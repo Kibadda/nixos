@@ -21,5 +21,6 @@
 
   security.pam.services = {
     sudo.u2fAuth = true;
+    login.u2fAuth = true;
   };
 }

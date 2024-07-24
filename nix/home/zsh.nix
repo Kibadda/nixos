@@ -9,6 +9,7 @@
     plugins = [
       "git" "sudo" "pass"
     ];
+    theme = "robbyrussell";
   };
   plugins = [
     {

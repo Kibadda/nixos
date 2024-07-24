@@ -3,8 +3,12 @@
 
   font = {
     name = "JetBrainsMono Nerd Font";
-    size = 16;
+    size = 10;
   };
+
+  extraConfig = ''
+    modify_font cell_height 105%
+  '';
 
   keybindings = {
     "kitty_mod+q" = "noop";
@@ -28,7 +32,7 @@
     cursor_shape = "block";
     cursor_blink_interval = 0;
     background_opacity = "0.9";
-    window_padding_width = 10;
+    window_padding_width = 5;
     enabled_layouts = "splits,stack";
 
     allow_remote_control = "socket-only";

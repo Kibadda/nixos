@@ -39,6 +39,7 @@
 
       network = {
         format-ethernet = "{ipaddr} <span font='11'></span>";
+        format-ethernet = "{ipaddr} <span font='11'></span>";
         format-disconnected = "Disconnected";
         interval = 5;
       };
