@@ -1,4 +1,4 @@
-{ inputs, pkgs, meta, ... }: {
+{ inputs, config, pkgs, meta, ... }: {
   home = {
     username = meta.username;
     homeDirectory = "/home/${meta.username}";
