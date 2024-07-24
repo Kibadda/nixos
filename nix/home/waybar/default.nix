@@ -12,7 +12,7 @@
       modules-right = [ "cpu" "memory" "disk" "pulseaudio" "network" ];
 
       "hyprland/workspaces" = {
-        format = "<span font='11'>{name}</spane>";
+        format = "<span font='11'>{name}</span>";
       };
 
       cpu = {
