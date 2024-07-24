@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   enable = true;
-  history.path = "{config.xdg.dataHome}/zsh/history";
+  history.path = "${config.xdg.dataHome}/zsh/history";
   shellAliases = {
     ls = "ls --color";
   };

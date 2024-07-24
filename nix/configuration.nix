@@ -44,7 +44,7 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   hardware = {
@@ -86,7 +86,7 @@
 
   programs = {
     zsh.enable = true;
-    gnuph.agent = {
+    gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };

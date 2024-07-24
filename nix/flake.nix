@@ -29,18 +29,18 @@
 
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays.nix { inherit inputs; };
     
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system: import ./pkgs.nix nixpkgs.legacyPackages.${system});
 
     nixosConfigurations = builtins.listToAttrs (map (name: let 
-      data = import ./machines/${name}/data.nix;
+      meta = { hostname = name; } // import ./machines/${name}/data.nix;
     in {
       name = name;
       value = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          meta = { hostname = name; } // data;
+          meta = meta;
         };
 
         system = "x86_64-linux";
@@ -55,8 +55,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${data.username} = import ./home/home.nix;
-            home-manager.extraSpecialArtgs = { inherit inputs; };
+            home-manager.users.${meta.username} = import ./home/home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs meta; };
           }
         ];
       };

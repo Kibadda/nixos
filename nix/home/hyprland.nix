@@ -26,10 +26,12 @@
     animations = {
       enabled = "yes";
       bezier = "custom, 0.1, 0.7, 0.1, 1.05";
-      animation = "fade, 1, 7, default";
-      animation = "windows, 1, 7, custom";
-      animation = "windowsOut, 1, 3, default, popin 60%";
-      animation = "windowsMove, 1, 7, custom";
+      animation = [
+        "fade, 1, 7, default";
+        "windows, 1, 7, custom";
+        "windowsOut, 1, 3, default, popin 60%";
+        "windowsMove, 1, 7, custom";
+      ];
     };
 
     misc = {
@@ -100,6 +102,10 @@
       "float, class:^(kitty-pinentry)$"
       "size 300 250, class:^(kitty-pinentry)$"
       "center, class:^(kitty-pinentry)$"
+    ];
+
+    exec-once = [
+      "${pkgs.waybar}/bin/waybar"
     ];
   };
 }

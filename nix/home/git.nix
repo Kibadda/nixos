@@ -8,11 +8,7 @@
     signByDefault = true;
   };
   extraConfig = {
-    pull = {
-      rebase = true;
-    };
-    init = {
-      defaultBranch = "main";
-    };
+    pull.rebase = true;
+    init.defaultBranch = "main";
   };
 }
