@@ -2,7 +2,7 @@
   enable = true;
   settings = {
     input = {
-      kb_layout = de;
+      kb_layout = "de";
       kb_options = "caps:swapescape";
       numlock_by_default = 1;
 
@@ -27,10 +27,10 @@
       enabled = "yes";
       bezier = "custom, 0.1, 0.7, 0.1, 1.05";
       animation = [
-        "fade, 1, 7, default";
-        "windows, 1, 7, custom";
-        "windowsOut, 1, 3, default, popin 60%";
-        "windowsMove, 1, 7, custom";
+        "fade, 1, 7, default"
+        "windows, 1, 7, custom"
+        "windowsOut, 1, 3, default, popin 60%"
+        "windowsMove, 1, 7, custom"
       ];
     };
 
