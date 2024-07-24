@@ -1,0 +1,59 @@
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-weight: bold;
+}
+
+window#waybar {
+  background-color: rgba(43, 48, 59, 0.5);
+}
+
+#workspaces {
+  background-color: #34C3A0;
+}
+
+#workspaces button {
+  border-radius: 0;
+}
+
+#workspaces button.active {
+  background-color: #343434;
+  color: #34C3A0;
+}
+
+#clock,
+#custom-yubikey,
+#custom-spotify,
+#cpu,
+#memory,
+#disk,
+#pulseaudio,
+#network {
+  padding: 0 10px;
+}
+
+#clock {
+  background-color: #64727D;
+}
+
+#custom-yubikey {
+  background-color: #FFFF00;
+  color: #000000;
+}
+
+#custom-spotify {
+  background-color: #1DB954;
+}
+
+#cpu,
+#memory,
+#disk {
+  background-color: #9B59B6;
+}
+
+#pulseaudio {
+  background-color: #2980B9;
+}
+
+#network {
+  background-color: #90B1B1;
+}

@@ -1,10 +1,12 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, meta, ... }: {
   enable = true;
   lfs.enable = true;
-  userName = "Michael Strobel";
-  userEmail = "mstrobel97@gmail.com";
-  signing.key = "0x3B6861376B6D3D78";
-  signing.signByDefault = true;
+  userName = meta.name;
+  userEmail = meta.email;
+  signing = {
+    key = meta.keyid;
+    signByDefault = true;
+  };
   extraConfig = {
     pull = {
       rebase = true;

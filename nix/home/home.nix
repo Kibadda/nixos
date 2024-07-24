@@ -1,20 +1,18 @@
-{ inputs, config, pkgs, ... }: let
+{ inputs, config, pkgs, meta, ... }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
   imports = [
-    ./ags.nix
+    ../machines/${meta.hostname}/home.nix
   ];
 
   programs.home-manager.enable = true;
 
-  home.username = "michael";
-  home.homeDirectory = "/home/michael";
   xdg.enable = true;
 
-  xdg.configFile.nvim.source = mkOutOfStoreSymlink "/home/michael/.dotfiles/.config/nvim";
-  xdg.dataFile.password-store.source = mkOutOfStoreSymlink "/home/michael/.password-store";
+  xdg.configFile.nvim.source = mkOutOfStoreSymlink "/home/${meta.username}/.dotfiles/.config/nvim";
+  xdg.dataFile.password-store.source = mkOutOfStoreSymlink "/home/${meta.username}/.password-store";
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   programs = {
     zsh = (import ./zsh.nix { inherit config pkgs; });
@@ -22,9 +20,6 @@ in {
     git = (import ./git.nix { inherit config pkgs; });
     gpg = (import ./gpg.nix { inherit config pkgs; });
     password-store = (import ./pass.nix { inherit config pkgs; });
-  };
-
-  wayland.windowManager = {
-    hyprland = (import ./hyprland.nix { inherit pkgs; });
+    kitty = (import ./kitty.nix { inherit config pkgs; });
   };
 }
