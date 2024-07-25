@@ -5,7 +5,8 @@
   userEmail = meta.email;
   signing = {
     key = meta.keyid;
-    signByDefault = true;
+    # enable after renewing yubikey subkeys
+    signByDefault = false;
   };
   extraConfig = {
     pull.rebase = true;
