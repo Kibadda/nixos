@@ -9,6 +9,7 @@
 
   xdg.enable = true;
 
+  # move theses to modules?
   programs = {
     zsh = (import ./zsh.nix { inherit config pkgs; });
     neovim = (import ./neovim.nix { inherit config pkgs; });

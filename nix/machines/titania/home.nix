@@ -4,6 +4,7 @@
     ../../home/home.nix
   ];
 
+  # move this to separate hyprland/home.nix?
   programs = {
     waybar = (import ../../home/waybar/default.nix { inherit config pkgs; });
   };

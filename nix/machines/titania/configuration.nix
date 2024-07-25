@@ -4,6 +4,7 @@
     ../../configuration.nix
   ];
 
+  # move this to separate hyprland/default.nix?
   environment = {
     systemPackages = with pkgs; [
       wl-clipboard
