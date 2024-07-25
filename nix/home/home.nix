@@ -1,16 +1,12 @@
-{ inputs, config, pkgs, meta, ... }: let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-in {
-  imports = [
-    ../machines/${meta.hostname}/home.nix
-  ];
+{ inputs, config, pkgs, meta, ... }: {
+  home = {
+    username = meta.username;
+    homeDirectory = "/home/${meta.username}";
+  };
 
   programs.home-manager.enable = true;
 
   xdg.enable = true;
-
-  xdg.configFile.nvim.source = mkOutOfStoreSymlink "/home/${meta.username}/.dotfiles/.config/nvim";
-  xdg.dataFile.password-store.source = mkOutOfStoreSymlink "/home/${meta.username}/.password-store";
 
   home.stateVersion = "24.05";
 
