@@ -26,7 +26,7 @@
     data = {
       username = "michael";
       name = "Michael Strobel";
-      key = "0x3B6861376B6D3D78";
+      keyid = "0x3B6861376B6D3D78";
       email = "mstrobel97@gmail.com";
     };
   in {

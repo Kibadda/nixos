@@ -1,4 +1,10 @@
-{ inputs, outputs, config, lib, pkgs, meta, ... }: {
+{ inputs, outputs, config, lib, pkgs, meta, ... }: let
+  jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
+    fonts = [
+      "JetBrainsMono"
+    ];
+  };
+in {
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -35,15 +41,14 @@
   };
 
   console = {
-    font = "JetBrains Mono Nerd Font Mono";
+    font = "JetBrainsMono Nerd Font";
     keyMap = "de";
   };
 
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      font-awesome
+      jetbrains-mono-nerdfont
     ];
   };
 
@@ -72,6 +77,7 @@
       sudo.u2fAuth = true;
       login.u2fAuth = true;
     };
+    sudo.execWheelOnly = true;
   };
 
   environment = {
@@ -109,7 +115,7 @@
     udev.packages = with pkgs; [
       yubikey-personalization
     ];
-    pcsdc.enable = true;
+    pcscd.enable = true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

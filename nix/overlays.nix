@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  additions = final: _prev: import ./pkgs.nix final.pkgs;
+  additions = final: prev: {};
 
   modifications = final: prev: {};
 

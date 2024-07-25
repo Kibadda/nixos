@@ -2,7 +2,7 @@
   enable = true;
 
   font = {
-    name = "JetBrains Mono Nerd Font Mono";
+    name = "JetBrainsMono Nerd Font Mono";
     size = 10;
   };
 
