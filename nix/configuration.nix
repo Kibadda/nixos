@@ -1,8 +1,4 @@
 { inputs, outputs, config, lib, pkgs, meta, ... }: {
-  imports = [
-    ./modules/yubikey-gpg.nix
-  ];
-
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -71,20 +67,31 @@
   };
 
   security = {
-    sudo.wheelNeedsPassword = false;
     polkit.enable = true;
+    pam.services = {
+      sudo.u2fAuth = true;
+      login.u2fAuth = true;
+    };
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    fzf
-    jq
-    ripgrep
-    stow
-    unzip
-    eza
-    bat
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      fzf
+      jq
+      ripgrep
+      stow
+      unzip
+      eza
+      bat
+      gnupg
+      yubikey-personalization
+    ];
+    shellInit = ''
+      gpg-connect-agent /bye
+      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    '';
+  };
 
   virtualisation.docker.enable = true;
 
@@ -95,6 +102,14 @@
       enableSSHSupport = true;
     };
     yubikey-touch-detector.enable = true;
+    ssh.startAgent = false;
+  };
+
+  services = {
+    udev.packages = with pkgs; [
+      yubikey-personalization
+    ];
+    pcsdc.enable = true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

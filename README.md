@@ -57,6 +57,12 @@ git -C /tmp/dotfiles diff
 sudo nixos-install --flake /tmp/dotfiles/nix#$HOSTNAME
 ```
 
+### Add u2f keys
+```console
+# make sure the yubikey is plugged in
+nix-shell -p pam_u2f --run 'mkdir -p /mnt/home/michael/.config/Yubico && pamu2fcfg > /mnt/home/michael/.config/Yubico/u2f_keys'
+```
+
 ### Reboot
 ```console
 sudo reboot now
