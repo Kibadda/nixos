@@ -39,14 +39,17 @@
   };
 
   console = {
-    font = "JetBrainsMono";
+    font = "JetBrains Mono Nerd Font Mono";
     keyMap = "de";
   };
 
-  fonts.packages = with pkgs; [
-    font-awesome
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      font-awesome
+    ];
+  };
 
   hardware = {
     pulseaudio.enable = true;
