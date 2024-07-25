@@ -1,5 +1,6 @@
 { inputs, config, pkgs, meta, ... }: {
   imports = [
+    # this is important
     ../../home/home.nix
   ];
 

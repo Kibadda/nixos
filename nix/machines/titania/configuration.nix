@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    # this is important
     ../../configuration.nix
   ];
 

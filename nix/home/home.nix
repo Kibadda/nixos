@@ -2,13 +2,12 @@
   home = {
     username = meta.username;
     homeDirectory = "/home/${meta.username}";
+    stateVersion = "24.05";
   };
 
   programs.home-manager.enable = true;
 
   xdg.enable = true;
-
-  home.stateVersion = "24.05";
 
   programs = {
     zsh = (import ./zsh.nix { inherit config pkgs; });
