@@ -18,16 +18,10 @@
   outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: let
     inherit (self) outputs;
 
-    systems = [
-      "x86_64-linux"
-    ];
-
     hosts = [
       # "uranus"
       "titania"
     ];
-
-    forAllSystems = nixpkgs.lib.genAttrs systems;
 
     data = {
       username = "michael";
@@ -37,8 +31,6 @@
     };
   in {
     overlays = import ./overlays.nix { inherit inputs; };
-    
-    packages = forAllSystems (system: import ./pkgs.nix nixpkgs.legacyPackages.${system});
 
     nixosConfigurations = builtins.listToAttrs (map (name: let 
       meta = { hostname = name; } // data;
