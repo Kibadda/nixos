@@ -76,9 +76,9 @@
           "SUPER SHIFT, l, movewindow, r"
           "SUPER, mouse:273, killactive"
 
-          # ", XF86AudioLowerVolume, exec, pamixer -d 5"
-          # ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-          # ", XF86AudioMute, exec, pamixer -t"
+          ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          ", XF86AudioMute, exec, pamixer -t"
           ", XF86AudioPlay, exec, playerctl -p spotify play-pause"
           ", XF86AudioPrev, exec, playerctl -p spotify previous"
           ", XF86AudioNext, exec, playerctl -p spotify next"

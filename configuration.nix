@@ -105,6 +105,7 @@ in {
       yubikey-personalization
       playerctl
       vim
+      pamixer
     ];
     shellInit = ''
       gpg-connect-agent /bye
