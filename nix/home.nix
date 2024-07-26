@@ -16,11 +16,9 @@
 
   xdg.enable = true;
 
-  programs.gpg.enable = true;
-
-  # move these to modules?
   programs = {
-    password-store = (import ./home/pass.nix { inherit config pkgs; });
+    gpg.enable = true;
+    password-store.enable = true;
   };
 
   # It is occasionally necessary for Home Manager to change configuration
