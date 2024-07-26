@@ -10,6 +10,9 @@
   home = {
     username = meta.username;
     homeDirectory = "/home/${meta.username}";
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
   };
 
   programs.home-manager.enable = true;

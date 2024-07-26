@@ -58,8 +58,8 @@
           "SUPER SHIFT, 5, movetoworkspace, 5"
 
           "SUPER, Return, exec, kitty"
-          "SUPER, B, exec, google-chrome-stable"
-          "SUPER SHIFT, B, exec, google-chrome-stable --incognito"
+          # "SUPER, B, exec, google-chrome-stable"
+          # "SUPER SHIFT, B, exec, google-chrome-stable --incognito"
           # "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
           # "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
 
@@ -76,9 +76,9 @@
           "SUPER SHIFT, l, movewindow, r"
           "SUPER, mouse:273, killactive"
 
-          ", XF86AudioLowerVolume, exec, pamixer -d 5"
-          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-          ", XF86AudioMute, exec, pamixer -t"
+          # ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          # ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          # ", XF86AudioMute, exec, pamixer -t"
           ", XF86AudioPlay, exec, playerctl -p spotify play-pause"
           ", XF86AudioPrev, exec, playerctl -p spotify previous"
           ", XF86AudioNext, exec, playerctl -p spotify next"
@@ -111,5 +111,10 @@
         ];
       };
     };
+  };
+
+  home.file.".local/bin/screenshot" = {
+    executable = true;
+    source = ./screenshot.sh;
   };
 }
