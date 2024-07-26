@@ -20,9 +20,9 @@
       "kitty_mod+e" = "layout_action rotate";
       "kitty_mod+z" = "toggle_layout stack";
       "ctrl+h" = "kitten pass_keys.py left ctrl+h";
-      "ctrl+j" = "kitten pass_keys.py left ctrl+j";
-      "ctrl+k" = "kitten pass_keys.py left ctrl+k";
-      "ctrl+l" = "kitten pass_keys.py left ctrl+l";
+      "ctrl+j" = "kitten pass_keys.py bottom ctrl+j";
+      "ctrl+k" = "kitten pass_keys.py top ctrl+k";
+      "ctrl+l" = "kitten pass_keys.py right ctrl+l";
     };
 
     settings = {
