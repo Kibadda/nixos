@@ -7,16 +7,7 @@
           kb_layout = "de";
           kb_options = "caps:swapescape";
           numlock_by_default = 1;
-
-          touchpad = {
-            natural_scroll = true;
-            tap-to-click = true;
-          };
         };
-
-        monitor = [
-          "eDP-1, 1920x1080@60, 0x0, 1"
-        ];
 
         general = {
           border_size = 1;
