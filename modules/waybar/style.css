@@ -28,7 +28,9 @@ window#waybar {
 #memory,
 #disk,
 #pulseaudio,
-#network {
+#network,
+#battery,
+#backlight {
   padding: 0 10px;
 }
 
@@ -51,10 +53,24 @@ window#waybar {
   background-color: #9B59B6;
 }
 
+#backlight {
+  background-color: #ABFC13;
+}
+
 #pulseaudio {
   background-color: #2980B9;
 }
 
 #network {
   background-color: #90B1B1;
+}
+
+#battery {
+  background-color: #2ECC71;
+}
+#battery.charging, #battery.plugged {
+  background-color: #2980B9;
+}
+#battery.critical:not(.charging) {
+  background-color: #F53C3C;
 }
