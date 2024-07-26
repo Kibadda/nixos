@@ -109,10 +109,6 @@
           "size 300 250, class:^(kitty-pinentry)$"
           "center, class:^(kitty-pinentry)$"
         ];
-
-        exec-once = [
-          "${pkgs.waybar}/bin/waybar"
-        ];
       };
     };
   };
