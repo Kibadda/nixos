@@ -3,6 +3,7 @@
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/kitty.nix
+    ./modules/neovim.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
@@ -19,7 +20,6 @@
 
   # move these to modules?
   programs = {
-    neovim = (import ./home/neovim.nix { inherit config pkgs; });
     password-store = (import ./home/pass.nix { inherit config pkgs; });
   };
 
