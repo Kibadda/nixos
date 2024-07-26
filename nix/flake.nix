@@ -38,7 +38,7 @@
       name = name;
       value = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs outputs meta;
+          inherit outputs meta;
         };
 
         system = "x86_64-linux";
@@ -51,7 +51,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${meta.username} = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs meta; };
+            home-manager.extraSpecialArgs = { inherit meta; };
           }
         ];
       };

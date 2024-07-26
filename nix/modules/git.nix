@@ -1,4 +1,4 @@
-{ config, pkgs, meta, ... }: {
+{ meta, ... }: {
   programs.git = {
     enable = true;
     lfs.enable = true;

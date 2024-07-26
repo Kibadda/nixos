@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, meta, ... }: {
+{ meta, ... }: {
   imports = [
     ./modules/zsh.nix
     ./modules/git.nix
