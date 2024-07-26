@@ -1,6 +1,6 @@
 { inputs, config, pkgs, meta, ... }: {
   imports = [
-    ../machines/${meta.hostname}/home.nix
+    ./machines/${meta.hostname}/home.nix
   ];
 
   home = {
@@ -14,12 +14,12 @@
 
   # move these to modules?
   programs = {
-    zsh = (import ./zsh.nix { inherit config pkgs; });
-    neovim = (import ./neovim.nix { inherit config pkgs; });
-    git = (import ./git.nix { inherit config pkgs meta; });
-    gpg = (import ./gpg.nix { inherit config pkgs; });
-    password-store = (import ./pass.nix { inherit config pkgs; });
-    kitty = (import ./kitty.nix { inherit config pkgs; });
+    zsh = (import ./home/zsh.nix { inherit config pkgs; });
+    neovim = (import ./home/neovim.nix { inherit config pkgs; });
+    git = (import ./home/git.nix { inherit config pkgs meta; });
+    gpg = (import ./home/gpg.nix { inherit config pkgs; });
+    password-store = (import ./home/pass.nix { inherit config pkgs; });
+    kitty = (import ./home/kitty.nix { inherit config pkgs; });
   };
 
   # It is occasionally necessary for Home Manager to change configuration

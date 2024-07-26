@@ -50,7 +50,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${meta.username} = import ./home/home.nix;
+            home-manager.users.${meta.username} = import ./home.nix;
             home-manager.extraSpecialArgs = { inherit inputs meta; };
           }
         ];
