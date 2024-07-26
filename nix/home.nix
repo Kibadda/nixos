@@ -1,5 +1,6 @@
 { inputs, config, pkgs, meta, ... }: {
   imports = [
+    ./modules/zsh.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
@@ -14,7 +15,6 @@
 
   # move these to modules?
   programs = {
-    zsh = (import ./home/zsh.nix { inherit config pkgs; });
     neovim = (import ./home/neovim.nix { inherit config pkgs; });
     git = (import ./home/git.nix { inherit config pkgs meta; });
     gpg = (import ./home/gpg.nix { inherit config pkgs; });
