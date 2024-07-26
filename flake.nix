@@ -19,7 +19,7 @@
     inherit (self) outputs;
 
     hosts = [
-      # "uranus"
+      "uranus"
       "titania"
     ];
 
