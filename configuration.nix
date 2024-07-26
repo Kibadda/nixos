@@ -1,4 +1,4 @@
-{ outputs, pkgs, meta, ... }: let
+{ outputs, pkgs, meta, lib, ... }: let
   jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
     fonts = [
       "JetBrainsMono"
@@ -27,6 +27,9 @@ in {
     overlays = [
       outputs.overlays.additions
       outputs.overlays.unstable
+    ];
+    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "google-chrome"
     ];
   };
 
@@ -108,6 +111,7 @@ in {
       vim
       pamixer
       pinentry-curses
+      google-chrome
     ];
     shellInit = ''
       gpg-connect-agent /bye
