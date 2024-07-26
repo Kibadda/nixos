@@ -2,6 +2,7 @@
   imports = [
     ./modules/zsh.nix
     ./modules/git.nix
+    ./modules/kitty.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
@@ -20,7 +21,6 @@
   programs = {
     neovim = (import ./home/neovim.nix { inherit config pkgs; });
     password-store = (import ./home/pass.nix { inherit config pkgs; });
-    kitty = (import ./home/kitty.nix { inherit config pkgs; });
   };
 
   # It is occasionally necessary for Home Manager to change configuration
