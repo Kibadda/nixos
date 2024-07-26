@@ -21,6 +21,7 @@
     hosts = [
       "uranus"
       "titania"
+      "work"
     ];
 
     data = {
