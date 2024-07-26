@@ -80,47 +80,11 @@
           };
 
           "custom/yubikey" = {
-            exec = pkgs.writeShellScript "waybar-yubikey" ''
-              socket="$XDG_RUNTIME_DIR/yubikey-touch-detector.socket"
-
-              while true; do
-                if [ ! -e "$socket" ]; then
-                  echo "Waiting for Yubikey socket\n"
-                  while [ ! -e "$socket" ]; do sleep 1; done
-                fi
-
-                echo ""
-
-                nc -U "$socket" | while read -n5 cmd; do
-                  if [ $(echo $cmd | cut -d'_' -f2) = "1" ]; then
-                    echo "🔑 Yubikey 🔑"
-                  else
-                    echo ""
-                  fi
-                done
-
-                sleep 1
-              done
-            '';
+            exec = pkgs.writeShellScript "waybar-yubikey" (builtins.readFile ../../bin/yubikey-indicator.sh);
           };
 
           "custom/spotify" = {
-            exec = pkgs.writeShellScript "waybar-spotify" ''
-              if playerctl -p spotify status 1>/dev/null 2>/dev/null; then
-                status=""
-
-                if [ $(playerctl -p spotify status) == "Paused" ]; then
-                  status=""
-                fi
-
-                song=$(playerctl -p spotify metadata --format "{{ artist }} - {{ title }}")
-                time=$(playerctl -p spotify metadata --format "{{ duration(position) }} / {{ duration(mpris:length) }}")
-
-                echo "  $song  $status  $time"
-              else
-                echo "  spotify not running"
-              fi
-            '';
+            exec = pkgs.writeShellScript "waybar-spotify" (builtins.readFile ../../bin/spotify-indicator.sh);
             interval = 1;
           };
         };

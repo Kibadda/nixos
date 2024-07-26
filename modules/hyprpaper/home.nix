@@ -14,7 +14,7 @@ in {
   };
 
   home.file.${wallpaper} = {
-    source = ./wallpaper.png;
+    source = ../../wallpapers/forest.png;
   };
 
   wayland.windowManager.hyprland.settings.exec-once = [
