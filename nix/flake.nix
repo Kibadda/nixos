@@ -38,22 +38,19 @@
       name = name;
       value = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs outputs;
-          meta = meta;
+          inherit inputs outputs meta;
         };
 
         system = "x86_64-linux";
 
         modules = [
           disko.nixosModules.disko
-          ./machines/${name}/hardware-configuration.nix
-          ./machines/${name}/disko-config.nix
-          ./machines/${name}/configuration.nix
+          ./configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${meta.username} = import ./machines/${name}/home.nix;
+            home-manager.users.${meta.username} = import ./home/home.nix;
             home-manager.extraSpecialArgs = { inherit inputs meta; };
           }
         ];

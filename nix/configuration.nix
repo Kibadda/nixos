@@ -5,6 +5,12 @@
     ];
   };
 in {
+  imports = [
+    ./machines/${meta.hostname}/hardware-configuration.nix
+    ./machines/${meta.hostname}/disko-config.nix
+    ./machines/${meta.hostname}/configuration.nix
+  ];
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''

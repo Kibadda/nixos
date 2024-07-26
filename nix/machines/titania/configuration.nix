@@ -1,9 +1,4 @@
 { pkgs, ... }: {
-  imports = [
-    # this is important
-    ../../configuration.nix
-  ];
-
   # move this to separate hyprland/default.nix?
   environment = {
     systemPackages = with pkgs; [
