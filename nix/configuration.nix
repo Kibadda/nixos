@@ -103,6 +103,8 @@ in {
       bat
       gnupg
       yubikey-personalization
+      playerctl
+      vim
     ];
     shellInit = ''
       gpg-connect-agent /bye
