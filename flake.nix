@@ -13,6 +13,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: let
@@ -52,7 +54,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${meta.username} = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit meta; };
+            home-manager.extraSpecialArgs = { inherit inputs meta; };
           }
         ];
       };
