@@ -75,6 +75,8 @@
         "SUPER, XF86AudioPlay, exec, playerctl play-pause"
         "SUPER, XF86AudioPrev, exec, playerctl previous"
         "SUPER, XF86AudioNext, exec, playerctl next"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
 
         ", Print, exec, screenshot area clip"
         "SUPER, Print, exec, screenshot clip"

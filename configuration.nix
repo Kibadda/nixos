@@ -104,6 +104,7 @@ in {
       gnupg
       yubikey-personalization
       playerctl
+      brightnessctl
       vim
       pamixer
       pinentry-curses
