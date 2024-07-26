@@ -1,6 +1,7 @@
 { inputs, config, pkgs, meta, ... }: {
   imports = [
     ./modules/zsh.nix
+    ./modules/git.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
@@ -13,11 +14,11 @@
 
   xdg.enable = true;
 
+  programs.gpg.enable = true;
+
   # move these to modules?
   programs = {
     neovim = (import ./home/neovim.nix { inherit config pkgs; });
-    git = (import ./home/git.nix { inherit config pkgs meta; });
-    gpg = (import ./home/gpg.nix { inherit config pkgs; });
     password-store = (import ./home/pass.nix { inherit config pkgs; });
     kitty = (import ./home/kitty.nix { inherit config pkgs; });
   };
