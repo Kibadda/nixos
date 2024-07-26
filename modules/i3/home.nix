@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: let
+{ lib, ... }: let
   wallpaper = ".config/i3/wallpaper.png";
 in {
   services.picom.enable = true;

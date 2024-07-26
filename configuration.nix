@@ -58,7 +58,7 @@ in {
 
   fonts = {
     fontDir.enable = true;
-    packages = with pkgs; [
+    packages = [
       jetbrains-mono-nerdfont
     ];
   };
