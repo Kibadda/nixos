@@ -1,14 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: let 
+  wallpaper = ".config/hypr/wallpaper.png";
+in {
   services.hyprpaper = {
     enable = true;
     settings = {
       preload = [
-        "~/.dotfiles/modules/hyprpaper/wallpaper.png"
+        "~/${wallpaper}"
       ];
       wallpaper = [
-        ",~/.dotfiles/modules/hyprpaper/wallpaper.png"
+        ",~/${wallpaper}"
       ];
     };
+  };
+
+  home.file.${wallpaper} = {
+    source = ./wallpaper.png;
   };
 
   wayland.windowManager.hyprland.settings.exec-once = [
