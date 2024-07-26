@@ -47,20 +47,7 @@
           };
 
           "custom/weather" = {
-            exec = pkgs.writeShellScript "waybar-weather" ''
-              for i in {1..5}
-              do
-                text=$(curl -s "https://wttr.in/Ulm+Germany?format=1")
-                if [[ $? == 0 ]];
-                then
-                  text=$(echo "$text" | sed -E "s/\s+/ /g")
-                  echo "$text"
-                  exit
-                fi
-                sleep 2
-              done
-              echo ""
-            '';
+            exec = pkgs.writeShellScript "waybar-weather" (builtins.readFile ../../bin/weather-indicator.sh);
             interval = 3600;
           };
         };
