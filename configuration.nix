@@ -106,6 +106,7 @@ in {
       playerctl
       vim
       pamixer
+      pinentry-curses
     ];
     shellInit = ''
       gpg-connect-agent /bye
