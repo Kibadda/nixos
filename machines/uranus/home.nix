@@ -3,6 +3,7 @@
     ../../modules/hyprland/home.nix
     ../../modules/waybar/home.nix
     ../../modules/hyprpaper.nix
+    ../../modules/chrome.nix
   ];
 
   wayland.windowManager.hyprland.settings = let

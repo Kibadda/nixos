@@ -112,7 +112,6 @@ in {
       vim
       pamixer
       pinentry-curses
-      google-chrome
     ];
     shellInit = ''
       gpg-connect-agent /bye
