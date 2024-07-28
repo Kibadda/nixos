@@ -15,6 +15,9 @@
     };
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    powermenu.url = "github:Kibadda/powermenu";
+    dmenu.url = "github:Kibadda/dmenu";
   };
 
   outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: let
@@ -41,7 +44,7 @@
       name = name;
       value = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit outputs meta;
+          inherit inputs outputs meta;
         };
 
         system = "x86_64-linux";

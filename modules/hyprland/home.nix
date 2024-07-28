@@ -50,8 +50,8 @@
         "SUPER, Return, exec, kitty"
         "SUPER, B, exec, google-chrome-stable"
         "SUPER SHIFT, B, exec, google-chrome-stable --incognito"
-        # "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
-        # "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
+        "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
+        "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
 
         "SUPER, Q, killactive"
         "SUPER, Space, togglefloating"

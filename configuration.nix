@@ -1,4 +1,4 @@
-{ outputs, pkgs, meta, lib, ... }: let
+{ inputs, outputs, pkgs, meta, lib, ... }: let
   jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
     fonts = [
       "JetBrainsMono"
@@ -114,6 +114,8 @@ in {
       pinentry-curses
       xdg-utils
       tree
+      inputs.powermenu.defaultPackage.${pkgs.system}
+      inputs.dmenu.defaultPackage.${pkgs.system}
     ];
     shellInit = ''
       gpg-connect-agent /bye
