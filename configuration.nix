@@ -112,6 +112,7 @@ in {
       vim
       pamixer
       pinentry-curses
+      xdg-utils
     ];
     shellInit = ''
       gpg-connect-agent /bye
