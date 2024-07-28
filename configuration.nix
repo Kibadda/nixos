@@ -113,6 +113,7 @@ in {
       pamixer
       pinentry-curses
       xdg-utils
+      tree
     ];
     shellInit = ''
       gpg-connect-agent /bye
