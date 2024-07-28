@@ -1,9 +1,13 @@
-{
+{ pkgs, ... }: {
   imports = [
     ../../modules/hyprland/home.nix
     ../../modules/waybar/home.nix
     ../../modules/hyprpaper.nix
     ../../modules/chrome.nix
+  ];
+
+  home.packages = with pkgs; [
+    chiaki
   ];
 
   wayland.windowManager.hyprland.settings = let
