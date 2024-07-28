@@ -9,6 +9,10 @@
     nil
   ];
 
+  home.sessionVariables = {
+    MANPAGER = "nvim +Man!";
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
