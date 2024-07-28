@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     tree-sitter
     lua-language-server
-    # nodePackages.intelephense
+    nodePackages.intelephense
     typescript-language-server
     stylua
     gcc
