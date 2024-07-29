@@ -31,6 +31,7 @@ in {
     config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "google-chrome"
       "intelephense"
+      "spotify"
     ];
   };
 
@@ -114,6 +115,7 @@ in {
       pinentry-curses
       xdg-utils
       tree
+      spotify
     ];
     shellInit = ''
       gpg-connect-agent /bye
