@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   programs.hyprland.enable = true;
 
   environment = {
@@ -6,6 +6,8 @@
       wl-clipboard
       grim
       slurp
+      inputs.powermenu.defaultPackage.${pkgs.system}
+      inputs.dmenu.defaultPackage.${pkgs.system}
     ];
 
     loginShellInit = ''
