@@ -32,6 +32,9 @@ in {
       "google-chrome"
       "intelephense"
       "spotify"
+      "steam"
+      "steam-original"
+      "steam-run"
     ];
   };
 
