@@ -119,6 +119,7 @@ in {
       xdg-utils
       tree
       spotify
+      telegram-desktop
     ];
     shellInit = ''
       gpg-connect-agent /bye
