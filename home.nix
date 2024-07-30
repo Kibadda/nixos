@@ -15,11 +15,10 @@
     ];
   };
 
-  programs.home-manager.enable = true;
-
   xdg.enable = true;
 
   programs = {
+    home-manager.enable = true;
     gpg.enable = true;
     password-store.enable = true;
   };
