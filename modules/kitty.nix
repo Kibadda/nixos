@@ -94,6 +94,6 @@
     text = ''
       include ./kitty.conf
       clear_all_shortcuts yes
-    ''
+    '';
   };
 }
