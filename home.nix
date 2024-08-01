@@ -4,6 +4,7 @@
     ./modules/git.nix
     ./modules/kitty.nix
     ./modules/neovim.nix
+    ./modules/dunst.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
