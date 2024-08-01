@@ -15,6 +15,9 @@
     coding = "name:Coding";
     games = "name:Games";
     tools = "name:Tools";
+
+    monitorLeft = "DP-1";
+    monitorRight = "DP-3";
   in {
     env = [
       "LIBVA_DRIVER_NAME,nvidia"
@@ -29,19 +32,19 @@
     };
 
     monitor = [
-      "DP-2, 3840x2160@60, 0x0, 1.5"
-      "DP-1, 2560x1440@60, 2560x0, 1"
+      "${monitorLeft}, 3840x2160@60, 0x0, 1.5"
+      "${monitorRight}, 2560x1440@60, 2560x0, 1"
     ];
 
     workspace = [
-      "${coding}, monitor:DP-1, default:true"
-      "${games}, monitor:DP-1"
-      "${tools}, monitor:DP-1"
-      "1, monitor:DP-2"
-      "2, monitor:DP-2"
-      "3, monitor:DP-2"
-      "4, monitor:DP-2"
-      "5, monitor:DP-2"
+      "${coding}, monitor:${monitorRight}, default:true"
+      "${games}, monitor:${monitorRight}"
+      "${tools}, monitor:${monitorRight}"
+      "1, monitor:${monitorLeft}"
+      "2, monitor:${monitorLeft}"
+      "3, monitor:${monitorLeft}"
+      "4, monitor:${monitorLeft}"
+      "5, monitor:${monitorLeft}"
     ];
 
     bind = [
