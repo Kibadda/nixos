@@ -1,4 +1,4 @@
-{ outputs, pkgs, meta, lib, ... }: let
+{ inputs, outputs, pkgs, meta, lib, ... }: let
   jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
     fonts = [
       "JetBrainsMono"
