@@ -18,6 +18,7 @@
 
     powermenu.url = "github:Kibadda/powermenu";
     dmenu.url = "github:Kibadda/dmenu";
+    # pinentry.url = "github:Kibadda/pinentry";
   };
 
   outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: let

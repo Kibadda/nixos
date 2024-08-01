@@ -124,6 +124,9 @@ in {
       tree
       spotify
       telegram-desktop
+      inputs.powermenu.defaultPackage.${pkgs.system}
+      inputs.dmenu.defaultPackage.${pkgs.system}
+      # inputs.pinentry.defaultPackage.${pkgs.system}
     ];
     shellInit = ''
       gpg-connect-agent /bye
@@ -138,6 +141,7 @@ in {
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+      # pinentryPackage = inputs.pinentry.defaultPackage.${pkgs.system};
     };
     yubikey-touch-detector.enable = true;
     ssh.startAgent = false;
