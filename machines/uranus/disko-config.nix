@@ -29,4 +29,5 @@
       };
     };
   };
+  # UUID=CA3AA5223AA50C8F /home/michael/External/ ntfs defaults,noatime,nofail 0 2
 }
