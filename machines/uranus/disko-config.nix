@@ -1,4 +1,3 @@
-# TODO: THIS IS JUST A COPY OF TITANIA
 {
   config.disko.devices = {
     disk = {
