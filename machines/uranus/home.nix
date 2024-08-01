@@ -3,6 +3,7 @@
     ../../modules/hyprland/home.nix
     ../../modules/waybar/home.nix
     ../../modules/hyprpaper.nix
+    ../../modules/hyprshade/home.nix
     ../../modules/chrome.nix
   ];
 
