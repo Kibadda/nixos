@@ -1,10 +1,12 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    hyprshade
-  ];
+  home = {
+    packages = with pkgs; [
+      hyprshade
+    ];
 
-  home.file.".config/hypr/hyprshade.toml" = {
-    source = ./hyprshade.toml;
+    file.".config/hypr/hyprshade.toml" = {
+      source = ./hyprshade.toml;
+    };
   };
 
   wayland.windowManager.hyprland.settings.exec = [
