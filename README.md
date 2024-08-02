@@ -3,6 +3,8 @@
 ## TODOs
 - fonts not working
 - flexible font sizes
+- cursor
+- pinentry
 
 ## Installation
 
@@ -25,7 +27,7 @@ export HOSTNAME=whatever
 
 ### Partition
 ```console
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/dotfiles/nix/machines/$HOSTNAME/disko-config.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/dotfiles/machines/$HOSTNAME/disko-config.nix
 ```
 
 ### Generate config
@@ -35,7 +37,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 
 ### Copy hardware-configuration.nix
 ```console
-cp /mnt/etc/nixos/hardware-configuration.nix /tmp/dotfiles/nix/machines/$HOSTNAME/hardware-configuration.nix
+cp /mnt/etc/nixos/hardware-configuration.nix /tmp/dotfiles/machines/$HOSTNAME/hardware-configuration.nix
 ```
 
 #### hardware-configuration.nix not in version control
@@ -52,16 +54,16 @@ git -C /tmp/dotfiles diff
 
 ### Install
 ```console
-sudo nixos-install --flake /tmp/dotfiles/nix#$HOSTNAME
-```
-
-### Add u2f keys
-```console
-# make sure the yubikey is plugged in
-nix-shell -p pam_u2f --run 'mkdir -p /mnt/home/michael/.config/Yubico && pamu2fcfg > /mnt/home/michael/.config/Yubico/u2f_keys'
+sudo nixos-install --flake /tmp/dotfiles#$HOSTNAME
 ```
 
 ### Reboot
 ```console
 sudo reboot now
+```
+
+### Add u2f keys
+```console
+# make sure the yubikey is plugged in
+nix-shell -p pam_u2f --run 'mkdir -p $HOME/.config/Yubico && pamu2fcfg > $HOME/.config/Yubico/u2f_keys'
 ```
