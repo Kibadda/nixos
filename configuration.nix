@@ -125,23 +125,13 @@ in {
       telegram-desktop
       inputs.powermenu.defaultPackage.${pkgs.system}
       inputs.dmenu.defaultPackage.${pkgs.system}
-      # inputs.pinentry.defaultPackage.${pkgs.system}
     ];
-    shellInit = ''
-      gpg-connect-agent /bye
-      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-    '';
   };
 
   virtualisation.docker.enable = true;
 
   programs = {
     zsh.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-      # pinentryPackage = inputs.pinentry.defaultPackage.${pkgs.system};
-    };
     yubikey-touch-detector.enable = true;
     ssh.startAgent = false;
   };

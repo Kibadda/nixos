@@ -6,6 +6,7 @@
     ./modules/neovim.nix
     ./modules/dunst.nix
     ./modules/eza.nix
+    ./modules/gpg.nix
     ./machines/${meta.hostname}/home.nix
   ];
 
@@ -24,7 +25,6 @@
 
   programs = {
     home-manager.enable = true;
-    gpg.enable = true;
     password-store.enable = true;
   };
 
