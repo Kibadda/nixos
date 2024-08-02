@@ -5,6 +5,7 @@
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/dunst.nix
+    ./modules/eza.nix
     ./machines/${meta.hostname}/home.nix
   ];
 

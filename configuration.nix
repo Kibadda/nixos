@@ -111,7 +111,6 @@ in {
       ripgrep
       stow
       unzip
-      eza
       bat
       gnupg
       yubikey-personalization
