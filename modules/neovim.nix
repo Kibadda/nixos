@@ -1,26 +1,30 @@
 { inputs, pkgs, ... }: {
-  home.packages = with pkgs; [
-    tree-sitter
-    lua-language-server
-    nodePackages.intelephense
-    typescript-language-server
-    stylua
-    gcc
-    nil
-  ];
+  home = {
+    packages = with pkgs; [
+      tree-sitter
+      gcc
 
-  home.sessionVariables = {
-    MANPAGER = "nvim +Man!";
+      lua-language-server
+      nodePackages.intelephense
+      typescript-language-server
+      nil
+
+      stylua
+    ];
+
+    sessionVariables = {
+      MANPAGER = "nvim +Man!";
+    };
+
+    file.".local/bin/nvimupdate" = {
+      executable = true;
+      source = ../bin/nvimupdate.sh;
+    };
   };
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     package = inputs.neovim-nightly.packages.${pkgs.system}.default;
-  };
-
-  home.file.".local/bin/nvimupdate" = {
-    executable = true;
-    source = ../bin/nvimupdate.sh;
   };
 }
