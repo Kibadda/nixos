@@ -14,6 +14,7 @@
 
     sessionVariables = {
       MANPAGER = "nvim +Man!";
+      NEOVIM_DIR = "$HOME/Projects/neovim";
     };
 
     file.".local/bin/nvimupdate" = {
