@@ -56,7 +56,6 @@
     windowrulev2 = [
       "workspace ${coding}, class:^(kitty)$"
 
-      "workspace ${tools}, class:^(Spotify)$"
       "workspace ${tools}, class:^(org.telegram.desktop)$"
       "workspace ${tools}, class:^(steam)$"
       "workspace ${games}, class:^(steam.+)$"
@@ -68,7 +67,6 @@
       "minsize 1 1, title:^()$, class:^(steam)$"
 
       "workspace ${games}, class:^(chiaki)$"
-      "fullscreen, class:^(chiaki)$"
     ];
   };
 }
