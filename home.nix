@@ -12,6 +12,9 @@
   home = {
     username = meta.username;
     homeDirectory = "/home/${meta.username}";
+    sessionVariables = {
+      KEYID = meta.keyid;
+    };
     sessionPath = [
       "$HOME/.local/bin"
     ];
