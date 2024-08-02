@@ -1,6 +1,6 @@
 # TODO: THIS IS JUST A COPY OF TITANIA
 {
-  config.disko.devices = {
+  disko.devices = {
     disk = {
       main = {
         type = "disk";
