@@ -3,29 +3,38 @@
     enable = true;
     settings = {
       global = {
+        notification_limit = 5;
+        frame_width = 1;
+        frame_color = "#7F3FBF";
+        separator_color = "auto";
+        idle_threshhold = 0;
         font = "JetBrains Mono Nerd Font 11";
-        frame_color = "#B9B4F4";
-        separator_color = "frame";
-        offset = "10x10";
+        show_indicators = "no";
+        sticky_history = false;
+        history_length = 0;
+        corner_radius = 7;
       };
 
       urgency_low = {
-        background = "#1E1E2E";
-        foreground = "#CDD6FA";
+        background = "#28143C";
+        foreground = "#FFFFFF";
+        timeout = 5;
       };
 
       urgency_normal = {
-        background = "#1E1E2E";
-        foreground = "#CDD6FA";
+        background = "#28143C";
+        foreground = "#FFFFFF";
+        timeout = 5;
       };
 
       urgency_critical = {
-        background = "#1E1E2E";
-        foreground = "#CDD6FA";
-        frame_color = "#FAB387";
+        background = "#28143C";
+        foreground = "#FFFFFF";
+        frame_color = "#FF7F7F";
+        timeout = 120;
       };
 
-      skip-rule = {
+      yubikey-touch-detector = {
         appname = "yubikey-touch-detector";
         skip_display = true;
         skip_history = true;
