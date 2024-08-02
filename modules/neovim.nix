@@ -18,4 +18,9 @@
     defaultEditor = true;
     package = inputs.neovim-nightly.packages.${pkgs.system}.default;
   };
+
+  home.file.".local/bin/nvimupdate" = {
+    executable = true;
+    source = ../bin/nvimupdate.sh;
+  };
 }
