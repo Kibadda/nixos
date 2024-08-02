@@ -3,8 +3,8 @@
     enable = true;
     history.path = "${config.xdg.dataHome}/zsh/history";
     shellAliases = {
-      ls = "ls --color";
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles#$(hostname)";
+      cat = "bat";
     };
     oh-my-zsh = {
       enable = true;
