@@ -4,7 +4,6 @@
 - fonts not working
 - flexible font sizes
 - cursor
-- pinentry
 
 ## Installation
 
