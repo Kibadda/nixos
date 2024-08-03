@@ -7,6 +7,7 @@
     ./modules/dunst.nix
     ./modules/eza.nix
     ./modules/gpg.nix
+    ./modules/cursor.nix
     ./machines/${meta.hostname}/home.nix
   ];
 

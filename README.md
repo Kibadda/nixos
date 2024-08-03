@@ -3,7 +3,6 @@
 ## TODOs
 - fonts not working
 - flexible font sizes
-- cursor
 
 ## Installation
 
