@@ -4,6 +4,7 @@
 - fonts not working
 - flexible font sizes
 - chrome/chiaki missing visuals
+- neomutt
 
 ## Installation
 
