@@ -1,4 +1,4 @@
-{ inputs, outputs, pkgs, meta, lib, ... }: let
+{ outputs, pkgs, meta, lib, ... }: let
   jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
     fonts = [
       "JetBrainsMono"
@@ -123,8 +123,6 @@ in {
       tree
       spotify
       telegram-desktop
-      inputs.powermenu.defaultPackage.${pkgs.system}
-      inputs.dmenu.defaultPackage.${pkgs.system}
     ];
   };
 

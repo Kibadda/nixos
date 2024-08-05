@@ -1,5 +1,3 @@
-#!/bin/sh
-
 clip=0
 area=0
 
