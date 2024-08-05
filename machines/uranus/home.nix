@@ -29,6 +29,7 @@
 
     cursor = {
       no_hardware_cursors = true;
+      allow_dumb_copy = true;
     };
 
     monitor = [
