@@ -24,5 +24,6 @@ in {
       filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
       fixup-to = "!git commit --fixup=$(git filter-commits)";
     };
-  } // cfg.git.extraConfig;
+    includes = cfg.git.includes;
+  };
 }

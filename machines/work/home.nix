@@ -12,14 +12,12 @@
 
     git = {
       email = "m.strobel@cortex-media.de";
-      extraConfig = {
-        includes = [
-          {
-            condition = "gitdir:~/Projects/Personal/";
-            contents.user.email = meta.email;
-          }
-        ];
-      };
+      includes = [
+        {
+          condition = "gitdir:~/Projects/Personal/";
+          contents.user.email = meta.email;
+        }
+      ];
     };
 
     neovim.dir = "$HOME/Projects/Personal/neovim";

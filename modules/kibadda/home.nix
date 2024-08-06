@@ -39,9 +39,28 @@
         default = false;
       };
 
-      settings = mkOption {
-        type = types.attrsOf types.anything;
-        default = {};
+      nvidia = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
+      monitor = mkOption {
+        type = types.listOf types.str;
+      };
+
+      bind = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+
+      windowrule = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+
+      workspace = mkOption {
+        type = types.listOf types.str;
+        default = [];
       };
 
       cursor = mkOption {
@@ -72,9 +91,9 @@
         default = meta.email;
       };
 
-      extraConfig = mkOption {
-        type = types.attrsOf types.anything;
-        default = {};
+      includes = mkOption {
+        type = types.listOf (types.attrsOf types.anything);
+        default = [];
       };
     };
   };

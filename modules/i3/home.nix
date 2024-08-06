@@ -1,4 +1,4 @@
-{ lib, pkgs, config, meta, ... }: with lib; let
+{ lib, config, ... }: with lib; let
   cfg = config.kibadda;
 
   wallpaper = ".config/i3/wallpaper.png";

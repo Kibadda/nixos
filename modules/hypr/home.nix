@@ -1,4 +1,4 @@
-{ lib, pkgs, config, meta, inputs, ... }: with lib; let
+{ lib, pkgs, config, inputs, ... }: with lib; let
   cfg = config.kibadda;
 
   wallpaper = ".config/hypr/wallpaper.png";
@@ -41,6 +41,11 @@ in {
           kb_layout = "de";
           kb_options = "caps:swapescape";
           numlock_by_default = 1;
+
+          touchpad = {
+            natural_scroll = true;
+            tap-to-click = true;
+          };
         };
 
         general = {
@@ -68,6 +73,21 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
+        };
+
+        env = [
+          "XDG_SESSION_TYPE,wayland"
+          "NIXOS_OZONE_WL,1"
+        ] ++ (if cfg.hypr.nvidia then [
+          "LIBVA_DRIVER_NAME,nvidia"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        ] else []);
+
+        monitor = cfg.hypr.monitor;
+
+        cursor = mkIf cfg.hypr.nvidia {
+          no_hardware_cursors = true;
         };
 
         bind = [
@@ -117,7 +137,7 @@ in {
           "SUPER, Print, exec, screenshot clip"
           "CONTROL, Print, exec, screenshot area"
           "SUPER CONTROL, Print, exec, screenshot"
-        ];
+        ] ++ cfg.hypr.bind;
 
         bindm = [
           "SUPER, mouse:272, movewindow"
@@ -135,7 +155,9 @@ in {
           "float, class:^(kitty-pinentry)$"
           "size 300 250, class:^(kitty-pinentry)$"
           "center, class:^(kitty-pinentry)$"
-        ];
+        ] ++ cfg.hypr.windowrule;
+
+        workspace = cfg.hypr.workspace;
 
         exec-once = [
           "${pkgs.hyprpaper}/bin/hyprpaper"
@@ -145,7 +167,7 @@ in {
         exec = [
           "${pkgs.hyprshade}/bin/hyprshade auto"
         ];
-      } // cfg.hypr.settings;
+      };
     };
 
     services.hyprpaper = {
