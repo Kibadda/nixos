@@ -6,6 +6,7 @@
   };
 in {
   imports = [
+    ./modules/kibadda/configuration.nix
     ./machines/${meta.hostname}/hardware-configuration.nix
     ./machines/${meta.hostname}/disko-config.nix
     ./machines/${meta.hostname}/configuration.nix

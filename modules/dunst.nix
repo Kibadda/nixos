@@ -1,5 +1,5 @@
-{ meta, ... }: {
-  home-manager.users.${meta.username}.services.dunst = {
+{
+  services.dunst = {
     enable = true;
     settings = {
       global = {

@@ -1,7 +1,7 @@
 { config, meta, ... }: let
   cfg = config.kibadda.git;
 in {
-  home-manager.users.${meta.username}.programs.git = {
+  programs.git = {
     enable = true;
     userName = meta.name;
     userEmail = cfg.email;

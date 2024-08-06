@@ -1,11 +1,7 @@
-{ config, pkgs, meta, ... }: {
-  programs.zsh.enable = true;
-
-  users.users.${meta.username}.shell = pkgs.zsh;
-
-  home-manager.users.${meta.username}.programs.zsh = {
+{ config, pkgs, ... }: {
+  programs.zsh = {
     enable = true;
-    history.path = "${config.home-manager.users.${meta.username}.xdg.dataHome}/zsh/history";
+    history.path = "${config.xdg.dataHome}/zsh/history";
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles#$(hostname)";
       cat = "bat";

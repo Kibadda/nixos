@@ -65,20 +65,6 @@
     };
   };
 
-  packageModule = types.submodule {
-    options = {
-      home = mkOption {
-        type = types.listOf types.package;
-        default = [];
-      };
-
-      system = mkOption {
-        type = types.listOf types.package;
-        default = [];
-      };
-    };
-  };
-
   gitModule = types.submodule {
     options = {
       email = mkOption {
@@ -103,15 +89,15 @@
   };
 in {
   imports = [
-    ./hypr.nix
-    ./i3.nix
-    ./git.nix
-    ./neovim.nix
-    ./zsh.nix
-    ./kitty.nix
-    ./yubikey.nix
-    ./dunst.nix
-    ./eza.nix
+    ../hypr/home.nix
+    ../i3/home.nix
+    ../zsh/home.nix
+    ../yubikey/home.nix
+    ../git.nix
+    ../neovim.nix
+    ../kitty.nix
+    ../dunst.nix
+    ../eza.nix
   ];
 
   options.kibadda = {
@@ -127,12 +113,12 @@ in {
 
     wallpaper = mkOption {
       type = types.path;
-      default = ../wallpapers/forest.png;
+      default = ../../wallpapers/forest.png;
     };
 
     packages = mkOption {
-      type = packageModule;
-      default = {};
+      type = types.listOf types.package;
+      default = [];
     };
 
     browser = mkOption {
@@ -152,13 +138,22 @@ in {
   };
 
   config = {
-    environment.systemPackages = cfg.packages.system;
+    home = {
+      username = meta.username;
 
-    home-manager.users.${meta.username}.home = {
-      packages = cfg.packages.home ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ];
+      homeDirectory = "/home/${meta.username}";
+
+      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ];
+
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
       };
+
+      sessionPath = [
+        "$HOME/.local/bin"
+      ];
     };
+
+    xdg.enable = true;
   };
 }
