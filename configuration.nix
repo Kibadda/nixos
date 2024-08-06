@@ -87,7 +87,6 @@ in {
       "docker"
       "networkmanager"
     ];
-    shell = pkgs.zsh;
     hashedPassword = "$6$t2GM2AFGTwx5HL1S$NuDSMSjd93Cm6Ud3uBMtaGVvFGdnJzgVlPOXYRWEras8eqeYhuSPuLA.lfBBFgWpTLEBOVlf2VlKoJqPvGZbC1";
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCSugc5zJ7zTYJ5o503umJi3TOUBrL2gciJOTW7hqn/k55ehbnVsDIZLtE0oBbD2xJddwWCCeLADLfIStTBjEWeDh6Z59M7eD/qexU38pSr/PgkDQNaHvVDyjhVT0AdpqJPgnHbXGkXi/eH3mPGoFc9BwgXIOR6+VMnKykpZlu5QsmHy+lAm/dptEVteTQk6At7tfNT5o+IY7DQDQyeolkXTrgu6D8HqvGOxU5UUsN/WKloPS3yj8xPBvMVlZ9uZf5SzwCv9UpRw2Y5b90LndXbEvLNgIf7w9TVy8A1d17sP9/ZrFrGlVADKN7Bqu+xc56setXbArHY5icM/83irQnf5+qHKZ0QP5PsvYZ9i2ygXNa0zoZjRxA0cLq5ylCaYeRS5INlwQfIQyJbiivdVBiZdyd1MJD3YerNpwFOZUSOrrEfSSSVMK+SHHyyadMgG+UY84YC0a8KD2nGrfzmZw4N2OK4wIMWPHFn4su1a9KQ7WanDxK5meu2TtBe8a8l1EDvHh/by3E3/dWOdNt8tqAlr8SD0pctMuBCGqIgfaNAjX5/hVnxdhohQKgeHlM5R4t2H6kg6zXp+gLZt06xSQetS1m/UfM5tTCcdLe3hs+7f13x4vZ+3auqlY2xTwmmegbVdKShmD7Lzl1TYL3iIzqietwJ/5IxI1gc5HsUFx3T4Q== cardno:18_124_120"
@@ -96,10 +95,6 @@ in {
 
   security = {
     polkit.enable = true;
-    pam.services = {
-      sudo.u2fAuth = true;
-      login.u2fAuth = true;
-    };
     sudo.execWheelOnly = true;
   };
 
@@ -112,8 +107,6 @@ in {
       stow
       unzip
       bat
-      gnupg
-      yubikey-personalization
       playerctl
       brightnessctl
       vim
@@ -124,21 +117,6 @@ in {
       spotify
       telegram-desktop
     ];
-  };
-
-  virtualisation.docker.enable = true;
-
-  programs = {
-    zsh.enable = true;
-    yubikey-touch-detector.enable = true;
-    ssh.startAgent = false;
-  };
-
-  services = {
-    udev.packages = with pkgs; [
-      yubikey-personalization
-    ];
-    pcscd.enable = true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

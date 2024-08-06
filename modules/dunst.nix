@@ -1,5 +1,5 @@
-{
-  services.dunst = {
+{ meta, ... }: {
+  home-manager.users.${meta.username}.services.dunst = {
     enable = true;
     settings = {
       global = {
@@ -32,12 +32,6 @@
         foreground = "#FFFFFF";
         frame_color = "#FF7F7F";
         timeout = 120;
-      };
-
-      yubikey-touch-detector = {
-        appname = "yubikey-touch-detector";
-        skip_display = true;
-        skip_history = true;
       };
     };
   };

@@ -1,7 +1,11 @@
-{ config, pkgs, ... }: {
-  programs.zsh = {
+{ config, pkgs, meta, ... }: {
+  programs.zsh.enable = true;
+
+  users.users.${meta.username}.shell = pkgs.zsh;
+
+  home-manager.users.${meta.username}.programs.zsh = {
     enable = true;
-    history.path = "${config.xdg.dataHome}/zsh/history";
+    history.path = "${config.home-manager.users.${meta.username}.xdg.dataHome}/zsh/history";
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles#$(hostname)";
       cat = "bat";
@@ -9,7 +13,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git" "sudo" "pass"
+        "git" "sudo"
       ];
       theme = "robbyrussell";
     };

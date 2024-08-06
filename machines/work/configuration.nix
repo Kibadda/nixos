@@ -1,18 +1,32 @@
-{ pkgs, lib, ... }: {
+{ lib, pkgs, meta, ... }: {
   imports = [
-    ../../modules/i3/default.nix
+    ../../modules/kibadda.nix
   ];
 
-  environment = {
-    systemPackages = with pkgs; [
+  kibadda = {
+    i3.enable = true;
+
+    packages.home = with pkgs; [
       linphone
-      firefox
       thunderbird
       rocketchat-desktop
     ];
-    variables = {
-      BROWSER = "firefox";
+
+    browser = "firefox";
+
+    git = {
+      email = "m.strobel@cortex-media.de";
+      extraConfig = {
+        includes = [
+          {
+            condition = "gitdir:~/Projects/Personal/";
+            contents.user.email = meta.email;
+          }
+        ];
+      };
     };
+
+    neovim.dir = "$HOME/Projects/Personal/neovim";
   };
 
   networking.hostName = lib.mkForce "michael-5824";

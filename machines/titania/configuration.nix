@@ -1,10 +1,11 @@
 {
   imports = [
-    ../../modules/hypr.nix
+    ../../modules/kibadda.nix
   ];
 
   kibadda.hypr = {
     enable = true;
+
     settings = {
       input.touchpad = {
         natural_scroll = true;
@@ -15,6 +16,7 @@
         "eDP-1, 1920x1080@60, 0x0, 1"
       ];
     };
+
     waybar = {
       battery = true;
       backlight = true;

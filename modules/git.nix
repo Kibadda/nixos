@@ -1,9 +1,10 @@
-{ meta, ... }: {
-  programs.git = {
+{ config, meta, ... }: let
+  cfg = config.kibadda.git;
+in {
+  home-manager.users.${meta.username}.programs.git = {
     enable = true;
-    lfs.enable = true;
     userName = meta.name;
-    userEmail = meta.email;
+    userEmail = cfg.email;
     signing = {
       key = meta.keyid;
       # enable after renewing yubikey subkeys
@@ -23,5 +24,5 @@
       filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
       fixup-to = "!git commit --fixup=$(git filter-commits)";
     };
-  };
+  } // cfg.extraConfig;
 }
