@@ -138,6 +138,10 @@ in {
   };
 
   config = {
+    warnings = if (!cfg.hypr.enable && !cfg.i3.enable) then [
+      "there is no window manager configured for '${meta.hostname}'"
+    ] else [];
+
     home = {
       username = meta.username;
 
