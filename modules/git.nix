@@ -1,10 +1,10 @@
 { config, meta, ... }: let
-  cfg = config.kibadda.git;
+  cfg = config.kibadda;
 in {
   programs.git = {
     enable = true;
     userName = meta.name;
-    userEmail = cfg.email;
+    userEmail = cfg.git.email;
     signing = {
       key = meta.keyid;
       # enable after renewing yubikey subkeys
@@ -24,5 +24,5 @@ in {
       filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
       fixup-to = "!git commit --fixup=$(git filter-commits)";
     };
-  } // cfg.extraConfig;
+  } // cfg.git.extraConfig;
 }

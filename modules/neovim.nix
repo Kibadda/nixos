@@ -1,5 +1,5 @@
 { pkgs, config, inputs, ... }: let
-  cfg = config.kibadda.neovim;
+  cfg = config.kibadda;
 in {
   home = {
     packages = with pkgs; [
@@ -16,7 +16,7 @@ in {
 
     sessionVariables = {
       MANPAGER = "nvim +Man!";
-      NEOVIM_DIR = cfg.dir;
+      NEOVIM_DIR = cfg.neovim.dir;
     };
 
     file.".local/bin/nvimupdate" = {
