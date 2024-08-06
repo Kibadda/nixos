@@ -1,8 +1,8 @@
-{ lib, config, meta, inputs, pkgs, ... }: with lib; let
+{ config, meta, inputs, pkgs, ... }: let
   cfg = config.kibadda;
 in {
   home = {
-    packages = [] ++ (optional cfg.hypr.enable inputs.pinentry.defaultPackage.${pkgs.system});
+    packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [];
 
     sessionVariables = {
       KEYID = meta.keyid;
