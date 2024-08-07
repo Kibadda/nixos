@@ -424,11 +424,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1722712046,
+        "lastModified": 1723065307,
         "narHash": "sha256-7wKxA2HzOt5zbBcOctB+6HAmfxt21uU+woS30RRiCso=",
         "owner": "Kibadda",
         "repo": "pinentry",
-        "rev": "65a2d591ec5b192f60af93af83f0f1559830ea8f",
+        "rev": "cf5517b11522a1caf67053b5a7b1f955eef9f4a5",
         "type": "github"
       },
       "original": {
