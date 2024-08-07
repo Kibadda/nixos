@@ -1,8 +1,5 @@
 { pkgs, ... }: {
-  programs = {
-    yubikey-touch-detector.enable = true;
-    ssh.startAgent = true;
-  };
+  programs.yubikey-touch-detector.enable = true;
 
   environment.systemPackages = with pkgs; [ gnupg yubikey-personalization ];
 
