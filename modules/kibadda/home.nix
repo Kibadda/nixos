@@ -5,15 +5,17 @@
     options = {
       name = mkOption {
         type = types.str;
+        default = "Bibata-Modern-Classic";
       };
 
       package = mkOption {
         type = types.package;
+        default = pkgs.bibata-cursors;
       };
 
       size = mkOption {
         type = types.int;
-        default = 24;
+        default = 18;
       };
     };
   };
@@ -64,8 +66,8 @@
       };
 
       cursor = mkOption {
-        type = types.nullOr cursorModule;
-        default = null;
+        type = cursorModule;
+        default = {};
       };
 
       waybar = mkOption {

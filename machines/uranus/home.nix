@@ -53,12 +53,6 @@
         "4, monitor:${monitorLeft}"
         "5, monitor:${monitorLeft}"
       ];
-
-      cursor = {
-        name = "Bibata-Modern-Classic";
-        package = pkgs.bibata-cursors;
-        size = 24;
-      };
     };
   };
 }
