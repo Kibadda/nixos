@@ -1,15 +1,19 @@
-{ pkgs, ... }: {
-  programs.yubikey-touch-detector.enable = true;
+{ pkgs, config, meta, lib, ... }: with lib; let
+  cfg = config.home-manager.users.${meta.username}.kibadda;
+in {
+  config = mkIf cfg.yubikey.enable {
+    programs.yubikey-touch-detector.enable = cfg.yubikey.touch-detector;
 
-  environment.systemPackages = with pkgs; [ gnupg yubikey-personalization ];
+    environment.systemPackages = with pkgs; [ gnupg yubikey-personalization ];
 
-  security.pam.services = {
-    sudo.u2fAuth = true;
-    login.u2fAuth = true;
-  };
+    security.pam.services = builtins.listToAttrs (map (name: {
+      name = name;
+      value = { u2fAuth = true; };
+    }) cfg.yubikey.pam);
 
-  services = {
-    udev.packages = with pkgs; [ yubikey-personalization ];
-    pcscd.enable = true;
+    services = {
+      udev.packages = with pkgs; [ yubikey-personalization ];
+      pcscd.enable = true;
+    };
   };
 }

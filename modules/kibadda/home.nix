@@ -108,6 +108,25 @@
       };
     };
   };
+
+  yubikeyModule = types.submodule {
+    options = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+      };
+
+      touch-detector = mkOption {
+        type = types.bool;
+        default = true;
+      };
+
+      pam = mkOption {
+        type = types.listOf types.str;
+        default = [ "sudo" "login" ];
+      };
+    };
+  };
 in {
   imports = [
     ../hypr/home.nix
@@ -154,6 +173,11 @@ in {
 
     neovim = mkOption {
       type = neovimModule;
+      default = {};
+    };
+
+    yubikey = mkOption {
+      type = yubikeyModule;
       default = {};
     };
   };
