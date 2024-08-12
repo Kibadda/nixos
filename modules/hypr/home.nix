@@ -274,7 +274,7 @@ in {
 
       style = ''
         * {
-          font-family: "JetBrainsMono Nerd Font";
+          font-family: ${cfg.font} Nerd Font;
           font-weight: bold;
         }
 

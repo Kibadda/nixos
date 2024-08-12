@@ -1,10 +1,4 @@
-{ outputs, pkgs, meta, lib, ... }: let
-  jetbrains-mono-nerdfont = pkgs.nerdfonts.override {
-    fonts = [
-      "JetBrainsMono"
-    ];
-  };
-in {
+{ outputs, pkgs, meta, lib, config, ... }: {
   imports = [
     ./modules/kibadda/configuration.nix
     ./machines/${meta.hostname}/hardware-configuration.nix
@@ -65,16 +59,11 @@ in {
   };
 
   console = {
-    font = "JetBrainsMono Nerd Font";
+    font = "${config.home-manager.users.${meta.username}.kibadda.font} Nerd Font";
     keyMap = "de";
   };
 
-  fonts = {
-    fontDir.enable = true;
-    packages = [
-      jetbrains-mono-nerdfont
-    ];
-  };
+  fonts.fontDir.enable = true;
 
   hardware = {
     pulseaudio.enable = true;

@@ -6,7 +6,7 @@ in {
       enable = true;
 
       font = {
-        name = "JetBrainsMono Nerd Font";
+        name = "${cfg.font} Nerd Font";
         size = 10;
       };
 

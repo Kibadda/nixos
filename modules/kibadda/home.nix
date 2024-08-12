@@ -185,6 +185,11 @@ in {
       type = types.bool;
       default = true;
     };
+
+    font = mkOption {
+      type = types.str;
+      default = "JetBrainsMono";
+    };
   };
 
   config = {
@@ -193,7 +198,7 @@ in {
 
       homeDirectory = "/home/${meta.username}";
 
-      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ];
+      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ] ++ [ (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
@@ -203,6 +208,8 @@ in {
         "$HOME/.local/bin"
       ];
     };
+
+    fonts.fontconfig.enable = true;
 
     xdg.enable = true;
   };
