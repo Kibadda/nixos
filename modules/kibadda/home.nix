@@ -180,6 +180,11 @@ in {
       type = yubikeyModule;
       default = {};
     };
+
+    kitty = mkOption {
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = {
