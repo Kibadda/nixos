@@ -127,6 +127,20 @@
       };
     };
   };
+
+  kittyModule = types.submodule {
+    options = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+      };
+
+      size = mkOption {
+        type = types.int;
+        default = 12;
+      };
+    };
+  };
 in {
   imports = [
     ../hypr/home.nix
@@ -182,8 +196,8 @@ in {
     };
 
     kitty = mkOption {
-      type = types.bool;
-      default = true;
+      type = kittyModule;
+      default = {};
     };
 
     font = mkOption {

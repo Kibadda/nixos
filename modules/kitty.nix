@@ -1,13 +1,13 @@
 { config, lib, ... }: with lib; let
   cfg = config.kibadda;
 in {
-  config = mkIf cfg.kitty {
+  config = mkIf cfg.kitty.enable {
     programs.kitty = {
       enable = true;
 
       font = {
         name = "${cfg.font} Nerd Font";
-        size = 10;
+        size = cfg.kitty.size;
       };
 
       extraConfig = ''

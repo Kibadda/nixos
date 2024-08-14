@@ -1,7 +1,6 @@
 # NixOS configuration
 
 ## TODOs
-- flexible font sizes
 - chrome/chiaki missing visuals
 - neomutt
 
