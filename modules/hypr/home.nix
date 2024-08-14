@@ -198,30 +198,30 @@ in {
           };
 
           cpu = {
-            format = "{usage}% <span font='11'></span>";
+            format = "<span font='11'></span> {usage}%";
             interval = 1;
           };
 
           memory = {
-            format = "{percentage}% <span font='11'></span>";
+            format = "<span font='11'></span> {percentage}%";
             interval = 1;
           };
 
           disk = {
-            format = "{percentage_used}% <span font='11'></span>";
+            format = "<span font='11'></span> {percentage_used}%";
           };
 
           pulseaudio = {
-            format = "{volume}% <span font='11'>{icon}</span>";
-            format-muted = "{volume}% <span font='11'></span>";
+            format = "<span font='11'>{icon}</span> {volume}%";
+            format-muted = "{volume}% <span font='11'>x</span>";
             format-icons = {
-              default = [ "" "" "" ];
+              default = [ " " " " " " ];
             };
           };
 
           network = {
-            format-ethernet = "{ipaddr} <span font='11'></span>";
-            format-wifi = "{ipaddr} <span font='11'></span>";
+            format-ethernet = "<span font='11'></span> {ipaddr}";
+            format-wifi = "<span font='11'></span> {ipaddr}";
             format-disconnected = "Disconnected";
             interval = 5;
           };

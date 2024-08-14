@@ -198,7 +198,7 @@ in {
 
       homeDirectory = "/home/${meta.username}";
 
-      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ] ++ [ (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ];
+      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ] ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
