@@ -16,6 +16,7 @@ in {
 
       keybindings = {
         "kitty_mod+q" = "noop";
+        "kitty_mod+w" = "noop";
         "kitty_mod+l" = "noop";
         "kitty_mod+h" = "launch --type=window --cwd=current --location=hsplit";
         "kitty_mod+b" = "launch --type=window --cwd=current --location=vsplit";
