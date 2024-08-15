@@ -222,6 +222,11 @@ in {
       sessionPath = [
         "$HOME/.local/bin"
       ];
+
+      file.".local/bin/setup" = {
+        executable = true;
+        source = ../../bin/setup.sh;
+      };
     };
 
     fonts.fontconfig.enable = true;
