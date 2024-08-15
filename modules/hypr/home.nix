@@ -9,6 +9,8 @@ in {
         pkgs.hyprshade
         inputs.powermenu.defaultPackage.${pkgs.system}
         inputs.dmenu.defaultPackage.${pkgs.system}
+        # password-store also provides a passmenu binary
+        (lib.hiPrio inputs.passmenu.defaultPackage.${pkgs.system})
       ];
 
       file = {
@@ -107,6 +109,7 @@ in {
           "SUPER SHIFT, B, exec, google-chrome-stable --incognito"
           "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
           "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
+          "SUPER, P, exec, kitty --class kitty-passmenu --config ~/.config/kitty/tool.conf passmenu"
 
           "SUPER, Q, killactive"
           "SUPER, Space, togglefloating"
@@ -151,6 +154,10 @@ in {
           "float, class:^(kitty-dmenu)$"
           "size 400 400, class:^(kitty-dmenu)$"
           "center, class:^(kitty-dmenu)$"
+
+          "float, class:^(kitty-passmenu)$"
+          "size 400 400, class:^(kitty-passmenu)$"
+          "center, class:^(kitty-passmenu)$"
 
           "float, class:^(kitty-pinentry)$"
           "size 300 250, class:^(kitty-pinentry)$"
