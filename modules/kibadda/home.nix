@@ -152,6 +152,7 @@ in {
     ../kitty.nix
     ../dunst.nix
     ../eza.nix
+    ../pass.nix
   ];
 
   options.kibadda = {
