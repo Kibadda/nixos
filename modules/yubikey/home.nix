@@ -10,7 +10,15 @@ in {
       };
     };
 
-    programs.gpg.enable = true;
+    programs.gpg = {
+      enable = true;
+      publicKeys = [
+        {
+          source = ../../keys/gpg-0x3B6861376B6D3D78-2024-08-18.asc;
+          trust = "ultimate";
+        }
+      ];
+    };
 
     services = {
       dunst.settings.yubikey-touch-detector = mkIf cfg.yubikey.touch-detector {
