@@ -1,15 +1,17 @@
-{ lib, config, meta, pkgs, ... }: with lib; let
+{ lib, config, meta, ... }: let
   cfg = config.home-manager.users.${meta.username}.kibadda;
 in {
-  programs.hyprland.enable = cfg.hypr.enable;
+  config = lib.mkIf cfg.hypr.enable {
+    programs.hyprland.enable = true;
 
-  environment.loginShellInit = mkIf cfg.hypr.enable ''
-    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec Hyprland
-    fi
-  '';
+    environment.loginShellInit = ''
+      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
+      fi
+    '';
 
-  services.pam.services.hyprlock = mkIf cfg.yubikey.enable {
-    u2fAuth = true;
+    security.pam.services.hyprlock = lib.mkIf cfg.yubikey.enable {
+      u2fAuth = true;
+    };
   };
 }
