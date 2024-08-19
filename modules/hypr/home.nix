@@ -16,6 +16,10 @@ in {
         inputs.dmenu.defaultPackage.${pkgs.system}
         # password-store also provides a passmenu binary
         (lib.hiPrio inputs.passmenu.defaultPackage.${pkgs.system})
+
+        pkgs.wl-clipboard
+        pkgs.grim
+        pkgs.slurp
       ];
 
       file = {

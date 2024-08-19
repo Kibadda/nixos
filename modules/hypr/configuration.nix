@@ -3,17 +3,9 @@
 in {
   programs.hyprland.enable = cfg.hypr.enable;
 
-  environment = mkIf cfg.hypr.enable {
-    systemPackages = with pkgs; [
-      wl-clipboard
-      grim
-      slurp
-    ];
-
-    loginShellInit = ''
-      if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland
-      fi
-    '';
-  };
+  environment.loginShellInit = mkIf cfg.hypr.enable ''
+    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+      exec Hyprland
+    fi
+  '';
 }
