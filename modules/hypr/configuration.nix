@@ -8,4 +8,8 @@ in {
       exec Hyprland
     fi
   '';
+
+  services.pam.services.hyprlock = mkIf cfg.yubikey.enable {
+    u2fAuth = true;
+  };
 }
