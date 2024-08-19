@@ -205,11 +205,6 @@ in {
       type = types.str;
       default = "JetBrainsMono";
     };
-
-    pass = mkOption {
-      type = types.str;
-      default = "$HOME/.password-store";
-    };
   };
 
   config = {
@@ -230,17 +225,7 @@ in {
 
       file.".local/bin/fetch-repositories" = {
         executable = true;
-        text = ''
-          NEOVIM_DIR="${cfg.neovim.dir}"
-          if [[ ! -d $NEOVIM_DIR ]]; then
-            git clone -b nixos --single-branch git@github.com:Kibadda/nvim $NEOVIM_DIR
-          fi
-
-          PASS_DIR="${cfg.pass}"
-          if [[ ! -d $PASS_DIR ]]; then
-            git clone git@github.com:Kibadda/password-store $PASS_DIR
-          fi
-        '';
+        source = ../../bin/fetch-repositories.sh;
       };
     };
 

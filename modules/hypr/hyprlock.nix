@@ -1,4 +1,4 @@
-{ pkgs, config, meta, lib, ... }: let
+{ config, meta, lib, ... }: let
   cfg = config.kibadda;
 in {
   config = lib.mkIf cfg.hypr.enable {

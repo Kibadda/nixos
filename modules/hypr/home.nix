@@ -1,4 +1,4 @@
-{ lib, pkgs, config, inputs, meta, ... }: with lib; let
+{ lib, pkgs, config, inputs, ... }: with lib; let
   cfg = config.kibadda;
 in {
   imports = [
