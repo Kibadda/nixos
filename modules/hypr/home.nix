@@ -6,6 +6,7 @@ in {
   imports = [
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
   ];
 
   config = mkIf cfg.hypr.enable {
@@ -172,21 +173,12 @@ in {
         workspace = cfg.hypr.workspace;
 
         exec-once = [
-          "${pkgs.hyprpaper}/bin/hyprpaper"
           "${pkgs.waybar}/bin/waybar"
         ] ++ (optional (cfg.hypr.cursor != null) "hyprctl setcursor \"${cfg.hypr.cursor.name}\" ${toString cfg.hypr.cursor.size}") ;
 
         exec = [
           "${pkgs.hyprshade}/bin/hyprshade auto"
         ];
-      };
-    };
-
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [ "~/${wallpaper}" ];
-        wallpaper = [ ",~/${wallpaper}" ];
       };
     };
 
