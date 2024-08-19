@@ -31,12 +31,7 @@
       "work"
     ];
 
-    data = {
-      username = "michael";
-      name = "Michael Strobel";
-      keyid = "0xBFA6A82102FF1B7A";
-      email = "mstrobel97@gmail.com";
-    };
+    data = import ./secrets/data.nix;
   in {
     overlays = import ./overlays.nix { inherit inputs; };
 

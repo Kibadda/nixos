@@ -11,11 +11,11 @@
     browser = "firefox";
 
     git = {
-      email = "m.strobel@cortex-media.de";
+      email = meta.email.work;
       includes = [
         {
           condition = "gitdir:~/Projects/Personal/";
-          contents.user.email = meta.email;
+          contents.user.email = meta.email.personal;
         }
       ];
     };

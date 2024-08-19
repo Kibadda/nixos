@@ -90,7 +90,7 @@
     options = {
       email = mkOption {
         type = types.str;
-        default = meta.email;
+        default = meta.email.personal;
       };
 
       includes = mkOption {
