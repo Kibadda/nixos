@@ -7,8 +7,7 @@ in {
     userEmail = cfg.git.email;
     signing = {
       key = meta.keyid;
-      # enable after renewing yubikey subkeys
-      signByDefault = false;
+      signByDefault = true;
     };
     extraConfig = {
       pull.rebase = true;

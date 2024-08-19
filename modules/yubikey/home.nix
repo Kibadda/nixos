@@ -14,7 +14,7 @@ in {
       enable = true;
       publicKeys = [
         {
-          source = ../../keys/gpg-0x3B6861376B6D3D78-2024-08-18.asc;
+          source = ../../keys/gpg-0xBFA6A82102FF1B7A-2024-08-19.asc;
           trust = "ultimate";
         }
       ];

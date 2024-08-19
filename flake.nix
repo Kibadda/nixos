@@ -34,7 +34,7 @@
     data = {
       username = "michael";
       name = "Michael Strobel";
-      keyid = "0x3B6861376B6D3D78";
+      keyid = "0xBFA6A82102FF1B7A";
       email = "mstrobel97@gmail.com";
     };
   in {
