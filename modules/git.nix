@@ -1,4 +1,4 @@
-{ config, meta, ... }: let
+{ config, meta, pkgs, ... }: let
   cfg = config.kibadda;
 in {
   programs.git = {
@@ -22,7 +22,13 @@ in {
       fixup = "!git commit --fixup $(git rev-parse HEAD)";
       filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
       fixup-to = "!git commit --fixup=$(git filter-commits)";
+      unlock = "!git-crypt unlock";
+      lock = "!git-crypt lock";
     };
     includes = cfg.git.includes;
   };
+
+  home.packages = [
+    pkgs.git-crypt
+  ];
 }
