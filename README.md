@@ -3,6 +3,7 @@
 ## TODOs
 - chrome/chiaki missing visuals
 - neomutt
+- hyprlock
 
 ## Installation
 
