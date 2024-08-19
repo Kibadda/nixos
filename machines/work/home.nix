@@ -19,7 +19,5 @@
         }
       ];
     };
-
-    neovim.dir = "$HOME/Projects/Personal/neovim";
   };
 }

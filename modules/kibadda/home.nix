@@ -100,15 +100,6 @@
     };
   };
 
-  neovimModule = types.submodule {
-    options = {
-      dir = mkOption {
-        type = types.str;
-        default = "$HOME/Projects/neovim";
-      };
-    };
-  };
-
   yubikeyModule = types.submodule {
     options = {
       enable = mkOption {
@@ -183,11 +174,6 @@ in {
 
     git = mkOption {
       type = gitModule;
-      default = {};
-    };
-
-    neovim = mkOption {
-      type = neovimModule;
       default = {};
     };
 
