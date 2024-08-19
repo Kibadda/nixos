@@ -205,6 +205,11 @@ in {
       type = types.str;
       default = "JetBrainsMono";
     };
+
+    pass = mkOption {
+      type = types.str;
+      default = "$HOME/.password-store";
+    };
   };
 
   config = {
