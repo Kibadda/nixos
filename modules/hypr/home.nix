@@ -1,7 +1,5 @@
 { lib, pkgs, config, inputs, meta, ... }: with lib; let
   cfg = config.kibadda;
-
-  wallpaper = ".config/hypr/wallpaper.png";
 in {
   imports = [
     ./hypridle.nix
@@ -26,9 +24,7 @@ in {
           source = ../../bin/hypr-screenshot.sh;
         };
 
-        ${wallpaper} = {
-          source = cfg.wallpaper;
-        };
+        ".config/hypr/wallpaper.png".source = cfg.wallpaper;
       };
 
       pointerCursor = cfg.hypr.cursor;
