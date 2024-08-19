@@ -7,12 +7,12 @@ in {
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./hyprshade.nix
   ];
 
   config = mkIf cfg.hypr.enable {
     home = {
       packages = [
-        pkgs.hyprshade
         inputs.powermenu.defaultPackage.${pkgs.system}
         inputs.dmenu.defaultPackage.${pkgs.system}
         # password-store also provides a passmenu binary
@@ -23,15 +23,6 @@ in {
         ".local/bin/screenshot" = {
           executable = true;
           source = ../../bin/hypr-screenshot.sh;
-        };
-
-        ".config/hypr/hyprshade.toml" = {
-          text = ''
-            [[shades]]
-            name = "blue-light-filter"
-            start_time = 19:00:00
-            end_time = 07:00:00
-          '';
         };
 
         ${wallpaper} = {
@@ -175,10 +166,6 @@ in {
         exec-once = [
           "${pkgs.waybar}/bin/waybar"
         ] ++ (optional (cfg.hypr.cursor != null) "hyprctl setcursor \"${cfg.hypr.cursor.name}\" ${toString cfg.hypr.cursor.size}") ;
-
-        exec = [
-          "${pkgs.hyprshade}/bin/hyprshade auto"
-        ];
       };
     };
 
