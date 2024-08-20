@@ -28,7 +28,7 @@ in {
           inner_color = "rgba(0, 0, 0, 0.5)";
           font_color = "rgb(200, 200, 200)";
           fade_on_empty = false;
-          placeholder_text = "<i><span foreground='#CDD6F4'>Password...</span></i>";
+          placeholder_text = "Password...";
           hide_input = false;
           position = "0, -120";
           halign = "center";
