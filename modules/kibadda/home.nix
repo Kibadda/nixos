@@ -1,4 +1,4 @@
-{ lib, pkgs, config, meta, ... }: with lib; let
+{ lib, pkgs, config, meta, inputs, ... }: with lib; let
   cfg = config.kibadda;
 
   cursorModule = types.submodule {
@@ -139,7 +139,6 @@ in {
     ../zsh/home.nix
     ../yubikey/home.nix
     ../git.nix
-    ../neovim.nix
     ../kitty.nix
     ../dunst.nix
     ../eza.nix
@@ -199,7 +198,10 @@ in {
 
       homeDirectory = "/home/${meta.username}";
 
-      packages = cfg.packages ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ] ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ];
+      packages = cfg.packages
+        ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ]
+        ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ]
+        ++ [ inputs.nvim.packages.${pkgs.system}.default ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");

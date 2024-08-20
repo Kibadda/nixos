@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    nvim.url = "github:Kibadda/nixvim";
 
     powermenu.url = "github:Kibadda/powermenu";
     dmenu.url = "github:Kibadda/dmenu";
