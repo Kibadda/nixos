@@ -1,0 +1,30 @@
+name: "Nix build"
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v20
+      - run: nix flake check -L
+  build:
+    name: ${{ matrix.attribute }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        attribute:
+          - .#devShells.x86_64-linux.default
+          - .#nvim
+          - .#nvim-dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v20
+      - run: nix build "${{ matrix.attribute }}" -L
