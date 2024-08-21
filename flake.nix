@@ -28,20 +28,20 @@
       "work"
     ];
 
-    data = import ./secrets/data.nix;
+    system = "x86_64-linux";
   in {
     overlays = import ./overlays.nix { inherit inputs; };
 
     nixosConfigurations = builtins.listToAttrs (map (name: let 
-      meta = { hostname = name; } // data;
+      meta = { hostname = name; } // (import ./secrets/data.nix);
     in {
       name = name;
       value = nixpkgs.lib.nixosSystem {
+        inherit system;
+
         specialArgs = {
           inherit inputs outputs meta;
         };
-
-        system = "x86_64-linux";
 
         modules = [
           disko.nixosModules.disko
@@ -72,5 +72,12 @@
         ];
       };
     }) hosts);
+
+    devShells.${system}.default = let
+      pkgs = import nixpkgs { inherit system; };
+    in pkgs.mkShell {
+      name = "nixos-devShell";
+      buildInputs = [];
+    };
   };
 }
