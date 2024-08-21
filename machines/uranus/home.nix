@@ -9,8 +9,8 @@
       games = "name:Games";
       tools = "name:Tools";
 
-      monitorLeft = "DP-1";
-      monitorRight = "DP-3";
+      monitorLeft = "DP-2";
+      monitorRight = "DP-1";
     in {
       enable = true;
 
