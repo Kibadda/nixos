@@ -4,7 +4,6 @@ in {
   config = mkIf cfg.yubikey.enable {
     home = {
       packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [];
-
       sessionVariables = {
         KEYID = meta.keyid;
       };
@@ -12,15 +11,14 @@ in {
 
     programs.gpg = {
       enable = true;
+      scdaemonSettings.disable-ccid = true;
+
       publicKeys = [
         {
           source = ../../keys/gpg-0xBFA6A82102FF1B7A-2024-08-19.asc;
           trust = "ultimate";
         }
       ];
-      scdaemonSettings = {
-        disable-ccid = true;
-      };
     };
 
     services = {

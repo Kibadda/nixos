@@ -5,14 +5,18 @@ in {
     enable = true;
     userName = meta.name;
     userEmail = cfg.git.email;
+    includes = cfg.git.includes;
+
     signing = {
       key = meta.keyid;
       signByDefault = true;
     };
+
     extraConfig = {
       pull.rebase = true;
       init.defaultBranch = "main";
     };
+
     aliases = {
       nah = "!f(){ git reset --hard; git clean -df; if [ -d \".git/rebase-apply\" ] || [ -d \".git/rebase-merge\" ]; then git rebase --abort; fi; }; f";
       forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D";
@@ -25,7 +29,6 @@ in {
       unlock = "!git-crypt unlock";
       lock = "!git-crypt lock";
     };
-    includes = cfg.git.includes;
   };
 
   home.packages = [

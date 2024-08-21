@@ -2,11 +2,13 @@
   programs.zsh = {
     enable = true;
     history.path = "${config.xdg.dataHome}/zsh/history";
+
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ${toString ./../..}#$(hostname)";
       check = "nix flake check";
       cat = "bat";
     };
+
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -14,6 +16,7 @@
       ];
       theme = "robbyrussell";
     };
+
     plugins = [
       {
         name = "zsh-autosuggestions";

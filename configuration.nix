@@ -90,26 +90,24 @@
     sudo.execWheelOnly = true;
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      git
-      fzf
-      jq
-      ripgrep
-      stow
-      unzip
-      bat
-      playerctl
-      brightnessctl
-      vim
-      pamixer
-      pinentry-curses
-      xdg-utils
-      tree
-      spotify
-      telegram-desktop
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    git
+    fzf
+    jq
+    ripgrep
+    stow
+    unzip
+    bat
+    playerctl
+    brightnessctl
+    vim
+    pamixer
+    pinentry-curses
+    xdg-utils
+    tree
+    spotify
+    telegram-desktop
+  ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

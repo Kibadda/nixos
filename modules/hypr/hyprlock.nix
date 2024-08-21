@@ -45,7 +45,6 @@ in {
             halign = "center";
             valign = "top";
           }
-
           {
             monitor = "";
             text = "Hi there, ${meta.name}";
