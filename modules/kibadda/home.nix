@@ -206,6 +206,8 @@ in {
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
+        NIXOS_DIR = "$HOME/.dotfiles";
+        NIXVIM_DIR = "$HOME/Projects/nixvim";
       };
 
       sessionPath = [

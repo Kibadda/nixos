@@ -4,9 +4,10 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake ${toString ./../..}#$(hostname)";
+      update = "sudo nixos-rebuild switch --flake $NIXOS_DIR#$(hostname)";
       check = "nix flake check";
       cat = "bat";
+      nvimdev = "nix run $NIXVIM_DIR#nvim-dev";
     };
 
     oh-my-zsh = {
