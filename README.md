@@ -39,14 +39,14 @@ cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nixos/machines/$HOSTNAME/hardw
 ```
 
 #### hardware-configuration.nix not in version control
+add index
 ```console
-# add to index
 git -C /tmp/nixos add .
 ```
 
 #### hardware-configuration.nix in version control
+check diff
 ```console
-# check diff
 git -C /tmp/nixos diff
 ```
 
@@ -61,7 +61,7 @@ sudo reboot now
 ```
 
 ### Add u2f keys
+make sure the yubikey is plugged in
 ```console
-# make sure the yubikey is plugged in
 nix-shell -p pam_u2f --run 'mkdir -p $HOME/.config/Yubico && pamu2fcfg > $HOME/.config/Yubico/u2f_keys'
 ```
