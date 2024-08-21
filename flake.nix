@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
 
     nvim.url = "github:Kibadda/nixvim";
     powermenu.url = "github:Kibadda/powermenu";
@@ -19,33 +20,20 @@
     pinentry.url = "github:Kibadda/pinentry";
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, disko, home-manager, raspberry-pi-nix, ... }@inputs: let
     inherit (self) outputs;
 
-    hosts = [
-      "uranus"
-      "titania"
-      "work"
-    ];
+    data = import ./secrets/data.nix;
 
-    system = "x86_64-linux";
-  in {
-    overlays = import ./overlays.nix { inherit inputs; };
-
-    nixosConfigurations = builtins.listToAttrs (map (name: let 
-      meta = { hostname = name; } // (import ./secrets/data.nix);
-    in {
-      name = name;
-      value = nixpkgs.lib.nixosSystem {
+    mkNixosSystem = { name, system, extraModules ? [], extraHomeModules ? [] }: let
+      meta = { hostname = name; } // data;
+    in nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs outputs meta; };
 
-        specialArgs = {
-          inherit inputs outputs meta;
-        };
-
-        modules = [
-          disko.nixosModules.disko
+        modules = extraModules ++ [
           ./configuration.nix
+          ./modules/kibadda/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -54,8 +42,7 @@
             home-manager.users.${meta.username} = {
               imports = [
                 ./modules/kibadda/home.nix
-                ./machines/${meta.hostname}/home.nix
-              ];
+              ] ++ extraHomeModules;
 
               # It is occasionally necessary for Home Manager to change configuration
               # defaults in a way that is incompatible with stateful data. This could,
@@ -71,10 +58,48 @@
           }
         ];
       };
-    }) hosts);
 
-    devShells.${system}.default = let
-      pkgs = import nixpkgs { inherit system; };
+    mkDesktopSystem = name: mkNixosSystem {
+      inherit name;
+      system = "x86_64-linux";
+      extraModules = [
+        disko.nixosModules.disko
+        ./desktop.nix
+        ./machines/${name}/disko-config.nix
+        ./machines/${name}/hardware-configuration.nix
+        ./machines/${name}/configuration.nix
+      ];
+      extraHomeModules = [
+        ./machines/${name}/home.nix
+      ];
+    };
+
+    mkPiSystem = name: mkNixosSystem {
+      inherit name;
+      system = "aarch64-linux";
+      extraModules = [
+        raspberry-pi-nix.nixosModules.raspberry-pi
+        {
+          raspberry-pi-nix.board = "bcm2711";
+        }
+      ];
+      extraHomeModules = [
+        ./machines/pi/home.nix
+      ];
+    };
+  in {
+    overlays = import ./overlays.nix { inherit inputs; };
+
+    nixosConfigurations = {
+      uranus = mkDesktopSystem "uranus";
+      titania = mkDesktopSystem "titania";
+      work = mkDesktopSystem "work";
+
+      pi = mkPiSystem "pi";
+    };
+
+    devShells."x86_64-linux".default = let
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
     in pkgs.mkShell {
       name = "nixos-devShell";
       buildInputs = [];

@@ -168,8 +168,8 @@ in {
     };
 
     browser = mkOption {
-      type = types.enum [ "chrome" "firefox" ];
-      default = "chrome";
+      type = types.nullOr (types.enum [ "chrome" "firefox" ]);
+      default = null;
     };
 
     git = mkOption {
@@ -200,7 +200,8 @@ in {
       homeDirectory = "/home/${meta.username}";
 
       packages = cfg.packages
-        ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ]
+        ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
+        ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else [])
         ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ]
         ++ [ inputs.nvim.packages.${pkgs.system}.nvim-dev ];
 

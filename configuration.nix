@@ -1,11 +1,4 @@
 { outputs, pkgs, meta, lib, config, ... }: {
-  imports = [
-    ./modules/kibadda/configuration.nix
-    ./machines/${meta.hostname}/hardware-configuration.nix
-    ./machines/${meta.hostname}/disko-config.nix
-    ./machines/${meta.hostname}/configuration.nix
-  ];
-
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -34,14 +27,6 @@
       "nvidia-x11"
       "nvidia-settings"
     ];
-  };
-
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 10;
-    };
-    efi.canTouchEfiVariables = true;
   };
 
   networking = {
@@ -76,7 +61,6 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
-      "docker"
       "networkmanager"
     ];
     hashedPassword = "$6$t2GM2AFGTwx5HL1S$NuDSMSjd93Cm6Ud3uBMtaGVvFGdnJzgVlPOXYRWEras8eqeYhuSPuLA.lfBBFgWpTLEBOVlf2VlKoJqPvGZbC1";
@@ -95,18 +79,9 @@
     fzf
     jq
     ripgrep
-    stow
     unzip
     bat
-    playerctl
-    brightnessctl
-    vim
-    pamixer
     pinentry-curses
-    xdg-utils
-    tree
-    spotify
-    telegram-desktop
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,

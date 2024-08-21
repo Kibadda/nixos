@@ -1,14 +1,18 @@
 {
-  kibadda.hypr = {
-    enable = true;
+  kibadda = {
+    browser = "chrome";
 
-    monitor = [
-      "eDP-1, 1920x1080@60, 0x0, 1"
-    ];
+    hypr = {
+      enable = true;
 
-    waybar = {
-      battery = true;
-      backlight = true;
+      monitor = [
+        "eDP-1, 1920x1080@60, 0x0, 1"
+      ];
+
+      waybar = {
+        battery = true;
+        backlight = true;
+      };
     };
   };
 }

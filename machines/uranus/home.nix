@@ -4,6 +4,8 @@
       chiaki
     ];
 
+    browser = "chrome";
+
     hypr = let
       coding = "name:Coding";
       games = "name:Games";
