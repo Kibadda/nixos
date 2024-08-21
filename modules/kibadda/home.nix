@@ -202,7 +202,7 @@ in {
       packages = cfg.packages
         ++ [ (if cfg.browser == "chrome" then pkgs.google-chrome else pkgs.firefox) ]
         ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ]
-        ++ [ inputs.nvim.packages.${pkgs.system}.default ];
+        ++ [ inputs.nvim.packages.${pkgs.system}.nvim-dev ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
