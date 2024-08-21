@@ -143,6 +143,7 @@ in {
     ../dunst.nix
     ../eza.nix
     ../pass.nix
+    ../direnv.nix
   ];
 
   options.kibadda = {
