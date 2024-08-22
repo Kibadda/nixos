@@ -25,15 +25,16 @@
 
     data = import ./secrets/data.nix;
 
-    mkNixosSystem = { name, system, extraModules ? [], extraHomeModules ? [] }: let
+    mkNixosSystem = { name, system, modules ? [] }: let
       meta = { hostname = name; } // data;
     in nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs outputs meta; };
 
-        modules = extraModules ++ [
+        modules = modules ++ [
           ./configuration.nix
           ./modules/kibadda/configuration.nix
+          ./machines/${name}/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -42,7 +43,8 @@
             home-manager.users.${meta.username} = {
               imports = [
                 ./modules/kibadda/home.nix
-              ] ++ extraHomeModules;
+                ./machines/${name}/home.nix
+              ];
 
               # It is occasionally necessary for Home Manager to change configuration
               # defaults in a way that is incompatible with stateful data. This could,
@@ -62,29 +64,19 @@
     mkDesktopSystem = name: mkNixosSystem {
       inherit name;
       system = "x86_64-linux";
-      extraModules = [
+      modules = [
         disko.nixosModules.disko
         ./desktop.nix
         ./machines/${name}/disko-config.nix
         ./machines/${name}/hardware-configuration.nix
-        ./machines/${name}/configuration.nix
-      ];
-      extraHomeModules = [
-        ./machines/${name}/home.nix
       ];
     };
 
     mkPiSystem = name: mkNixosSystem {
       inherit name;
       system = "aarch64-linux";
-      extraModules = [
+      modules = [
         raspberry-pi-nix.nixosModules.raspberry-pi
-        {
-          raspberry-pi-nix.board = "bcm2711";
-        }
-      ];
-      extraHomeModules = [
-        ./machines/pi/home.nix
       ];
     };
   in {

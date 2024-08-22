@@ -1,6 +1,6 @@
 {
   kibadda = {
     kitty.enable = false;
-    yubikey.touch-detector = false;
+    yubikey.enable = false;
   };
 }
