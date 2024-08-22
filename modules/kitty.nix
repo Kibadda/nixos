@@ -1,7 +1,7 @@
-{ config, lib, ... }: with lib; let
+{ config, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = mkIf cfg.kitty.enable {
+  config = lib.mkIf cfg.kitty.enable {
     programs.kitty = {
       enable = true;
 

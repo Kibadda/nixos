@@ -1,10 +1,13 @@
-{ pkgs, config, meta, lib, ... }: with lib; let
+{ pkgs, config, meta, lib, ... }: let
   cfg = config.home-manager.users.${meta.username}.kibadda;
 in {
-  config = mkIf cfg.yubikey.enable {
+  config = lib.mkIf cfg.yubikey.enable {
     programs.yubikey-touch-detector.enable = cfg.yubikey.touch-detector;
 
-    environment.systemPackages = with pkgs; [ gnupg yubikey-personalization ];
+    environment.systemPackages = with pkgs; [
+      gnupg
+      yubikey-personalization
+    ];
 
     security.pam.services = builtins.listToAttrs (map (name: {
       name = name;
@@ -12,7 +15,9 @@ in {
     }) cfg.yubikey.pam);
 
     services = {
-      udev.packages = with pkgs; [ yubikey-personalization ];
+      udev.packages = with pkgs; [
+        yubikey-personalization
+      ];
       pcscd.enable = true;
     };
   };

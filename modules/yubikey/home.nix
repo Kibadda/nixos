@@ -1,7 +1,7 @@
-{ config, meta, inputs, pkgs, lib, ... }: with lib; let
+{ config, meta, inputs, pkgs, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = mkIf cfg.yubikey.enable {
+  config = lib.mkIf cfg.yubikey.enable {
     home = {
       packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [];
       sessionVariables = {
@@ -22,7 +22,7 @@ in {
     };
 
     services = {
-      dunst.settings.yubikey-touch-detector = mkIf cfg.yubikey.touch-detector {
+      dunst.settings.yubikey-touch-detector = lib.mkIf cfg.yubikey.touch-detector {
         appname = "yubikey-touch-detector";
         skip_display = true;
         skip_history = true;

@@ -1,133 +1,133 @@
-{ lib, pkgs, config, meta, inputs, ... }: with lib; let
+{ lib, pkgs, config, meta, inputs, ... }: let
   cfg = config.kibadda;
 
-  cursorModule = types.submodule {
+  cursorModule = lib.types.submodule {
     options = {
-      name = mkOption {
-        type = types.str;
+      name = lib.mkOption {
+        type = lib.types.str;
         default = "Bibata-Modern-Classic";
       };
 
-      package = mkOption {
-        type = types.package;
+      package = lib.mkOption {
+        type = lib.types.package;
         default = pkgs.bibata-cursors;
       };
 
-      size = mkOption {
-        type = types.int;
+      size = lib.mkOption {
+        type = lib.types.int;
         default = 18;
       };
     };
   };
 
-  waybarModule = types.submodule {
+  waybarModule = lib.types.submodule {
     options = {
-      battery = mkOption {
-        type = types.bool;
+      battery = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
 
-      backlight = mkOption {
-        type = types.bool;
+      backlight = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
     };
   };
 
-  hyprModule = types.submodule {
+  hyprModule = lib.types.submodule {
     options = {
-      enable = mkOption {
-        type = types.bool;
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
 
-      nvidia = mkOption {
-        type = types.bool;
+      nvidia = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
 
-      monitor = mkOption {
-        type = types.listOf types.str;
+      monitor = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
       };
 
-      bind = mkOption {
-        type = types.listOf types.str;
+      bind = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [];
       };
 
-      windowrule = mkOption {
-        type = types.listOf types.str;
+      windowrule = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [];
       };
 
-      workspace = mkOption {
-        type = types.listOf types.str;
+      workspace = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [];
       };
 
-      cursor = mkOption {
+      cursor = lib.mkOption {
         type = cursorModule;
         default = {};
       };
 
-      waybar = mkOption {
+      waybar = lib.mkOption {
         type = waybarModule;
         default = {};
       };
     };
   };
 
-  i3Module = types.submodule {
+  i3Module = lib.types.submodule {
     options = {
-      enable = mkOption {
-        type = types.bool;
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
     };
   };
 
-  gitModule = types.submodule {
+  gitModule = lib.types.submodule {
     options = {
-      email = mkOption {
-        type = types.str;
+      email = lib.mkOption {
+        type = lib.types.str;
         default = meta.email.personal;
       };
 
-      includes = mkOption {
-        type = types.listOf (types.attrsOf types.anything);
+      includes = lib.mkOption {
+        type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
         default = [];
       };
     };
   };
 
-  yubikeyModule = types.submodule {
+  yubikeyModule = lib.types.submodule {
     options = {
-      enable = mkOption {
-        type = types.bool;
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = true;
       };
 
-      touch-detector = mkOption {
-        type = types.bool;
+      touch-detector = lib.mkOption {
+        type = lib.types.bool;
         default = true;
       };
 
-      pam = mkOption {
-        type = types.listOf types.str;
+      pam = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ "sudo" "login" ];
       };
     };
   };
 
-  kittyModule = types.submodule {
+  kittyModule = lib.types.submodule {
     options = {
-      enable = mkOption {
-        type = types.bool;
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = true;
       };
 
-      size = mkOption {
-        type = types.int;
+      size = lib.mkOption {
+        type = lib.types.int;
         default = 10;
       };
     };
@@ -147,48 +147,48 @@ in {
   ];
 
   options.kibadda = {
-    hypr = mkOption {
+    hypr = lib.mkOption {
       type = hyprModule;
       default = {};
     };
 
-    i3 = mkOption {
+    i3 = lib.mkOption {
       type = i3Module;
       default = {};
     };
 
-    wallpaper = mkOption {
-      type = types.path;
+    wallpaper = lib.mkOption {
+      type = lib.types.path;
       default = ../../wallpapers/forest.png;
     };
 
-    packages = mkOption {
-      type = types.listOf types.package;
+    packages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
       default = [];
     };
 
-    browser = mkOption {
-      type = types.nullOr (types.enum [ "chrome" "firefox" ]);
+    browser = lib.mkOption {
+      type = lib.types.nullOr (lib.types.enum [ "chrome" "firefox" ]);
       default = null;
     };
 
-    git = mkOption {
+    git = lib.mkOption {
       type = gitModule;
       default = {};
     };
 
-    yubikey = mkOption {
+    yubikey = lib.mkOption {
       type = yubikeyModule;
       default = {};
     };
 
-    kitty = mkOption {
+    kitty = lib.mkOption {
       type = kittyModule;
       default = {};
     };
 
-    font = mkOption {
-      type = types.str;
+    font = lib.mkOption {
+      type = lib.types.str;
       default = "JetBrainsMono";
     };
   };

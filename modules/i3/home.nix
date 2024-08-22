@@ -1,9 +1,9 @@
-{ lib, config, ... }: with lib; let
+{ lib, config, ... }: let
   cfg = config.kibadda;
 
   wallpaper = ".config/i3/wallpaper.png";
 in {
-  config = mkIf cfg.i3.enable {
+  config = lib.mkIf cfg.i3.enable {
     services.picom.enable = true;
 
     xsession.windowManager.i3 = let

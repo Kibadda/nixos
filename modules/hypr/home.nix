@@ -1,4 +1,4 @@
-{ lib, pkgs, config, inputs, ... }: with lib; let
+{ lib, pkgs, config, inputs, ... }: let
   cfg = config.kibadda;
 in {
   imports = [
@@ -9,7 +9,7 @@ in {
     ./waybar.nix
   ];
 
-  config = mkIf cfg.hypr.enable {
+  config = lib.mkIf cfg.hypr.enable {
     home = {
       packages = [
         inputs.powermenu.defaultPackage.${pkgs.system}
@@ -86,7 +86,7 @@ in {
 
         monitor = cfg.hypr.monitor;
 
-        cursor = mkIf cfg.hypr.nvidia {
+        cursor = lib.mkIf cfg.hypr.nvidia {
           no_hardware_cursors = true;
         };
 

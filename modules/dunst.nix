@@ -1,7 +1,7 @@
-{ config, lib, ... }: with lib; let
+{ config, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = mkIf (cfg.hypr.enable || cfg.i3.enable) {
+  config = lib.mkIf (cfg.hypr.enable || cfg.i3.enable) {
     services.dunst = {
       enable = true;
       settings = {
