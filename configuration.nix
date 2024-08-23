@@ -26,6 +26,7 @@
       "steam-run"
       "nvidia-x11"
       "nvidia-settings"
+      "discord"
     ];
   };
 
