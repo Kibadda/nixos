@@ -1,5 +1,4 @@
 { config, ... }: {
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   programs.steam.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
