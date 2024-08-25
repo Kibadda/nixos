@@ -91,6 +91,7 @@
     unzip
     bat
     pinentry-curses
+    btop
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
