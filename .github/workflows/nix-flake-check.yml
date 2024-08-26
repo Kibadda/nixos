@@ -4,8 +4,8 @@ on:
   push:
   workflow_call:
 jobs:
-  checks:
-    name: Checks
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
