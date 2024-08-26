@@ -1,4 +1,4 @@
-name: nix-flake-check
+name: "Nix flake check"
 on:
   pull_request:
   push:
