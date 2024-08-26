@@ -2,6 +2,7 @@ name: "Nix flake check"
 on:
   pull_request:
   push:
+    branches: [main]
   workflow_call:
 jobs:
   check:
