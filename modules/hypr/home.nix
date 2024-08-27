@@ -108,6 +108,7 @@ in {
           "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
           "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
           "SUPER, P, exec, kitty --class kitty-passmenu --config ~/.config/kitty/tool.conf passmenu"
+          "SUPER, Minus, togglespecialworkspace"
 
           "SUPER, Q, killactive"
           "SUPER, Space, togglefloating"
@@ -160,6 +161,8 @@ in {
           "float, class:^(kitty-pinentry)$"
           "size 300 250, class:^(kitty-pinentry)$"
           "center, class:^(kitty-pinentry)$"
+
+          "workspace special silent, initialTitle:^(Spotify Premium)$"
         ] ++ cfg.hypr.windowrule;
 
         workspace = cfg.hypr.workspace;
