@@ -180,9 +180,7 @@ in {
     };
 
     home.file = {
-      ${wallpaper} = {
-        source = cfg.wallpaper;
-      };
+      ${wallpaper}.source = cfg.wallpaper;
 
       ".local/bin/i3blocks-yubikey" = {
         executable = true;

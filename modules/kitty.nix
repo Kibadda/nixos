@@ -94,11 +94,9 @@ in {
       };
     };
 
-    home.file.".config/kitty/tool.conf" = {
-      text = ''
-        include ./kitty.conf
-        clear_all_shortcuts yes
-      '';
-    };
+    home.file.".config/kitty/tool.conf".text = ''
+      include ./kitty.conf
+      clear_all_shortcuts yes
+    '';
   };
 }
