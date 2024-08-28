@@ -35,7 +35,7 @@ nix-shell -p pam_u2f --run 'mkdir -p $HOME/.config/Yubico && pamu2fcfg > $HOME/.
 # Pi
 
 ```console
-nix build .#nixosConfigurations.pi.config.system.build.sdImage
+sudo nix build .#nixosConfigurations.pi.config.system.build.sdImage
 
 sudo dd if=TODO of=/dev/sdX bs=4096 conv=fsync status=progress
 ```
