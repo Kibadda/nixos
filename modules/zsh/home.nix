@@ -18,6 +18,10 @@
       fi
     '';
 
+    sessionVariables = {
+      MAN_PAGER = "nvim +Man!";
+    };
+
     oh-my-zsh = {
       enable = true;
       plugins = [
