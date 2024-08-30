@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{
   raspberry-pi-nix.board = "bcm2711";
 
   services = {
@@ -7,7 +7,6 @@
   };
 
   networking = {
-    networkmanager.enable = lib.mkForce false;
     interfaces.wlan0.useDHCP = true;
   };
 }
