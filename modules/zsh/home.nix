@@ -8,6 +8,7 @@
       check = "nix flake check";
       cat = "bat";
       nvimdev = "nix run $NIXVIM_DIR#nvim-dev";
+      buildpi = "nix build .#nixosConfigurations.pi.config.system.build.sdImage";
     };
 
     initExtra = ''
