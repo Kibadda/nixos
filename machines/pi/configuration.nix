@@ -1,4 +1,4 @@
-{
+{ meta, ... }: {
   raspberry-pi-nix.board = "bcm2711";
 
   services = {
@@ -7,6 +7,10 @@
   };
 
   networking = {
+    wireless = {
+      enable = true;
+      networks.${meta.wifi.ssid}.psk = meta.wifi.pass;
+    };
     interfaces.wlan0.useDHCP = true;
   };
 }
