@@ -71,6 +71,11 @@
     ];
   };
 
+  services.openssh = {
+    enable = true;
+    ports = [ meta.sshPort ];
+  };
+
   security = {
     polkit.enable = true;
     sudo.execWheelOnly = true;
