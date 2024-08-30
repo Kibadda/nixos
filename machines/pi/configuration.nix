@@ -9,5 +9,6 @@
       networks.${meta.wifi.ssid}.psk = meta.wifi.pass;
     };
     interfaces.wlan0.useDHCP = true;
+    firewall.allowedTCPPorts = [ 80 443 ];
   };
 }

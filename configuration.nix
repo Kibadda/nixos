@@ -35,11 +35,6 @@
     ];
   };
 
-  networking = {
-    hostName = meta.hostname;
-    firewall.enable = false;
-  };
-
   time.timeZone = "Europe/Berlin";
 
   i18n = {
@@ -74,6 +69,11 @@
   services.openssh = {
     enable = true;
     ports = [ meta.sshPort ];
+  };
+
+  networking = {
+    hostName = meta.hostname;
+    firewall.enable = true;
   };
 
   security = {
