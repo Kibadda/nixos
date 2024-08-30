@@ -10,6 +10,13 @@
       nvimdev = "nix run $NIXVIM_DIR#nvim-dev";
     };
 
+    initExtra = ''
+      if [[ -n $SSH_CONNECTION ]]; then
+        hostname="%{$fg_bold[black]%}%m"
+        PROMPT="$hostname $PROMPT"
+      fi
+    '';
+
     oh-my-zsh = {
       enable = true;
       plugins = [
