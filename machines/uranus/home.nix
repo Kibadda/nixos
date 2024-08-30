@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   kibadda = {
     packages = with pkgs; [
       chiaki
@@ -6,6 +6,8 @@
     ];
 
     browser = "chrome";
+
+    nvimPackage = inputs.nvim.packages.${pkgs.system}.nvim-dev;
 
     hypr = let
       coding = "name:Coding";

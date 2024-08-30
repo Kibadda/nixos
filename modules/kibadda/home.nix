@@ -191,6 +191,11 @@ in {
       type = lib.types.str;
       default = "JetBrainsMono";
     };
+
+    nvimPackage = lib.mkOption {
+      type = lib.types.package;
+      default = inputs.nvim.packages.${pkgs.system}.nvim;
+    };
   };
 
   config = {
@@ -203,7 +208,7 @@ in {
         ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
         ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else [])
         ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ]
-        ++ [ inputs.nvim.packages.${pkgs.system}.nvim-dev ];
+        ++ [ cfg.nvimPackage ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
