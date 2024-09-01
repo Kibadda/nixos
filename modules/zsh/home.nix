@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, meta, ... }: {
   programs.zsh = {
     enable = true;
     history.path = "${config.xdg.dataHome}/zsh/history";
@@ -8,7 +8,7 @@
       check = "nix flake check";
       cat = "bat";
       nvimdev = "nix run $NIXVIM_DIR#nvim-dev";
-      buildpi = "nix build .#nixosConfigurations.pi.config.system.build.sdImage";
+      buildpi = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake $NIXOS_DIR#pi --target-host pi --use-remote-sudo";
     };
 
     initExtra = ''
