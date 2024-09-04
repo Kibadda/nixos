@@ -1,4 +1,4 @@
-{ meta, ... }: {
+{ meta, pkgs, ... }: {
   raspberry-pi-nix.board = "bcm2711";
 
   services.k3s = {
@@ -11,6 +11,10 @@
       "--disable local-storage"
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    kubernetes-helm
+  ];
 
   networking = {
     wireless = {
