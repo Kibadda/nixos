@@ -19,7 +19,7 @@ in {
           modules-center = [ "custom/weather" ];
           modules-right = (lib.optional cfg.hypr.waybar.battery "battery")
             ++ (lib.optional cfg.hypr.waybar.backlight "backlight")
-            ++ [ "cpu" "memory" "disk" "pulseaudio" "network" ];
+            ++ [ "bluetooth" "cpu" "memory" "disk" "pulseaudio" "network" ];
 
           "hyprland/workspaces" = {
             format = "<span font='11'>{name}</span>";
@@ -72,6 +72,12 @@ in {
           backlight = {
             device = "intel_backlight";
             format = "{percent}% <span font='11'></span> ";
+          };
+
+          bluetooth = {
+            format = "{status} ";
+            format-connected = "{device_alias} ";
+            format-connected-battery = "{device_alias} {device_battery_percentage}% ";
           };
         };
 
@@ -133,7 +139,8 @@ in {
         #pulseaudio,
         #network,
         #battery,
-        #backlight {
+        #backlight,
+        #bluetooth {
           padding: 0 10px;
         }
 
@@ -176,6 +183,10 @@ in {
         }
         #battery.critical:not(.charging) {
           background-color: #F53C3C;
+        }
+
+        #bluetooth {
+          background-color: #2980B9;
         }
       '';
     };
