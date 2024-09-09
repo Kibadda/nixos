@@ -1,4 +1,17 @@
-{ meta, pkgs, ... }: {
+{ meta, pkgs, ... }: let
+  helm = with pkgs; wrapHelm kubernetes-helm {
+    plugins = with pkgs.kubernetes-helmPlugins; [
+      helm-secrets
+      helm-diff
+      helm-git
+      helm-s3
+    ];
+  };
+
+  helmfile = pkgs.helmfile-wrapped.override {
+    inherit (helm) pluginsDir;
+  };
+in {
   raspberry-pi-nix.board = "bcm2711";
 
   services.k3s = {
@@ -12,8 +25,9 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    kubernetes-helm
+  environment.systemPackages = [
+    helm
+    helmfile
   ];
 
   networking = {
