@@ -52,10 +52,7 @@
 
   fonts.fontDir.enable = true;
 
-  hardware = {
-    pulseaudio.enable = true;
-    bluetooth.enable = true;
-  };
+  hardware.bluetooth.enable = true;
 
   users.users.${meta.username} = {
     isNormalUser = true;
@@ -66,9 +63,17 @@
     ];
   };
 
-  services.openssh = {
-    enable = true;
-    ports = [ meta.sshPort ];
+  services = {
+    openssh = {
+      enable = true;
+      ports = [ meta.sshPort ];
+    };
+
+    pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true;
+    };
   };
 
   networking = {
