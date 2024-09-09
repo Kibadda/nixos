@@ -2,7 +2,6 @@
   kibadda = {
     packages = with pkgs; [
       chiaki
-      discord
     ];
 
     browser = "chrome";
