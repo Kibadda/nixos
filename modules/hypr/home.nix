@@ -125,6 +125,7 @@ in {
 
           ", XF86AudioLowerVolume, exec, pamixer -d 5"
           ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          # XF86AudioMicMute
           ", XF86AudioMute, exec, pamixer -t"
           ", XF86AudioPlay, exec, playerctl -p spotify play-pause"
           ", XF86AudioPause, exec, playerctl -p spotify play-pause"
