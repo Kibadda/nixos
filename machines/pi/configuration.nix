@@ -25,9 +25,19 @@ in {
     ];
   };
 
+  services.openiscsi = {
+    enable = true;
+    name = "${meta.hostname}-initiatorhost";
+  };
+
+  systemd.tmpfiles.rules = [
+    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
+  ];
+
   environment.systemPackages = [
     helm
     helmfile
+    pkgs.nfs-utils
   ];
 
   networking = {
