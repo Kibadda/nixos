@@ -41,7 +41,7 @@ in {
 
           pulseaudio = {
             format = "<span font='11'>{icon}</span> {volume}%";
-            format-muted = "{volume}% <span font='11'>x</span>";
+            format-muted = "<span font='11'>x</span> {volume}%";
             format-icons = {
               default = [ " " " " " " ];
             };
@@ -49,7 +49,7 @@ in {
 
           network = {
             format-ethernet = "<span font='11'></span> {ipaddr}";
-            format-wifi = "<span font='11'></span> {ipaddr}";
+            format-wifi = "<span font='11'> </span> {ipaddr}";
             format-disconnected = "Disconnected";
             interval = 5;
           };
@@ -60,9 +60,9 @@ in {
           };
 
           battery = {
-            format = "{capacity}% <span font='11'>{icon}</span> ";
-            format-charging = "{capacity}% <span font='11'></span>";
-            format-plugged = "{capacity}% <span font='11'></span>";
+            format = "<span font='11'>{icon}</span> {capacity}%";
+            format-charging = "<span font='11'></span> {capacity}%";
+            format-plugged = "<span font='11'></span> {capacity}%";
             format-icons = [ "" "" "" "" "" ];
             states = {
               critical = 25;
@@ -71,13 +71,13 @@ in {
 
           backlight = {
             device = "intel_backlight";
-            format = "{percent}% <span font='11'></span> ";
+            format = "<span font='11'></span> {percent}%";
           };
 
           bluetooth = {
-            format = "{status} ";
-            format-connected = "{device_alias} ";
-            format-connected-battery = "{device_alias} {device_battery_percentage}% ";
+            format = " {status}";
+            format-connected = " {device_alias}";
+            format-connected-battery = " {device_alias} {device_battery_percentage}%";
           };
         };
 
