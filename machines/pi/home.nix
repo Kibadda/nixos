@@ -14,7 +14,7 @@
         kind: StorageClass
         apiVersion: storage.k8s.io/v1
         metadata:
-          name: longhorn-test
+          name: longhorn-immich
         provisioner: driver.longhorn.io
         allowVolumeExpansion: true
         parameters:
@@ -31,7 +31,7 @@
         spec:
           accessModes:
             - ReadWriteMany
-          storageClassName: longhorn
+          storageClassName: longhorn-immich
           resources:
             requests:
               storage: 4G
