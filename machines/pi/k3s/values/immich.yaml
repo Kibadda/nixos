@@ -1,0 +1,12 @@
+image:
+  tag: v1.106.1
+immich:
+  persistence:
+    library:
+      existingClaim: immich-library
+postgresql:
+  enabled: true
+resis:
+  enabled: true
+machine-learning:
+  enabled: false
