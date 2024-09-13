@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, meta, ... }: {
   kibadda = {
     packages = with pkgs; [
       chiaki
@@ -7,6 +7,20 @@
     browser = "chrome";
 
     nvimPackage = inputs.nvim.packages.${pkgs.system}.nvim-dev;
+
+    ssh = [
+      {
+        name = "titania";
+        host = "10.0.0.11";
+        port = meta.sshPort;
+      }
+      {
+        name = "pi";
+        host = "10.0.0.2";
+        port = meta.sshPort;
+        forward = false;
+      }
+    ];
 
     hypr = let
       coding = "name:Coding";

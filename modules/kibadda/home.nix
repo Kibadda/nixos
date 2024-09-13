@@ -132,6 +132,27 @@
       };
     };
   };
+
+  sshModule = lib.types.submodule {
+    options = {
+      name = lib.mkOption {
+        type = lib.types.str;
+      };
+
+      host = lib.mkOption {
+        type = lib.types.str;
+      };
+
+      port = lib.mkOption {
+        type = lib.types.int;
+      };
+
+      forward = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+    };
+  };
 in {
   imports = [
     ../hypr/home.nix
@@ -144,6 +165,7 @@ in {
     ../eza.nix
     ../pass.nix
     ../direnv.nix
+    ../ssh.nix
   ];
 
   options.kibadda = {
@@ -195,6 +217,11 @@ in {
     nvimPackage = lib.mkOption {
       type = lib.types.package;
       default = inputs.nvim.packages.${pkgs.system}.nvim;
+    };
+
+    ssh = lib.mkOption {
+      type = lib.types.listOf sshModule;
+      default = [];
     };
   };
 
