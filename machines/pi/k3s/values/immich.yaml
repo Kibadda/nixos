@@ -4,6 +4,14 @@ immich:
   persistence:
     library:
       existingClaim: immich-library
+server:
+  ingress:
+    main:
+      enabled: true
+      hosts:
+        - host: "immich.home"
+          paths:
+            - path: "/"
 postgresql:
   enabled: true
 resis:

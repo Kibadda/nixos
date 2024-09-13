@@ -1,6 +1,14 @@
 repositories:
   - name: longhorn
     url: https://charts.longhorn.io
+  - name: metallb
+    url: https://metallb.github.io/metallb
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: mojo2600
+    url: https://mojo2600.github.io/pihole-kubernetes/
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
   - name: immich
     url: https://immich-app.github.io/immich-charts
 ---
@@ -9,10 +17,38 @@ releases:
     namespace: longhorn-system
     chart: longhorn/longhorn
     version: 1.7.1
+    values:
+      - ./values/longhorn.yaml
+
+  - name: metallb
+    namespace: metallb-system
+    chart: metallb/metallb
+    version: 0.14.8
+
+  - name: ingress-nginx
+    namespace: nginx-system
+    chart: ingress-nginx/ingress-nginx
+    version: 4.11.2
+    values:
+      - ./values/ingress-nginx.yaml
+
+  - name: pihole
+    namespace: pihole-system
+    chart: mojo2600/pihole
+    version: 2.26.1
+    values:
+      - ./values/pihole.yaml
+
+  - name: externaldns
+    namespace: pihole-system
+    chart: bitnami/external-dns
+    version: 8.3.7
+    values:
+      - ./values/externaldns.yaml
 
   - name: immich
     namespace: immich-system
     chart: immich/immich
     version: 0.7.2
     values:
-      - ./values/immich.values.yaml
+      - ./values/immich.yaml

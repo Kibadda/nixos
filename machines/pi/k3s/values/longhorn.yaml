@@ -1,0 +1,7 @@
+service:
+  ui:
+    type: LoadBalancer
+ingress:
+  enabled: true
+  host: "longhorn.home"
+  ingressClassName: nginx-internal
