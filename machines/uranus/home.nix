@@ -41,8 +41,11 @@
 
       bind = [
         "SUPER, C, workspace, ${coding}"
+        "SUPER SHIFT, C, movetoworkspace, ${coding}"
         "SUPER, G, workspace, ${games}"
+        "SUPER SHIFT, G, movetoworkspace, ${games}"
         "SUPER, T, workspace, ${tools}"
+        "SUPER SHIFT, T, movetoworkspace, ${tools}"
       ];
 
       windowrule = [
