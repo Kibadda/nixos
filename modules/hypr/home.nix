@@ -31,8 +31,12 @@ in {
         ".config/hypr/wallpaper.png".source = cfg.wallpaper;
       };
 
-      pointerCursor = cfg.hypr.cursor;
+      pointerCursor = cfg.hypr.cursor // {
+        gtk.enable = true;
+      };
     };
+
+    gtk.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -78,6 +82,8 @@ in {
         env = [
           "XDG_SESSION_TYPE,wayland"
           "NIXOS_OZONE_WL,1"
+          "HYPRCURSOR_SIZE,${toString cfg.hypr.cursor.size}"
+          "XCURSOR_SIZE,${toString cfg.hypr.cursor.size}"
         ] ++ (if cfg.hypr.nvidia then [
           "LIBVA_DRIVER_NAME,nvidia"
           "GBM_BACKEND,nvidia-drm"
@@ -169,9 +175,9 @@ in {
 
         workspace = cfg.hypr.workspace;
 
-        exec-once = if (cfg.hypr.cursor != null) then [
+        exec-once = [
           "hyprctl setcursor \"${cfg.hypr.cursor.name}\" ${toString cfg.hypr.cursor.size}"
-        ] else [];
+        ];
       };
     };
   };
