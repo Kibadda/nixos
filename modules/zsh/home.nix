@@ -20,12 +20,14 @@
 
     sessionVariables = {
       MAN_PAGER = "nvim +Man!";
+      TIMER_PRECISION = 2;
+      TIMER_FORMAT = "[%d]";
     };
 
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git" "sudo"
+        "git" "sudo" "timer"
       ];
       theme = "robbyrussell";
     };
