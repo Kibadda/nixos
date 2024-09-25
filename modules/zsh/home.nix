@@ -7,7 +7,7 @@
       update = "sudo nixos-rebuild switch --flake $NIXOS_DIR#$(hostname)";
       check = "nix flake check";
       cat = "bat";
-      nvimdev = "nix run $NIXVIM_DIR#nvim-dev";
+      nvimdev = "nix run $NIXVIM_DIR#nvim-dev --";
       buildpi = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake $NIXOS_DIR#pi --target-host pi --use-remote-sudo";
     };
 
@@ -19,7 +19,7 @@
     '';
 
     sessionVariables = {
-      MAN_PAGER = "nvim +Man!";
+      MANPAGER = "nvim --cmd 'lua vim.g.loaded_starter = 1' +Man!";
       TIMER_PRECISION = 2;
       TIMER_FORMAT = "[%d]";
     };

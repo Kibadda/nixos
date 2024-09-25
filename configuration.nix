@@ -46,7 +46,7 @@
   };
 
   console = {
-    font = "${config.home-manager.users.${meta.username}.kibadda.font} Nerd Font";
+    font = "Lat2-Terminus16";
     keyMap = "de";
   };
 
