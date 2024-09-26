@@ -1,8 +1,0 @@
-controller:
-  ingressClassResource:
-    name: nginx-internal
-    enabled: true
-    default: true
-    controllerValue: "k8s.io/ingress-nginx"
-    parameters: {}
-  ingressClass: nginx-internal

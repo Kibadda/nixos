@@ -1,0 +1,32 @@
+image:
+  tag: v1.115.0
+immich:
+  persistence:
+    library:
+      existingClaim: immich-library
+  configuration:
+    server:
+      externalDomain: "https://fotos.xn--strobel-s-o1a23a.de"
+    storageTemplate:
+      enabled: true
+      template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+server:
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+      hosts:
+        - host: "fotos.xn--strobel-s-o1a23a.de"
+          paths:
+            - path: "/"
+      tls:
+        - hosts:
+            - "fotos.xn--strobel-s-o1a23a.de"
+          secretName: immich-tls
+postgresql:
+  enabled: true
+redis:
+  enabled: true
