@@ -20,23 +20,18 @@ in {
     extraFlags = toString [
       "--write-kubeconfig-mode \"0644\""
       "--disable traefik"
-      "--disable local-storage"
+      "--default-local-storage-path /mnt/data"
     ];
   };
 
-  services.openiscsi = {
-    enable = true;
-    name = "${meta.hostname}-initiatorhost";
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/bc76ab1a-8f4a-4d9b-9846-436419d779be";
+    fsType = "ext4";
   };
-
-  systemd.tmpfiles.rules = [
-    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
-  ];
 
   environment.systemPackages = [
     helm
     helmfile
-    pkgs.nfs-utils
   ];
 
   networking = {
