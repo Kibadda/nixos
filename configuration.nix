@@ -67,7 +67,11 @@
     openssh = {
       enable = true;
       ports = [ meta.sshPort ];
-      settings.StreamLocalBindUnlink = meta.hostname != "pi";
+      settings = {
+        StreamLocalBindUnlink = meta.hostname != "pi";
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
     };
 
     pipewire = {
