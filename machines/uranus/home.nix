@@ -1,6 +1,10 @@
 { pkgs, inputs, meta, ... }: {
   home = {
     packages = [ pkgs.sshfs ];
+    file.".local/bin/work" = {
+      executable = true;
+      source = ../../bin/work.sh;
+    };
   };
 
   kibadda = {
