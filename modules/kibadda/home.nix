@@ -90,7 +90,7 @@
     options = {
       email = lib.mkOption {
         type = lib.types.str;
-        default = meta.email.personal;
+        default = meta.email;
       };
 
       includes = lib.mkOption {

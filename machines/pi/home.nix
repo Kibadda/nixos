@@ -104,7 +104,7 @@
         spec:
           acme:
             server: https://acme-v02.api.letsencrypt.org/directory
-            email: ${meta.email.personal}
+            email: ${meta.email}
             privateKeySecretRef:
               name: letsencrypt-production
             solvers:
@@ -121,7 +121,7 @@
         spec:
           acme:
             server: https://acme-staging-v02.api.letsencrypt.org/directory
-            email: ${meta.email.personal}
+            email: ${meta.email}
             privateKeySecretRef:
               name: letsencrypt-staging
             solvers:

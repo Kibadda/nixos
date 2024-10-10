@@ -11,11 +11,11 @@
     browser = "firefox";
 
     git = {
-      email = meta.email.work;
+      email = meta.work.email;
       includes = [
         {
           condition = "gitdir:~/Projects/Personal/";
-          contents.user.email = meta.email.personal;
+          contents.user.email = meta.email;
         }
       ];
     };
