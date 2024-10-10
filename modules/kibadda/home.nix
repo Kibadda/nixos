@@ -144,12 +144,18 @@
       };
 
       port = lib.mkOption {
-        type = lib.types.int;
+        type = lib.types.nullOr lib.types.int;
+        default = null;
       };
 
       forward = lib.mkOption {
         type = lib.types.bool;
         default = true;
+      };
+
+      user = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
       };
     };
   };

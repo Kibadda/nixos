@@ -1,4 +1,8 @@
 { pkgs, inputs, meta, ... }: {
+  home = {
+    packages = [ pkgs.sshfs ];
+  };
+
   kibadda = {
     packages = with pkgs; [
       chiaki
@@ -18,6 +22,12 @@
         name = "pi";
         host = "10.0.0.2";
         port = meta.sshPort;
+        forward = false;
+      }
+      {
+        name = "work-studies";
+        host = meta.work.sshfs.studies;
+        user = meta.work.sshfs.user;
         forward = false;
       }
     ];

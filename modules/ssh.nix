@@ -9,6 +9,7 @@ in {
         value = {
           hostname = config.host;
           port = config.port;
+          user = config.user;
           remoteForwards = lib.mkIf config.forward [
             {
               bind.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
