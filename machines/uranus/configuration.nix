@@ -1,4 +1,4 @@
-{ config, meta, ... }: {
+{ config, ... }: {
   programs.steam.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
@@ -8,5 +8,4 @@
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };
-  networking.wg-quick.interfaces.work = meta.work.vpn;
 }

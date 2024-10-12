@@ -1,11 +1,5 @@
 { pkgs, inputs, meta, ... }: {
-  home = {
-    packages = [ pkgs.sshfs ];
-    file.".local/bin/work" = {
-      executable = true;
-      source = ../../bin/work.sh;
-    };
-  };
+  home-office.enable = true;
 
   kibadda = {
     packages = with pkgs; [
@@ -26,12 +20,6 @@
         name = "pi";
         host = "10.0.0.2";
         port = meta.sshPort;
-        forward = false;
-      }
-      {
-        name = "work-studies";
-        host = meta.work.sshfs.studies;
-        user = meta.work.sshfs.user;
         forward = false;
       }
     ];

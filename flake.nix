@@ -49,6 +49,7 @@
         modules = modules ++ [
           ./configuration.nix
           ./modules/kibadda/configuration.nix
+          ./modules/home-office/configuration.nix
           ./machines/${name}/configuration.nix
           home-manager.nixosModules.home-manager
           {
@@ -58,6 +59,7 @@
             home-manager.users.${meta.username} = {
               imports = [
                 ./modules/kibadda/home.nix
+                ./modules/home-office/home.nix
                 ./machines/${name}/home.nix
               ];
 
