@@ -21,10 +21,22 @@
       url = "github:Kibadda/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    powermenu.url = "github:Kibadda/powermenu";
-    dmenu.url = "github:Kibadda/dmenu";
-    passmenu.url = "github:Kibadda/passmenu";
-    pinentry.url = "github:Kibadda/pinentry";
+    powermenu = {
+      url = "github:Kibadda/powermenu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dmenu = {
+      url = "github:Kibadda/dmenu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    passmenu = {
+      url = "github:Kibadda/passmenu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pinentry = {
+      url = "github:Kibadda/pinentry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
