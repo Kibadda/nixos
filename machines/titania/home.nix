@@ -4,6 +4,11 @@
 
     ssh = [
       {
+        name = "uranus";
+        host = "10.0.0.10";
+        port = meta.sshPort;
+      }
+      {
         name = "pi";
         host = "10.0.0.2";
         port = meta.sshPort;
