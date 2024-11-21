@@ -2,7 +2,7 @@ socket="$XDG_RUNTIME_DIR/yubikey-touch-detector.socket"
 
 while true; do
   if [ ! -e "$socket" ]; then
-    echo "Waiting for Yubikey socket\n"
+    echo "Waiting for Yubikey socket"
     while [ ! -e "$socket" ]; do sleep 1; done
   fi
 
