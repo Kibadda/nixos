@@ -4,6 +4,7 @@
   kibadda = {
     packages = with pkgs; [
       chiaki
+      lutris
     ];
 
     browser = "chrome";
@@ -55,6 +56,8 @@
 
         "workspace ${tools}, class:^(org.telegram.desktop)$"
         "workspace ${tools}, class:^(steam)$"
+        "workspace ${tools}, class:^(lutris)$"
+        "workspace ${games}, class:^(battle.net.exe)$"
         "workspace ${games}, class:^(steam.+)$"
 
         "workspace ${games}, class:^(Last Epoch.x86_64)$"
@@ -64,6 +67,9 @@
         "minsize 1 1, title:^()$, class:^(steam)$"
 
         "workspace ${games}, class:^(chiaki)$"
+
+        "workspace ${games}, class:^(hearthstone.exe)$"
+        "fullscreen, class:^(hearthstone.exe)$"
       ];
 
       workspace = [
