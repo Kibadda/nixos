@@ -1,6 +1,10 @@
-{ meta, ... }: {
+{ meta, pkgs, ... }: {
   kibadda = {
     browser = "chrome";
+
+    packages = with pkgs; [
+      lutris
+    ];
 
     ssh = [
       {
