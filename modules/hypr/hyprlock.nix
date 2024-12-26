@@ -40,7 +40,7 @@ in {
             monitor = "";
             text = "cmd[update:1000] echo \"$(date +\"%-H:%M\")\"";
             font_size = 120;
-            font_family = "${cfg.font} Nerd Font";
+            font_family = "${cfg.font.name} Nerd Font";
             position = "0, -300";
             halign = "center";
             valign = "top";
@@ -49,7 +49,7 @@ in {
             monitor = "";
             text = "Hi there, ${meta.name}";
             font_size = 25;
-            font_family = "${cfg.font} Nerd Font";
+            font_family = "${cfg.font.name} Nerd Font";
             position = "0, -40";
             halign = "center";
             valign = "center";

@@ -11,7 +11,7 @@ in {
           frame_color = "#7F3FBF";
           separator_color = "auto";
           idle_threshhold = 0;
-          font = "${cfg.font} Nerd Font 11";
+          font = "${cfg.font.name} Nerd Font 11";
           show_indicators = "no";
           sticky_history = false;
           history_length = 0;

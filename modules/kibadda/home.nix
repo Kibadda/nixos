@@ -34,6 +34,20 @@
     };
   };
 
+  fontModule = lib.types.submodule {
+    options = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "JetBrainsMono";
+      };
+
+      pkg = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.nerd-fonts.jetbrains-mono;
+      };
+    };
+  };
+
   hyprModule = lib.types.submodule {
     options = {
       enable = lib.mkOption {
@@ -216,8 +230,8 @@ in {
     };
 
     font = lib.mkOption {
-      type = lib.types.str;
-      default = "JetBrainsMono";
+      type = fontModule;
+      default = {};
     };
 
     nvimPackage = lib.mkOption {
@@ -240,7 +254,7 @@ in {
       packages = cfg.packages
         ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
         ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else [])
-        ++ [ pkgs.font-awesome (pkgs.nerdfonts.override { fonts = [ cfg.font ]; }) ]
+        ++ [ pkgs.font-awesome cfg.font.pkg ]
         ++ [ cfg.nvimPackage ];
 
       sessionVariables = {
