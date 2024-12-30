@@ -7,7 +7,7 @@
       update = "sudo nixos-rebuild switch --flake $NIXOS_DIR#$(hostname)";
       check = "nix flake check";
       cat = "bat";
-      nvimdev = "nix run $NIXVIM_DIR#nvim-dev --";
+      dev = "nix run $NIXVIM_DIR#nvim-dev --";
       buildpi = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake $NIXOS_DIR#pi --target-host pi --use-remote-sudo";
     };
 
