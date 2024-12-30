@@ -9,8 +9,6 @@
 
     browser = "chrome";
 
-    nvimPackage = inputs.nvim.packages.${pkgs.system}.nvim-dev;
-
     ssh = [
       {
         name = "titania";
