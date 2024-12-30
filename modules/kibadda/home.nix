@@ -186,6 +186,7 @@ in {
     ../pass.nix
     ../direnv.nix
     ../ssh.nix
+    ../zoxide.nix
   ];
 
   options.kibadda = {
