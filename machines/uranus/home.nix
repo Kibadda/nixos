@@ -56,7 +56,7 @@
 
         "workspace ${tools}, class:^(org.telegram.desktop)$"
         "workspace ${tools}, class:^(steam)$"
-        "workspace ${tools}, class:^(lutris)$"
+        "workspace ${tools}, class:^(net.lutris.Lutris)$"
         "workspace ${games}, class:^(battle.net.exe)$"
         "workspace ${games}, class:^(steam.+)$"
 
