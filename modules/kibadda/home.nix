@@ -187,6 +187,7 @@ in {
     ../direnv.nix
     ../ssh.nix
     ../zoxide.nix
+    ../neovim.nix
   ];
 
   options.kibadda = {
@@ -235,11 +236,6 @@ in {
       default = {};
     };
 
-    nvimPackage = lib.mkOption {
-      type = lib.types.package;
-      default = inputs.nvim.packages.${pkgs.system}.nvim;
-    };
-
     ssh = lib.mkOption {
       type = lib.types.listOf sshModule;
       default = [];
@@ -255,13 +251,11 @@ in {
       packages = cfg.packages
         ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
         ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else [])
-        ++ [ pkgs.font-awesome cfg.font.pkg ]
-        ++ [ cfg.nvimPackage ];
+        ++ [ pkgs.font-awesome cfg.font.pkg ];
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
         NIXOS_DIR = "$HOME/.dotfiles";
-        NIXVIM_DIR = "$HOME/Projects/nixvim";
       };
 
       sessionPath = [
