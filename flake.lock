@@ -594,7 +594,10 @@
         "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks_2",
         "hercules-ci-effects": "hercules-ci-effects",
-        "neovim-src": "neovim-src",
+        "neovim-src": [
+          "nvim",
+          "neovim-src"
+        ],
         "nixpkgs": [
           "nvim",
           "nixpkgs"
@@ -618,11 +621,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1735598207,
-        "narHash": "sha256-T/UtvF0WSkXy4Lk0ZzCsqjp6At0SRmwTsRXDxJcFzMA=",
+        "lastModified": 1735929980,
+        "narHash": "sha256-vtnUEiVt9QtwUJTi/Vr8fCy+yAhYjY9BdLlsaDVrObc=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "e9c077d197a80a2ecd858821b18d0be3e3eb6d0b",
+        "rev": "a09c7a5d57ba2aca58fbc00e0b04a1437555a3c0",
         "type": "github"
       },
       "original": {
@@ -770,6 +773,7 @@
         "mini-hipatterns": "mini-hipatterns",
         "mini-pick": "mini-pick",
         "neovim-nightly": "neovim-nightly",
+        "neovim-src": "neovim-src",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -786,11 +790,11 @@
         "vim-pasta": "vim-pasta"
       },
       "locked": {
-        "lastModified": 1735643366,
-        "narHash": "sha256-dwnVau4TF/PTFLi9b2+QcNlWiX77jWd6B1mlStzdsA0=",
+        "lastModified": 1735940597,
+        "narHash": "sha256-t7QId3p7fnw6qn4UjIvwjvS2IR5RMMZa6WxeAtlAwuA=",
         "owner": "Kibadda",
         "repo": "nixvim",
-        "rev": "70395b68595d02684edd0a6dfa28f3f5b0c89d74",
+        "rev": "0a9568c7d289d2323d663bc360fdf86703c0a763",
         "type": "github"
       },
       "original": {
