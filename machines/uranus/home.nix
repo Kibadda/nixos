@@ -1,4 +1,4 @@
-{ pkgs, inputs, meta, ... }: {
+{ pkgs, meta, ... }: {
   home-office.enable = true;
 
   kibadda = {

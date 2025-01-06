@@ -1,4 +1,4 @@
-{ lib, pkgs, config, meta, inputs, ... }: let
+{ lib, pkgs, config, meta, ... }: let
   cfg = config.kibadda;
 
   cursorModule = lib.types.submodule {
