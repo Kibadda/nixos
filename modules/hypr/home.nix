@@ -1,4 +1,4 @@
-{ lib, pkgs, config, inputs, ... }: let
+{ lib, pkgs, config, ... }: let
   cfg = config.kibadda;
 in {
   imports = [
@@ -12,10 +12,10 @@ in {
   config = lib.mkIf cfg.hypr.enable {
     home = {
       packages = [
-        inputs.powermenu.defaultPackage.${pkgs.system}
-        inputs.dmenu.defaultPackage.${pkgs.system}
+        pkgs.kibadda.powermenu
+        pkgs.kibadda.dmenu
         # password-store also provides a passmenu binary
-        (lib.hiPrio inputs.passmenu.defaultPackage.${pkgs.system})
+        (lib.hiPrio pkgs.kibadda.passmenu)
 
         pkgs.wl-clipboard
         pkgs.grim
