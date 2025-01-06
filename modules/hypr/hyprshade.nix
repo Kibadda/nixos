@@ -15,8 +15,14 @@ in {
       '';
     };
 
-    wayland.windowManager.hyprland.settings.exec = [
-      "${pkgs.hyprshade}/bin/hyprshade auto"
-    ];
+    wayland.windowManager.hyprland.settings = {
+      bind = [
+        "SUPER SHIFT, S, exec, ${pkgs.hyprshade}/bin/hyprshade toggle"
+      ];
+
+      exec = [
+        "${pkgs.hyprshade}/bin/hyprshade auto"
+      ];
+    };
   };
 }
