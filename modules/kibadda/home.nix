@@ -188,6 +188,7 @@ in {
     ../ssh.nix
     ../zoxide.nix
     ../neovim.nix
+    ../firefox.nix
   ];
 
   options.kibadda = {
