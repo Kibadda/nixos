@@ -24,9 +24,22 @@ in {
     ];
   };
 
-  fileSystems."/mnt/data" = {
-    device = "/dev/disk/by-uuid/bc76ab1a-8f4a-4d9b-9846-436419d779be";
-    fsType = "ext4";
+  fileSystems = {
+    "/" = {
+      device = "/dev/root";
+      fsType = "ext4";
+    };
+
+    "/boot/firmware" = {
+      device = "/dev/disk/by-uuid/2178-694E";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+    "/mnt/data" = {
+      device = "/dev/disk/by-uuid/bc76ab1a-8f4a-4d9b-9846-436419d779be";
+      fsType = "ext4";
+    };
   };
 
   environment.systemPackages = [
