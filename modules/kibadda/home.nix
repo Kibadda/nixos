@@ -1,20 +1,6 @@
 { lib, pkgs, config, meta, ... }: let
   cfg = config.kibadda;
 
-  waybarModule = lib.types.submodule {
-    options = {
-      battery = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
-      backlight = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-    };
-  };
-
   hyprModule = lib.types.submodule {
     options = {
       enable = lib.mkOption {
@@ -44,11 +30,6 @@
       workspace = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
-      };
-
-      waybar = lib.mkOption {
-        type = waybarModule;
-        default = {};
       };
     };
   };

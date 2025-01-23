@@ -1,6 +1,20 @@
 { config, pkgs, lib, ... }: let
   cfg = config.kibadda;
 in {
+  options = {
+    kibadda.hypr.waybar = {
+      battery = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
+      backlight = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+    };
+  };
+
   config = lib.mkIf cfg.hypr.enable {
     wayland.windowManager.hyprland.settings.exec-once = [
       "${pkgs.waybar}/bin/waybar"
