@@ -1,7 +1,16 @@
 { config, meta, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = lib.mkIf cfg.hypr.enable {
+  options = {
+    kibadda.hypr.hyprlock = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+    };
+  };
+
+  config = lib.mkIf (cfg.hypr.enable && cfg.hypr.hyprlock.enable) {
     programs.hyprlock = {
       enable = true;
       settings = {

@@ -3,6 +3,11 @@
 in {
   options = {
     kibadda.hypr.waybar = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+
       battery = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -15,7 +20,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.hypr.enable {
+  config = lib.mkIf (cfg.hypr.enable && cfg.hypr.waybar.enable) {
     wayland.windowManager.hyprland.settings.exec-once = [
       "${pkgs.waybar}/bin/waybar"
     ];

@@ -1,7 +1,16 @@
 { pkgs, config, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = lib.mkIf cfg.hypr.enable {
+  options = {
+    kibadda.hypr.hypridle = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+    };
+  };
+
+  config = lib.mkIf (cfg.hypr.enable && cfg.hypr.hypridle.enable) {
     wayland.windowManager.hyprland.settings.exec-once = [
       "${pkgs.hypridle}/bin/hypridle"
     ];

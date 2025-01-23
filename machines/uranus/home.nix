@@ -35,6 +35,8 @@
 
       nvidia = true;
 
+      hypridle.enable = false;
+
       monitor = [
         "${monitorLeft}, 3840x2160@60, 0x0, 1.5"
         "${monitorRight}, 2560x1440@60, 2560x0, 1"

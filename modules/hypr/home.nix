@@ -2,7 +2,7 @@
   cfg = config.kibadda;
 in {
   imports = [
-    # ./hypridle.nix
+    ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./hyprshade.nix
