@@ -1,14 +1,5 @@
 { lib, pkgs, config, meta, ... }: let
   cfg = config.kibadda;
-
-  i3Module = lib.types.submodule {
-    options = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-    };
-  };
 in {
   imports = [
     ../hypr/home.nix
@@ -29,11 +20,6 @@ in {
   ];
 
   options.kibadda = {
-    i3 = lib.mkOption {
-      type = i3Module;
-      default = {};
-    };
-
     wallpaper = lib.mkOption {
       type = lib.types.path;
       default = ../../wallpapers/forest.png;

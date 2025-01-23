@@ -3,6 +3,15 @@
 
   wallpaper = ".config/i3/wallpaper.png";
 in {
+  options = {
+    kibadda.i3 = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+    };
+  };
+
   config = lib.mkIf cfg.i3.enable {
     services.picom.enable = true;
 
