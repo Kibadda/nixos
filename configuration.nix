@@ -1,4 +1,4 @@
-{ outputs, pkgs, meta, lib, ... }: {
+{ outputs, inputs, pkgs, meta, lib, ... }: {
   nix = {
     package = pkgs.nixVersions.stable;
     extraOptions = ''
@@ -21,6 +21,7 @@
     overlays = [
       outputs.overlays.additions
       outputs.overlays.unstable
+      inputs.nur.overlays.default
     ];
     config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "google-chrome"
