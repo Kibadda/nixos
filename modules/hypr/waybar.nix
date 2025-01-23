@@ -108,7 +108,7 @@ in {
 
       style = ''
         * {
-          font-family: ${cfg.font.name} Nerd Font;
+          font-family: ${cfg.font.main.name} Nerd Font;
           font-weight: bold;
         }
 

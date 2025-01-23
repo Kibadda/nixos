@@ -20,7 +20,7 @@ in {
       enable = true;
 
       font = {
-        name = "${cfg.font.name} Nerd Font";
+        name = "${cfg.font.main.name} Nerd Font";
         size = cfg.kitty.size;
       };
 

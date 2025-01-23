@@ -34,20 +34,6 @@
     };
   };
 
-  fontModule = lib.types.submodule {
-    options = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        default = "JetBrainsMono";
-      };
-
-      pkg = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.nerd-fonts.jetbrains-mono;
-      };
-    };
-  };
-
   hyprModule = lib.types.submodule {
     options = {
       enable = lib.mkOption {
@@ -115,6 +101,7 @@ in {
     ../zoxide.nix
     ../neovim.nix
     ../firefox.nix
+    ../font.nix
   ];
 
   options.kibadda = {
@@ -142,11 +129,6 @@ in {
       type = lib.types.nullOr (lib.types.enum [ "chrome" "firefox" ]);
       default = null;
     };
-
-    font = lib.mkOption {
-      type = fontModule;
-      default = {};
-    };
   };
 
   config = {
@@ -157,8 +139,7 @@ in {
 
       packages = cfg.packages
         ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
-        ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else [])
-        ++ [ pkgs.font-awesome cfg.font.pkg ];
+        ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else []);
 
       sessionVariables = {
         BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
@@ -174,8 +155,6 @@ in {
         source = ../../bin/fetch-repositories.sh;
       };
     };
-
-    fonts.fontconfig.enable = true;
 
     xdg.enable = true;
   };
