@@ -1,37 +1,53 @@
-{ config, meta, pkgs, ... }: let
+{ config, meta, pkgs, lib, ... }: let
   cfg = config.kibadda;
 in {
-  programs.git = {
-    enable = true;
-    userName = meta.name;
-    userEmail = cfg.git.email;
-    includes = cfg.git.includes;
+  options = {
+    kibadda.git = {
+      email = lib.mkOption {
+        type = lib.types.str;
+        default = meta.email;
+      };
 
-    signing = {
-      key = meta.keyid;
-      signByDefault = true;
-    };
-
-    extraConfig = {
-      pull.rebase = true;
-      init.defaultBranch = "main";
-    };
-
-    aliases = {
-      nah = "!f(){ git reset --hard; git clean -df; if [ -d \".git/rebase-apply\" ] || [ -d \".git/rebase-merge\" ]; then git rebase --abort; fi; }; f";
-      forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D";
-      forgetlist = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}'";
-      uncommit = "reset --soft HEAD~1";
-      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
-      fixup = "!git commit --fixup $(git rev-parse HEAD)";
-      filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
-      fixup-to = "!git commit --fixup=$(git filter-commits)";
-      unlock = "!git-crypt unlock";
-      lock = "!git-crypt lock";
+      includes = lib.mkOption {
+        type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
+        default = [];
+      };
     };
   };
 
-  home.packages = [
-    pkgs.git-crypt
-  ];
+  config = {
+    programs.git = {
+      enable = true;
+      userName = meta.name;
+      userEmail = cfg.git.email;
+      includes = cfg.git.includes;
+
+      signing = {
+        key = meta.keyid;
+        signByDefault = true;
+      };
+
+      extraConfig = {
+        pull.rebase = true;
+        init.defaultBranch = "main";
+      };
+
+      aliases = {
+        nah = "!f(){ git reset --hard; git clean -df; if [ -d \".git/rebase-apply\" ] || [ -d \".git/rebase-merge\" ]; then git rebase --abort; fi; }; f";
+        forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D";
+        forgetlist = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}'";
+        uncommit = "reset --soft HEAD~1";
+        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
+        fixup = "!git commit --fixup $(git rev-parse HEAD)";
+        filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 | fzf --no-sort | cut -d \" \" -f1 ' -";
+        fixup-to = "!git commit --fixup=$(git filter-commits)";
+        unlock = "!git-crypt unlock";
+        lock = "!git-crypt lock";
+      };
+    };
+
+    home.packages = [
+      pkgs.git-crypt
+    ];
+  };
 }

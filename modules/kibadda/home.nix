@@ -100,20 +100,6 @@
     };
   };
 
-  gitModule = lib.types.submodule {
-    options = {
-      email = lib.mkOption {
-        type = lib.types.str;
-        default = meta.email;
-      };
-
-      includes = lib.mkOption {
-        type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
-        default = [];
-      };
-    };
-  };
-
   yubikeyModule = lib.types.submodule {
     options = {
       enable = lib.mkOption {
@@ -215,11 +201,6 @@ in {
     browser = lib.mkOption {
       type = lib.types.nullOr (lib.types.enum [ "chrome" "firefox" ]);
       default = null;
-    };
-
-    git = lib.mkOption {
-      type = gitModule;
-      default = {};
     };
 
     yubikey = lib.mkOption {
