@@ -1,6 +1,20 @@
 { config, lib, ... }: let
   cfg = config.kibadda;
 in {
+  options = {
+    kibadda.kitty = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+
+      size = lib.mkOption {
+        type = lib.types.int;
+        default = 10;
+      };
+    };
+  };
+
   config = lib.mkIf cfg.kitty.enable {
     programs.kitty = {
       enable = true;

@@ -118,20 +118,6 @@
       };
     };
   };
-
-  kittyModule = lib.types.submodule {
-    options = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-
-      size = lib.mkOption {
-        type = lib.types.int;
-        default = 10;
-      };
-    };
-  };
 in {
   imports = [
     ../hypr/home.nix
@@ -178,11 +164,6 @@ in {
 
     yubikey = lib.mkOption {
       type = yubikeyModule;
-      default = {};
-    };
-
-    kitty = lib.mkOption {
-      type = kittyModule;
       default = {};
     };
 
