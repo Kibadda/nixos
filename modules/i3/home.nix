@@ -1,4 +1,4 @@
-{ lib, config, ... }: let
+{ lib, config, pkgs, ... }: let
   cfg = config.kibadda;
 
   wallpaper = ".config/i3/wallpaper.png";
@@ -193,19 +193,7 @@ in {
       '';
     };
 
-    home.file = {
-      ${wallpaper}.source = cfg.i3.wallpaper;
-
-      ".local/bin/i3blocks-yubikey" = {
-        executable = true;
-        source = ../../bin/yubikey-indicator.sh;
-      };
-
-      ".local/bin/i3blocks-spotify" = {
-        executable = true;
-        source = ../../bin/spotify-indicator.sh;
-      };
-    };
+    home.file.${wallpaper}.source = cfg.i3.wallpaper;
 
     programs.i3blocks = {
       enable = true;
@@ -213,12 +201,12 @@ in {
       bars = {
         top = {
           yubikey = {
-            command = "yubikey-indicator.sh";
+            command = lib.getExe pkgs.kibadda.yubikey-indicator;
             interval = "persist";
             color = "#FFFF00";
           };
           spotify = {
-            command = "spotify-indicator.sh";
+            command = lib.getExe pkgs.kibadda.spotify-indicator;
             interval = 1;
             color = "#1DB954";
           };

@@ -57,18 +57,9 @@ in {
         (lib.hiPrio pkgs.kibadda.passmenu)
 
         pkgs.wl-clipboard
-        pkgs.grim
-        pkgs.slurp
       ];
 
-      file = {
-        ".local/bin/screenshot" = {
-          executable = true;
-          source = ../../bin/hypr-screenshot.sh;
-        };
-
-        ".config/hypr/wallpaper.png".source = cfg.hypr.wallpaper;
-      };
+      file.".config/hypr/wallpaper.png".source = cfg.hypr.wallpaper;
     };
 
     gtk.enable = true;
@@ -177,10 +168,10 @@ in {
           ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
           ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
 
-          ", Print, exec, screenshot area clip"
-          "SUPER, Print, exec, screenshot clip"
-          "CONTROL, Print, exec, screenshot area"
-          "SUPER CONTROL, Print, exec, screenshot"
+          ", Print, exec, ${lib.getExe pkgs.kibadda.screenshot} area clip"
+          "SUPER, Print, exec, ${lib.getExe pkgs.kibadda.screenshot} clip"
+          "CONTROL, Print, exec, ${lib.getExe pkgs.kibadda.screenshot} area"
+          "SUPER CONTROL, Print, exec, ${lib.getExe pkgs.kibadda.screenshot}"
         ] ++ cfg.hypr.bind;
 
         bindm = [

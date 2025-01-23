@@ -69,7 +69,7 @@ in {
           };
 
           "custom/weather" = {
-            exec = pkgs.writeShellScript "waybar-weather" (builtins.readFile ../../bin/weather-indicator.sh);
+            exec = pkgs.kibadda.weather-indicator;
             interval = 3600;
           };
 
@@ -110,11 +110,11 @@ in {
           };
 
           "custom/yubikey" = {
-            exec = pkgs.writeShellScript "waybar-yubikey" (builtins.readFile ../../bin/yubikey-indicator.sh);
+            exec = pkgs.kibadda.yubikey-indicator;
           };
 
           "custom/spotify" = {
-            exec = pkgs.writeShellScript "waybar-spotify" (builtins.readFile ../../bin/spotify-indicator.sh);
+            exec = pkgs.kibadda.spotify-indicator;
             interval = 1;
           };
         };
