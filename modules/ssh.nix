@@ -1,6 +1,38 @@
 { config, lib, ... }: let
   cfg = config.kibadda;
 in {
+  options = {
+    kibadda.ssh = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+
+          host = lib.mkOption {
+            type = lib.types.str;
+          };
+
+          port = lib.mkOption {
+            type = lib.types.nullOr lib.types.int;
+            default = null;
+          };
+
+          forward = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+
+          user = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+        };
+      });
+      default = [];
+    };
+  };
+
   config = lib.mkIf (cfg.ssh != []) {
     programs.ssh = {
       enable = true;
