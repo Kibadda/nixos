@@ -40,6 +40,11 @@ in {
         type = lib.types.listOf lib.types.str;
         default = [];
       };
+
+      wallpaper = lib.mkOption {
+        type = lib.types.path;
+        default = ../../wallpapers/forest.png;
+      };
     };
   };
 
@@ -62,7 +67,7 @@ in {
           source = ../../bin/hypr-screenshot.sh;
         };
 
-        ".config/hypr/wallpaper.png".source = cfg.wallpaper;
+        ".config/hypr/wallpaper.png".source = cfg.hypr.wallpaper;
       };
     };
 

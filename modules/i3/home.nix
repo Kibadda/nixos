@@ -9,6 +9,11 @@ in {
         type = lib.types.bool;
         default = false;
       };
+
+      wallpaper = lib.mkOption {
+        type = lib.types.path;
+        default = ../../wallpapers/forest.png;
+      };
     };
   };
 
@@ -189,7 +194,7 @@ in {
     };
 
     home.file = {
-      ${wallpaper}.source = cfg.wallpaper;
+      ${wallpaper}.source = cfg.i3.wallpaper;
 
       ".local/bin/i3blocks-yubikey" = {
         executable = true;

@@ -1,4 +1,4 @@
-{ lib, meta, ... }: {
+{ meta, ... }: {
   imports = [
     ../hypr/home.nix
     ../i3/home.nix
@@ -17,13 +17,6 @@
     ../chrome.nix
     ../font.nix
   ];
-
-  options.kibadda = {
-    wallpaper = lib.mkOption {
-      type = lib.types.path;
-      default = ../../wallpapers/forest.png;
-    };
-  };
 
   config = {
     home = {
