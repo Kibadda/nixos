@@ -1,4 +1,4 @@
-{ lib, pkgs, config, meta, ... }: let
+{ lib, config, meta, ... }: let
   cfg = config.kibadda;
 in {
   imports = [
@@ -16,6 +16,7 @@ in {
     ../zoxide.nix
     ../neovim.nix
     ../firefox.nix
+    ../chrome.nix
     ../font.nix
   ];
 
@@ -29,11 +30,6 @@ in {
       type = lib.types.listOf lib.types.package;
       default = [];
     };
-
-    browser = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum [ "chrome" "firefox" ]);
-      default = null;
-    };
   };
 
   config = {
@@ -42,12 +38,9 @@ in {
 
       homeDirectory = "/home/${meta.username}";
 
-      packages = cfg.packages
-        ++ (if cfg.browser == "chrome" then [ pkgs.google-chrome ] else [])
-        ++ (if cfg.browser == "firefox" then [ pkgs.firefox ] else []);
+      packages = cfg.packages;
 
       sessionVariables = {
-        BROWSER = (if cfg.browser == "chrome" then "google-chrome-stable" else "firefox");
         NIXOS_DIR = "$HOME/.dotfiles";
       };
 

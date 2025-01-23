@@ -1,6 +1,6 @@
 { meta, pkgs, ... }: {
   kibadda = {
-    browser = "chrome";
+    chrome.enable = true;
 
     packages = with pkgs; [
       lutris

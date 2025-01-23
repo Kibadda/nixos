@@ -7,7 +7,7 @@
       lutris
     ];
 
-    browser = "chrome";
+    chrome.enable = true;
 
     ssh = [
       {

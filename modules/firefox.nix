@@ -1,7 +1,25 @@
 { config, lib, ... }: let
   cfg = config.kibadda;
 in {
-  config = lib.mkIf (cfg.browser == "firefox") {
+  options = {
+    kibadda.firefox = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
+      default = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+    };
+  };
+
+  config = lib.mkIf cfg.firefox.enable {
+    home.sessionVariables = lib.mkIf (cfg.firefox.default || !cfg.chrome.enable) {
+      BROWSER = "firefox";
+    };
+
     programs.firefox = {
       enable = true;
       languagePacks = [ "de" "en-US" ];

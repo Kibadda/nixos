@@ -8,7 +8,7 @@
       rocketchat-desktop
     ];
 
-    browser = "firefox";
+    firefox.enable = true;
 
     git = {
       email = meta.work.email;
