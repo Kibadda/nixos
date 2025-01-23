@@ -1,39 +1,6 @@
 { lib, pkgs, config, meta, ... }: let
   cfg = config.kibadda;
 
-  hyprModule = lib.types.submodule {
-    options = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
-      nvidia = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
-      monitor = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-      };
-
-      bind = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-      };
-
-      windowrule = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-      };
-
-      workspace = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-      };
-    };
-  };
-
   i3Module = lib.types.submodule {
     options = {
       enable = lib.mkOption {
@@ -62,11 +29,6 @@ in {
   ];
 
   options.kibadda = {
-    hypr = lib.mkOption {
-      type = hyprModule;
-      default = {};
-    };
-
     i3 = lib.mkOption {
       type = i3Module;
       default = {};

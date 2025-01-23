@@ -9,6 +9,40 @@ in {
     ./waybar.nix
   ];
 
+  options = {
+    kibadda.hypr = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
+      nvidia = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
+      monitor = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+      };
+
+      bind = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+      };
+
+      windowrule = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+      };
+
+      workspace = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+      };
+    };
+  };
+
   config = lib.mkIf cfg.hypr.enable {
     home = {
       packages = [
