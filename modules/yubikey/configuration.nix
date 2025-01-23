@@ -7,6 +7,7 @@ in {
     environment.systemPackages = with pkgs; [
       gnupg
       yubikey-personalization
+      yubikey-manager
     ];
 
     security.pam.services = builtins.listToAttrs (map (name: {
