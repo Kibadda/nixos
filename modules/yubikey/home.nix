@@ -1,6 +1,25 @@
 { config, meta, inputs, pkgs, lib, ... }: let
   cfg = config.kibadda;
 in {
+  options = {
+    kibadda.yubikey = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+
+      touch-detector = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+
+      pam = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ "sudo" "login" ];
+      };
+    };
+  };
+
   config = lib.mkIf cfg.yubikey.enable {
     home = {
       packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [];

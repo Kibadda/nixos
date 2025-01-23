@@ -99,25 +99,6 @@
       };
     };
   };
-
-  yubikeyModule = lib.types.submodule {
-    options = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-
-      touch-detector = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-
-      pam = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ "sudo" "login" ];
-      };
-    };
-  };
 in {
   imports = [
     ../hypr/home.nix
@@ -160,11 +141,6 @@ in {
     browser = lib.mkOption {
       type = lib.types.nullOr (lib.types.enum [ "chrome" "firefox" ]);
       default = null;
-    };
-
-    yubikey = lib.mkOption {
-      type = yubikeyModule;
-      default = {};
     };
 
     font = lib.mkOption {
