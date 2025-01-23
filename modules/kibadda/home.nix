@@ -1,25 +1,6 @@
 { lib, pkgs, config, meta, ... }: let
   cfg = config.kibadda;
 
-  cursorModule = lib.types.submodule {
-    options = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        default = "Bibata-Modern-Classic";
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.bibata-cursors;
-      };
-
-      size = lib.mkOption {
-        type = lib.types.int;
-        default = 18;
-      };
-    };
-  };
-
   waybarModule = lib.types.submodule {
     options = {
       battery = lib.mkOption {
@@ -63,11 +44,6 @@
       workspace = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
-      };
-
-      cursor = lib.mkOption {
-        type = cursorModule;
-        default = {};
       };
 
       waybar = lib.mkOption {
