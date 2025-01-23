@@ -13,7 +13,7 @@
           if playerctl -p spotify status 1>/dev/null 2>/dev/null; then
             status=""
 
-            if [ $(playerctl -p spotify status) == "Paused" ]; then
+            if [ "$(playerctl -p spotify status)" == "Paused" ]; then
               status=""
             fi
 
@@ -41,8 +41,8 @@
 
             echo ""
 
-            nc -U "$socket" | while read -n5 cmd; do
-              if [ $(echo $cmd | cut -d'_' -f2) = "1" ]; then
+            nc -U "$socket" | while read -r -n5 cmd; do
+              if [ "$(echo "$cmd" | cut -d'_' -f2)" = "1" ]; then
                 echo "🔑 Yubikey 🔑"
               else
                 echo ""
@@ -58,10 +58,9 @@
         name = "weather-indicator";
         runtimeInputs = [ final.curl final.toybox ];
         text = ''
-          for i in {1..5}
+          for _ in {1..5}
           do
-            text=$(curl -s "https://wttr.in/Ulm+Germany?format=1")
-            if [[ $? == 0 ]];
+            if ! text=$(curl -s "https://wttr.in/Ulm+Germany?format=1");
             then
               text=$(echo "$text" | sed -E "s/\s+/ /g")
               echo "$text"
@@ -96,7 +95,7 @@
             fi
           else
             dir="$HOME/Pictures"
-            [[ -d $dir ]] || mkdir $dir
+            [[ -d "$dir" ]] || mkdir "$dir"
 
             filename="$dir/$(date +'%Y-%m-%d_%H:%M:%S_grim.png')"
 

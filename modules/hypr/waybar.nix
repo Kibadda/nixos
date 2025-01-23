@@ -25,6 +25,12 @@ in {
       "${pkgs.waybar}/bin/waybar"
     ];
 
+    home.packages = [
+      pkgs.kibadda.weather-indicator
+      pkgs.kibadda.spotify-indicator
+      pkgs.kibadda.yubikey-indicator
+    ];
+
     programs.waybar = {
       enable = true;
 
@@ -74,7 +80,7 @@ in {
           };
 
           "custom/weather" = {
-            exec = pkgs.kibadda.weather-indicator;
+            exec = "${pkgs.kibadda.weather-indicator}/bin/weather-indicator";
             interval = 3600;
           };
 
@@ -115,11 +121,11 @@ in {
           };
 
           "custom/yubikey" = {
-            exec = pkgs.kibadda.yubikey-indicator;
+            exec = "${pkgs.kibadda.yubikey-indicator}/bin/yubikey-indicator";
           };
 
           "custom/spotify" = {
-            exec = pkgs.kibadda.spotify-indicator;
+            exec = "${pkgs.kibadda.spotify-indicator}/bin/spotify-indicator";
             interval = 1;
           };
         };

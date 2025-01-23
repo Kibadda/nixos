@@ -55,6 +55,7 @@ in {
         pkgs.kibadda.dmenu
         # password-store also provides a passmenu binary
         (lib.hiPrio pkgs.kibadda.passmenu)
+        pkgs.kibadda.screenshot
 
         pkgs.wl-clipboard
       ];
@@ -168,10 +169,10 @@ in {
           ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
           ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
 
-          ", Print, exec, ${lib.getExe pkgs.kibadda.screenshot} area clip"
-          "SUPER, Print, exec, ${lib.getExe pkgs.kibadda.screenshot} clip"
-          "CONTROL, Print, exec, ${lib.getExe pkgs.kibadda.screenshot} area"
-          "SUPER CONTROL, Print, exec, ${lib.getExe pkgs.kibadda.screenshot}"
+          ", Print, exec, ${pkgs.kibadda.screenshot}/bin/screenshot area clip"
+          "SUPER, Print, exec, ${pkgs.kibadda.screenshot}/bin/screenshot clip"
+          "CONTROL, Print, exec, ${pkgs.kibadda.screenshot}/bin/screenshot area"
+          "SUPER CONTROL, Print, exec, ${pkgs.kibadda.screenshot}/bin/screenshot"
         ] ++ cfg.hypr.bind;
 
         bindm = [
