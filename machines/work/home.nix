@@ -1,12 +1,12 @@
 { pkgs, meta, ... }: {
+  home.packages = with pkgs; [
+    linphone
+    thunderbird
+    rocketchat-desktop
+  ];
+
   kibadda = {
     i3.enable = true;
-
-    packages = with pkgs; [
-      linphone
-      thunderbird
-      rocketchat-desktop
-    ];
 
     firefox.enable = true;
 

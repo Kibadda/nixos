@@ -1,6 +1,4 @@
-{ lib, config, meta, ... }: let
-  cfg = config.kibadda;
-in {
+{ lib, meta, ... }: {
   imports = [
     ../hypr/home.nix
     ../i3/home.nix
@@ -25,11 +23,6 @@ in {
       type = lib.types.path;
       default = ../../wallpapers/forest.png;
     };
-
-    packages = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      default = [];
-    };
   };
 
   config = {
@@ -37,8 +30,6 @@ in {
       username = meta.username;
 
       homeDirectory = "/home/${meta.username}";
-
-      packages = cfg.packages;
 
       sessionVariables = {
         NIXOS_DIR = "$HOME/.dotfiles";

@@ -1,10 +1,10 @@
 { meta, pkgs, ... }: {
+  home.packages = with pkgs; [
+    lutris
+  ];
+
   kibadda = {
     chrome.enable = true;
-
-    packages = with pkgs; [
-      lutris
-    ];
 
     ssh = [
       {

@@ -1,12 +1,12 @@
 { pkgs, meta, ... }: {
   home-office.enable = true;
 
-  kibadda = {
-    packages = with pkgs; [
-      chiaki
-      lutris
-    ];
+  home.packages = with pkgs; [
+    chiaki
+    lutris
+  ];
 
+  kibadda = {
     chrome.enable = true;
 
     ssh = [
