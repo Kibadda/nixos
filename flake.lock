@@ -45,11 +45,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1735590972,
-        "narHash": "sha256-iH3R9cMhIMn6Sb0Mnv9qLstr7iq4her6KPiN5WiBCvc=",
+        "lastModified": 1737755569,
+        "narHash": "sha256-ZYxhiXH/LyYauCnBjbNcn9us+Ot5lVrobIlwJrVBHjc=",
         "owner": "Kibadda",
         "repo": "dmenu",
-        "rev": "fd77651009de84523a4a3f9cd40359f230213547",
+        "rev": "fe31c54546dd408433f66e96e813ba98089624c5",
         "type": "github"
       },
       "original": {
