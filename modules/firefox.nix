@@ -89,6 +89,7 @@ in {
 
           "browser.tabs.loadInBackground" = true;
 
+          "media.eme.enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;
           "layers.acceleration.force-enabled" = true;
           "gfx.webrender.all" = true;
@@ -139,11 +140,6 @@ in {
           privacy-badger
           decentraleyes
         ];
-        # settings = {
-        #   "extensions.autoDisableScopes" = 0;
-        #   "browser.theme.content-theme" = 0;
-        #   "browser.theme.toolbar-theme" = 0;
-        # };
         search = {
           default = "DuckDuckGo";
           privateDefault = "DuckDuckGo";
@@ -197,6 +193,46 @@ in {
               definedAliases = [ "@nw" ];
             };
 
+            "Homemanager options" = {
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                    {
+                      name = "release";
+                      value = "master";
+                    }
+                  ];
+                }
+              ];
+              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@ho" ];
+            };
+
+            "Nix github" = {
+              urls = [
+                {
+                  template = "https://github.com/search";
+                  params = [
+                    {
+                      name = "type";
+                      value = "code";
+                    }
+                    {
+                      name = "q";
+                      value = "language:nix {searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@ng" ];
+            };
+
             "Google".metaData.hidden = true;
             "Bing".metaData.hidden = true;
             "Amazon.com".metaData.hidden = true;
@@ -210,16 +246,33 @@ in {
             toolbar = true;
             bookmarks = [
               {
-                name = "NixOs Search";
-                url = "https://search.nixos.org";
+                name = "Mail";
+                url = "https://mail.google.com";
               }
               {
-                name = "Homemanager Search";
-                url = "https://nix-community.github.io/home-manager/options.xhtml";
+                name = "Youtube";
+                url = "https://youtube.com/feed/subscriptions";
               }
               {
-                name = "wiki";
-                url = "https://wiki.nixos.org";
+                name = "Neovim";
+                url = "https://github.com/neovim/neovim";
+              }
+              {
+                name = "Streaming";
+                bookmarks = [
+                  {
+                    name = "Netflix";
+                    url = "https://www.netflix.com/browse";
+                  }
+                  {
+                    name = "Prime";
+                    url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
+                  }
+                  {
+                    name = "Disney";
+                    url = "https://www.disneyplus.com/de-de/";
+                  }
+                ];
               }
             ];
           }
