@@ -1,17 +1,21 @@
-{ meta, pkgs, ... }: let
-  helm = with pkgs; wrapHelm kubernetes-helm {
-    plugins = with pkgs.kubernetes-helmPlugins; [
-      helm-secrets
-      helm-diff
-      helm-git
-      helm-s3
-    ];
-  };
+{ meta, pkgs, ... }:
+let
+  helm =
+    with pkgs;
+    wrapHelm kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+        helm-git
+        helm-s3
+      ];
+    };
 
   helmfile = pkgs.helmfile-wrapped.override {
     inherit (helm) pluginsDir;
   };
-in {
+in
+{
   raspberry-pi-nix.board = "bcm2711";
 
   services.k3s = {
@@ -33,7 +37,10 @@ in {
     "/boot/firmware" = {
       device = "/dev/disk/by-uuid/2178-694E";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
 
     "/mnt/data" = {
@@ -53,10 +60,17 @@ in {
       networks.${meta.wifi.ssid}.psk = meta.wifi.pass;
     };
     interfaces.wlan0.useDHCP = true;
-    firewall.allowedTCPPorts = [ 80 443 6443 ];
+    firewall.allowedTCPPorts = [
+      80
+      443
+      6443
+    ];
   };
 
   security.sudo.wheelNeedsPassword = false;
 
-  boot.kernelParams = [ "cgroup_memory=1" "cgroup_enable=memory" ];
+  boot.kernelParams = [
+    "cgroup_memory=1"
+    "cgroup_enable=memory"
+  ];
 }

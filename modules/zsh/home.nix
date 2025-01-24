@@ -1,4 +1,10 @@
-{ config, pkgs, meta, ... }: {
+{
+  config,
+  pkgs,
+  meta,
+  ...
+}:
+{
   programs.zsh = {
     enable = true;
     history.path = "${config.xdg.dataHome}/zsh/history";
@@ -25,7 +31,9 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git" "sudo" "timer"
+        "git"
+        "sudo"
+        "timer"
       ];
       theme = "robbyrussell";
     };

@@ -1,6 +1,8 @@
-{ config, lib, ... }: let
+{ config, lib, ... }:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.kitty = {
       enable = lib.mkOption {

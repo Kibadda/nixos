@@ -1,5 +1,7 @@
-{ config, meta, ... }: let
+{ config, meta, ... }:
+let
   cfg = config.home-manager.users.${meta.username}.kibadda;
-in {
+in
+{
   services.xserver.windowManager.i3.enable = cfg.i3.enable;
 }

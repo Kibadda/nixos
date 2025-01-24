@@ -1,6 +1,13 @@
-{ pkgs, config, lib, ... }: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.hypr.hypridle = {
       enable = lib.mkOption {

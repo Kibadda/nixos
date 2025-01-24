@@ -1,6 +1,14 @@
-{ config, lib, meta, pkgs, ... }: let
+{
+  config,
+  lib,
+  meta,
+  pkgs,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.firefox = {
       enable = lib.mkOption {
@@ -104,7 +112,7 @@ in {
 
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
-              widget-overflow-fixed-list = [];
+              widget-overflow-fixed-list = [ ];
               toolbar-menubar = [ "menubar-items" ];
               PersonalToolbar = [ "personal-bookmarks" ];
               nav-bar = [
@@ -119,14 +127,17 @@ in {
                 "tabbrowser-tabs"
                 "new-tab-button"
               ];
-              unified-extensions-area = [];
+              unified-extensions-area = [ ];
             };
             currentVersion = 20;
             newElementCount = 3;
           };
         };
       };
-      languagePacks = [ "de" "en-US" ];
+      languagePacks = [
+        "de"
+        "en-US"
+      ];
       profiles.${meta.username} = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin

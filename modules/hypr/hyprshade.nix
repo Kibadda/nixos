@@ -1,6 +1,13 @@
-{ pkgs, config, lib, ... }: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   config = lib.mkIf cfg.hypr.enable {
     home = {
       packages = [

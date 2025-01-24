@@ -1,7 +1,15 @@
-{ lib, config, pkgs, meta, ...}: let
+{
+  lib,
+  config,
+  pkgs,
+  meta,
+  ...
+}:
+let
   cfg = config.home-office;
 
-in {
+in
+{
   options.home-office = {
     enable = lib.mkOption {
       type = lib.types.bool;

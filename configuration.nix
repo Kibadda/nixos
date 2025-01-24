@@ -1,4 +1,12 @@
-{ outputs, inputs, pkgs, meta, lib, ... }: {
+{
+  outputs,
+  inputs,
+  pkgs,
+  meta,
+  lib,
+  ...
+}:
+{
   nix = {
     package = pkgs.nixVersions.stable;
     extraOptions = ''
@@ -23,18 +31,20 @@
       outputs.overlays.unstable
       inputs.nur.overlays.default
     ];
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "google-chrome"
-      "intelephense"
-      "spotify"
-      "steam"
-      "steam-original"
-      "steam-run"
-      "steam-unwrapped"
-      "nvidia-x11"
-      "nvidia-settings"
-      "discord"
-    ];
+    config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "google-chrome"
+        "intelephense"
+        "spotify"
+        "steam"
+        "steam-original"
+        "steam-run"
+        "steam-unwrapped"
+        "nvidia-x11"
+        "nvidia-settings"
+        "discord"
+      ];
   };
 
   time.timeZone = "Europe/Berlin";

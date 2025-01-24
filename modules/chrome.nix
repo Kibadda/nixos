@@ -1,6 +1,13 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.chrome = {
       enable = lib.mkOption {

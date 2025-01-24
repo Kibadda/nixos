@@ -1,6 +1,13 @@
-{ lib, pkgs, config, ... }: let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   imports = [
     ./hypridle.nix
     ./hyprlock.nix
@@ -23,22 +30,22 @@ in {
 
       monitor = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [];
+        default = [ ];
       };
 
       bind = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [];
+        default = [ ];
       };
 
       windowrule = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [];
+        default = [ ];
       };
 
       workspace = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [];
+        default = [ ];
       };
 
       wallpaper = lib.mkOption {
@@ -107,14 +114,21 @@ in {
           disable_splash_rendering = true;
         };
 
-        env = [
-          "XDG_SESSION_TYPE,wayland"
-          "NIXOS_OZONE_WL,1"
-        ] ++ (if cfg.hypr.nvidia then [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        ] else []);
+        env =
+          [
+            "XDG_SESSION_TYPE,wayland"
+            "NIXOS_OZONE_WL,1"
+          ]
+          ++ (
+            if cfg.hypr.nvidia then
+              [
+                "LIBVA_DRIVER_NAME,nvidia"
+                "GBM_BACKEND,nvidia-drm"
+                "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+              ]
+            else
+              [ ]
+          );
 
         monitor = cfg.hypr.monitor;
 

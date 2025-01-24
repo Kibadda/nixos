@@ -1,6 +1,13 @@
-{ config, meta, lib, ... }: let
+{
+  config,
+  meta,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.hypr.hyprlock = {
       enable = lib.mkOption {

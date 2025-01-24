@@ -1,6 +1,15 @@
-{ config, meta, inputs, pkgs, lib, ... }: let
+{
+  config,
+  meta,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.yubikey = {
       enable = lib.mkOption {
@@ -15,14 +24,17 @@ in {
 
       pam = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ "sudo" "login" ];
+        default = [
+          "sudo"
+          "login"
+        ];
       };
     };
   };
 
   config = lib.mkIf cfg.yubikey.enable {
     home = {
-      packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [];
+      packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [ ];
       sessionVariables = {
         KEYID = meta.keyid;
       };
@@ -53,7 +65,8 @@ in {
         enableSshSupport = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentryPackage = (if cfg.hypr.enable then inputs.pinentry.defaultPackage.${pkgs.system} else pkgs.pinentry-qt);
+        pinentryPackage =
+          if cfg.hypr.enable then inputs.pinentry.defaultPackage.${pkgs.system} else pkgs.pinentry-qt;
       };
     };
   };

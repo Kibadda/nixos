@@ -1,4 +1,5 @@
-{ meta, ... }: {
+{ meta, ... }:
+{
   imports = [
     ../hypr/home.nix
     ../i3/home.nix

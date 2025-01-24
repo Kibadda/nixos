@@ -1,6 +1,14 @@
-{ pkgs, config, meta, lib, ... }: let
+{
+  pkgs,
+  config,
+  meta,
+  lib,
+  ...
+}:
+let
   cfg = config.home-manager.users.${meta.username}.kibadda;
-in {
+in
+{
   config = lib.mkIf cfg.yubikey.enable {
     programs.yubikey-touch-detector.enable = cfg.yubikey.touch-detector;
 
@@ -10,10 +18,14 @@ in {
       yubikey-manager
     ];
 
-    security.pam.services = builtins.listToAttrs (map (name: {
-      name = name;
-      value = { u2fAuth = true; };
-    }) cfg.yubikey.pam);
+    security.pam.services = builtins.listToAttrs (
+      map (name: {
+        name = name;
+        value = {
+          u2fAuth = true;
+        };
+      }) cfg.yubikey.pam
+    );
 
     services = {
       udev.packages = with pkgs; [

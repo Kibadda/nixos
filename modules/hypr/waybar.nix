@@ -1,6 +1,13 @@
-{ config, pkgs, lib, ... }: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.hypr.waybar = {
       enable = lib.mkOption {
@@ -42,9 +49,17 @@ in {
 
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "custom/weather" ];
-          modules-right = (lib.optional cfg.hypr.waybar.battery "battery")
+          modules-right =
+            (lib.optional cfg.hypr.waybar.battery "battery")
             ++ (lib.optional cfg.hypr.waybar.backlight "backlight")
-            ++ [ "bluetooth" "cpu" "memory" "disk" "pulseaudio" "network" ];
+            ++ [
+              "bluetooth"
+              "cpu"
+              "memory"
+              "disk"
+              "pulseaudio"
+              "network"
+            ];
 
           "hyprland/workspaces" = {
             format = "<span font='11'>{name}</span>";
@@ -68,7 +83,11 @@ in {
             format = "<span font='11'>{icon}</span> {volume}%";
             format-muted = "<span font='11'>x</span> {volume}%";
             format-icons = {
-              default = [ " " " " " " ];
+              default = [
+                " "
+                " "
+                " "
+              ];
             };
           };
 
@@ -88,7 +107,13 @@ in {
             format = "<span font='11'>{icon}</span> {capacity}%";
             format-charging = "<span font='11'></span> {capacity}%";
             format-plugged = "<span font='11'></span> {capacity}%";
-            format-icons = [ "" "" "" "" "" ];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
             states = {
               critical = 25;
             };

@@ -1,6 +1,13 @@
-{ lib, config, meta, ... }: let
+{
+  lib,
+  config,
+  meta,
+  ...
+}:
+let
   cfg = config.home-manager.users.${meta.username}.kibadda;
-in {
+in
+{
   config = lib.mkIf cfg.hypr.enable {
     programs.hyprland.enable = true;
 

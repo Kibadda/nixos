@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   additions = final: prev: {
     kibadda = {
       dmenu = inputs.dmenu.defaultPackage.${prev.system};
@@ -8,7 +9,10 @@
 
       spotify-indicator = final.writeShellApplication {
         name = "spotify-indicator";
-        runtimeInputs = [ final.playerctl final.toybox ];
+        runtimeInputs = [
+          final.playerctl
+          final.toybox
+        ];
         text = ''
           if playerctl -p spotify status 1>/dev/null 2>/dev/null; then
             status=""
@@ -56,7 +60,10 @@
 
       weather-indicator = final.writeShellApplication {
         name = "weather-indicator";
-        runtimeInputs = [ final.curl final.toybox ];
+        runtimeInputs = [
+          final.curl
+          final.toybox
+        ];
         text = ''
           for _ in {1..5}
           do
@@ -74,7 +81,11 @@
 
       screenshot = final.writeShellApplication {
         name = "screenshot";
-        runtimeInputs = [ final.grim final.slurp final.wl-clipboard ];
+        runtimeInputs = [
+          final.grim
+          final.slurp
+          final.wl-clipboard
+        ];
         text = ''
           clip=0
           area=0
@@ -110,7 +121,7 @@
     };
   };
 
-  modifications = final: prev: {};
+  modifications = final: prev: { };
 
   unstable = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {

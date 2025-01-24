@@ -1,6 +1,13 @@
-{ lib, config, meta, ... }: let
+{
+  lib,
+  config,
+  meta,
+  ...
+}:
+let
   cfg = config.home-manager.users.${meta.username}.home-office;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     networking.wg-quick.interfaces.work = meta.work.vpn;
   };

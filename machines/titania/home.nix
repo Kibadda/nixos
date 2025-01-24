@@ -1,4 +1,5 @@
-{ meta, pkgs, ... }: {
+{ meta, pkgs, ... }:
+{
   home.packages = with pkgs; [
     lutris
   ];

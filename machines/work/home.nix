@@ -1,4 +1,5 @@
-{ pkgs, meta, ... }: {
+{ pkgs, meta, ... }:
+{
   home.packages = with pkgs; [
     linphone
     thunderbird

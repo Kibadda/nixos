@@ -1,6 +1,14 @@
-{ config, meta, pkgs, lib, ... }: let
+{
+  config,
+  meta,
+  pkgs,
+  lib,
+  ...
+}:
+let
   cfg = config.kibadda;
-in {
+in
+{
   options = {
     kibadda.git = {
       email = lib.mkOption {
@@ -10,7 +18,7 @@ in {
 
       includes = lib.mkOption {
         type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
-        default = [];
+        default = [ ];
       };
     };
   };

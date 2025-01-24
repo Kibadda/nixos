@@ -1,4 +1,5 @@
-{ pkgs, meta, ... }: {
+{ pkgs, meta, ... }:
+{
   boot = {
     loader = {
       systemd-boot = {
@@ -14,7 +15,7 @@
 
   users.users.${meta.username}.extraGroups = [ "networkmanager" ];
 
-  services.greetd =  {
+  services.greetd = {
     enable = true;
     package = pkgs.greetd.tuigreet;
     settings = {
