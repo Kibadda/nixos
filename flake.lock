@@ -990,11 +990,11 @@
         "vim-pasta": "vim-pasta"
       },
       "locked": {
-        "lastModified": 1737543070,
-        "narHash": "sha256-voRc48sWyfsd9a4n00j63/Yv+H2vGBRxL/tjbZVMXP0=",
+        "lastModified": 1737760907,
+        "narHash": "sha256-fOpOFYHpS64Hm/YcQzw/aAhJIB/iGifppKyzVWRhv5M=",
         "owner": "Kibadda",
         "repo": "nixvim",
-        "rev": "dbe4a5d464c51c4cc605d22a2d6684ed5c2f3834",
+        "rev": "04a62a84f1f35370af4556563108003f28a2f988",
         "type": "github"
       },
       "original": {
