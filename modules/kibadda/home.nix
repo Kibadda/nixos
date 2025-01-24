@@ -16,6 +16,7 @@
     ../firefox.nix
     ../chrome.nix
     ../font.nix
+    ../cursor.nix
   ];
 
   config = {

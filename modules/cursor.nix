@@ -22,18 +22,20 @@ in {
 
   config = {
     home = {
-      sessionVariables = {
-        XCURSOR_SIZE = cfg.cursor.size;
-        HYPRCURSOR_SIZE = lib.mkIf cfg.hypr.enable cfg.cursor.size;
-      };
-
       pointerCursor = cfg.cursor // {
         gtk.enable = true;
       };
     };
 
-    wayland.windowManager.hyprland.exec-once = lib.mkIf cfg.hypr.enable [
-      "hyprctl sercursor \"${cfg.cursor.name}\" ${toString cfg.cursor.size}"
-    ];
+    wayland.windowManager.hyprland.settings = lib.mkIf cfg.hypr.enable {
+      exec-once = lib.mkIf cfg.hypr.enable [
+        "hyprctl setcursor \"${cfg.cursor.name}\" ${toString cfg.cursor.size}"
+      ];
+
+      env = [
+        "HYPRCURSOR_SIZE,${toString cfg.cursor.size}"
+        "XCURSOR_SIZE,${toString cfg.cursor.size}"
+      ];
+    };
   };
 }
