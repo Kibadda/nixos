@@ -10,6 +10,11 @@
   kibadda = {
     chrome.enable = true;
 
+    firefox = {
+      enable = true;
+      default = true;
+    };
+
     ssh = [
       {
         name = "titania";

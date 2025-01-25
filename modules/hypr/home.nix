@@ -149,8 +149,8 @@ in
           "SUPER SHIFT, 5, movetoworkspace, 5"
 
           "SUPER, Return, exec, kitty"
-          "SUPER, B, exec, google-chrome-stable"
-          "SUPER SHIFT, B, exec, google-chrome-stable --incognito"
+          "SUPER, B, exec, firefox"
+          "SUPER SHIFT, B, exec, firefox --private-window"
           "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
           "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
           "SUPER, P, exec, kitty --class kitty-passmenu --config ~/.config/kitty/tool.conf passmenu"
