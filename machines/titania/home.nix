@@ -7,6 +7,8 @@
   kibadda = {
     chrome.enable = true;
 
+    vpn.enable = true;
+
     ssh = {
       enable = true;
       hosts = [

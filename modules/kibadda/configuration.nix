@@ -6,5 +6,6 @@
     ../zsh/configuration.nix
     ../nvidia/configuration.nix
     ../home-office/configuration.nix
+    ../vpn/configuration.nix
   ];
 }

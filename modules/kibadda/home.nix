@@ -7,6 +7,7 @@
     ../yubikey/home.nix
     ../nvidia/home.nix
     ../home-office/home.nix
+    ../vpn/home.nix
     ../git.nix
     ../kitty.nix
     ../dunst.nix
