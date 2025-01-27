@@ -121,7 +121,7 @@
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
-            ./desktop.nix
+            ./machines/common/desktop.nix
             ./machines/${name}/disko-config.nix
             ./machines/${name}/hardware-configuration.nix
           ];
