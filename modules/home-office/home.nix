@@ -27,7 +27,7 @@ in
       };
     };
 
-    kibadda.ssh = [
+    kibadda.ssh.hosts = [
       {
         name = "work-studies";
         host = meta.work.sshfs.studies;

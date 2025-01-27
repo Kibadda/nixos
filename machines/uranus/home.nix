@@ -15,19 +15,22 @@
       default = true;
     };
 
-    ssh = [
-      {
-        name = "titania";
-        host = "10.0.0.11";
-        port = meta.sshPort;
-      }
-      {
-        name = "pi";
-        host = "10.0.0.2";
-        port = meta.sshPort;
-        forward = false;
-      }
-    ];
+    ssh = {
+      enable = true;
+      hosts = [
+        {
+          name = "titania";
+          host = "10.0.0.11";
+          port = meta.sshPort;
+        }
+        {
+          name = "pi";
+          host = "10.0.0.2";
+          port = meta.sshPort;
+          forward = false;
+        }
+      ];
+    };
 
     nvidia.enable = true;
 

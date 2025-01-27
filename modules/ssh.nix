@@ -4,40 +4,47 @@ let
 in
 {
   options = {
-    kibadda.ssh = lib.mkOption {
-      type = lib.types.listOf (
-        lib.types.submodule {
-          options = {
-            name = lib.mkOption {
-              type = lib.types.str;
-            };
+    kibadda.ssh = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
 
-            host = lib.mkOption {
-              type = lib.types.str;
-            };
+      hosts = lib.mkOption {
+        type = lib.types.listOf (
+          lib.types.submodule {
+            options = {
+              name = lib.mkOption {
+                type = lib.types.str;
+              };
 
-            port = lib.mkOption {
-              type = lib.types.nullOr lib.types.int;
-              default = null;
-            };
+              host = lib.mkOption {
+                type = lib.types.str;
+              };
 
-            forward = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-            };
+              port = lib.mkOption {
+                type = lib.types.nullOr lib.types.int;
+                default = null;
+              };
 
-            user = lib.mkOption {
-              type = lib.types.nullOr lib.types.str;
-              default = null;
+              forward = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+              };
+
+              user = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+              };
             };
-          };
-        }
-      );
-      default = [ ];
+          }
+        );
+        default = [ ];
+      };
     };
   };
 
-  config = lib.mkIf (cfg.ssh != [ ]) {
+  config = lib.mkIf cfg.ssh.enable {
     programs.ssh = {
       enable = true;
       matchBlocks = builtins.listToAttrs (
@@ -58,7 +65,7 @@ in
               }
             ];
           };
-        }) cfg.ssh
+        }) cfg.ssh.hosts
       );
     };
   };
