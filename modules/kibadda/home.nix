@@ -1,4 +1,4 @@
-{ meta, ... }:
+{ meta, pkgs, ... }:
 {
   imports = [
     ../hypr/home.nix
@@ -34,14 +34,7 @@
         NIXOS_DIR = "$HOME/.dotfiles";
       };
 
-      sessionPath = [
-        "$HOME/.local/bin"
-      ];
-
-      file.".local/bin/fetch-repositories" = {
-        executable = true;
-        source = ../../bin/fetch-repositories.sh;
-      };
+      packages = [ pkgs.kibadda.setup-git-repos ];
     };
 
     xdg.enable = true;
