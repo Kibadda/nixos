@@ -8,6 +8,7 @@
     ../nvidia/home.nix
     ../home-office/home.nix
     ../vpn/home.nix
+    ../gaming/home.nix
     ../git.nix
     ../kitty.nix
     ../dunst.nix

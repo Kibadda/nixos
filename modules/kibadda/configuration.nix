@@ -7,5 +7,6 @@
     ../nvidia/configuration.nix
     ../home-office/configuration.nix
     ../vpn/configuration.nix
+    ../gaming/configuration.nix
   ];
 }

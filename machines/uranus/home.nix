@@ -1,10 +1,5 @@
-{ pkgs, meta, ... }:
+{ meta, ... }:
 {
-  home.packages = with pkgs; [
-    chiaki
-    lutris
-  ];
-
   kibadda = {
     chrome.enable = true;
 
@@ -13,6 +8,12 @@
     firefox = {
       enable = true;
       default = true;
+    };
+
+    gaming = {
+      steam = true;
+      lutris = true;
+      chiaki = true;
     };
 
     ssh = {

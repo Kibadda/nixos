@@ -1,13 +1,11 @@
-{ meta, pkgs, ... }:
+{ meta, ... }:
 {
-  home.packages = with pkgs; [
-    lutris
-  ];
-
   kibadda = {
     chrome.enable = true;
 
     vpn.enable = true;
+
+    gaming.lutris = true;
 
     ssh = {
       enable = true;
