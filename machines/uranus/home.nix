@@ -1,7 +1,5 @@
 { pkgs, meta, ... }:
 {
-  home-office.enable = true;
-
   home.packages = with pkgs; [
     chiaki
     lutris
@@ -9,6 +7,8 @@
 
   kibadda = {
     chrome.enable = true;
+
+    home-office.enable = true;
 
     firefox = {
       enable = true;

@@ -5,5 +5,6 @@
     ../yubikey/configuration.nix
     ../zsh/configuration.nix
     ../nvidia/configuration.nix
+    ../home-office/configuration.nix
   ];
 }

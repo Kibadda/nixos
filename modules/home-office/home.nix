@@ -6,18 +6,19 @@
   ...
 }:
 let
-  cfg = config.home-office;
-
+  cfg = config.kibadda;
 in
 {
-  options.home-office = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
+  options = {
+    kibadda.home-office = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.home-office.enable {
     home = {
       packages = [ pkgs.sshfs ];
 

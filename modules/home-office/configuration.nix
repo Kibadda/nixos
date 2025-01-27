@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.home-manager.users.${meta.username}.home-office;
+  cfg = config.home-manager.users.${meta.username}.kibadda;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.home-office.enable {
     networking.wg-quick.interfaces.work = meta.work.vpn;
   };
 }

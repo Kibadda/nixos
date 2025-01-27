@@ -6,6 +6,7 @@
     ../zsh/home.nix
     ../yubikey/home.nix
     ../nvidia/home.nix
+    ../home-office/home.nix
     ../git.nix
     ../kitty.nix
     ../dunst.nix
