@@ -12,16 +12,21 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
     settings = {
       auto-optimise-store = true;
       trusted-users = [
         meta.username
       ];
+    };
+  };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/${meta.username}/.dotfiles";
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 4d --keep 5";
+      dates = "weekly";
     };
   };
 
