@@ -143,7 +143,7 @@
       nixosConfigurations = {
         uranus = mkDesktopSystem "uranus";
         titania = mkDesktopSystem "titania";
-        work = mkDesktopSystem "work";
+        setebos = mkDesktopSystem "setebos";
 
         pi = mkPiSystem "pi";
       };
