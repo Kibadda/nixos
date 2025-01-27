@@ -5,6 +5,7 @@
     ../i3/home.nix
     ../zsh/home.nix
     ../yubikey/home.nix
+    ../nvidia/home.nix
     ../git.nix
     ../kitty.nix
     ../dunst.nix

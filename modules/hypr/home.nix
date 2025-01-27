@@ -23,11 +23,6 @@ in
         default = false;
       };
 
-      nvidia = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
       monitor = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
@@ -114,27 +109,12 @@ in
           disable_splash_rendering = true;
         };
 
-        env =
-          [
-            "XDG_SESSION_TYPE,wayland"
-            "NIXOS_OZONE_WL,1"
-          ]
-          ++ (
-            if cfg.hypr.nvidia then
-              [
-                "LIBVA_DRIVER_NAME,nvidia"
-                "GBM_BACKEND,nvidia-drm"
-                "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-              ]
-            else
-              [ ]
-          );
+        env = [
+          "XDG_SESSION_TYPE,wayland"
+          "NIXOS_OZONE_WL,1"
+        ];
 
         monitor = cfg.hypr.monitor;
-
-        cursor = lib.mkIf cfg.hypr.nvidia {
-          no_hardware_cursors = true;
-        };
 
         bind = [
           "SUPER, 1, workspace, 1"

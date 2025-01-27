@@ -29,6 +29,8 @@
       }
     ];
 
+    nvidia.enable = true;
+
     hypr =
       let
         coding = "name:Coding";
@@ -40,8 +42,6 @@
       in
       {
         enable = true;
-
-        nvidia = true;
 
         hypridle.enable = false;
 
