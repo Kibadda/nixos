@@ -19,14 +19,7 @@ in
   };
 
   config = lib.mkIf cfg.home-office.enable {
-    home = {
-      packages = [ pkgs.sshfs ];
-
-      file.".local/bin/work" = {
-        executable = true;
-        source = ../../bin/work.sh;
-      };
-    };
+    home.packages = [ pkgs.kibadda.work ];
 
     kibadda.ssh.hosts = [
       {
