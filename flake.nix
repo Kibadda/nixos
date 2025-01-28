@@ -16,6 +16,7 @@
       url = "github:nix-community/raspberry-pi-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -62,6 +63,7 @@
       disko,
       home-manager,
       raspberry-pi-nix,
+      nixos-hardware,
       ...
     }@inputs:
     let
@@ -136,6 +138,17 @@
             raspberry-pi-nix.nixosModules.raspberry-pi
           ];
         };
+
+      mkPiSystem2 =
+        name:
+        mkNixosSystem {
+          inherit name;
+          system = "aarch64-linux";
+          modules = [
+            nixos-hardware.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          ];
+        };
     in
     {
       overlays = import ./overlays.nix { inherit inputs; };
@@ -145,6 +158,7 @@
         titania = mkDesktopSystem "titania";
         setebos = mkDesktopSystem "setebos";
 
+        oberon = mkPiSystem2 "oberon";
         pi = mkPiSystem "pi";
       };
 
