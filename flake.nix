@@ -85,7 +85,7 @@
           specialArgs = { inherit inputs outputs meta; };
 
           modules = modules ++ [
-            ./configuration.nix
+            ./machines/common/configuration.nix
             ./modules/kibadda/configuration.nix
             ./machines/${name}/configuration.nix
             home-manager.nixosModules.home-manager
