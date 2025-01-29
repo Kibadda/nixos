@@ -69,60 +69,32 @@
 
       data = import ./secrets/data.nix;
 
-      mkNixosSystem =
+      nixosSystem =
         {
           name,
-          system,
-          modules ? [ ],
+          system ? "x86_64-linux",
         }:
-        let
-          meta = {
-            hostname = name;
-          } // data;
-        in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs outputs meta; };
-
-          modules = modules ++ [
-            ./machines/common/configuration.nix
-            ./modules/kibadda/configuration.nix
-            ./machines/${name}/configuration.nix
-            home-manager.nixosModules.home-manager
-            ./machines/common/home.nix
-          ];
-        };
-
-      mkDesktopSystem =
-        name:
-        mkNixosSystem {
-          inherit name;
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            ./machines/common/desktop.nix
-            ./machines/${name}/disko-config.nix
-            ./machines/${name}/hardware-configuration.nix
-          ];
-        };
-
-      mkPiSystem =
-        name:
-        mkNixosSystem {
-          inherit name;
-          system = "aarch64-linux";
-          modules = [
-            raspberry-pi-nix.nixosModules.raspberry-pi
-          ];
+          specialArgs = {
+            inherit inputs outputs;
+            meta = {
+              hostname = name;
+            } // data;
+          };
+          modules = [ ./machines/${name}/configuration.nix ];
         };
     in
     {
       nixosConfigurations = {
-        uranus = mkDesktopSystem "uranus";
-        titania = mkDesktopSystem "titania";
-        setebos = mkDesktopSystem "setebos";
+        uranus = nixosSystem { name = "uranus"; };
+        titania = nixosSystem { name = "titania"; };
+        setebos = nixosSystem { name = "setebos"; };
 
-        pi = mkPiSystem "pi";
+        pi = nixosSystem {
+          name = "pi";
+          system = "aarch64-linux";
+        };
       };
 
       devShells."x86_64-linux".default =

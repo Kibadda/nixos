@@ -1,4 +1,9 @@
-{ meta, pkgs, ... }:
+{
+  meta,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   helm =
     with pkgs;
@@ -16,6 +21,16 @@ let
   };
 in
 {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+
+    ../common/configuration.nix
+    ../common/home.nix
+
+    ../../modules/kibadda/configuration.nix
+  ];
+
   raspberry-pi-nix.board = "bcm2711";
 
   services.k3s = {
