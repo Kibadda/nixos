@@ -31,11 +31,25 @@
   };
 
   nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.unstable
-      inputs.nur.overlays.default
-    ];
+    overlays =
+      let
+        packages = import ../../packages;
+      in
+      [
+        inputs.nur.overlays.default
+        inputs.dmenu.overlays.default
+        inputs.powermenu.overlays.default
+        inputs.passmenu.overlays.default
+        inputs.pinentry.overlays.default
+
+        (final: prev: {
+          kibadda = (prev.kibadda or { }) // {
+            nvim = inputs.nvim.packages.${prev.system}.nvim;
+          };
+        })
+
+        packages.overlays.default
+      ];
     config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [

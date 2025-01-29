@@ -117,8 +117,6 @@
         };
     in
     {
-      overlays = import ./overlays.nix { inherit inputs; };
-
       nixosConfigurations = {
         uranus = mkDesktopSystem "uranus";
         titania = mkDesktopSystem "titania";

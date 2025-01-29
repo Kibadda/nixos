@@ -34,7 +34,7 @@ in
 
   config = lib.mkIf cfg.yubikey.enable {
     home = {
-      packages = if cfg.hypr.enable then [ inputs.pinentry.defaultPackage.${pkgs.system} ] else [ ];
+      packages = [ pkgs.kibadda.pinentry ];
       sessionVariables = {
         KEYID = meta.keyid;
       };
@@ -65,8 +65,7 @@ in
         enableSshSupport = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentryPackage =
-          if cfg.hypr.enable then inputs.pinentry.defaultPackage.${pkgs.system} else pkgs.pinentry-qt;
+        pinentryPackage = if cfg.hypr.enable then pkgs.kibadda.pinentry else pkgs.pinentry-qt;
       };
     };
   };
