@@ -36,6 +36,8 @@
       };
 
       packages = [ pkgs.kibadda.setup-git-repos ];
+
+      file."intelephense/licence.txt".text = meta.intelephense.licence;
     };
 
     xdg.enable = true;
