@@ -12,8 +12,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    raspberry-pi-nix = {
-      url = "github:nix-community/raspberry-pi-nix";
+    # raspberry-pi-nix = {
+    #   url = "github:nix-community/raspberry-pi-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,11 +51,11 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://raspberry-pi-nix.cachix.org"
+      # "https://raspberry-pi-nix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
+      # "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
     ];
   };
 
@@ -59,9 +63,6 @@
     {
       self,
       nixpkgs,
-      disko,
-      home-manager,
-      raspberry-pi-nix,
       ...
     }@inputs:
     let
@@ -91,10 +92,15 @@
         titania = nixosSystem { name = "titania"; };
         setebos = nixosSystem { name = "setebos"; };
 
-        pi = nixosSystem {
-          name = "pi";
+        oberon = nixosSystem {
+          name = "oberon";
           system = "aarch64-linux";
         };
+
+        # pi = nixosSystem {
+        #   name = "pi";
+        #   system = "aarch64-linux";
+        # };
       };
 
       devShells."x86_64-linux".default =
