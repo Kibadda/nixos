@@ -25,7 +25,7 @@
         default = true;
         enableACME = true;
         forceSSL = true;
-        serverName = "fotos2.xn--strobel-s-o1a23a.de";
+        serverName = "fotos.xn--strobel-s-o1a23a.de";
         locations."/".proxyPass = "http://localhost:2283";
       };
     };
@@ -36,7 +36,7 @@
       # FIX: tests for this are failing
       machine-learning.enable = false;
       settings = {
-        server.externalDomain = "https://fotos2.xn--strobel-s-o1a23a.de";
+        server.externalDomain = "https://fotos.xn--strobel-s-o1a23a.de";
         storageTemplate = {
           enabled = true;
           template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
