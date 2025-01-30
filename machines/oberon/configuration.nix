@@ -36,6 +36,13 @@
           serverName = "essen.xn--strobel-s-o1a23a.de";
           locations."/".proxyPass = "http://loaclhost:9000";
         };
+
+        youtrack = {
+          enableACME = true;
+          forceSSL = true;
+          serverName = "aufgaben.xn--strobel-s-o1a23a.de";
+          locations."/".proxyPass = "http://loaclhost:8080";
+        };
       };
     };
 
@@ -55,6 +62,13 @@
 
     mealie = {
       enable = true;
+    };
+
+    youtrack = {
+      enable = true;
+      environmentalParameters = {
+        base-url = "https://aufgaben.xn--strobel-s-o1a23a.de";
+      };
     };
   };
 
