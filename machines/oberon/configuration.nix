@@ -33,6 +33,7 @@
     immich = {
       enable = true;
       openFirewall = true;
+      # FIX: tests for this are failing
       machine-learning.enable = false;
       settings = {
         server.externalDomain = "https://fotos2.xn--strobel-s-o1a23a.de";
