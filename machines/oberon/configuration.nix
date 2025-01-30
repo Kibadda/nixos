@@ -43,6 +43,13 @@
           serverName = "aufgaben.xn--strobel-s-o1a23a.de";
           locations."/".proxyPass = "http://loaclhost:8080";
         };
+
+        open-web-calendar = {
+          enableACME = true;
+          forceSSL = true;
+          serverName = "kalender.xn--strobel-s-o1a23a.de";
+          locations."/".proxyPass = "http://loaclhost:5000";
+        };
       };
     };
 
@@ -68,6 +75,14 @@
       enable = true;
       environmentalParameters = {
         base-url = "https://aufgaben.xn--strobel-s-o1a23a.de";
+      };
+    };
+
+    open-web-calendar = {
+      enable = true;
+      domain = "kalender.xn--strobel-s-o1a23a.de";
+      settings = {
+        language = "de";
       };
     };
   };
