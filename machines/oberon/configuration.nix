@@ -21,12 +21,21 @@
     nginx = {
       enable = true;
       recommendedTlsSettings = true;
-      virtualHosts.immich = {
-        default = true;
-        enableACME = true;
-        forceSSL = true;
-        serverName = "fotos.xn--strobel-s-o1a23a.de";
-        locations."/".proxyPass = "http://localhost:2283";
+      virtualHosts = {
+        immich = {
+          default = true;
+          enableACME = true;
+          forceSSL = true;
+          serverName = "fotos.xn--strobel-s-o1a23a.de";
+          locations."/".proxyPass = "http://localhost:2283";
+        };
+
+        mealie = {
+          enableACME = true;
+          forceSSL = true;
+          serverName = "essen.xn--strobel-s-o1a23a.de";
+          locations."/".proxyPass = "http://loaclhost:9000";
+        };
       };
     };
 
@@ -43,6 +52,10 @@
         };
       };
     };
+
+    mealie = {
+      enable = true;
+    };
   };
 
   networking = {
@@ -54,6 +67,7 @@
     firewall.allowedTCPPorts = [
       80
       443
+      9000
     ];
   };
 }
