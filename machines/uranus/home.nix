@@ -30,6 +30,12 @@
           port = meta.sshPort;
           forward = false;
         }
+        {
+          name = "oberon";
+          host = "10.0.0.3";
+          port = meta.sshPort;
+          forward = false;
+        }
       ];
     };
 

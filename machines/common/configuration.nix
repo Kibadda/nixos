@@ -1,5 +1,4 @@
 {
-  outputs,
   inputs,
   pkgs,
   meta,
