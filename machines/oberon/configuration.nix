@@ -23,32 +23,17 @@
       recommendedTlsSettings = true;
       virtualHosts = {
         immich = {
-          default = true;
           enableACME = true;
           forceSSL = true;
-          serverName = "fotos.xn--strobel-s-o1a23a.de";
+          serverName = "fotos.${meta.domain}";
           locations."/".proxyPass = "http://localhost:2283";
         };
 
         mealie = {
           enableACME = true;
           forceSSL = true;
-          serverName = "essen.xn--strobel-s-o1a23a.de";
-          locations."/".proxyPass = "http://loaclhost:9000";
-        };
-
-        youtrack = {
-          enableACME = true;
-          forceSSL = true;
-          serverName = "aufgaben.xn--strobel-s-o1a23a.de";
-          locations."/".proxyPass = "http://loaclhost:8080";
-        };
-
-        open-web-calendar = {
-          enableACME = true;
-          forceSSL = true;
-          serverName = "kalender.xn--strobel-s-o1a23a.de";
-          locations."/".proxyPass = "http://loaclhost:5000";
+          serverName = "essen.${meta.domain}";
+          locations."/".proxyPass = "http://localhost:9000";
         };
       };
     };
@@ -59,7 +44,7 @@
       # FIX: tests for this are failing
       machine-learning.enable = false;
       settings = {
-        server.externalDomain = "https://fotos.xn--strobel-s-o1a23a.de";
+        server.externalDomain = "https://fotos.${meta.domain}";
         storageTemplate = {
           enabled = true;
           template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
@@ -69,21 +54,6 @@
 
     mealie = {
       enable = true;
-    };
-
-    youtrack = {
-      enable = true;
-      environmentalParameters = {
-        base-url = "https://aufgaben.xn--strobel-s-o1a23a.de";
-      };
-    };
-
-    open-web-calendar = {
-      enable = true;
-      domain = "kalender.xn--strobel-s-o1a23a.de";
-      settings = {
-        language = "de";
-      };
     };
   };
 
@@ -96,7 +66,6 @@
     firewall.allowedTCPPorts = [
       80
       443
-      9000
     ];
   };
 }
