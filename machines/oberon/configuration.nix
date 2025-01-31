@@ -10,6 +10,8 @@
 
     ../common/configuration.nix
     ../common/home.nix
+
+    ../../modules/zsh/configuration.nix
   ];
 
   security.acme = {
