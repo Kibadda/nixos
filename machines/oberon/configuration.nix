@@ -24,17 +24,17 @@
       enable = true;
       recommendedTlsSettings = true;
       virtualHosts = {
-        immich = {
+        "fotos.${meta.pi.domain}" = {
           enableACME = true;
           forceSSL = true;
-          serverName = "fotos.${meta.domain}";
+          basicAuth = meta.pi.users;
           locations."/".proxyPass = "http://localhost:2283";
         };
 
-        mealie = {
+        "essen.${meta.pi.domain}" = {
           enableACME = true;
           forceSSL = true;
-          serverName = "essen.${meta.domain}";
+          basicAuth = meta.pi.users;
           locations."/".proxyPass = "http://localhost:9000";
         };
       };
@@ -46,7 +46,7 @@
       # FIX: tests for this are failing
       machine-learning.enable = false;
       settings = {
-        server.externalDomain = "https://fotos.${meta.domain}";
+        server.externalDomain = "https://fotos.${meta.pi.domain}";
         storageTemplate = {
           enabled = true;
           template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
