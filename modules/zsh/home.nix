@@ -16,12 +16,18 @@
       buildpi = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake $NIXOS_DIR#pi --target-host pi --use-remote-sudo";
     };
 
-    initExtra = ''
-      if [[ -n $SSH_CONNECTION ]]; then
-        hostname="%{$fg_bold[red]%}%m"
-        PROMPT="$hostname $PROMPT"
-      fi
-    '';
+    initExtra = # bash
+      ''
+        if echo "$PATH" | grep -qc "/nix/store"; then
+          nixshell="%{$fg_bold[cyan]%} "
+          PROMPT="$nixshell $PROMPT"
+        fi
+
+        if [[ -n $SSH_CONNECTION ]]; then
+          hostname="%{$fg_bold[red]%}%m"
+          PROMPT="$hostname $PROMPT"
+        fi
+      '';
 
     sessionVariables = {
       TIMER_PRECISION = 2;
