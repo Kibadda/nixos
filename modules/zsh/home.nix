@@ -18,7 +18,7 @@
 
     initExtra = ''
       if [[ -n $SSH_CONNECTION ]]; then
-        hostname="%{$fg_bold[black]%}%m"
+        hostname="%{$fg_bold[red]%}%m"
         PROMPT="$hostname $PROMPT"
       fi
     '';
