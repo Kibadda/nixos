@@ -1,5 +1,9 @@
 { meta, ... }:
 {
+  imports = [
+    ../../modules/kibadda/home.nix
+  ];
+
   kibadda = {
     chrome.enable = true;
 

@@ -1,5 +1,9 @@
 { meta, ... }:
 {
+  imports = [
+    ../../modules/kibadda/home.nix
+  ];
+
   kibadda = {
     kitty.enable = false;
     yubikey.enable = false;

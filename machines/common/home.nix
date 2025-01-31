@@ -10,7 +10,6 @@
     extraSpecialArgs = { inherit inputs meta; };
     users.${meta.username} = {
       imports = [
-        ../../modules/kibadda/home.nix
         ../${meta.hostname}/home.nix
       ];
 

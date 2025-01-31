@@ -1,5 +1,9 @@
 { pkgs, meta, ... }:
 {
+  imports = [
+    ../../modules/kibadda/home.nix
+  ];
+
   home.packages = with pkgs; [
     linphone
     thunderbird
