@@ -118,6 +118,7 @@ in
               nav-bar = [
                 "back-button"
                 "forward-button"
+                "stop-reload-button"
                 "urlbar-container"
                 "downloads-button"
                 "unified-extensions-button"
