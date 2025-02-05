@@ -6,7 +6,6 @@
 {
   imports = [
     inputs.nixos-generators.nixosModules.sd-aarch64
-    inputs.home-manager.nixosModules.home-manager
 
     ../common/configuration.nix
     ../common/home.nix

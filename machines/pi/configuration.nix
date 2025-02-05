@@ -22,7 +22,6 @@ let
 in
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     inputs.raspberry-pi-nix.nixosModules.raspberry-pi
 
     ../common/configuration.nix
