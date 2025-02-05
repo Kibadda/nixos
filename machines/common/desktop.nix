@@ -1,5 +1,16 @@
-{ pkgs, meta, ... }:
 {
+  pkgs,
+  meta,
+  inputs,
+  ...
+}:
+{
+  imports = [
+    inputs.disko.nixosModules.default
+    ../${meta.hostname}/disko.nix
+    ../${meta.hostname}/hardware-configuration.nix
+  ];
+
   boot = {
     loader = {
       systemd-boot = {
