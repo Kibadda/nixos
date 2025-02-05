@@ -7,13 +7,18 @@
   ...
 }:
 {
+  imports = [
+    inputs.nix-monitored.nixosModules.default
+  ];
+
   nix = {
-    package = pkgs.nixVersions.stable;
+    package = lib.mkDefault pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    monitored.enable = true;
     settings = {
       auto-optimise-store = true;
       trusted-users = [

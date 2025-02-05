@@ -712,6 +712,26 @@
         "type": "github"
       }
     },
+    "nix-monitored": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737219791,
+        "narHash": "sha256-OU0NPjJ3woNDFNx7HtWuUXBb4eI6Ggre/Uj2qhiSjrg=",
+        "owner": "ners",
+        "repo": "nix-monitored",
+        "rev": "6ed8ed4832ff26c616e5856ba19f5b8141d61bd3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ners",
+        "repo": "nix-monitored",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1736643958,
@@ -1116,6 +1136,7 @@
         "disko": "disko",
         "dmenu": "dmenu",
         "home-manager": "home-manager",
+        "nix-monitored": "nix-monitored",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
