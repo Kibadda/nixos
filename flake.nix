@@ -20,6 +20,7 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nur = {
       url = "github:nix-community/NUR";

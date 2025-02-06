@@ -6,6 +6,7 @@
 {
   imports = [
     inputs.nixos-generators.nixosModules.sd-aarch64
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
     ../common/configuration.nix
     ../common/home.nix
