@@ -109,6 +109,11 @@ in
           disable_splash_rendering = true;
         };
 
+        ecosystem = {
+          no_update_news = true;
+          no_donation_nag = true;
+        };
+
         env = [
           "XDG_SESSION_TYPE,wayland"
           "NIXOS_OZONE_WL,1"
