@@ -18,7 +18,10 @@
     '';
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-    monitored.enable = true;
+    monitored = {
+      enable = true;
+      notify = false;
+    };
     gc = {
       automatic = true;
       dates = "weekly";
