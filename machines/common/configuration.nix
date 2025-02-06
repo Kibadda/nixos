@@ -19,21 +19,16 @@
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     monitored.enable = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than +5";
+    };
     settings = {
       auto-optimise-store = true;
       trusted-users = [
         meta.username
       ];
-    };
-  };
-
-  programs.nh = {
-    enable = true;
-    flake = "/home/${meta.username}/.dotfiles";
-    clean = {
-      enable = true;
-      extraArgs = "--keep-since 4d --keep 5";
-      dates = "weekly";
     };
   };
 
