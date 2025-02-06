@@ -101,7 +101,7 @@
       enable = true;
       ports = [ meta.sshPort ];
       settings = {
-        StreamLocalBindUnlink = meta.hostname != "pi";
+        StreamLocalBindUnlink = false;
         PermitRootLogin = "no";
         PasswordAuthentication = false;
       };
