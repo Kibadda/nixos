@@ -31,10 +31,6 @@
 
       homeDirectory = "/home/${meta.username}";
 
-      sessionVariables = {
-        NIXOS_DIR = "$HOME/.dotfiles";
-      };
-
       packages = [ pkgs.kibadda.setup-git-repos ];
 
       file."intelephense/licence.txt".text = meta.intelephense.licence;

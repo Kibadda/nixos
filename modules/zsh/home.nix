@@ -9,7 +9,7 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake $NIXOS_DIR#$(hostname)";
+      update = "sudo nixos-rebuild switch --flake self#$(hostname)";
       check = "nix flake check";
       cat = "bat";
     };
