@@ -76,12 +76,8 @@
       data = import ./secrets/data.nix;
 
       nixosSystem =
-        {
-          name,
-          system ? "x86_64-linux",
-        }:
+        name:
         nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = {
             inherit inputs outputs;
             meta = {
@@ -93,14 +89,10 @@
     in
     {
       nixosConfigurations = {
-        uranus = nixosSystem { name = "uranus"; };
-        titania = nixosSystem { name = "titania"; };
-        setebos = nixosSystem { name = "setebos"; };
-
-        oberon = nixosSystem {
-          name = "oberon";
-          system = "aarch64-linux";
-        };
+        uranus = nixosSystem "uranus";
+        titania = nixosSystem "titania";
+        setebos = nixosSystem "setebos";
+        oberon = nixosSystem "oberon";
 
         # pi = nixosSystem {
         #   name = "pi";
