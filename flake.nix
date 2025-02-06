@@ -56,20 +56,18 @@
       ...
     }@inputs:
     let
-      inherit (self) outputs;
-
       data = import ./secrets/data.nix;
 
       nixosSystem =
-        name:
+        hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
             meta = {
-              hostname = name;
+              inherit hostname;
             } // data;
           };
-          modules = [ ./machines/${name}/configuration.nix ];
+          modules = [ ./machines/${hostname}/configuration.nix ];
         };
     in
     {
@@ -80,13 +78,14 @@
         oberon = nixosSystem "oberon";
       };
 
-      devShells."x86_64-linux".default =
+      devShells =
         let
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          system = "x86_64-linux";
         in
-        pkgs.mkShell {
-          name = "nixos-devShell";
-          buildInputs = [ ];
+        {
+          ${system}.default = nixpkgs.legacyPackages.${system}.mkShell {
+            name = "nixos";
+          };
         };
     };
 }
