@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  meta,
   ...
 }:
 {
@@ -12,6 +13,7 @@
       update = "sudo nixos-rebuild switch --flake self#$(hostname)";
       check = "nix flake check";
       cat = "bat";
+      buildoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake self#oberon --target-host oberon --use-remote-sudo";
     };
 
     initExtra = # bash
