@@ -71,5 +71,13 @@
     ];
   };
 
-  nixpkgs.hostPlatform = "aarch64-linux";
+  nixpkgs = {
+    hostPlatform = "aarch64-linux";
+    # FIX: cross compiling https://github.com/NixOS/nixpkgs/issues/126755#issuecomment-869149243
+    overlays = [
+      (final: prev: {
+        makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
+      })
+    ];
+  };
 }
