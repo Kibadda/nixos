@@ -7,7 +7,7 @@
     nginx.virtualHosts."essen.${meta.pi.domain}" = {
       enableACME = true;
       forceSSL = true;
-      basicAuth = meta.pi.users;
+      extraConfig = meta.pi.ip-whitelist;
       locations."/".proxyPass = "http://localhost:9000";
     };
 
