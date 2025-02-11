@@ -1,6 +1,7 @@
 {
   meta,
   pkgs,
+  config,
   ...
 }:
 {
@@ -17,6 +18,16 @@
       initialRootEmail = meta.pi.gitlab.admin.username;
       initialRootPasswordFile = pkgs.writeText "rootPassword" meta.pi.gitlab.admin.password;
       databasePasswordFile = pkgs.writeText "dbPassword" meta.pi.gitlab.db-password;
+      extraConfig = {
+        gitlab = {
+          default_theme = 11;
+          time_zone = config.time.timeZone;
+        };
+      };
+      extraGitlabRb = ''
+        ApplicationSetting.last.update(signup_enabled: false)
+        ApplicationSetting.last.update(first_day_of_week: 1)
+      '';
       secrets = {
         secretFile = pkgs.writeText "secret" meta.pi.gitlab.secret;
         otpFile = pkgs.writeText "otpsecret" meta.pi.gitlab.otp;
