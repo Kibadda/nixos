@@ -139,6 +139,7 @@ in
           "SUPER, D, exec, kitty --class kitty-dmenu --config ~/.config/kitty/tool.conf dmenu"
           "SUPER, Escape, exec, kitty --class kitty-powermenu --config ~/.config/kitty/tool.conf powermenu"
           "SUPER, P, exec, kitty --class kitty-passmenu --config ~/.config/kitty/tool.conf passmenu"
+          "SUPER SHIFT, P, exec, kitty --class kitty-passmenu --config ~/.config/kitty/tool.conf passmenu --otp"
           "SUPER, Minus, togglespecialworkspace"
 
           "SUPER, Q, killactive"
