@@ -31,6 +31,13 @@
     ];
   };
 
+  fileSystems = {
+    "/mnt" = {
+      device = "/dev/disk/by-uuid/bc76ab1a-8f4a-4d9b-9846-436419d779be";
+      fsType = "ext4";
+    };
+  };
+
   nixpkgs = {
     hostPlatform = "aarch64-linux";
     # FIX: cross compiling https://github.com/NixOS/nixpkgs/issues/126755#issuecomment-869149243

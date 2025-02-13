@@ -31,6 +31,7 @@
         type = "postgres";
         passwordFile = pkgs.writeText "dbPassword" meta.pi.gitea.db-password;
       };
+      stateDir = meta.pi.gitea.dir;
     };
   };
 }

@@ -23,6 +23,12 @@
           template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
         };
       };
+      mediaLocation = meta.pi.immich.dir;
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d ${meta.pi.immich.dir} 0750 immich immich - -"
+    "x ${meta.pi.immich.dir}"
+  ];
 }
