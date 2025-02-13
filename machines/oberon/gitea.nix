@@ -21,6 +21,8 @@
           ROOT_URL = "https://${meta.pi.gitea.domain}/";
         };
         service = {
+          # on first installation this should be false
+          # to create first admin account
           DISABLE_REGISTRATION = true;
           REQUIRE_SIGNIN_VIEW = true;
         };
