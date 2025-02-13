@@ -22,6 +22,7 @@ in
       packages = [ pkgs.kibadda.nvim ];
 
       sessionVariables = {
+        EDITOR = "nvim";
         NIXVIM_DIR = "$HOME/Projects/nixvim";
         NEOVIM_DIR = "$HOME/Projects/neovim";
         MANPAGER = "nvim --cmd 'lua vim.g.loaded_starter = 1' +Man!";
