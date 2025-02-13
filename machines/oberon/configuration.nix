@@ -16,7 +16,6 @@
     ./nginx.nix
     ./immich.nix
     ./mealie.nix
-    ./gitlab.nix
   ];
 
   networking = {
