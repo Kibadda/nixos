@@ -40,6 +40,11 @@
           port = meta.sshPort;
           forward = false;
         }
+        {
+          name = meta.pi.gitea.domain;
+          port = meta.sshPort;
+          forward = false;
+        }
       ];
     };
 
