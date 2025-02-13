@@ -4,7 +4,7 @@
 }:
 {
   services = {
-    nginx.virtualHosts."fotos.${meta.pi.domain}" = {
+    nginx.virtualHosts."${meta.pi.immich.domain}" = {
       enableACME = true;
       forceSSL = true;
       extraConfig = meta.pi.ip-whitelist;
@@ -17,7 +17,7 @@
       # FIX: tests for this are failing
       machine-learning.enable = false;
       settings = {
-        server.externalDomain = "https://fotos.${meta.pi.domain}";
+        server.externalDomain = "https://${meta.pi.immich.domain}";
         storageTemplate = {
           enabled = true;
           template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
