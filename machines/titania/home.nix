@@ -7,6 +7,11 @@
   kibadda = {
     chrome.enable = true;
 
+    firefox = {
+      enable = true;
+      default = true;
+    };
+
     vpn.enable = true;
 
     gaming.lutris = true;
