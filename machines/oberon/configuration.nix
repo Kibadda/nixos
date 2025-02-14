@@ -17,6 +17,7 @@
     ./immich.nix
     ./mealie.nix
     ./gitea.nix
+    ./restic.nix
   ];
 
   networking = {
