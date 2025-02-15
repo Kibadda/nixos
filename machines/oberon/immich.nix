@@ -7,7 +7,7 @@
     nginx.virtualHosts."${meta.pi.immich.domain}" = {
       enableACME = true;
       forceSSL = true;
-      extraConfig = meta.pi.ip-whitelist;
+      # extraConfig = meta.pi.ip-whitelist;
       locations."/".proxyPass = "http://localhost:2283";
     };
 
