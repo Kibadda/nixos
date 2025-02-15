@@ -33,10 +33,10 @@ let
 in
 {
   services.restic.backups = {
-    gitea = restic {
-      name = "gitea";
+    forgejo = restic {
+      name = "forgejo";
       time = "23:00";
-      path = meta.pi.gitea.dir;
+      path = meta.pi.forgejo.dir;
       exclude = [
         "tmp/**"
         "log/**"

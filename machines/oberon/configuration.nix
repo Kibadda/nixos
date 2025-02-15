@@ -16,7 +16,7 @@
     ./nginx.nix
     ./immich.nix
     ./mealie.nix
-    ./gitea.nix
+    ./forgejo.nix
     ./restic.nix
   ];
 

@@ -41,7 +41,7 @@
           forward = false;
         }
         {
-          name = meta.pi.gitea.domain;
+          name = meta.pi.forgejo.domain;
           port = meta.sshPort;
           forward = false;
         }

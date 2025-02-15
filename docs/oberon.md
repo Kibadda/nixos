@@ -3,12 +3,12 @@
 ## First Installation
 
 ```diff
-diff --git a/machines/oberon/gitea.nix b/machines/oberon/gitea.nix
+diff --git a/machines/oberon/forgejo.nix b/machines/oberon/forgejo.nix
 index bbb6632..8fa7ec3 100644
---- a/machines/oberon/gitea.nix
-+++ b/machines/oberon/gitea.nix
+--- a/machines/oberon/forgejo.nix
++++ b/machines/oberon/forgejo.nix
 @@ -8,7 +8,7 @@
-     nginx.virtualHosts."${meta.pi.gitea.domain}" = {
+     nginx.virtualHosts."${meta.pi.forgejo.domain}" = {
        enableACME = true;
        forceSSL = true;
 -      # extraConfig = meta.pi.ip-whitelist;
@@ -17,8 +17,8 @@ index bbb6632..8fa7ec3 100644
      };
  
 @@ -20,7 +20,7 @@
-           DOMAIN = meta.pi.gitea.domain;
-           ROOT_URL = "https://${meta.pi.gitea.domain}/";
+           DOMAIN = meta.pi.forgejo.domain;
+           ROOT_URL = "https://${meta.pi.forgejo.domain}/";
          };
 -        service.DISABLE_REGISTRATION = true;
 +        service.DISABLE_REGISTRATION = false;
@@ -65,7 +65,7 @@ sudo dd bs=4096 conv=fsync status=progress of=/dev/mmcblk0 if=nixos-image.img
 
 ## Setup
 
-- [ ] create gitea admin login
+- [ ] create forgejo admin login
 - [ ] create immich admin login
 - [ ] create mealie admin login
 
