@@ -35,7 +35,7 @@ in
   services.restic.backups = {
     forgejo = restic {
       name = "forgejo";
-      time = "23:00";
+      time = "03:00";
       path = meta.pi.forgejo.dir;
       exclude = [
         "tmp/**"
@@ -45,13 +45,13 @@ in
 
     immich = restic {
       name = "immich";
-      time = "23:15";
+      time = "03:15";
       path = meta.pi.immich.dir;
     };
 
     mealie = restic {
       name = "mealie";
-      time = "23:30";
+      time = "03:30";
       path = meta.pi.mealie.dir;
     };
   };
