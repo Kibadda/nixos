@@ -2,29 +2,58 @@
   meta,
   ...
 }:
+let
+  restic =
+    {
+      path,
+      name,
+      time,
+      exclude ? [ ],
+    }:
+    {
+      initialize = true;
+      environmentFile = "/etc/restic/env";
+      passwordFile = "/etc/restic/pass";
+      repository = "${meta.pi.backup.repository}-${name}";
+
+      extraBackupArgs = [ "--skip-if-unchanged" ];
+
+      paths = [ path ];
+
+      exclude = exclude;
+
+      timerConfig.OnCalendar = time;
+
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 3"
+        "--keep-monthly 3"
+      ];
+    };
+in
 {
-  services.restic.backups.daily = {
-    initialize = true;
+  services.restic.backups = {
+    gitea = restic {
+      name = "gitea";
+      time = "23:00";
+      path = meta.pi.gitea.dir;
+      exclude = [
+        "tmp/**"
+        "log/**"
+      ];
+    };
 
-    environmentFile = "/etc/restic/env";
-    passwordFile = "/etc/restic/pass";
-    repository = meta.pi.backup.repository;
+    immich = restic {
+      name = "immich";
+      time = "23:15";
+      path = meta.pi.immich.dir;
+    };
 
-    extraBackupArgs = [
-      "--skip-if-unchanged"
-    ];
-
-    paths = [
-      meta.pi.gitea.dir
-      meta.pi.immich.dir
-      meta.pi.mealie.dir
-    ];
-
-    pruneOpts = [
-      "--keep-daily 7"
-      "--keep-weekly 3"
-      "--keep-monthly 3"
-    ];
+    mealie = restic {
+      name = "mealie";
+      time = "23:30";
+      path = meta.pi.mealie.dir;
+    };
   };
 
   environment.etc = {
