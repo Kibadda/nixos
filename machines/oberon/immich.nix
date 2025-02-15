@@ -14,8 +14,7 @@
     immich = {
       enable = true;
       openFirewall = true;
-      # FIX: tests for this are failing
-      machine-learning.enable = false;
+      machine-learning.enable = true;
       settings = {
         server.externalDomain = "https://${meta.pi.immich.domain}";
         storageTemplate = {
