@@ -10,10 +10,11 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake self#$(hostname)";
+      update = "sudo nixos-rebuild switch --flake .#$(hostname)";
       check = "nix flake check";
       cat = "bat";
-      buildoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake self#oberon --target-host oberon --use-remote-sudo";
+      buildoberon = "nix build .#nixosConfigurations.oberon.config.system.build.sdImage";
+      switchoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --use-remote-sudo";
     };
 
     initExtra = # bash
