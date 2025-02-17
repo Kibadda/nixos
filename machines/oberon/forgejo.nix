@@ -4,9 +4,20 @@
   ...
 }:
 {
-  oberon.nginx."${meta.pi.forgejo.domain}" = {
-    restrict-access = false;
-    port = 3050;
+  oberon = {
+    nginx."${meta.pi.forgejo.domain}" = {
+      restrict-access = false;
+      port = 3050;
+    };
+
+    backup.forgejo = {
+      path = meta.pi.forgejo.dir;
+      time = "03:00";
+      exclude = [
+        "tmp/**"
+        "log/**"
+      ];
+    };
   };
 
   services = {

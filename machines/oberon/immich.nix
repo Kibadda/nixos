@@ -3,9 +3,16 @@
   ...
 }:
 {
-  oberon.nginx."${meta.pi.immich.domain}" = {
-    restrict-access = false;
-    port = 2283;
+  oberon = {
+    nginx."${meta.pi.immich.domain}" = {
+      restrict-access = false;
+      port = 2283;
+    };
+
+    backup.immich = {
+      path = meta.pi.immich.dir;
+      time = "03:15";
+    };
   };
 
   services.immich = {
