@@ -4,14 +4,12 @@
   ...
 }:
 {
-  services = {
-    nginx.virtualHosts."${meta.pi.forgejo.domain}" = {
-      enableACME = true;
-      forceSSL = true;
-      # extraConfig = meta.pi.ip-whitelist;
-      locations."/".proxyPass = "http://localhost:3050";
-    };
+  oberon.nginx."${meta.pi.forgejo.domain}" = {
+    restrict-access = false;
+    port = 3050;
+  };
 
+  services = {
     forgejo = {
       enable = true;
       lfs.enable = true;
