@@ -50,7 +50,8 @@
           DEFAULT_THEME = "forgejo-dark";
         };
         actions = {
-          DEFAULT_ACTIONS_URL = "github";
+          ENABLED = true;
+          DEFAULT_ACTIONS_URL = "https://github.com";
         };
       };
       database = {
@@ -68,11 +69,11 @@
           name = meta.hostname;
           url = "https://${meta.pi.forgejo.domain}";
           token = meta.pi.forgejo.actions-runner-token;
-          labels = [
-            "native:host"
-          ];
+          labels = [ ];
         };
       };
     };
   };
+
+  virtualisation.docker.enable = true;
 }
