@@ -270,6 +270,10 @@ in
                 url = "https://github.com/neovim/neovim";
               }
               {
+                name = "AWS";
+                url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+              }
+              {
                 name = "Streaming";
                 bookmarks = [
                   {
@@ -283,6 +287,15 @@ in
                   {
                     name = "Disney";
                     url = "https://www.disneyplus.com/de-de/";
+                  }
+                ];
+              }
+              {
+                name = "Games";
+                bookmarks = [
+                  {
+                    name = "Bazaar";
+                    url = "https://howbazaar.gg";
                   }
                 ];
               }
