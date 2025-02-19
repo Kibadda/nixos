@@ -151,6 +151,7 @@ in
           consent-o-matic
           privacy-badger
           decentraleyes
+          bitwarden
         ];
         search = {
           default = "DuckDuckGo";
