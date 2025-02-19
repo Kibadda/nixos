@@ -36,6 +36,7 @@
           DOMAIN = meta.pi.forgejo.domain;
           ROOT_URL = "https://${meta.pi.forgejo.domain}/";
           HTTP_PORT = 3050;
+          BUILTIN_SSH_SERVER_USER = "git";
         };
         service = {
           DISABLE_REGISTRATION = true;
