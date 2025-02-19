@@ -17,6 +17,7 @@
     ./immich.nix
     ./mealie.nix
     ./forgejo.nix
+    ./vaultwarden.nix
     ./restic.nix
   ];
 
