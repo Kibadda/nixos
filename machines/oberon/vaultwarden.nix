@@ -5,7 +5,6 @@
 {
   oberon = {
     nginx."${meta.pi.vaultwarden.domain}" = {
-      restrict-access = true;
       port = 8222;
     };
 
@@ -22,6 +21,7 @@
       DOMAIN = "https://${meta.pi.vaultwarden.domain}";
       SIGNUPS_ALLOWED = false;
       SIGNUPS_VERIFY = false;
+      INVITATIONS_ALLOWED = false;
       ROCKET_PORT = 8222;
     };
   };
