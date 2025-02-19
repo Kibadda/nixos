@@ -270,6 +270,10 @@ in
                 url = "https://github.com/neovim/neovim";
               }
               {
+                name = "Discord";
+                url = "https://discord.com/app";
+              }
+              {
                 name = "AWS";
                 url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
               }
