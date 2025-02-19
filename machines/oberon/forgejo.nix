@@ -48,6 +48,7 @@
         };
         ui = {
           DEFAULT_THEME = "forgejo-dark";
+          SHOW_USER_EMAIL = false;
         };
         actions = {
           ENABLED = true;
