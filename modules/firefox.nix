@@ -122,13 +122,22 @@ in
                 "urlbar-container"
                 "downloads-button"
                 "unified-extensions-button"
+                "ublock0_raymondhill_net-browser-action"
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
               ];
               TabsToolbar = [
                 "firefox-view-button"
                 "tabbrowser-tabs"
                 "new-tab-button"
               ];
-              unified-extensions-area = [ ];
+              unified-extensions-area = [
+                "gdpr_cavi_au_dk-browser-action"
+                "addon_darkreader_org-browser-action"
+                "_74145f27-f039-47ce-a470-a662b129930a_-browser-action"
+                "firefox_ghostery_com-browser-action"
+                "sponsorblocker_ajay_app-browser-action"
+              ];
             };
             currentVersion = 20;
             newElementCount = 3;
@@ -259,28 +268,36 @@ in
             toolbar = true;
             bookmarks = [
               {
-                name = "Mail";
-                url = "https://mail.google.com";
+                name = "Tasks - Coding";
+                url = "https://git.kibadda.de/michael/tasks/projects/1";
               }
               {
-                name = "Youtube";
-                url = "https://youtube.com/feed/subscriptions";
+                name = "Tasks - Personal";
+                url = "https://git.kibadda.de/michael/tasks/projects/3";
               }
               {
                 name = "Neovim";
                 url = "https://github.com/neovim/neovim";
               }
               {
-                name = "Discord";
-                url = "https://discord.com/app";
-              }
-              {
-                name = "AWS";
-                url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
-              }
-              {
-                name = "Streaming";
+                name = "Services";
                 bookmarks = [
+                  {
+                    name = "Youtube";
+                    url = "https://youtube.com/feed/subscriptions";
+                  }
+                  {
+                    name = "Mail";
+                    url = "https://mail.google.com";
+                  }
+                  {
+                    name = "Discord";
+                    url = "https://discord.com/app";
+                  }
+                  {
+                    name = "AWS";
+                    url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                  }
                   {
                     name = "Netflix";
                     url = "https://www.netflix.com/browse";
