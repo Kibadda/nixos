@@ -53,7 +53,7 @@
         };
         actions = {
           ENABLED = true;
-          DEFAULT_ACTIONS_URL = "https://github.com";
+          DEFAULT_ACTIONS_URL = "github";
         };
       };
       database = {
@@ -66,12 +66,15 @@
     gitea-actions-runner = {
       package = pkgs.forgejo-runner;
       instances = {
-        runner = {
+        default = {
           enable = true;
           name = meta.hostname;
           url = "https://${meta.pi.forgejo.domain}";
           token = meta.pi.forgejo.actions-runner-token;
-          labels = [ ];
+          labels = [
+            "runner:docker://ghcr.io/catthehacker/ubuntu:runner-latest"
+            "act:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+          ];
         };
       };
     };
