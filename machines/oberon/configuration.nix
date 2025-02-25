@@ -18,6 +18,7 @@
     ./mealie.nix
     ./forgejo.nix
     ./vaultwarden.nix
+    ./home-assistant.nix
     ./restic.nix
   ];
 

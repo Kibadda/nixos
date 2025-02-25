@@ -21,6 +21,10 @@
             port = lib.mkOption {
               type = lib.types.int;
             };
+            websockets = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+            };
           };
         }
       );
@@ -44,6 +48,7 @@
         forceSSL = conf.ssl;
         extraConfig = if conf.restrict-access then meta.pi.ip-whitelist else "";
         locations."/".proxyPass = "http://localhost:${toString conf.port}";
+        locations."/".proxyWebsockets = conf.websockets;
       }) config.oberon.nginx;
     };
   };
