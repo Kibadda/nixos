@@ -66,6 +66,55 @@
           types = [ "Restmüll" ];
           add_days_to = true;
         }
+        {
+          platform = "waste_collection_schedule";
+          name = "Müll";
+          value_template = "{{ value.types|join(', ')}}";
+        }
+      ];
+
+      automation = [
+        {
+          alias = "Müll";
+          mode = "single";
+          trigger = [
+            {
+              platform = "time";
+              at = "19:00:00";
+            }
+          ];
+          condition = [
+            {
+              or = [
+                {
+                  condition = "template";
+                  value_template = "{{ is_state_attr('sensor.gelber_sack', 'daysTo', 1) }}";
+                }
+                {
+                  condition = "template";
+                  value_template = "{{ is_state_attr('sensor.blaue_tonne', 'daysTo', 1) }}";
+                }
+                {
+                  condition = "template";
+                  value_template = "{{ is_state_attr('sensor.restmull', 'daysTo', 1) }}";
+                }
+                {
+                  condition = "template";
+                  value_template = "{{ is_state_attr('sensor.biomull', 'daysTo', 1) }}";
+                }
+              ];
+            }
+          ];
+          action = [
+            {
+              action = "notify.mobile_app_${meta.pi.home-assistant.devices.michael}";
+              data = {
+                title = "Müll";
+                message = "{{ states('sensor.mull') }}";
+              };
+            }
+          ];
+        }
       ];
     };
   };
