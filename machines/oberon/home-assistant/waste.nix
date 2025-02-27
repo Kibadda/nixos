@@ -1,0 +1,72 @@
+{
+  meta,
+  pkgs,
+  ...
+}:
+{
+  services.home-assistant = {
+    customComponents = [
+      (pkgs.home-assistant-custom-components.waste_collection_schedule.overrideAttrs (
+        final: _: {
+          version = "2.6.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "mampfes";
+            repo = "hacs_waste_collection_schedule";
+            tag = final.version;
+            hash = "sha256-gfL5Nxe8io7DTya5x8aQ5PhxiH8rb8L3/CA+UqKEDAk=";
+          };
+        }
+      ))
+    ];
+
+    config = {
+      waste_collection_schedule = {
+        sources = [
+          {
+            name = "jumomind_de";
+            args = {
+              service_id = "mymuell";
+              city = meta.pi.home-assistant.city;
+              street = meta.pi.home-assistant.street;
+            };
+          }
+        ];
+      };
+
+      sensor = [
+        {
+          platform = "waste_collection_schedule";
+          name = "Blaue Tonne";
+          value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
+          date_template = "{{ value.date.strftime('%a, %d.%m.%Y') }}";
+          types = [ "Blaue Tonne" ];
+          add_days_to = true;
+        }
+        {
+          platform = "waste_collection_schedule";
+          name = "Gelber Sack";
+          value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
+          date_template = "{{ value.date.strftime('%a, %d.%m.%Y') }}";
+          types = [ "Gelber Sack" ];
+          add_days_to = true;
+        }
+        {
+          platform = "waste_collection_schedule";
+          name = "Biomüll";
+          value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
+          date_template = "{{ value.date.strftime('%a, %d.%m.%Y') }}";
+          types = [ "Biomüll" ];
+          add_days_to = true;
+        }
+        {
+          platform = "waste_collection_schedule";
+          name = "Restmüll";
+          value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
+          date_template = "{{ value.date.strftime('%a, %d.%m.%Y') }}";
+          types = [ "Restmüll" ];
+          add_days_to = true;
+        }
+      ];
+    };
+  };
+}
