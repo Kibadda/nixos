@@ -5,9 +5,9 @@
 }:
 {
   imports = [
-    ./home-assistant/lovelace.nix
-    ./home-assistant/waste.nix
-    ./home-assistant/hue.nix
+    ./lovelace.nix
+    ./waste.nix
+    ./hue.nix
   ];
 
   oberon = {
