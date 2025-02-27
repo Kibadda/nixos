@@ -23,32 +23,6 @@
               forecast_type = "daily";
               type = "weather-forecast";
             }
-            {
-              type = "tile";
-              entity = "light.arbeitszimmer";
-              name = "Arbeitszimmer";
-              features = [
-                { type = "light-brightness"; }
-                { type = "light-color-temp"; }
-              ];
-            }
-            {
-              type = "tile";
-              entity = "light.esszimmer";
-              name = "Esszimmer";
-              features = [
-                { type = "light-brightness"; }
-              ];
-            }
-            {
-              type = "tile";
-              entity = "light.wohnzimmer";
-              name = "Wohnzimmer";
-              features = [
-                { type = "light-brightness"; }
-                { type = "light-color-temp"; }
-              ];
-            }
           ];
         }
       ];

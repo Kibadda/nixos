@@ -7,6 +7,7 @@
   imports = [
     ./home-assistant/lovelace.nix
     ./home-assistant/waste.nix
+    ./home-assistant/hue.nix
   ];
 
   oberon = {
@@ -36,7 +37,6 @@
         "met"
         "radio_browser"
         "isal"
-        "hue"
         "esphome"
         "default_config"
         "frontend"
