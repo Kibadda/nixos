@@ -35,6 +35,7 @@
         "esphome"
         "default_config"
         "frontend"
+        "mobile_app"
       ];
       customComponents = [
         (pkgs.home-assistant-custom-components.waste_collection_schedule.overrideAttrs (
@@ -51,6 +52,8 @@
       ];
       configDir = meta.pi.home-assistant.dir;
       config = {
+        mobile_app = { };
+
         recorder = {
           db_url = "postgresql://@/hass";
         };
