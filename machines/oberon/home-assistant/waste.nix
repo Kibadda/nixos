@@ -4,6 +4,31 @@
   ...
 }:
 {
+  oberon.home-assistant.dashboard = [
+    {
+      type = "entities";
+      title = "Müll";
+      entities = [
+        {
+          entity = "sensor.gelber_sack";
+          name = "Gelber Sack";
+        }
+        {
+          entity = "sensor.biomull";
+          name = "Biomüll";
+        }
+        {
+          entity = "sensor.restmull";
+          name = "Restmüll";
+        }
+        {
+          entity = "sensor.blaue_tonne";
+          name = "Blaue Tonne";
+        }
+      ];
+    }
+  ];
+
   services.home-assistant = {
     customComponents = [
       (pkgs.home-assistant-custom-components.waste_collection_schedule.overrideAttrs (

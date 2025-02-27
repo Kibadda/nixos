@@ -19,28 +19,6 @@
           title = "Dashboard";
           cards = config.oberon.home-assistant.dashboard ++ [
             {
-              type = "entities";
-              title = "Müll";
-              entities = [
-                {
-                  entity = "sensor.gelber_sack";
-                  name = "Gelber Sack";
-                }
-                {
-                  entity = "sensor.biomull";
-                  name = "Biomüll";
-                }
-                {
-                  entity = "sensor.restmull";
-                  name = "Restmüll";
-                }
-                {
-                  entity = "sensor.blaue_tonne";
-                  name = "Blaue Tonne";
-                }
-              ];
-            }
-            {
               entity = "weather.forecast_home";
               forecast_type = "daily";
               type = "weather-forecast";
