@@ -105,7 +105,7 @@
           trigger = [
             {
               platform = "time";
-              at = "19:00:00";
+              at = "18:00:00";
             }
           ];
           condition = [
