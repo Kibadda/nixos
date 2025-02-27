@@ -30,11 +30,12 @@
 
   services.home-assistant = {
     extraComponents = [ "hue" ];
-    config.hue.bridges = [
-      {
-        host = "10.0.0.22";
-        allow_unreachable = true;
-      }
-    ];
+    # FIX: unfortunately this can not be done this way
+    # config.hue.bridges = [
+    #   {
+    #     host = "10.0.0.22";
+    #     allow_unreachable = true;
+    #   }
+    # ];
   };
 }
