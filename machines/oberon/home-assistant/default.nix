@@ -14,7 +14,6 @@
     nginx."${meta.pi.home-assistant.domain}" = {
       port = 8123;
       websockets = true;
-      restrict-access = true;
     };
 
     backup.home-assistant = {
