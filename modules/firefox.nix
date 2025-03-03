@@ -48,7 +48,10 @@ in
         HardwareAcceleration = true;
         TranslateEnabled = true;
 
-        Homepage.StartPage = "previous-session";
+        Homepage = {
+          StartPage = "homepage";
+          URL = "https://${meta.pi.home-assistant.domain}";
+        };
 
         UserMessaging = {
           UrlbarInterventions = false;
@@ -122,9 +125,8 @@ in
                 "urlbar-container"
                 "downloads-button"
                 "unified-extensions-button"
-                "ublock0_raymondhill_net-browser-action"
-                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
                 "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                "addon_darkreader_org-browser-action"
               ];
               TabsToolbar = [
                 "firefox-view-button"
@@ -132,8 +134,10 @@ in
                 "new-tab-button"
               ];
               unified-extensions-area = [
+                "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+                "ublock0_raymondhill_net-browser-action"
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
                 "gdpr_cavi_au_dk-browser-action"
-                "addon_darkreader_org-browser-action"
                 "_74145f27-f039-47ce-a470-a662b129930a_-browser-action"
                 "firefox_ghostery_com-browser-action"
                 "sponsorblocker_ajay_app-browser-action"
