@@ -48,10 +48,7 @@ in
         HardwareAcceleration = true;
         TranslateEnabled = true;
 
-        Homepage = {
-          StartPage = "homepage";
-          URL = "https://${meta.pi.home-assistant.domain}";
-        };
+        Homepage.StartPage = "previous-session";
 
         UserMessaging = {
           UrlbarInterventions = false;
