@@ -25,6 +25,10 @@
               type = lib.types.bool;
               default = false;
             };
+            extraConfig = lib.mkOption {
+              type = lib.types.str;
+              default = "";
+            };
           };
         }
       );
@@ -46,7 +50,10 @@
       virtualHosts = builtins.mapAttrs (domain: conf: {
         enableACME = conf.ssl;
         forceSSL = conf.ssl;
-        extraConfig = if conf.restrict-access then meta.pi.ip-whitelist else "";
+        extraConfig = builtins.concatStringsSep "\n" [
+          (if conf.restrict-access then meta.pi.ip-whitelist else "")
+          conf.extraConfig
+        ];
         locations."/".proxyPass = "http://localhost:${toString conf.port}";
         locations."/".proxyWebsockets = conf.websockets;
       }) config.oberon.nginx;
