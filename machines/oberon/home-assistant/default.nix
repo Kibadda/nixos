@@ -8,6 +8,7 @@
     ./lovelace.nix
     ./waste.nix
     ./hue.nix
+    ./states.nix
   ];
 
   oberon = {

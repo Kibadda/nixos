@@ -13,28 +13,26 @@
   ];
 
   systemd.services = {
-    hue-arbeitszimmer-on = {
-      description = "Turn on lights in arbeitszimmer";
+    state-uranus-on = {
+      enable = true;
+      description = "Update uranus state on startup";
       wantedBy = [ "multi-user.target" ];
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.curl}/bin/curl -X PUT https://${meta.pi.home-assistant.domain}/api/webhook/${meta.pi.home-assistant.webhooks.uranus.light_on}";
+        ExecStart = "${pkgs.curl}/bin/curl -X PUT https://${meta.pi.home-assistant.domain}/api/webhook/${meta.pi.home-assistant.webhooks.uranus.startup}";
       };
     };
 
-    hue-arbeitszimmer-off = {
-      description = "Turn off lights in arbeitszimmer";
-      wantedBy = [ "multi-user.target" ];
+    state-uranus-off = {
+      enable = true;
+      description = "Update uranus state on shutdown";
       wants = [ "network-online.target" ];
-      after = [
-        "network-online.target"
-        "final.target"
-      ];
+      before = [ "shutdown.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.curl}/bin/curl -X PUT https://${meta.pi.home-assistant.domain}/api/webhook/${meta.pi.home-assistant.webhooks.uranus.light_off}";
+        ExecStart = "${pkgs.curl}/bin/curl -X PUT https://${meta.pi.home-assistant.domain}/api/webhook/${meta.pi.home-assistant.webhooks.uranus.shutdown}";
       };
     };
   };

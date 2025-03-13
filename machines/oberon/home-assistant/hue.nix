@@ -1,8 +1,4 @@
 {
-  meta,
-  ...
-}:
-{
   oberon.home-assistant.dashboard = [
     {
       type = "tile";
@@ -40,17 +36,16 @@
         alias = "Turn on lights after uranus start";
         trigger = [
           {
-            trigger = "webhook";
-            webhook_id = meta.pi.home-assistant.webhooks.uranus.light_on;
-            allowed_methods = [ "PUT" ];
-            local_only = false;
+            trigger = "state";
+            entity_id = "input_boolean.state_uranus";
+            to = "on";
           }
         ];
         condition = [
           {
             condition = "time";
-            before = "10:00:00";
             after = "21:00:00";
+            before = "10:00:00";
           }
         ];
         action = [
@@ -66,10 +61,13 @@
         alias = "Turn off lights after uranus shutdown";
         trigger = [
           {
-            trigger = "webhook";
-            webhook_id = meta.pi.home-assistant.webhooks.uranus.light_off;
-            allowed_methods = [ "PUT" ];
-            local_only = false;
+            trigger = "state";
+            entity_id = "input_boolean.state_uranus";
+            to = "off";
+            for = {
+              minutes = 1;
+              seconds = 30;
+            };
           }
         ];
         condition = [
@@ -94,7 +92,14 @@
           {
             trigger = "sun";
             event = "sunrise";
-            offset = "02:00:00";
+            offset = "02:30:00";
+          }
+        ];
+        condition = [
+          {
+            condition = "state";
+            entity_id = "input_boolean.state_uranus";
+            state = "on";
           }
         ];
         action = [
