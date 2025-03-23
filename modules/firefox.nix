@@ -320,6 +320,14 @@ in
                     name = "Bazaar";
                     url = "https://howbazaar.gg";
                   }
+                  {
+                    name = "Satisfactory Tools";
+                    url = "https://www.satisfactorytools.com/1.01.0";
+                  }
+                  {
+                    name = "Satisfactory Alt Recipes";
+                    url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
+                  }
                 ];
               }
             ];
