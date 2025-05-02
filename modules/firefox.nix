@@ -322,11 +322,19 @@ in
                   }
                   {
                     name = "Satisfactory Tools";
-                    url = "https://www.satisfactorytools.com/1.01.0";
+                    url = "https://www.satisfactorytools.com/1.0";
                   }
                   {
                     name = "Satisfactory Alt Recipes";
                     url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
+                  }
+                  {
+                    name = "Satisfactory Interactive Map";
+                    url = "https://satisfactory-calculator.com/en/interactive-map";
+                  }
+                  {
+                    name = "Satisfactory Wiki";
+                    url = "https://satisfactory.wiki.gg/";
                   }
                 ];
               }
