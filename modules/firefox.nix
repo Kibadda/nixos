@@ -150,7 +150,7 @@ in
         "en-US"
       ];
       profiles.${meta.username} = {
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           vimium
           darkreader
@@ -164,8 +164,8 @@ in
           bitwarden
         ];
         search = {
-          default = "DuckDuckGo";
-          privateDefault = "DuckDuckGo";
+          default = "ddg";
+          privateDefault = "ddg";
           force = true;
           engines = {
             "Nix packages" = {
@@ -256,91 +256,94 @@ in
               definedAliases = [ "@ng" ];
             };
 
-            "Google".metaData.hidden = true;
-            "Bing".metaData.hidden = true;
-            "Amazon.com".metaData.hidden = true;
-            "eBay".metaData.hidden = true;
-            "Wikipedia (en)".metaData.hidden = true;
+            google.metaData.hidden = true;
+            bing.metaData.hidden = true;
+            amazon.metaData.hidden = true;
+            ebay.metaData.hidden = true;
+            wikipedia.metaData.hidden = true;
           };
         };
-        bookmarks = [
-          {
-            name = "Nix";
-            toolbar = true;
-            bookmarks = [
-              {
-                name = "Tasks - Coding";
-                url = "https://git.kibadda.de/michael/tasks/projects/1";
-              }
-              {
-                name = "Tasks - Personal";
-                url = "https://git.kibadda.de/michael/tasks/projects/3";
-              }
-              {
-                name = "Neovim";
-                url = "https://github.com/neovim/neovim";
-              }
-              {
-                name = "Services";
-                bookmarks = [
-                  {
-                    name = "Youtube";
-                    url = "https://youtube.com/feed/subscriptions";
-                  }
-                  {
-                    name = "Mail";
-                    url = "https://mail.google.com";
-                  }
-                  {
-                    name = "Discord";
-                    url = "https://discord.com/app";
-                  }
-                  {
-                    name = "AWS";
-                    url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
-                  }
-                  {
-                    name = "Netflix";
-                    url = "https://www.netflix.com/browse";
-                  }
-                  {
-                    name = "Prime";
-                    url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
-                  }
-                  {
-                    name = "Disney";
-                    url = "https://www.disneyplus.com/de-de/";
-                  }
-                ];
-              }
-              {
-                name = "Games";
-                bookmarks = [
-                  {
-                    name = "Bazaar";
-                    url = "https://howbazaar.gg";
-                  }
-                  {
-                    name = "Satisfactory Tools";
-                    url = "https://www.satisfactorytools.com/1.0";
-                  }
-                  {
-                    name = "Satisfactory Alt Recipes";
-                    url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
-                  }
-                  {
-                    name = "Satisfactory Interactive Map";
-                    url = "https://satisfactory-calculator.com/en/interactive-map";
-                  }
-                  {
-                    name = "Satisfactory Wiki";
-                    url = "https://satisfactory.wiki.gg/";
-                  }
-                ];
-              }
-            ];
-          }
-        ];
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Nix";
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "Tasks - Coding";
+                  url = "https://git.kibadda.de/michael/tasks/projects/1";
+                }
+                {
+                  name = "Tasks - Personal";
+                  url = "https://git.kibadda.de/michael/tasks/projects/3";
+                }
+                {
+                  name = "Neovim";
+                  url = "https://github.com/neovim/neovim";
+                }
+                {
+                  name = "Services";
+                  bookmarks = [
+                    {
+                      name = "Youtube";
+                      url = "https://youtube.com/feed/subscriptions";
+                    }
+                    {
+                      name = "Mail";
+                      url = "https://mail.google.com";
+                    }
+                    {
+                      name = "Discord";
+                      url = "https://discord.com/app";
+                    }
+                    {
+                      name = "AWS";
+                      url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                    }
+                    {
+                      name = "Netflix";
+                      url = "https://www.netflix.com/browse";
+                    }
+                    {
+                      name = "Prime";
+                      url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
+                    }
+                    {
+                      name = "Disney";
+                      url = "https://www.disneyplus.com/de-de/";
+                    }
+                  ];
+                }
+                {
+                  name = "Games";
+                  bookmarks = [
+                    {
+                      name = "Bazaar";
+                      url = "https://howbazaar.gg";
+                    }
+                    {
+                      name = "Satisfactory Tools";
+                      url = "https://www.satisfactorytools.com/1.0";
+                    }
+                    {
+                      name = "Satisfactory Alt Recipes";
+                      url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
+                    }
+                    {
+                      name = "Satisfactory Interactive Map";
+                      url = "https://satisfactory-calculator.com/en/interactive-map";
+                    }
+                    {
+                      name = "Satisfactory Wiki";
+                      url = "https://satisfactory.wiki.gg/";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
       };
     };
   };

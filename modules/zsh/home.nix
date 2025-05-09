@@ -17,7 +17,7 @@
       switchoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --use-remote-sudo";
     };
 
-    initExtra = # bash
+    initContent = # bash
       ''
         if echo "$PATH" | grep -qc "/nix/store"; then
           nixshell="%{$fg_bold[cyan]%} "
