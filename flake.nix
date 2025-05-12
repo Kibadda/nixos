@@ -50,6 +50,7 @@
             inherit inputs;
             meta = {
               inherit hostname;
+              self = self;
             } // data;
           };
           modules = [ ./machines/${hostname}/configuration.nix ];
