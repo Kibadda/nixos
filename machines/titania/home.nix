@@ -44,19 +44,45 @@
       ];
     };
 
-    hypr = {
-      enable = true;
+    hypr =
+      let
+        coding = "name:Coding";
+        games = "name:Games";
+        tools = "name:Tools";
+      in
+      {
+        enable = true;
 
-      hypridle.enable = false;
+        hypridle.enable = false;
 
-      monitor = [
-        "eDP-1, 1920x1080@60, 0x0, 1"
-      ];
+        monitor = [
+          "eDP-1, 1920x1080@60, 0x0, 1"
+        ];
 
-      waybar = {
-        battery = true;
-        backlight = true;
+        bind = [
+          "SUPER, C, workspace, ${coding}"
+          "SUPER SHIFT, C, movetoworkspace, ${coding}"
+          "SUPER, G, workspace, ${games}"
+          "SUPER SHIFT, G, movetoworkspace, ${games}"
+          "SUPER, T, workspace, ${tools}"
+          "SUPER SHIFT, T, movetoworkspace, ${tools}"
+        ];
+
+        windowrule = [
+          "workspace ${coding}, class:^(kitty)$"
+
+          "workspace ${tools}, class:^(org.telegram.desktop)$"
+          "workspace ${tools}, class:^(net.lutris.Lutris)$"
+          "workspace ${games}, class:^(battle.net.exe)$"
+
+          "workspace ${games}, class:^(hearthstone.exe)$"
+          "fullscreen, class:^(hearthstone.exe)$"
+        ];
+
+        waybar = {
+          battery = true;
+          backlight = true;
+        };
       };
-    };
   };
 }
