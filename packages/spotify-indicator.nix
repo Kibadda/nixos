@@ -13,10 +13,11 @@ pkgs.writeShellApplication {
         status=""
       fi
 
-      song=$(playerctl -p spotify metadata --format "{{ artist }} - {{ title }}")
+      artist=$(playerctl -p spotify metadata --format "{{ artist }}")
+      song=$(playerctl -p spotify metadata --format "{{ title }}")
       time=$(playerctl -p spotify metadata --format "{{ duration(position) }} / {{ duration(mpris:length) }}")
 
-      echo "  $song  $status  $time"
+      echo "  $artist - ''${song:0:25}  $status  $time"
     else
       echo "  spotify not running"
     fi
