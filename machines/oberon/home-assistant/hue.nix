@@ -1,29 +1,42 @@
 {
   oberon.home-assistant.dashboard = [
     {
-      type = "tile";
-      entity = "light.arbeitszimmer";
-      name = "Arbeitszimmer";
-      features = [
-        { type = "light-brightness"; }
-        { type = "light-color-temp"; }
-      ];
-    }
-    {
-      type = "tile";
-      entity = "light.esszimmer";
-      name = "Esszimmer";
-      features = [
-        { type = "light-brightness"; }
-      ];
-    }
-    {
-      type = "tile";
-      entity = "light.wohnzimmer";
-      name = "Wohnzimmer";
-      features = [
-        { type = "light-brightness"; }
-        { type = "light-color-temp"; }
+      cards = [
+        {
+          type = "heading";
+          heading = "Licht";
+          heading_type = "title";
+          icon = "mdi:lightbulb";
+        }
+        {
+          type = "tile";
+          entity = "light.arbeitszimmer";
+          name = "Arbeitszimmer";
+          features = [
+            { type = "light-brightness"; }
+            { type = "light-color-temp"; }
+          ];
+          grid_options.columns = "full";
+        }
+        {
+          type = "tile";
+          entity = "light.wohnzimmer";
+          name = "Wohnzimmer";
+          features = [
+            { type = "light-brightness"; }
+            { type = "light-color-temp"; }
+          ];
+          grid_options.columns = "full";
+        }
+        {
+          type = "tile";
+          entity = "light.esszimmer";
+          name = "Esszimmer";
+          features = [
+            { type = "light-brightness"; }
+          ];
+          grid_options.columns = "full";
+        }
       ];
     }
   ];

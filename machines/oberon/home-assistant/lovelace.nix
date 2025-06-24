@@ -13,15 +13,27 @@
 
   config = {
     services.home-assistant.lovelaceConfig = {
-      title = "Dashboard";
+      title = "Home";
+      icon = "mdi:home";
       views = [
         {
-          title = "Dashboard";
-          cards = config.oberon.home-assistant.dashboard ++ [
+          title = "Home";
+          max_columns = 3;
+          sections = config.oberon.home-assistant.dashboard ++ [
             {
-              entity = "weather.forecast_home";
-              forecast_type = "daily";
-              type = "weather-forecast";
+              cards = [
+                {
+                  type = "heading";
+                  heading = "Misc";
+                  heading_type = "title";
+                  icon = "mdi:weather-partly-cloudy";
+                }
+                {
+                  type = "weather-forecast";
+                  entity = "weather.forecast_home";
+                  forecast_type = "daily";
+                }
+              ];
             }
           ];
         }
