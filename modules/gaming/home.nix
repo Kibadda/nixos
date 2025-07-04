@@ -24,6 +24,11 @@ in
         type = lib.types.bool;
         default = false;
       };
+
+      bottles = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 
@@ -31,6 +36,7 @@ in
     home.packages =
       (lib.optional cfg.gaming.lutris pkgs.lutris)
       ++ (lib.optional cfg.gaming.chiaki pkgs.chiaki-ng)
+      ++ (lib.optional cfg.gaming.chiaki pkgs.bottles)
       ++ [ ];
   };
 }
