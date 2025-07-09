@@ -18,6 +18,11 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    mobile-nixos = {
+      url = "github:mobile-nixos/mobile-nixos";
+      flake = false;
+    };
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +67,7 @@
         titania = nixosSystem "titania";
         setebos = nixosSystem "setebos";
         oberon = nixosSystem "oberon";
+        ophelia = nixosSystem "ophelia";
       };
 
       devShells =
