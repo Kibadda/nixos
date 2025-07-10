@@ -21,7 +21,5 @@
     };
   };
 
-  nixpkgs.hostPlatform = "aarch64-linux";
-
   system.stateVersion = lib.mkForce "25.11";
 }

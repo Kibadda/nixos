@@ -49,8 +49,9 @@
       data = import ./secrets/data.nix;
 
       nixosSystem =
-        hostname:
+        hostname: system:
         nixpkgs.lib.nixosSystem {
+          inherit system;
           specialArgs = {
             inherit inputs;
             meta = {
@@ -63,11 +64,11 @@
     in
     {
       nixosConfigurations = {
-        uranus = nixosSystem "uranus";
-        titania = nixosSystem "titania";
-        setebos = nixosSystem "setebos";
-        oberon = nixosSystem "oberon";
-        ophelia = nixosSystem "ophelia";
+        uranus = nixosSystem "uranus" "x86_64-linux";
+        titania = nixosSystem "titania" "x86_64-linux";
+        setebos = nixosSystem "setebos" "x86_64-linux";
+        oberon = nixosSystem "oberon" "aarch64-linux";
+        ophelia = nixosSystem "ophelia" "aarch64-linux";
       };
 
       devShells =
