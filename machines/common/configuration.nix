@@ -68,6 +68,8 @@
         "nvidia-x11"
         "nvidia-settings"
         "discord"
+        "oneplus-sdm845-firmware-zstd"
+        "oneplus-sdm845-firmware"
       ];
   };
 
