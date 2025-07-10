@@ -1,7 +1,6 @@
 {
   inputs,
   meta,
-  lib,
   ...
 }:
 {
@@ -17,9 +16,7 @@
   networking = {
     wireless = {
       enable = true;
-      networks.${meta.wifi.ssid}.psk = meta.wifi.pass;
+      networks.${meta.wifi.ssid2}.psk = meta.wifi.pass;
     };
   };
-
-  system.stateVersion = lib.mkForce "25.11";
 }
