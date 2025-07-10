@@ -24,6 +24,16 @@ in
         type = lib.types.bool;
         default = false;
       };
+
+      spotify = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+
+      yubikey = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
     };
   };
 
@@ -136,8 +146,8 @@ in
           position = "bottom";
           height = 34;
 
-          modules-left = [ "custom/spotify" ];
-          modules-center = [ "custom/yubikey" ];
+          modules-left = (lib.optional cfg.hypr.waybar.spotify "custom/spotify") ++ [ ];
+          modules-center = (lib.optional cfg.hypr.waybar.yubikey "custom/yubikey") ++ [ ];
           modules-right = [ "clock" ];
 
           clock = {

@@ -1,6 +1,7 @@
 {
   inputs,
   meta,
+  pkgs,
   ...
 }:
 {
@@ -11,6 +12,23 @@
     ../common/home.nix
 
     ../../modules/kibadda/configuration.nix
+  ];
+
+  services.greetd = {
+    enable = true;
+    package = pkgs.greetd.tuigreet;
+    settings = {
+      default_session = {
+        command = "Hyprland";
+        user = meta.username;
+      };
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    playerctl
+    brightnessctl
+    pamixer
   ];
 
   networking = {
