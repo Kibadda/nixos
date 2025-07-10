@@ -10,7 +10,7 @@
         {
           type = "heading";
           heading = "Müll";
-          heading_type = "title";
+          heading_style = "title";
           icon = "mdi:recycle";
         }
         {
@@ -81,21 +81,21 @@
         sources = [
           {
             name = "jumomind_de";
+            calendar_title = "Müll ${meta.pi.home-assistant.street}";
             args = {
               service_id = "mymuell";
               city = meta.pi.home-assistant.city;
               street = meta.pi.home-assistant.street;
             };
-            calendar_title = meta.pi.home-assistant.street;
           }
           {
             name = "jumomind_de";
+            calendar_title = "Müll ${meta.pi.home-assistant.street-other}";
             args = {
               service_id = "mymuell";
               city = meta.pi.home-assistant.city;
               street = meta.pi.home-assistant.street-other;
             };
-            calendar_title = meta.pi.home-assistant.street-other;
           }
         ];
       };
@@ -129,7 +129,7 @@
               1
             ];
             name = "Müll";
-            value_template = "{{ value.types|join(', ')}}";
+            value_template = "{{ value.types|join(', ') }}";
           }
         ];
 

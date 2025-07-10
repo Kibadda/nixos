@@ -25,7 +25,7 @@
                 {
                   type = "heading";
                   heading = "Misc";
-                  heading_type = "title";
+                  heading_style = "title";
                   icon = "mdi:weather-partly-cloudy";
                 }
                 {

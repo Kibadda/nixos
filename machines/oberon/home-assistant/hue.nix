@@ -5,7 +5,7 @@
         {
           type = "heading";
           heading = "Licht";
-          heading_type = "title";
+          heading_style = "title";
           icon = "mdi:lightbulb";
         }
         {
