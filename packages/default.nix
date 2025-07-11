@@ -20,6 +20,7 @@ in
         "home"
         "work"
         "setup-git-repos"
+        "ophelia-landscape-toggle"
       ];
   };
 }

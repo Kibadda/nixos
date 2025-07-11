@@ -47,6 +47,11 @@ in
         type = lib.types.path;
         default = ../../wallpapers/forest.png;
       };
+
+      device = lib.mkOption {
+        type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
+        default = [ ];
+      };
     };
   };
 
@@ -120,6 +125,8 @@ in
         ];
 
         monitor = cfg.hypr.monitor;
+
+        device = cfg.hypr.device;
 
         bind = [
           "SUPER, 1, workspace, 1"

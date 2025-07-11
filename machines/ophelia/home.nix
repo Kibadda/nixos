@@ -14,6 +14,10 @@
   # - backlight change?
   # - hyprgrass
 
+  home.packages = [
+    pkgs.kibadda.ophelia-landscape-toggle
+  ];
+
   kibadda = {
     firefox = {
       enable = true;
@@ -29,6 +33,17 @@
 
       monitor = [
         "DSI-1, 1080x2280@60, 0x0, 1, transform, 1"
+      ];
+
+      device = [
+        {
+          name = "synaptics-s3706b";
+          transform = 1;
+        }
+      ];
+
+      bind = [
+        "SUPER, m, exec, ${pkgs.kibadda.ophelia-landscape-toggle}/bin/ophelia-landscape-toggle"
       ];
 
       hyprlock.enable = false;
