@@ -23,8 +23,6 @@
       default = true;
     };
 
-    neovim.enable = false;
-
     yubikey.enable = false;
 
     hypr = {
