@@ -34,6 +34,11 @@ in
         type = lib.types.bool;
         default = true;
       };
+
+      extraCss = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
     };
   };
 
@@ -248,6 +253,8 @@ in
         #bluetooth {
           background-color: #2980B9;
         }
+
+        ${cfg.hypr.waybar.extraCss}
       '';
     };
   };

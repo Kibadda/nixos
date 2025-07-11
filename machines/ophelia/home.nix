@@ -9,7 +9,7 @@
 
   # TODO
   # - keyboard?
-  # - waybar padding corners
+  # - waybar portait top bar full
   # - mouse support?
   # - backlight change?
   # - hyprgrass
@@ -54,6 +54,22 @@
         backlight = true;
         spotify = false;
         yubikey = false;
+
+        extraCss =
+          let
+            margin = "50px";
+          in
+          ''
+            #workspaces,
+            #spotify {
+              margin-left: ${margin};
+            }
+
+            #network,
+            #clock {
+              margin-right: ${margin};
+            }
+          '';
       };
     };
   };
