@@ -11,7 +11,6 @@
   # - keyboard?
   # - waybar portait top bar full
   # - mouse support?
-  # - backlight change?
   # - hyprgrass
 
   home.packages = [
@@ -44,6 +43,8 @@
 
       bind = [
         "SUPER, m, exec, ${pkgs.kibadda.ophelia-landscape-toggle}/bin/ophelia-landscape-toggle"
+        "SUPER SHIFT, Down, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%-"
+        "SUPER SHIFT, Up, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%+"
       ];
 
       hyprlock.enable = false;
