@@ -47,6 +47,8 @@
         "SUPER SHIFT, Up, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%+"
       ];
 
+      # FIX: make this work again
+      hyprpaper.enable = false;
       hyprlock.enable = false;
       hypridle.enable = false;
 
