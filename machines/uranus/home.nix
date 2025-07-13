@@ -109,6 +109,25 @@
           "4, monitor:${monitorLeft}"
           "5, monitor:${monitorLeft}"
         ];
+
+        waybar = {
+          top = {
+            modules-left = [ "hyprland/workspaces" ];
+            modules-right = [
+              "bluetooth"
+              "cpu"
+              "memory"
+              "disk"
+              "pulseaudio"
+              "network"
+            ];
+          };
+          bottom = {
+            modules-left = [ "custom/spotify" ];
+            modules-center = [ "custom/yubikey" ];
+            modules-right = [ "clock" ];
+          };
+        };
       };
   };
 }

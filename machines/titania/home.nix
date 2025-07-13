@@ -80,8 +80,24 @@
         ];
 
         waybar = {
-          battery = true;
-          backlight = true;
+          top = {
+            modules-left = [ "hyprland/workspaces" ];
+            modules-right = [
+              "battery"
+              "backlight"
+              "bluetooth"
+              "cpu"
+              "memory"
+              "disk"
+              "pulseaudio"
+              "network"
+            ];
+          };
+          bottom = {
+            modules-left = [ "custom/spotify" ];
+            modules-center = [ "custom/yubikey" ];
+            modules-right = [ "clock" ];
+          };
         };
       };
   };

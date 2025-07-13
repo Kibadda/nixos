@@ -9,7 +9,6 @@
 
   # TODO
   # - keyboard?
-  # - waybar portait top bar full
   # - mouse support?
   # - hyprgrass
 
@@ -53,23 +52,35 @@
       hypridle.enable = false;
 
       waybar = {
-        battery = true;
-        backlight = true;
-        spotify = false;
-        yubikey = false;
+        top = {
+          modules-left = [ "hyprland/workspaces" ];
+          modules-right = [
+            "battery"
+            "backlight"
+            # FIX: sound not working
+            # "pulseaudio"
+            "network"
+          ];
+        };
+        bottom = {
+          modules-left = [ "bluetooth" ];
+          modules-center = [
+            "cpu"
+            "memory"
+            "disk"
+          ];
+          modules-right = [ "clock" ];
+        };
 
         extraCss =
           let
             margin = "50px";
           in
           ''
-            #workspaces,
-            #spotify {
+            .modules-left {
               margin-left: ${margin};
             }
-
-            #network,
-            #clock {
+            .modules-right {
               margin-right: ${margin};
             }
           '';

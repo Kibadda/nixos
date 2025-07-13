@@ -6,6 +6,22 @@
 }:
 let
   cfg = config.kibadda;
+
+  modules = [
+    "hyprland/workspaces"
+    "bluetooth"
+    "backlight"
+    "battery"
+    "cpu"
+    "memory"
+    "disk"
+    "pulseaudio"
+    "network"
+    "clock"
+    "custom/weather"
+    "custom/spotify"
+    "custom/yubikey"
+  ];
 in
 {
   options = {
@@ -15,24 +31,43 @@ in
         default = true;
       };
 
-      battery = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
+      top = {
+        modules-left = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
+
+        modules-center = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
+
+        modules-right = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
       };
 
-      backlight = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
+      bottom = {
+        modules-left = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
+
+        modules-center = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
+
+        modules-right = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum modules);
+          default = [ ];
+        };
       };
 
-      spotify = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-
-      yubikey = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
+      height = lib.mkOption {
+        type = lib.types.int;
+        default = 34;
       };
 
       extraCss = lib.mkOption {
@@ -56,120 +91,105 @@ in
     programs.waybar = {
       enable = true;
 
-      settings = {
-        top = {
-          layer = "top";
-          position = "top";
-          height = 34;
+      settings =
+        let
+          mkBar = position: {
+            layer = "top";
+            inherit position;
+            height = cfg.hypr.waybar.height;
 
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "custom/weather" ];
-          modules-right =
-            (lib.optional cfg.hypr.waybar.battery "battery")
-            ++ (lib.optional cfg.hypr.waybar.backlight "backlight")
-            ++ [
-              "bluetooth"
-              "cpu"
-              "memory"
-              "disk"
-              "pulseaudio"
-              "network"
-            ];
+            modules-left = cfg.hypr.waybar.${position}.modules-left;
+            modules-center = cfg.hypr.waybar.${position}.modules-center;
+            modules-right = cfg.hypr.waybar.${position}.modules-right;
 
-          "hyprland/workspaces" = {
-            format = "<span font='11'>{name}</span>";
-          };
+            "hyprland/workspaces" = {
+              format = "<span font='11'>{name}</span>";
+            };
 
-          cpu = {
-            format = "<span font='11'></span> {usage}%";
-            interval = 1;
-          };
+            cpu = {
+              format = "<span font='11'></span> {usage}%";
+              interval = 1;
+            };
 
-          memory = {
-            format = "<span font='11'></span> {percentage}%";
-            interval = 1;
-          };
+            memory = {
+              format = "<span font='11'></span> {percentage}%";
+              interval = 1;
+            };
 
-          disk = {
-            format = "<span font='11'></span> {percentage_used}%";
-          };
+            disk = {
+              format = "<span font='11'></span> {percentage_used}%";
+            };
 
-          pulseaudio = {
-            format = "<span font='11'>{icon}</span> {volume}%";
-            format-muted = "<span font='11'>x</span> {volume}%";
-            format-icons = {
-              default = [
-                " "
-                " "
-                " "
+            pulseaudio = {
+              format = "<span font='11'>{icon}</span> {volume}%";
+              format-muted = "<span font='11'>x</span> {volume}%";
+              format-icons = {
+                default = [
+                  " "
+                  " "
+                  " "
+                ];
+              };
+            };
+
+            network = {
+              format-ethernet = "<span font='11'></span> {ipaddr}";
+              format-wifi = "<span font='11'> </span> {ipaddr}";
+              format-disconnected = "Disconnected";
+              interval = 5;
+            };
+
+            "custom/weather" = {
+              exec = "${pkgs.kibadda.weather-indicator}/bin/weather-indicator";
+              interval = 3600;
+            };
+
+            battery = {
+              format = "<span font='11'>{icon}</span> {capacity}%";
+              format-charging = "<span font='11'></span> {capacity}%";
+              format-plugged = "<span font='11'></span> {capacity}%";
+              format-icons = [
+                ""
+                ""
+                ""
+                ""
+                ""
               ];
+              states = {
+                critical = 25;
+              };
+            };
+
+            backlight = {
+              device = "intel_backlight";
+              format = "<span font='11'></span> {percent}%";
+            };
+
+            bluetooth = {
+              format = " {status}";
+              format-connected = " {device_alias}";
+              format-connected-battery = " {device_alias} {device_battery_percentage}%";
+            };
+
+            clock = {
+              format = "{:%H:%M:%S - %d.%m.%Y}";
+              interval = 1;
+            };
+
+            "custom/yubikey" = {
+              exec = "${pkgs.kibadda.yubikey-indicator}/bin/yubikey-indicator";
+            };
+
+            "custom/spotify" = {
+              exec = "${pkgs.kibadda.spotify-indicator}/bin/spotify-indicator";
+              interval = 1;
             };
           };
-
-          network = {
-            format-ethernet = "<span font='11'></span> {ipaddr}";
-            format-wifi = "<span font='11'> </span> {ipaddr}";
-            format-disconnected = "Disconnected";
-            interval = 5;
-          };
-
-          "custom/weather" = {
-            exec = "${pkgs.kibadda.weather-indicator}/bin/weather-indicator";
-            interval = 3600;
-          };
-
-          battery = {
-            format = "<span font='11'>{icon}</span> {capacity}%";
-            format-charging = "<span font='11'></span> {capacity}%";
-            format-plugged = "<span font='11'></span> {capacity}%";
-            format-icons = [
-              ""
-              ""
-              ""
-              ""
-              ""
-            ];
-            states = {
-              critical = 25;
-            };
-          };
-
-          backlight = {
-            device = "intel_backlight";
-            format = "<span font='11'></span> {percent}%";
-          };
-
-          bluetooth = {
-            format = " {status}";
-            format-connected = " {device_alias}";
-            format-connected-battery = " {device_alias} {device_battery_percentage}%";
-          };
+        in
+        {
+          top = mkBar "top";
+          bottom = mkBar "bottom";
         };
-
-        bottom = {
-          layer = "top";
-          position = "bottom";
-          height = 34;
-
-          modules-left = (lib.optional cfg.hypr.waybar.spotify "custom/spotify") ++ [ ];
-          modules-center = (lib.optional cfg.hypr.waybar.yubikey "custom/yubikey") ++ [ ];
-          modules-right = [ "clock" ];
-
-          clock = {
-            format = "{:%H:%M:%S - %d.%m.%Y}";
-            interval = 1;
-          };
-
-          "custom/yubikey" = {
-            exec = "${pkgs.kibadda.yubikey-indicator}/bin/yubikey-indicator";
-          };
-
-          "custom/spotify" = {
-            exec = "${pkgs.kibadda.spotify-indicator}/bin/spotify-indicator";
-            interval = 1;
-          };
-        };
-      };
 
       style = ''
         * {
