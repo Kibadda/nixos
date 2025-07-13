@@ -23,6 +23,8 @@
       default = true;
     };
 
+    kitty.size = 18;
+
     yubikey.enable = false;
 
     hypr = {
