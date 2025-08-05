@@ -14,7 +14,7 @@
       check = "nix flake check";
       cat = "bat";
       buildoberon = "nix build .#nixosConfigurations.oberon.config.system.build.sdImage";
-      switchoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --use-remote-sudo";
+      switchoberon = "NIX_SSHOPTS='-p ${toString meta.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --sudo --ask-sudo-password";
     };
 
     initContent = # bash
