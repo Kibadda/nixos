@@ -57,7 +57,8 @@
             meta = {
               inherit hostname;
               self = self;
-            } // data;
+            }
+            // data;
           };
           modules = [ ./machines/${hostname}/configuration.nix ];
         };
