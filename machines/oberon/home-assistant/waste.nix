@@ -124,7 +124,7 @@
         ++ [
           {
             platform = "waste_collection_schedule";
-            sensor_index = [
+            source_index = [
               0
               1
             ];
