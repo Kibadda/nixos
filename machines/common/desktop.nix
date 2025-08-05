@@ -43,5 +43,6 @@
     xdg-utils
     spotify
     telegram-desktop
+    claude-code
   ];
 }
