@@ -5,8 +5,6 @@
   ];
 
   kibadda = {
-    chrome.enable = true;
-
     home-office.enable = true;
 
     firefox = {
