@@ -12,7 +12,10 @@
 
     vpn.enable = true;
 
-    gaming.lutris = true;
+    gaming = {
+      bottles = true;
+      lutris = true;
+    };
 
     ssh = {
       enable = true;
