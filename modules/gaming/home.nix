@@ -36,7 +36,7 @@ in
     home.packages =
       (lib.optional cfg.gaming.lutris pkgs.lutris)
       ++ (lib.optional cfg.gaming.chiaki pkgs.chiaki-ng)
-      ++ (lib.optional cfg.gaming.chiaki (
+      ++ (lib.optional cfg.gaming.bottles (
         pkgs.bottles.override {
           removeWarningPopup = true;
         }
