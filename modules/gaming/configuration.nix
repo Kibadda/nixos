@@ -1,6 +1,8 @@
 {
   config,
   meta,
+  lib,
+  pkgs,
   ...
 }:
 let
@@ -8,4 +10,6 @@ let
 in
 {
   programs.steam.enable = cfg.gaming.steam;
+
+  environment.systemPackages = (lib.optional cfg.gaming.pinball [ pkgs.space-cadet-pinball ]) ++ [ ];
 }

@@ -29,6 +29,11 @@ in
         type = lib.types.bool;
         default = false;
       };
+
+      pinball = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

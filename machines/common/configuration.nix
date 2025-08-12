@@ -71,6 +71,8 @@
         "oneplus-sdm845-firmware-zstd"
         "oneplus-sdm845-firmware"
         "claude-code"
+        "SpaceCadetPinball"
+        "unrar"
       ];
   };
 
