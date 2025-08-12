@@ -1,7 +1,6 @@
 {
   config,
   meta,
-  inputs,
   pkgs,
   lib,
   ...
@@ -68,5 +67,11 @@ in
         pinentry.package = if cfg.hypr.enable then pkgs.kibadda.pinentry else pkgs.pinentry-qt;
       };
     };
+
+    wayland.windowManager.hyprland.settings.exec-once =
+      lib.mkIf (cfg.hypr.enable && cfg.yubikey-touch-detector)
+        [
+          "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector"
+        ];
   };
 }
