@@ -65,10 +65,15 @@
     in
     {
       nixosConfigurations = {
+        # Home PC
         uranus = nixosSystem "uranus" "x86_64-linux";
+        # Laptop
         titania = nixosSystem "titania" "x86_64-linux";
+        # Work
         setebos = nixosSystem "setebos" "x86_64-linux";
+        # Raspberry Pi
         oberon = nixosSystem "oberon" "aarch64-linux";
+        # OnePlus 6
         ophelia = nixosSystem "ophelia" "aarch64-linux";
       };
 
