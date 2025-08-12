@@ -69,7 +69,7 @@ in
     };
 
     wayland.windowManager.hyprland.settings.exec-once =
-      lib.mkIf (cfg.hypr.enable && cfg.yubikey-touch-detector)
+      lib.mkIf (cfg.hypr.enable && cfg.yubikey.touch-detector)
         [
           "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector"
         ];
