@@ -127,8 +127,12 @@ in
       createHome = true;
     };
 
+    users.${meta.username}.extraGroups = [ "homepage" ];
+
     groups.homepage = { };
   };
+
+  environment.systemPackages = [ php ];
 
   systemd = {
     timers = {
