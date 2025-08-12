@@ -161,202 +161,237 @@ in
         "de"
         "en-US"
       ];
-      profiles.${secrets.base.username} = {
-        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-          vimium
-          darkreader
-          sponsorblock
-          duckduckgo-privacy-essentials
-          ghostery
-          clearurls
-          consent-o-matic
-          privacy-badger
-          decentraleyes
-          bitwarden
-        ];
-        search = {
-          default = "ddg";
-          privateDefault = "ddg";
-          force = true;
-          engines = {
-            "Nix packages" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/packages";
-                  params = [
+      profiles =
+        let
+          createProfile = data: {
+            id = data.id;
+            isDefault = data.default;
+            extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+              ublock-origin
+              vimium
+              darkreader
+              sponsorblock
+              duckduckgo-privacy-essentials
+              ghostery
+              clearurls
+              consent-o-matic
+              privacy-badger
+              decentraleyes
+              bitwarden
+            ];
+            search = {
+              default = "ddg";
+              privateDefault = "ddg";
+              force = true;
+              engines = {
+                "Nix packages" = {
+                  urls = [
                     {
-                      name = "query";
-                      value = "{searchTerms}";
+                      template = "https://search.nixos.org/packages";
+                      params = [
+                        {
+                          name = "query";
+                          value = "{searchTerms}";
+                        }
+                      ];
                     }
                   ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
-            };
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@np" ];
+                };
 
-            "Nix options" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/options";
-                  params = [
+                "Nix options" = {
+                  urls = [
                     {
-                      name = "query";
-                      value = "{searchTerms}";
+                      template = "https://search.nixos.org/options";
+                      params = [
+                        {
+                          name = "query";
+                          value = "{searchTerms}";
+                        }
+                      ];
                     }
                   ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@no" ];
-            };
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@no" ];
+                };
 
-            "NixOS Wiki" = {
-              urls = [
-                {
-                  template = "https://wiki.nixos.org/w/index.php";
-                  params = [
+                "NixOS Wiki" = {
+                  urls = [
                     {
-                      name = "search";
-                      value = "{searchTerms}";
+                      template = "https://wiki.nixos.org/w/index.php";
+                      params = [
+                        {
+                          name = "search";
+                          value = "{searchTerms}";
+                        }
+                      ];
                     }
                   ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@nw" ];
-            };
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@nw" ];
+                };
 
-            "Homemanager options" = {
-              urls = [
-                {
-                  template = "https://home-manager-options.extranix.com";
-                  params = [
+                "Homemanager options" = {
+                  urls = [
                     {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                    {
-                      name = "release";
-                      value = "master";
+                      template = "https://home-manager-options.extranix.com";
+                      params = [
+                        {
+                          name = "query";
+                          value = "{searchTerms}";
+                        }
+                        {
+                          name = "release";
+                          value = "master";
+                        }
+                      ];
                     }
                   ];
-                }
-              ];
-              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@ho" ];
-            };
+                  icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@ho" ];
+                };
 
-            "Nix github" = {
-              urls = [
-                {
-                  template = "https://github.com/search";
-                  params = [
+                "Nix github" = {
+                  urls = [
                     {
-                      name = "type";
-                      value = "code";
-                    }
-                    {
-                      name = "q";
-                      value = "language:nix {searchTerms}";
+                      template = "https://github.com/search";
+                      params = [
+                        {
+                          name = "type";
+                          value = "code";
+                        }
+                        {
+                          name = "q";
+                          value = "language:nix {searchTerms}";
+                        }
+                      ];
                     }
                   ];
-                }
-              ];
-              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@ng" ];
-            };
+                  icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@ng" ];
+                };
 
-            google.metaData.hidden = true;
-            bing.metaData.hidden = true;
-            amazon.metaData.hidden = true;
-            ebay.metaData.hidden = true;
-            wikipedia.metaData.hidden = true;
+                google.metaData.hidden = true;
+                bing.metaData.hidden = true;
+                amazon.metaData.hidden = true;
+                ebay.metaData.hidden = true;
+                wikipedia.metaData.hidden = true;
+              };
+            };
+            bookmarks = data.bookmarks;
           };
-        };
-        bookmarks = {
-          force = true;
-          settings = [
-            {
-              name = "Nix";
-              toolbar = true;
-              bookmarks = [
+        in
+        {
+          ${secrets.base.username} = createProfile {
+            id = 0;
+            default = true;
+            bookmarks = {
+              force = true;
+              settings = [
                 {
-                  name = "Tasks - Coding";
-                  url = "https://git.kibadda.de/michael/tasks/projects/1";
-                }
-                {
-                  name = "Tasks - Personal";
-                  url = "https://git.kibadda.de/michael/tasks/projects/3";
-                }
-                {
-                  name = "Neovim";
-                  url = "https://github.com/neovim/neovim";
-                }
-                {
-                  name = "Services";
+                  name = "Nix";
+                  toolbar = true;
                   bookmarks = [
                     {
-                      name = "Youtube";
-                      url = "https://youtube.com/feed/subscriptions";
+                      name = "Tasks - Coding";
+                      url = "https://git.kibadda.de/michael/tasks/projects/1";
                     }
                     {
-                      name = "Mail";
-                      url = "https://mail.google.com";
+                      name = "Tasks - Personal";
+                      url = "https://git.kibadda.de/michael/tasks/projects/3";
                     }
                     {
-                      name = "Discord";
-                      url = "https://discord.com/app";
+                      name = "Neovim";
+                      url = "https://github.com/neovim/neovim";
                     }
                     {
-                      name = "AWS";
-                      url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                      name = "Services";
+                      bookmarks = [
+                        {
+                          name = "Youtube";
+                          url = "https://youtube.com/feed/subscriptions";
+                        }
+                        {
+                          name = "Mail";
+                          url = "https://mail.google.com";
+                        }
+                        {
+                          name = "Discord";
+                          url = "https://discord.com/app";
+                        }
+                        {
+                          name = "AWS";
+                          url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                        }
+                        {
+                          name = "Netflix";
+                          url = "https://www.netflix.com/browse";
+                        }
+                        {
+                          name = "Prime";
+                          url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
+                        }
+                        {
+                          name = "Disney";
+                          url = "https://www.disneyplus.com/de-de/";
+                        }
+                      ];
                     }
                     {
-                      name = "Netflix";
-                      url = "https://www.netflix.com/browse";
-                    }
-                    {
-                      name = "Prime";
-                      url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
-                    }
-                    {
-                      name = "Disney";
-                      url = "https://www.disneyplus.com/de-de/";
-                    }
-                  ];
-                }
-                {
-                  name = "Games";
-                  bookmarks = [
-                    {
-                      name = "Bazaar";
-                      url = "https://howbazaar.gg";
-                    }
-                    {
-                      name = "Satisfactory Tools";
-                      url = "https://www.satisfactorytools.com/1.0";
-                    }
-                    {
-                      name = "Satisfactory Alt Recipes";
-                      url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
-                    }
-                    {
-                      name = "Satisfactory Interactive Map";
-                      url = "https://satisfactory-calculator.com/en/interactive-map";
-                    }
-                    {
-                      name = "Satisfactory Wiki";
-                      url = "https://satisfactory.wiki.gg/";
+                      name = "Games";
+                      bookmarks = [
+                        {
+                          name = "Bazaar";
+                          url = "https://howbazaar.gg";
+                        }
+                        {
+                          name = "Satisfactory Tools";
+                          url = "https://www.satisfactorytools.com/1.0";
+                        }
+                        {
+                          name = "Satisfactory Alt Recipes";
+                          url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
+                        }
+                        {
+                          name = "Satisfactory Interactive Map";
+                          url = "https://satisfactory-calculator.com/en/interactive-map";
+                        }
+                        {
+                          name = "Satisfactory Wiki";
+                          url = "https://satisfactory.wiki.gg/";
+                        }
+                      ];
                     }
                   ];
                 }
               ];
-            }
-          ];
+            };
+          };
+          work = lib.mkIf cfg.home-office.enable (createProfile {
+            id = 1;
+            default = false;
+            bookmarks = {
+              force = true;
+              settings = [
+                {
+                  name = "Work";
+                  toolbar = true;
+                  bookmarks = [
+                    {
+                      name = "Chat";
+                      url = "https://rocket.in.cortex-media.de";
+                    }
+                    {
+                      name = "Pass";
+                      url = "https://passwords.in.cortex-media.de";
+                    }
+                  ];
+                }
+              ];
+            };
+          });
         };
-      };
     };
   };
 }

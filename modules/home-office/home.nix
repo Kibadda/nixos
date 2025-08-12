@@ -19,7 +19,20 @@ in
   };
 
   config = lib.mkIf cfg.home-office.enable {
-    home.packages = [ pkgs.kibadda.work ];
+    home.packages = [
+      pkgs.kibadda.work
+      pkgs.thunderbird
+      pkgs.linphone
+    ];
+
+    kibadda.git = {
+      includes = [
+        {
+          condition = "gitdir:/mnt/studiesbeta/";
+          contents.user.email = secrets.work.email;
+        }
+      ];
+    };
 
     kibadda.ssh.hosts = [
       {
