@@ -5,6 +5,7 @@
 {
   oberon = {
     nginx."${meta.pi.vaultwarden.domain}" = {
+      restrict-access = true;
       port = 8222;
     };
 

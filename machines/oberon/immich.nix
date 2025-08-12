@@ -5,7 +5,7 @@
 {
   oberon = {
     nginx."${meta.pi.immich.domain}" = {
-      restrict-access = false;
+      restrict-access = true;
       port = 2283;
       websockets = true;
       extraConfig = ''
