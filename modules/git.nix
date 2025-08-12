@@ -1,6 +1,6 @@
 {
   config,
-  meta,
+  secrets,
   pkgs,
   lib,
   ...
@@ -13,7 +13,7 @@ in
     kibadda.git = {
       email = lib.mkOption {
         type = lib.types.str;
-        default = meta.email;
+        default = secrets.base.email;
       };
 
       includes = lib.mkOption {
@@ -26,12 +26,12 @@ in
   config = {
     programs.git = {
       enable = true;
-      userName = meta.name;
+      userName = secrets.base.name;
       userEmail = cfg.git.email;
       includes = cfg.git.includes;
 
       signing = {
-        key = meta.keyid;
+        key = secrets.base.keyid;
         signByDefault = true;
       };
 

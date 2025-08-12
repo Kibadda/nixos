@@ -1,4 +1,6 @@
-{ pkgs }:
+{
+  pkgs,
+}:
 pkgs.writeShellApplication {
   name = "weather-indicator";
   runtimeInputs = [

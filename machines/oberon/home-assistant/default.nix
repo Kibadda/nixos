@@ -1,5 +1,5 @@
 {
-  meta,
+  secrets,
   pkgs,
   ...
 }:
@@ -8,17 +8,16 @@
     ./lovelace.nix
     ./waste.nix
     ./hue.nix
-    ./states.nix
   ];
 
   oberon = {
-    nginx."${meta.pi.home-assistant.domain}" = {
+    nginx."${secrets.pi.home-assistant.domain}" = {
       port = 8123;
       websockets = true;
     };
 
     backup.home-assistant = {
-      path = meta.pi.home-assistant.dir;
+      path = secrets.pi.home-assistant.dir;
       time = "02:30";
     };
   };
@@ -42,7 +41,7 @@
         "frontend"
         "mobile_app"
       ];
-      configDir = meta.pi.home-assistant.dir;
+      configDir = secrets.pi.home-assistant.dir;
       config = {
         mobile_app = { };
 
@@ -52,7 +51,7 @@
 
         http = {
           server_port = 8123;
-          base_url = "https://${meta.pi.home-assistant.domain}";
+          base_url = "https://${secrets.pi.home-assistant.domain}";
           use_x_forwarded_for = true;
           cors_allowed_origins = "*";
           trusted_proxies = [
@@ -62,8 +61,8 @@
         };
 
         homeassistant = {
-          latitude = meta.pi.home-assistant.lat;
-          longitude = meta.pi.home-assistant.lon;
+          latitude = secrets.pi.home-assistant.lat;
+          longitude = secrets.pi.home-assistant.lon;
           name = "Home";
           unit_system = "metric";
           country = "DE";

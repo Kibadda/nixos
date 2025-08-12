@@ -1,4 +1,6 @@
-{ pkgs }:
+{
+  pkgs,
+}:
 pkgs.writeShellApplication {
   name = "home";
   text = ''

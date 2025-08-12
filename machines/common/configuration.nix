@@ -1,7 +1,8 @@
 {
   inputs,
   pkgs,
-  meta,
+  hostname,
+  secrets,
   lib,
   config,
   ...
@@ -30,7 +31,7 @@
     settings = {
       auto-optimise-store = true;
       trusted-users = [
-        meta.username
+        secrets.base.username
       ];
     };
   };
@@ -95,7 +96,7 @@
 
   hardware.bluetooth.enable = true;
 
-  users.users.${meta.username} = {
+  users.users.${secrets.base.username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     hashedPassword = "$6$t2GM2AFGTwx5HL1S$NuDSMSjd93Cm6Ud3uBMtaGVvFGdnJzgVlPOXYRWEras8eqeYhuSPuLA.lfBBFgWpTLEBOVlf2VlKoJqPvGZbC1";
@@ -107,7 +108,7 @@
   services = {
     openssh = {
       enable = true;
-      ports = [ meta.sshPort ];
+      ports = [ secrets.home.sshPort ];
       settings = {
         StreamLocalBindUnlink = false;
         PermitRootLogin = "no";
@@ -123,7 +124,7 @@
   };
 
   networking = {
-    hostName = meta.hostname;
+    hostName = hostname;
     firewall.enable = true;
   };
 
@@ -143,8 +144,6 @@
     btop
     zstd
   ];
-
-  system.nixos.label = "${config.system.nixos.version}.${meta.self.sourceInfo.shortRev or "dirty"}";
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

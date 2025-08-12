@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  meta,
+  secrets,
   pkgs,
   ...
 }:
@@ -161,7 +161,7 @@ in
         "de"
         "en-US"
       ];
-      profiles.${meta.username} = {
+      profiles.${secrets.base.username} = {
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           vimium

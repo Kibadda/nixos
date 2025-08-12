@@ -1,5 +1,5 @@
 {
-  meta,
+  secrets,
   pkgs,
   ...
 }:
@@ -34,7 +34,7 @@ let
           exit 1
         fi
 
-        cd ${meta.pi.homepage.dir}
+        cd ${secrets.pi.homepage.dir}
 
         # Clone or update repository
         if [ ! -d ".git" ]; then
@@ -58,7 +58,7 @@ let
 
         # Install PHP dependencies
         echo "Installing PHP dependencies..."
-        composer config http-basic.composer.fluxui.dev "${meta.pi.homepage.flux.username}" "${meta.pi.homepage.flux.license}"
+        composer config http-basic.composer.fluxui.dev "${secrets.pi.homepage.flux.username}" "${secrets.pi.homepage.flux.license}"
         composer install --no-dev --optimize-autoloader --no-interaction
 
         # Install Node.js dependencies and build assets
@@ -82,7 +82,7 @@ let
         # Set environment variables
         sed -i "s|APP_ENV=.*|APP_ENV=production|" .env
         sed -i "s|APP_DEBUG=.*|APP_DEBUG=false|" .env
-        sed -i "s|APP_URL=.*|APP_URL=https://${meta.pi.homepage.domain}|" .env
+        sed -i "s|APP_URL=.*|APP_URL=https://${secrets.pi.homepage.domain}|" .env
 
         # Run Laravel optimization commands
         echo "Optimizing Laravel..."
@@ -108,13 +108,13 @@ let
 in
 {
   oberon = {
-    nginx."${meta.pi.homepage.domain}" = {
+    nginx."${secrets.pi.homepage.domain}" = {
       restrict-access = true;
       port = 8080;
     };
 
     backup.homepage = {
-      path = meta.pi.homepage.dir;
+      path = secrets.pi.homepage.dir;
       time = "04:00";
     };
   };
@@ -123,11 +123,11 @@ in
     users.homepage = {
       isSystemUser = true;
       group = "homepage";
-      home = meta.pi.homepage.dir;
+      home = secrets.pi.homepage.dir;
       createHome = true;
     };
 
-    users.${meta.username}.extraGroups = [ "homepage" ];
+    users.${secrets.base.username}.extraGroups = [ "homepage" ];
 
     groups.homepage = { };
   };
@@ -153,7 +153,7 @@ in
           Type = "oneshot";
           User = "homepage";
           Group = "homepage";
-          WorkingDirectory = meta.pi.homepage.dir;
+          WorkingDirectory = secrets.pi.homepage.dir;
           ExecStart = "${php}/bin/php artisan schedule:run";
         };
       };
@@ -168,7 +168,7 @@ in
           Type = "simple";
           User = "homepage";
           Group = "homepage";
-          WorkingDirectory = meta.pi.homepage.dir;
+          WorkingDirectory = secrets.pi.homepage.dir;
           ExecStart = "${php}/bin/php artisan queue:work";
           Restart = "always";
           RestartSec = "5";
@@ -183,7 +183,7 @@ in
           Type = "oneshot";
           User = "homepage";
           Group = "homepage";
-          WorkingDirectory = meta.pi.homepage.dir;
+          WorkingDirectory = secrets.pi.homepage.dir;
           ExecStart = "${deployScript}/bin/homepage-deploy";
         };
       };
@@ -201,14 +201,14 @@ in
           Type = "simple";
           User = "homepage";
           Group = "homepage";
-          WorkingDirectory = meta.pi.homepage.dir;
+          WorkingDirectory = secrets.pi.homepage.dir;
           ExecStart = "${php}/bin/php artisan serve --host=127.0.0.1 --port=8080";
           Restart = "always";
           RestartSec = "5";
         };
 
         preStart = ''
-          if [ ! -f ${meta.pi.homepage.dir}/.env ]; then
+          if [ ! -f ${secrets.pi.homepage.dir}/.env ]; then
             echo "Application not deployed, running deployment..."
             systemctl start homepage-deploy.service
           fi
@@ -217,14 +217,14 @@ in
     };
 
     tmpfiles.rules = [
-      "d ${meta.pi.homepage.dir} 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage/logs 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage/framework 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage/framework/cache 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage/framework/sessions 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/storage/framework/views 0755 homepage homepage - -"
-      "d ${meta.pi.homepage.dir}/bootstrap/cache 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir} 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage/logs 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage/framework 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage/framework/cache 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage/framework/sessions 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/storage/framework/views 0755 homepage homepage - -"
+      "d ${secrets.pi.homepage.dir}/bootstrap/cache 0755 homepage homepage - -"
     ];
   };
 }

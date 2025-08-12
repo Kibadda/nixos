@@ -46,19 +46,19 @@
       ...
     }@inputs:
     let
-      data = import ./secrets/data.nix;
+      secrets = {
+        base = import ./secrets/base.nix;
+        home = import ./secrets/home.nix;
+        pi = import ./secrets/pi.nix;
+        work = import ./secrets/work.nix;
+      };
 
       nixosSystem =
         hostname: system:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
-            meta = {
-              inherit hostname;
-              self = self;
-            }
-            // data;
+            inherit inputs secrets hostname;
           };
           modules = [ ./machines/${hostname}/configuration.nix ];
         };

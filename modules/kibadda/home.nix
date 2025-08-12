@@ -1,4 +1,8 @@
-{ meta, pkgs, ... }:
+{
+  secrets,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../gaming/home.nix
@@ -27,13 +31,13 @@
 
   config = {
     home = {
-      username = meta.username;
+      username = secrets.base.username;
 
-      homeDirectory = "/home/${meta.username}";
+      homeDirectory = "/home/${secrets.base.username}";
 
       packages = [ pkgs.kibadda.setup-git-repos ];
 
-      file."intelephense/licence.txt".text = meta.intelephense.licence;
+      file."intelephense/licence.txt".text = secrets.base.intelephenseLicense;
     };
 
     xdg.enable = true;

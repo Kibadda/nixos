@@ -1,4 +1,6 @@
-{ pkgs }:
+{
+  pkgs,
+}:
 pkgs.writeShellApplication {
   name = "work";
   runtimeInputs = [ pkgs.sshfs ];

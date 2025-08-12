@@ -1,4 +1,6 @@
-{ pkgs }:
+{
+  pkgs,
+}:
 pkgs.writeShellApplication {
   name = "yubikey-indicator";
   runtimeInputs = [ pkgs.toybox ];

@@ -1,14 +1,14 @@
 {
   lib,
   config,
-  meta,
+  secrets,
   ...
 }:
 let
-  cfg = config.home-manager.users.${meta.username}.kibadda;
+  cfg = config.home-manager.users.${secrets.base.username}.kibadda;
 in
 {
   config = lib.mkIf cfg.home-office.enable {
-    networking.wg-quick.interfaces.work = meta.work.vpn;
+    networking.wg-quick.interfaces.work = secrets.work.vpn;
   };
 }

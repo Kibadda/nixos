@@ -1,17 +1,18 @@
 {
-  meta,
+  hostname,
+  secrets,
   pkgs,
   ...
 }:
 {
   oberon = {
-    nginx."${meta.pi.forgejo.domain}" = {
+    nginx."${secrets.pi.forgejo.domain}" = {
       restrict-access = false;
       port = 3050;
     };
 
     backup.forgejo = {
-      path = meta.pi.forgejo.dir;
+      path = secrets.pi.forgejo.dir;
       time = "03:00";
       exclude = [
         "tmp/**"
@@ -33,8 +34,8 @@
           DEFAULT_MERGE_STYLE = "rebase";
         };
         server = {
-          DOMAIN = meta.pi.forgejo.domain;
-          ROOT_URL = "https://${meta.pi.forgejo.domain}/";
+          DOMAIN = secrets.pi.forgejo.domain;
+          ROOT_URL = "https://${secrets.pi.forgejo.domain}/";
           HTTP_PORT = 3050;
           BUILTIN_SSH_SERVER_USER = "git";
         };
@@ -58,9 +59,9 @@
       };
       database = {
         type = "postgres";
-        passwordFile = pkgs.writeText "dbPassword" meta.pi.forgejo.db-password;
+        passwordFile = pkgs.writeText "dbPassword" secrets.pi.forgejo.db-password;
       };
-      stateDir = meta.pi.forgejo.dir;
+      stateDir = secrets.pi.forgejo.dir;
     };
 
     gitea-actions-runner = {
@@ -68,9 +69,9 @@
       instances = {
         default = {
           enable = true;
-          name = meta.hostname;
-          url = "https://${meta.pi.forgejo.domain}";
-          token = meta.pi.forgejo.actions-runner-token;
+          name = hostname;
+          url = "https://${secrets.pi.forgejo.domain}";
+          token = secrets.pi.forgejo.actions-runner-token;
           labels = [
             "runner:docker://ghcr.io/catthehacker/ubuntu:runner-latest"
             "act:docker://ghcr.io/catthehacker/ubuntu:act-latest"

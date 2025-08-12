@@ -2,7 +2,7 @@
   lib,
   config,
   pkgs,
-  meta,
+  secrets,
   ...
 }:
 let
@@ -24,8 +24,8 @@ in
     kibadda.ssh.hosts = [
       {
         name = "work-studies";
-        host = meta.work.sshfs.studies;
-        user = meta.work.sshfs.user;
+        host = secrets.work.sshfs.studies;
+        user = secrets.work.sshfs.user;
         forward = false;
       }
     ];

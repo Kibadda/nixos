@@ -1,4 +1,7 @@
-{ meta, ... }:
+{
+  secrets,
+  ...
+}:
 {
   imports = [
     ../../modules/kibadda/home.nix
@@ -23,23 +26,23 @@
         {
           name = "uranus";
           host = "10.0.0.10";
-          port = meta.sshPort;
+          port = secrets.home.sshPort;
         }
         {
           name = "pi";
           host = "10.0.0.2";
-          port = meta.sshPort;
+          port = secrets.home.sshPort;
           forward = false;
         }
         {
           name = "oberon";
           host = "10.0.0.3";
-          port = meta.sshPort;
+          port = secrets.home.sshPort;
           forward = false;
         }
         {
-          name = meta.pi.forgejo.domain;
-          port = meta.sshPort;
+          name = secrets.pi.forgejo.domain;
+          port = secrets.home.sshPort;
           forward = false;
         }
       ];

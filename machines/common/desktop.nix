@@ -1,14 +1,15 @@
 {
   pkgs,
-  meta,
+  hostname,
+  secrets,
   inputs,
   ...
 }:
 {
   imports = [
     inputs.disko.nixosModules.default
-    ../${meta.hostname}/disko.nix
-    ../${meta.hostname}/hardware-configuration.nix
+    ../${hostname}/disko.nix
+    ../${hostname}/hardware-configuration.nix
   ];
 
   boot = {
@@ -24,14 +25,14 @@
 
   networking.networkmanager.enable = true;
 
-  users.users.${meta.username}.extraGroups = [ "networkmanager" ];
+  users.users.${secrets.base.username}.extraGroups = [ "networkmanager" ];
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
         command = "Hyprland";
-        user = meta.username;
+        user = secrets.base.username;
       };
     };
   };

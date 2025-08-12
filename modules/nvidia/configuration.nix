@@ -1,11 +1,11 @@
 {
   config,
-  meta,
+  secrets,
   lib,
   ...
 }:
 let
-  cfg = config.home-manager.users.${meta.username}.kibadda;
+  cfg = config.home-manager.users.${secrets.base.username}.kibadda;
 in
 {
   config = lib.mkIf cfg.nvidia.enable {

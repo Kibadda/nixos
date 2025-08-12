@@ -1,12 +1,12 @@
 {
   config,
-  meta,
+  secrets,
   lib,
   pkgs,
   ...
 }:
 let
-  cfg = config.home-manager.users.${meta.username}.kibadda;
+  cfg = config.home-manager.users.${secrets.base.username}.kibadda;
 in
 {
   programs.steam.enable = cfg.gaming.steam;

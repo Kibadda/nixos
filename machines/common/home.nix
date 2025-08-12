@@ -1,5 +1,6 @@
 {
-  meta,
+  hostname,
+  secrets,
   inputs,
   ...
 }:
@@ -11,10 +12,10 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs meta; };
-    users.${meta.username} = {
+    extraSpecialArgs = { inherit inputs hostname secrets; };
+    users.${secrets.base.username} = {
       imports = [
-        ../${meta.hostname}/home.nix
+        ../${hostname}/home.nix
       ];
 
       programs.home-manager.enable = true;

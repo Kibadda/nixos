@@ -1,5 +1,5 @@
 {
-  meta,
+  secrets,
   config,
   lib,
   ...
@@ -39,7 +39,7 @@
   config = {
     security.acme = {
       acceptTerms = true;
-      defaults.email = meta.email;
+      defaults.email = secrets.base.email;
     };
 
     services.nginx = {
@@ -51,7 +51,7 @@
         enableACME = conf.ssl;
         forceSSL = conf.ssl;
         extraConfig = builtins.concatStringsSep "\n" [
-          (if conf.restrict-access then meta.pi.ip-whitelist else "")
+          (if conf.restrict-access then secrets.pi.ip-whitelist else "")
           conf.extraConfig
         ];
         locations."/".proxyPass = "http://localhost:${toString conf.port}";

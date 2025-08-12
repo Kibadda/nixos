@@ -1,10 +1,10 @@
 {
-  meta,
+  secrets,
   ...
 }:
 {
   oberon = {
-    nginx."${meta.pi.immich.domain}" = {
+    nginx."${secrets.pi.immich.domain}" = {
       restrict-access = true;
       port = 2283;
       websockets = true;
@@ -17,7 +17,7 @@
     };
 
     backup.immich = {
-      path = meta.pi.immich.dir;
+      path = secrets.pi.immich.dir;
       time = "03:15";
     };
   };
@@ -27,17 +27,17 @@
     openFirewall = true;
     machine-learning.enable = true;
     settings = {
-      server.externalDomain = "https://${meta.pi.immich.domain}";
+      server.externalDomain = "https://${secrets.pi.immich.domain}";
       storageTemplate = {
         enabled = true;
         template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
       };
     };
-    mediaLocation = meta.pi.immich.dir;
+    mediaLocation = secrets.pi.immich.dir;
   };
 
   systemd.tmpfiles.rules = [
-    "d ${meta.pi.immich.dir} 0750 immich immich - -"
-    "x ${meta.pi.immich.dir}"
+    "d ${secrets.pi.immich.dir} 0750 immich immich - -"
+    "x ${secrets.pi.immich.dir}"
   ];
 }

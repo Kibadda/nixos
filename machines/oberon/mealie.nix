@@ -1,16 +1,16 @@
 {
-  meta,
+  secrets,
   ...
 }:
 {
   oberon = {
-    nginx."${meta.pi.mealie.domain}" = {
+    nginx."${secrets.pi.mealie.domain}" = {
       restrict-access = true;
       port = 9000;
     };
 
     backup.mealie = {
-      path = meta.pi.mealie.dir;
+      path = secrets.pi.mealie.dir;
       time = "03:30";
     };
   };

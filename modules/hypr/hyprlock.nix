@@ -1,6 +1,6 @@
 {
   config,
-  meta,
+  secrets,
   lib,
   ...
 }:
@@ -23,7 +23,7 @@ in
       settings = {
         background = {
           monitor = "";
-          path = "/home/${meta.username}/.config/hypr/wallpaper.png";
+          path = "/home/${secrets.base.username}/.config/hypr/wallpaper.png";
           blur_passes = 3;
           contrast = 0.8916;
           brightness = 0.8172;
@@ -63,7 +63,7 @@ in
           }
           {
             monitor = "";
-            text = "Hi there, ${meta.name}";
+            text = "Hi there, ${secrets.base.name}";
             font_size = 25;
             font_family = "${cfg.font.main.name} Nerd Font";
             position = "0, -40";

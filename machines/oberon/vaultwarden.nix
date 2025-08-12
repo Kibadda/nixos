@@ -1,16 +1,16 @@
 {
-  meta,
+  secrets,
   ...
 }:
 {
   oberon = {
-    nginx."${meta.pi.vaultwarden.domain}" = {
+    nginx."${secrets.pi.vaultwarden.domain}" = {
       restrict-access = true;
       port = 8222;
     };
 
     backup.vaultwarden = {
-      path = meta.pi.vaultwarden.dir;
+      path = secrets.pi.vaultwarden.dir;
       time = "02:00";
     };
   };
@@ -19,7 +19,7 @@
     enable = true;
     environmentFile = "/etc/vaultwarden/env";
     config = {
-      DOMAIN = "https://${meta.pi.vaultwarden.domain}";
+      DOMAIN = "https://${secrets.pi.vaultwarden.domain}";
       SIGNUPS_ALLOWED = false;
       SIGNUPS_VERIFY = false;
       INVITATIONS_ALLOWED = false;
@@ -28,6 +28,6 @@
   };
 
   environment.etc = {
-    "vaultwarden/env".text = meta.pi.vaultwarden.environment;
+    "vaultwarden/env".text = secrets.pi.vaultwarden.environment;
   };
 }

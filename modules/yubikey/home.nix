@@ -1,6 +1,6 @@
 {
   config,
-  meta,
+  secrets,
   pkgs,
   lib,
   ...
@@ -35,7 +35,7 @@ in
     home = {
       packages = [ pkgs.kibadda.pinentry ];
       sessionVariables = {
-        KEYID = meta.keyid;
+        KEYID = secrets.base.keyid;
       };
     };
 

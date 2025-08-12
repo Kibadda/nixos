@@ -1,5 +1,5 @@
 {
-  meta,
+  secrets,
   pkgs,
   ...
 }:
@@ -15,7 +15,7 @@
         }
         {
           type = "entities";
-          title = meta.pi.home-assistant.street;
+          title = secrets.pi.home-assistant.street;
           entities = [
             {
               entity = "sensor.gelbe_tonne_0";
@@ -37,7 +37,7 @@
         }
         {
           type = "entities";
-          title = meta.pi.home-assistant.street-other;
+          title = secrets.pi.home-assistant.street-other;
           entities = [
             {
               entity = "sensor.gelbe_tonne_1";
@@ -81,20 +81,20 @@
         sources = [
           {
             name = "jumomind_de";
-            calendar_title = "Müll ${meta.pi.home-assistant.street}";
+            calendar_title = "Müll ${secrets.pi.home-assistant.street}";
             args = {
               service_id = "mymuell";
-              city = meta.pi.home-assistant.city;
-              street = meta.pi.home-assistant.street;
+              city = secrets.pi.home-assistant.city;
+              street = secrets.pi.home-assistant.street;
             };
           }
           {
             name = "jumomind_de";
-            calendar_title = "Müll ${meta.pi.home-assistant.street-other}";
+            calendar_title = "Müll ${secrets.pi.home-assistant.street-other}";
             args = {
               service_id = "mymuell";
-              city = meta.pi.home-assistant.city;
-              street = meta.pi.home-assistant.street-other;
+              city = secrets.pi.home-assistant.city;
+              street = secrets.pi.home-assistant.street-other;
             };
           }
         ];
@@ -183,7 +183,7 @@
           ];
           action = [
             {
-              action = "notify.mobile_app_${meta.pi.home-assistant.devices.michael}";
+              action = "notify.mobile_app_${secrets.pi.home-assistant.devices.michael}";
               data = {
                 title = "Müll";
                 message = "{{ states('sensor.mull') }}";

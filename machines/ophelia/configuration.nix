@@ -1,6 +1,6 @@
 {
   inputs,
-  meta,
+  secrets,
   pkgs,
   ...
 }:
@@ -19,7 +19,7 @@
     settings = {
       default_session = {
         command = "Hyprland";
-        user = meta.username;
+        user = secrets.base.username;
       };
     };
   };
@@ -33,7 +33,7 @@
   networking = {
     wireless = {
       enable = true;
-      networks.${meta.wifi.ssid2}.psk = meta.wifi.pass;
+      networks.${secrets.home.wifi."2.4"}.psk = secrets.home.wifi.pass;
     };
   };
 }

@@ -1,6 +1,6 @@
 {
   inputs,
-  meta,
+  secrets,
   ...
 }:
 {
@@ -26,7 +26,7 @@
   networking = {
     wireless = {
       enable = true;
-      networks.${meta.wifi.ssid}.psk = meta.wifi.pass;
+      networks.${secrets.home.wifi."5.0"}.psk = secrets.home.wifi.pass;
     };
     interfaces.wlan0.useDHCP = true;
     firewall.allowedTCPPorts = [

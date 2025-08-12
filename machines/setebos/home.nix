@@ -1,4 +1,8 @@
-{ pkgs, meta, ... }:
+{
+  pkgs,
+  secrets,
+  ...
+}:
 {
   imports = [
     ../../modules/kibadda/home.nix
@@ -16,11 +20,11 @@
     firefox.enable = true;
 
     git = {
-      email = meta.work.email;
+      email = secrets.work.email;
       includes = [
         {
           condition = "gitdir:~/Projects/Personal/";
-          contents.user.email = meta.email;
+          contents.user.email = secrets.base.email;
         }
       ];
     };

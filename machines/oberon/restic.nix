@@ -1,5 +1,5 @@
 {
-  meta,
+  secrets,
   config,
   lib,
   ...
@@ -32,7 +32,7 @@
       initialize = true;
       environmentFile = "/etc/restic/env";
       passwordFile = "/etc/restic/pass";
-      repository = "${meta.pi.backup.repository}-${name}";
+      repository = "${secrets.pi.backup.repository}-${name}";
       extraBackupArgs = [ "--skip-if-unchanged" ];
       paths = [ conf.path ];
       exclude = conf.exclude;
@@ -45,8 +45,8 @@
     }) config.oberon.backup;
 
     environment.etc = {
-      "restic/env".text = meta.pi.backup.environment;
-      "restic/pass".text = meta.pi.backup.password;
+      "restic/env".text = secrets.pi.backup.environment;
+      "restic/pass".text = secrets.pi.backup.password;
     };
   };
 }
