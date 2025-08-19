@@ -71,8 +71,10 @@
         titania = nixosSystem "titania" "x86_64-linux";
         # Work
         setebos = nixosSystem "setebos" "x86_64-linux";
-        # Raspberry Pi
+        # Raspberry Pi 1
         oberon = nixosSystem "oberon" "aarch64-linux";
+        # Raspberry Pi 2
+        umbriel = nixosSystem "umbriel" "aarch64-linux";
         # OnePlus 6
         ophelia = nixosSystem "ophelia" "aarch64-linux";
       };

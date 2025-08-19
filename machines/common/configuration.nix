@@ -74,6 +74,7 @@
         "claude-code"
         "SpaceCadetPinball"
         "unrar"
+        "n8n"
       ];
   };
 
