@@ -22,7 +22,7 @@ in
     home.packages = [
       pkgs.kibadda.work
       pkgs.thunderbird
-      pkgs.linphone
+      # pkgs.linphone
     ];
 
     kibadda.git = {
