@@ -5,7 +5,7 @@
 {
   oberon = {
     nginx."${secrets.pi.immich.domain}" = {
-      restrict-access = true;
+      restrict-access = false;
       port = 2283;
       websockets = true;
       extraConfig = ''
