@@ -15,6 +15,8 @@
       cat = "bat";
       buildoberon = "nix build .#nixosConfigurations.oberon.config.system.build.sdImage";
       switchoberon = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --sudo --ask-sudo-password";
+      buildumbriel = "nix build .#nixosConfigurations.umbriel.config.system.build.sdImage";
+      switchumbriel = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#umbriel --target-host umbriel --sudo --ask-sudo-password";
     };
 
     initContent = # bash
