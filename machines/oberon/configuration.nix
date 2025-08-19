@@ -21,6 +21,7 @@
     ./homepage.nix
     ./home-assistant
     ./restic.nix
+    ./vikunja.nix
   ];
 
   networking = {
