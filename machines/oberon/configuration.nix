@@ -22,6 +22,8 @@
     ./home-assistant
     ./restic.nix
     ./vikunja.nix
+
+    ./umbriel/n8n.nix
   ];
 
   networking = {
