@@ -21,6 +21,10 @@
             port = lib.mkOption {
               type = lib.types.int;
             };
+            host = lib.mkOption {
+              type = lib.types.str;
+              default = "localhost";
+            };
             websockets = lib.mkOption {
               type = lib.types.bool;
               default = false;
@@ -54,7 +58,7 @@
           (if conf.restrict-access then secrets.pi.ip-whitelist else "")
           conf.extraConfig
         ];
-        locations."/".proxyPass = "http://localhost:${toString conf.port}";
+        locations."/".proxyPass = "http://${conf.host}:${toString conf.port}";
         locations."/".proxyWebsockets = conf.websockets;
       }) config.oberon.nginx;
     };
