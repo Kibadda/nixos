@@ -6,7 +6,7 @@
 {
   oberon = {
     nginx."${secrets.pi.vikunja.domain}" = {
-      restrict-access = true;
+      restrict-access = false;
       port = 3456;
     };
 
