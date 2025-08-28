@@ -14,6 +14,13 @@
       path = secrets.pi.vikunja.dir;
       time = "03:30";
     };
+
+    authelia.vikunja = {
+      secret = secrets.pi.authelia.oidc.vikunja;
+      redirect_uris = [
+        "https://${secrets.pi.vikunja.domain}/auth/openid/authelia"
+      ];
+    };
   };
 
   services.vikunja = {
@@ -28,6 +35,22 @@
         language = "de";
       };
       files.basepath = lib.mkForce "${secrets.pi.vikunja.dir}/files";
+      auth = {
+        local.enabled = false;
+        openid = {
+          enabled = true;
+          redirecturl = "https://${secrets.pi.vikunja.domain}/auth/openid/";
+          providers = [
+            {
+              name = "Authelia";
+              authurl = "https://${secrets.pi.authelia.domain}";
+              clientid = "vikunja";
+              clientsecret = secrets.pi.authelia.oidc.vikunja;
+              scope = "openid profile email";
+            }
+          ];
+        };
+      };
     };
   };
 
