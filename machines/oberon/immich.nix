@@ -20,6 +20,16 @@
       path = secrets.pi.immich.dir;
       time = "03:15";
     };
+
+    authelia.immich = {
+      secret = secrets.pi.authelia.oidc.immich;
+      redirect_uris = [
+        "https://${secrets.pi.immich.domain}/auth/login"
+        "https://${secrets.pi.immich.domain}/user-settings"
+        "app.immich:///oauth-callback"
+      ];
+      auth_method = "post";
+    };
   };
 
   services.immich = {
@@ -31,6 +41,13 @@
       storageTemplate = {
         enabled = true;
         template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
+      };
+      oauth = {
+        enabled = true;
+        autoLaunch = true;
+        issuerUrl = "https://${secrets.pi.authelia.domain}/.well-known/openid-configuration";
+        clientId = "immich";
+        clientSecret = secrets.pi.authelia.oidc.immich;
       };
     };
     mediaLocation = secrets.pi.immich.dir;
