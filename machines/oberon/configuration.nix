@@ -14,13 +14,14 @@
     ../../modules/zsh/configuration.nix
 
     ./nginx.nix
+    ./restic.nix
+
     ./immich.nix
     ./mealie.nix
     ./forgejo.nix
     ./vaultwarden.nix
     ./homepage.nix
     ./home-assistant
-    ./restic.nix
     ./vikunja.nix
 
     ./umbriel/n8n.nix
