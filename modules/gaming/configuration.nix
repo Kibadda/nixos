@@ -9,7 +9,17 @@ let
   cfg = config.home-manager.users.${secrets.base.username}.kibadda;
 in
 {
-  programs.steam.enable = cfg.gaming.steam;
+  programs = lib.mkIf cfg.gaming.steam {
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
 
-  environment.systemPackages = (lib.optional cfg.gaming.pinball [ pkgs.space-cadet-pinball ]) ++ [ ];
+    gamemode.enable = true;
+  };
+
+  environment.systemPackages =
+    (lib.optional cfg.gaming.pinball pkgs.space-cadet-pinball)
+    ++ (lib.optional cfg.gaming.steam pkgs.mangohud)
+    ++ [ ];
 }
