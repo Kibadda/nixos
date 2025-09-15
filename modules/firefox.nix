@@ -294,74 +294,40 @@ in
                   toolbar = true;
                   bookmarks = [
                     {
-                      name = "Tasks - Coding";
-                      url = "https://git.kibadda.de/michael/tasks/projects/1";
+                      name = "Todos";
+                      url = "https://${secrets.pi.vikunja.domain}";
                     }
                     {
-                      name = "Tasks - Personal";
-                      url = "https://git.kibadda.de/michael/tasks/projects/3";
+                      name = "Fotos";
+                      url = "https://${secrets.pi.immich.domain}";
                     }
                     {
-                      name = "Neovim";
-                      url = "https://github.com/neovim/neovim";
+                      name = "Essen";
+                      url = "https://${secrets.pi.mealie.domain}";
                     }
                     {
-                      name = "Services";
-                      bookmarks = [
-                        {
-                          name = "Youtube";
-                          url = "https://youtube.com/feed/subscriptions";
-                        }
-                        {
-                          name = "Mail";
-                          url = "https://mail.google.com";
-                        }
-                        {
-                          name = "Discord";
-                          url = "https://discord.com/app";
-                        }
-                        {
-                          name = "AWS";
-                          url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
-                        }
-                        {
-                          name = "Netflix";
-                          url = "https://www.netflix.com/browse";
-                        }
-                        {
-                          name = "Prime";
-                          url = "https://www.amazon.de/Amazon-Video/b/?ie=UTF8&node=3010075031&ref_=nav_cs_prime_video";
-                        }
-                        {
-                          name = "Disney";
-                          url = "https://www.disneyplus.com/de-de/";
-                        }
-                      ];
+                      name = "Keypass";
+                      url = "https://${secrets.pi.vaultwarden.domain}";
                     }
                     {
-                      name = "Games";
-                      bookmarks = [
-                        {
-                          name = "Bazaar";
-                          url = "https://howbazaar.gg";
-                        }
-                        {
-                          name = "Satisfactory Tools";
-                          url = "https://www.satisfactorytools.com/1.0";
-                        }
-                        {
-                          name = "Satisfactory Alt Recipes";
-                          url = "https://www.reddit.com/r/SatisfactoryGame/comments/1fekus9/alternate_recipe_ranking_10_optimizing_for/";
-                        }
-                        {
-                          name = "Satisfactory Interactive Map";
-                          url = "https://satisfactory-calculator.com/en/interactive-map";
-                        }
-                        {
-                          name = "Satisfactory Wiki";
-                          url = "https://satisfactory.wiki.gg/";
-                        }
-                      ];
+                      name = "Homeassistant";
+                      url = "https://${secrets.pi.home-assistant.domain}";
+                    }
+                    {
+                      name = "Homepage";
+                      url = "https://${secrets.pi.homepage.domain}";
+                    }
+                    {
+                      name = "Git";
+                      url = "https://${secrets.pi.forgejo.domain}";
+                    }
+                    {
+                      name = "Discord";
+                      url = "https://discord.com/app";
+                    }
+                    {
+                      name = "AWS";
+                      url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
                     }
                   ];
                 }
