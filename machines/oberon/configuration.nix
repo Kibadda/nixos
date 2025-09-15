@@ -15,6 +15,7 @@
 
     ./nginx.nix
     ./restic.nix
+    ./authelia.nix
 
     ./immich.nix
     ./mealie.nix
