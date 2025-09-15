@@ -21,6 +21,12 @@
         "https://${secrets.pi.vikunja.domain}/auth/openid/authelia"
       ];
     };
+
+    dashboard.vikunja = {
+      icon = "vikunja.svg";
+      description = "Todos";
+      url = "https://${secrets.pi.vikunja.domain}";
+    };
   };
 
   services.vikunja = {

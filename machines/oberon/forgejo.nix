@@ -19,6 +19,12 @@
         "log/**"
       ];
     };
+
+    dashboard.forgejo = {
+      icon = "forgejo.svg";
+      description = "Git";
+      url = "https://${secrets.pi.forgejo.domain}";
+    };
   };
 
   services = {

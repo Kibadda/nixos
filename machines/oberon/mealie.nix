@@ -20,6 +20,12 @@
         "https://${secrets.pi.mealie.domain}/login"
       ];
     };
+
+    dashboard.mealie = {
+      icon = "mealie.svg";
+      description = "Essen";
+      url = "https://${secrets.pi.mealie.domain}";
+    };
   };
 
   services.mealie = {

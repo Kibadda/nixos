@@ -13,6 +13,12 @@
       path = secrets.pi.vaultwarden.dir;
       time = "02:00";
     };
+
+    dashboard.vaultwarden = {
+      icon = "vaultwarden.svg";
+      description = "Passwörter";
+      url = "https://${secrets.pi.vaultwarden.domain}";
+    };
   };
 
   services.vaultwarden = {

@@ -117,6 +117,12 @@ in
       path = secrets.pi.homepage.dir;
       time = "04:00";
     };
+
+    dashboard.homepage = {
+      icon = "si-laravel-#FF2D20";
+      description = "Erinnerungen";
+      url = "https://${secrets.pi.homepage.domain}";
+    };
   };
 
   users = {

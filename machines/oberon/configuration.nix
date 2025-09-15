@@ -17,6 +17,7 @@
     ./restic.nix
     ./authelia.nix
 
+    ./dashboard.nix
     ./immich.nix
     ./mealie.nix
     ./forgejo.nix
@@ -27,6 +28,8 @@
 
     ./umbriel/n8n.nix
   ];
+
+  services.glances.enable = true;
 
   networking = {
     wireless = {

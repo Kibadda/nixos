@@ -21,6 +21,12 @@
       path = secrets.pi.home-assistant.dir;
       time = "02:30";
     };
+
+    dashboard.home-assistant = {
+      icon = "home-assistant.svg";
+      description = "Smart Home";
+      url = "https://${secrets.pi.home-assistant.domain}";
+    };
   };
 
   services = {
