@@ -14,11 +14,14 @@
       time = "02:00";
     };
 
-    dashboard.vaultwarden = {
-      icon = "vaultwarden.svg";
-      description = "Passwörter";
-      url = "https://${secrets.pi.vaultwarden.domain}";
-    };
+    dashboard.Coding = [
+      {
+        name = "Vaultwarden";
+        icon = "vaultwarden.svg";
+        description = "Passwörter";
+        url = "https://${secrets.pi.vaultwarden.domain}";
+      }
+    ];
   };
 
   services.vaultwarden = {

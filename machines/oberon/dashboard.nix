@@ -8,25 +8,37 @@ let
   cfg = config.home-manager.users.${secrets.base.username}.kibadda;
 in
 {
-  options = {
-    oberon.dashboard = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            icon = lib.mkOption {
-              type = lib.types.str;
-            };
-            description = lib.mkOption {
-              type = lib.types.str;
-            };
-            url = lib.mkOption {
-              type = lib.types.str;
-            };
+  options =
+    let
+      dashboardService = {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
           };
-        }
-      );
+          icon = lib.mkOption {
+            type = lib.types.str;
+          };
+          description = lib.mkOption {
+            type = lib.types.str;
+          };
+          url = lib.mkOption {
+            type = lib.types.str;
+          };
+        };
+      };
+    in
+    {
+      oberon.dashboard = {
+        Home = lib.mkOption {
+          type = lib.types.listOf (lib.types.submodule dashboardService);
+          default = [ ];
+        };
+        Coding = lib.mkOption {
+          type = lib.types.listOf (lib.types.submodule dashboardService);
+          default = [ ];
+        };
+      };
     };
-  };
 
   config = {
     oberon = {
@@ -66,24 +78,27 @@ in
       settings = {
         layout = [
           {
+            Home = {
+              header = true;
+              style = "column";
+            };
+          }
+          {
+            Coding = {
+              header = true;
+              style = "column";
+            };
+          }
+          {
             Oberon = {
               header = true;
-              style = "row";
-              columns = 4;
+              style = "column";
             };
           }
           {
             Umbriel = {
               header = true;
-              style = "row";
-              columns = 4;
-            };
-          }
-          {
-            Services = {
-              header = true;
-              style = "row";
-              columns = 4;
+              style = "column";
             };
           }
         ];
@@ -139,25 +154,30 @@ in
               };
             }
           ];
+
+          convertServices =
+            services:
+            builtins.map (conf: {
+              ${conf.name} = {
+                icon = conf.icon;
+                description = conf.description;
+                href = conf.url;
+                siteMonitor = conf.url;
+              };
+            }) services;
         in
         [
+          {
+            Home = convertServices config.oberon.dashboard.Home;
+          }
+          {
+            Coding = convertServices config.oberon.dashboard.Coding;
+          }
           {
             Oberon = piInfo "http://localhost:61208";
           }
           {
             Umbriel = piInfo "http://10.0.0.4:61208";
-          }
-          {
-            Services = builtins.attrValues (
-              builtins.mapAttrs (name: conf: {
-                ${name} = {
-                  icon = conf.icon;
-                  description = conf.description;
-                  href = conf.url;
-                  siteMonitor = conf.url;
-                };
-              }) config.oberon.dashboard
-            );
           }
         ];
     };

@@ -31,11 +31,14 @@
       auth_method = "post";
     };
 
-    dashboard.immich = {
-      icon = "immich.svg";
-      description = "Bilder und Videos";
-      url = "https://${secrets.pi.immich.domain}";
-    };
+    dashboard.Home = [
+      {
+        name = "Immich";
+        icon = "immich.svg";
+        description = "Bilder und Videos";
+        url = "https://${secrets.pi.immich.domain}";
+      }
+    ];
   };
 
   services.immich = {

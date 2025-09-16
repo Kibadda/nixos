@@ -22,11 +22,14 @@
       time = "02:30";
     };
 
-    dashboard.home-assistant = {
-      icon = "home-assistant.svg";
-      description = "Smart Home";
-      url = "https://${secrets.pi.home-assistant.domain}";
-    };
+    dashboard.Coding = [
+      {
+        name = "Home Assistant";
+        icon = "home-assistant.svg";
+        description = "Smart Home";
+        url = "https://${secrets.pi.home-assistant.domain}";
+      }
+    ];
   };
 
   services = {

@@ -20,11 +20,14 @@
       ];
     };
 
-    dashboard.forgejo = {
-      icon = "forgejo.svg";
-      description = "Git";
-      url = "https://${secrets.pi.forgejo.domain}";
-    };
+    dashboard.Coding = [
+      {
+        name = "Forgejo";
+        icon = "forgejo.svg";
+        description = "Git";
+        url = "https://${secrets.pi.forgejo.domain}";
+      }
+    ];
   };
 
   services = {

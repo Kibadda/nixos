@@ -22,11 +22,14 @@
       ];
     };
 
-    dashboard.vikunja = {
-      icon = "vikunja.svg";
-      description = "Todos";
-      url = "https://${secrets.pi.vikunja.domain}";
-    };
+    dashboard.Coding = [
+      {
+        name = "Vikunja";
+        icon = "vikunja.svg";
+        description = "Todos";
+        url = "https://${secrets.pi.vikunja.domain}";
+      }
+    ];
   };
 
   services.vikunja = {

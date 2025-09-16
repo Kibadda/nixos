@@ -118,11 +118,14 @@ in
       time = "04:00";
     };
 
-    dashboard.homepage = {
-      icon = "si-laravel-#FF2D20";
-      description = "Erinnerungen";
-      url = "https://${secrets.pi.homepage.domain}";
-    };
+    dashboard.Home = [
+      {
+        name = "Homepage";
+        icon = "si-laravel-#FF2D20";
+        description = "Erinnerungen";
+        url = "https://${secrets.pi.homepage.domain}";
+      }
+    ];
   };
 
   users = {

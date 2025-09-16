@@ -10,10 +10,13 @@
       port = 5678;
     };
 
-    dashboard.n8n = {
-      icon = "n8n.svg";
-      description = "Automation";
-      url = "https://${secrets.pi.n8n.domain}";
-    };
+    dashboard.Coding = [
+      {
+        name = "n8n";
+        icon = "n8n.svg";
+        description = "Automation";
+        url = "https://${secrets.pi.n8n.domain}";
+      }
+    ];
   };
 }

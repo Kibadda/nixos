@@ -21,11 +21,14 @@
       ];
     };
 
-    dashboard.mealie = {
-      icon = "mealie.svg";
-      description = "Essen";
-      url = "https://${secrets.pi.mealie.domain}";
-    };
+    dashboard.Home = [
+      {
+        name = "Mealie";
+        icon = "mealie.svg";
+        description = "Essen";
+        url = "https://${secrets.pi.mealie.domain}";
+      }
+    ];
   };
 
   services.mealie = {
