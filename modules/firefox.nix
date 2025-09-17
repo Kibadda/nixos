@@ -294,32 +294,8 @@ in
                   toolbar = true;
                   bookmarks = [
                     {
-                      name = "Todos";
-                      url = "https://${secrets.pi.vikunja.domain}";
-                    }
-                    {
-                      name = "Fotos";
-                      url = "https://${secrets.pi.immich.domain}";
-                    }
-                    {
-                      name = "Essen";
-                      url = "https://${secrets.pi.mealie.domain}";
-                    }
-                    {
-                      name = "Keypass";
-                      url = "https://${secrets.pi.vaultwarden.domain}";
-                    }
-                    {
-                      name = "Homeassistant";
-                      url = "https://${secrets.pi.home-assistant.domain}";
-                    }
-                    {
-                      name = "Homepage";
-                      url = "https://${secrets.pi.homepage.domain}";
-                    }
-                    {
-                      name = "Git";
-                      url = "https://${secrets.pi.forgejo.domain}";
+                      name = "Dashboard";
+                      url = "https://${secrets.pi.dashboard.domain}";
                     }
                     {
                       name = "Discord";
