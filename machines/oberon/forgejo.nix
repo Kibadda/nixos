@@ -6,7 +6,7 @@
 }:
 {
   oberon = {
-    nginx."${secrets.pi.forgejo.domain}" = {
+    nginx.${secrets.pi.forgejo.domain} = {
       restrict-access = false;
       port = 3050;
     };

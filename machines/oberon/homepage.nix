@@ -108,7 +108,7 @@ let
 in
 {
   oberon = {
-    nginx."${secrets.pi.homepage.domain}" = {
+    nginx.${secrets.pi.homepage.domain} = {
       restrict-access = true;
       port = 8080;
     };

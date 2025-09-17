@@ -4,7 +4,7 @@
 }:
 {
   oberon = {
-    nginx."${secrets.pi.vaultwarden.domain}" = {
+    nginx.${secrets.pi.vaultwarden.domain} = {
       restrict-access = true;
       port = 8222;
     };

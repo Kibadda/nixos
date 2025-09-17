@@ -4,7 +4,7 @@
 }:
 {
   oberon = {
-    nginx."${secrets.pi.mealie.domain}" = {
+    nginx.${secrets.pi.mealie.domain} = {
       restrict-access = true;
       port = 9000;
     };

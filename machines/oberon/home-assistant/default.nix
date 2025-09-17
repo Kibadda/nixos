@@ -11,7 +11,7 @@
   ];
 
   oberon = {
-    nginx."${secrets.pi.home-assistant.domain}" = {
+    nginx.${secrets.pi.home-assistant.domain} = {
       restrict-access = false;
       port = 8123;
       websockets = true;

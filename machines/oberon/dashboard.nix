@@ -42,7 +42,7 @@ in
 
   config = {
     oberon = {
-      nginx."${secrets.pi.dashboard.domain}" = {
+      nginx.${secrets.pi.dashboard.domain} = {
         restrict-access = true;
         port = 8082;
       };
