@@ -20,7 +20,8 @@
     ./dashboard.nix
     ./immich.nix
     ./mealie.nix
-    ./forgejo.nix
+    # TODO: enable again if I find a use for this
+    # ./forgejo.nix
     ./vaultwarden.nix
     ./homepage.nix
     ./home-assistant
