@@ -19,6 +19,7 @@
       steam = true;
       lutris = true;
       chiaki = true;
+      bottles = true;
     };
 
     ssh = {
