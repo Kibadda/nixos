@@ -25,6 +25,7 @@
     ./homepage.nix
     ./home-assistant
     ./vikunja.nix
+    ./paperless.nix
 
     ./umbriel/n8n.nix
   ];
