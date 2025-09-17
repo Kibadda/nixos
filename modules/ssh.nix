@@ -52,6 +52,7 @@ in
   config = lib.mkIf cfg.ssh.enable {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = true;
       matchBlocks = builtins.listToAttrs (
         map (config: {
           name = config.name;
