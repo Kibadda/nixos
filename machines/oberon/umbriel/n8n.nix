@@ -8,6 +8,7 @@
       restrict-access = true;
       host = "10.0.0.4";
       port = 5678;
+      websockets = true;
     };
 
     dashboard.Coding = [
