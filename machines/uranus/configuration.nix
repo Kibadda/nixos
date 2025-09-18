@@ -6,4 +6,9 @@
 
     ../../modules/kibadda/configuration.nix
   ];
+
+  programs.ausweisapp = {
+    enable = true;
+    openFirewall = true;
+  };
 }
