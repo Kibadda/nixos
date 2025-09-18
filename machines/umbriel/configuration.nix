@@ -13,6 +13,7 @@
 
     ../../modules/zsh/configuration.nix
 
+    ./ollama.nix
     ./n8n.nix
   ];
 
