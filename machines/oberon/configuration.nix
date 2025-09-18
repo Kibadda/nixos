@@ -29,6 +29,7 @@
     ./paperless.nix
 
     ./umbriel/n8n.nix
+    ./umbriel/open-webui.nix
   ];
 
   services.glances.enable = true;

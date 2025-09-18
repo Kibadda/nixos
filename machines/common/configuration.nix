@@ -56,6 +56,7 @@
 
         packages.overlays.default
       ];
+    config.allowUnsupportedSystem = true;
     config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
@@ -75,6 +76,7 @@
         "SpaceCadetPinball"
         "unrar"
         "n8n"
+        "open-webui"
       ];
   };
 
