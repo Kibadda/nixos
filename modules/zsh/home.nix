@@ -13,10 +13,8 @@
       update = "sudo nixos-rebuild switch --flake .#$(hostname)";
       check = "nix flake check";
       cat = "bat";
-      buildoberon = "nix build .#nixosConfigurations.oberon.config.system.build.sdImage";
-      switchoberon = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#oberon --target-host oberon --sudo --ask-sudo-password";
-      buildumbriel = "nix build .#nixosConfigurations.umbriel.config.system.build.sdImage";
-      switchumbriel = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#umbriel --target-host umbriel --sudo --ask-sudo-password";
+      switch = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#$1 --target-host $1 --sudo --ask-sudo-password";
+      build = "nix build .#nixosConfigurations.$1.config.system.build.sdImage";
     };
 
     initContent = # bash
