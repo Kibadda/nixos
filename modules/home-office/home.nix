@@ -25,22 +25,26 @@ in
       # pkgs.linphone
     ];
 
-    kibadda.git = {
-      includes = [
+    programs.zsh.shellAliases.smbmount = "sudo mount -t cifs -o username=${secrets.work.smb.username},password=${secrets.work.smb.password},uid=1000,gid=1000 //${secrets.work.smb.ip}/team /mnt/team";
+
+    kibadda = {
+      git = {
+        includes = [
+          {
+            condition = "gitdir:/mnt/studiesbeta/";
+            contents.user.email = secrets.work.email;
+          }
+        ];
+      };
+
+      ssh.hosts = [
         {
-          condition = "gitdir:/mnt/studiesbeta/";
-          contents.user.email = secrets.work.email;
+          name = "work-studies";
+          host = secrets.work.sshfs.studies;
+          user = secrets.work.sshfs.user;
+          forward = false;
         }
       ];
     };
-
-    kibadda.ssh.hosts = [
-      {
-        name = "work-studies";
-        host = secrets.work.sshfs.studies;
-        user = secrets.work.sshfs.user;
-        forward = false;
-      }
-    ];
   };
 }
