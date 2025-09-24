@@ -131,6 +131,7 @@ in
                 "back-button"
                 "forward-button"
                 "stop-reload-button"
+                "home-button"
                 "urlbar-container"
                 "downloads-button"
                 "unified-extensions-button"
@@ -161,179 +162,145 @@ in
         "de"
         "en-US"
       ];
-      profiles =
-        let
-          createProfile = data: {
-            id = data.id;
-            isDefault = data.default;
-            extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-              ublock-origin
-              vimium
-              darkreader
-              sponsorblock
-              duckduckgo-privacy-essentials
-              ghostery
-              clearurls
-              consent-o-matic
-              privacy-badger
-              decentraleyes
-              bitwarden
-            ];
-            search = {
-              default = "ddg";
-              privateDefault = "ddg";
-              force = true;
-              engines = {
-                "Nix packages" = {
-                  urls = [
-                    {
-                      template = "https://search.nixos.org/packages";
-                      params = [
-                        {
-                          name = "query";
-                          value = "{searchTerms}";
-                        }
-                      ];
-                    }
-                  ];
-                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = [ "@np" ];
-                };
-
-                "Nix options" = {
-                  urls = [
-                    {
-                      template = "https://search.nixos.org/options";
-                      params = [
-                        {
-                          name = "query";
-                          value = "{searchTerms}";
-                        }
-                      ];
-                    }
-                  ];
-                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = [ "@no" ];
-                };
-
-                "NixOS Wiki" = {
-                  urls = [
-                    {
-                      template = "https://wiki.nixos.org/w/index.php";
-                      params = [
-                        {
-                          name = "search";
-                          value = "{searchTerms}";
-                        }
-                      ];
-                    }
-                  ];
-                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = [ "@nw" ];
-                };
-
-                "Homemanager options" = {
-                  urls = [
-                    {
-                      template = "https://home-manager-options.extranix.com";
-                      params = [
-                        {
-                          name = "query";
-                          value = "{searchTerms}";
-                        }
-                        {
-                          name = "release";
-                          value = "master";
-                        }
-                      ];
-                    }
-                  ];
-                  icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = [ "@ho" ];
-                };
-
-                "Nix github" = {
-                  urls = [
-                    {
-                      template = "https://github.com/search";
-                      params = [
-                        {
-                          name = "type";
-                          value = "code";
-                        }
-                        {
-                          name = "q";
-                          value = "language:nix {searchTerms}";
-                        }
-                      ];
-                    }
-                  ];
-                  icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = [ "@ng" ];
-                };
-
-                google.metaData.hidden = true;
-                bing.metaData.hidden = true;
-                amazon.metaData.hidden = true;
-                ebay.metaData.hidden = true;
-                wikipedia.metaData.hidden = true;
-              };
-            };
-            bookmarks = data.bookmarks;
-          };
-        in
-        {
-          ${secrets.base.username} = createProfile {
-            id = 0;
-            default = true;
-            bookmarks = {
-              force = true;
-              settings = [
-                {
-                  name = "Nix";
-                  toolbar = true;
-                  bookmarks = [
-                    {
-                      name = "Dashboard";
-                      url = "https://${secrets.pi.dashboard.domain}";
-                    }
-                    {
-                      name = "Discord";
-                      url = "https://discord.com/app";
-                    }
-                    {
-                      name = "AWS";
-                      url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
-                    }
-                  ];
-                }
-              ];
-            };
-          };
-          work = lib.mkIf cfg.home-office.enable (createProfile {
-            id = 1;
-            default = false;
-            bookmarks = {
-              force = true;
-              settings = [
-                {
-                  name = "Work";
-                  toolbar = true;
-                  bookmarks = [
-                    {
-                      name = "Chat";
-                      url = "https://rocket.in.cortex-media.de";
-                    }
-                    {
-                      name = "Pass";
-                      url = "https://passwords.in.cortex-media.de";
-                    }
-                  ];
-                }
-              ];
-            };
-          });
+      profiles.${secrets.base.username} = {
+        id = 0;
+        isDefault = true;
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          vimium
+          darkreader
+          sponsorblock
+          duckduckgo-privacy-essentials
+          ghostery
+          clearurls
+          consent-o-matic
+          privacy-badger
+          decentraleyes
+          bitwarden
+        ];
+        settings = {
+          "browser.startup.homepage" = "https://${secrets.pi.dashboard.domain}";
         };
+        search = {
+          default = "ddg";
+          privateDefault = "ddg";
+          force = true;
+          engines = {
+            "Nix packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+
+            "Nix options" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@no" ];
+            };
+
+            "NixOS Wiki" = {
+              urls = [
+                {
+                  template = "https://wiki.nixos.org/w/index.php";
+                  params = [
+                    {
+                      name = "search";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@nw" ];
+            };
+
+            "Homemanager options" = {
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                    {
+                      name = "release";
+                      value = "master";
+                    }
+                  ];
+                }
+              ];
+              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@ho" ];
+            };
+
+            "Nix github" = {
+              urls = [
+                {
+                  template = "https://github.com/search";
+                  params = [
+                    {
+                      name = "type";
+                      value = "code";
+                    }
+                    {
+                      name = "q";
+                      value = "language:nix {searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icons = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@ng" ];
+            };
+
+            google.metaData.hidden = true;
+            bing.metaData.hidden = true;
+            amazon.metaData.hidden = true;
+            ebay.metaData.hidden = true;
+            wikipedia.metaData.hidden = true;
+          };
+        };
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Nix";
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "Discord";
+                  url = "https://discord.com/app";
+                }
+                {
+                  name = "AWS";
+                  url = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                }
+              ];
+            }
+          ];
+        };
+      };
     };
   };
 }

@@ -25,17 +25,52 @@ in
       # pkgs.linphone
     ];
 
-    programs.zsh.shellAliases.smbmount = "sudo mount -t cifs -o username=${secrets.work.smb.username},password=${secrets.work.smb.password},uid=1000,gid=1000 //${secrets.work.smb.ip}/team /mnt/team";
+    programs = {
+      zsh.shellAliases.smbmount = "sudo mount -t cifs -o username=${secrets.work.smb.username},password=${secrets.work.smb.password},uid=1000,gid=1000 //${secrets.work.smb.ip}/team /mnt/team";
+
+      firefox.profiles.work = {
+        id = 1;
+        isDefault = false;
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          vimium
+          darkreader
+        ];
+        settings = {
+          "browser.startup.homepage" = "https://${secrets.work.domain}";
+        };
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Work";
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "Chat";
+                  url = "https://rocket.${secrets.work.domain}";
+                }
+                {
+                  name = "Pass";
+                  url = "https://passwords.${secrets.work.domain}";
+                }
+              ];
+            }
+          ];
+        };
+      };
+    };
 
     kibadda = {
-      git = {
-        includes = [
-          {
-            condition = "gitdir:/mnt/studiesbeta/";
-            contents.user.email = secrets.work.email;
-          }
-        ];
-      };
+      hypr.bind = [
+        "SUPER CONTROL, B, exec, firefox -P work"
+      ];
+
+      git.includes = [
+        {
+          condition = "gitdir:/mnt/studiesbeta/";
+          contents.user.email = secrets.work.email;
+        }
+      ];
 
       ssh.hosts = [
         {
