@@ -151,6 +151,7 @@ in
                 "_74145f27-f039-47ce-a470-a662b129930a_-browser-action"
                 "firefox_ghostery_com-browser-action"
                 "sponsorblocker_ajay_app-browser-action"
+                "myallychou_gmail_com-browser-action"
               ];
             };
             currentVersion = 20;
@@ -166,6 +167,14 @@ in
         id = 0;
         isDefault = true;
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          (buildFirefoxXpiAddon {
+            pname = "unhook";
+            version = "1.6.7";
+            addonId = "myallychou@gmail.com";
+            url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-recommended-videos/latest.xpi";
+            sha256 = "sha256-u21ouN9IyOzkTkFSeDz+QBp9psJ1F2Nmsvqp6nh0DRU=";
+            meta = { platforms = lib.platforms.all; };
+          })
           ublock-origin
           vimium
           darkreader
