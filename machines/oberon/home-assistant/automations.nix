@@ -5,6 +5,42 @@
 {
   services.home-assistant.config.automation = [
     {
+      alias = "Handy laden";
+      mode = "single";
+      trigger = [
+        {
+          trigger = "numeric_state";
+          entity_id = "sensor.${secrets.pi.home-assistant.devices.michael}_battery_level";
+          below = 21;
+        }
+      ];
+      condition = [
+        {
+          condition = "state";
+          entity_id = "sensor.${secrets.pi.home-assistant.devices.michael}_battery_state";
+          state = "discharging";
+        }
+        {
+          condition = "state";
+          entity_id = "sensor.${secrets.pi.home-assistant.devices.michael}_wi_fi_connection";
+          state = [
+            secrets.home.wifi."2.4"
+            secrets.home.wifi."5.0"
+          ];
+        }
+      ];
+      action = [
+        {
+          action = "notify.mobile_app_${secrets.pi.home-assistant.devices.michael}";
+          data = {
+            title = "Lade dein Handy";
+            message = "Handy ist fast leer!!!";
+          };
+        }
+      ];
+    }
+
+    {
       alias = "Vergessene Sachen";
       mode = "single";
       trigger = [
