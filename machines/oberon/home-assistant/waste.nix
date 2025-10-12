@@ -15,44 +15,21 @@
         }
         {
           type = "entities";
-          title = secrets.pi.home-assistant.street;
           entities = [
             {
-              entity = "sensor.gelbe_tonne_0";
+              entity = "sensor.gelbe_tonne";
               name = "Gelbe Tonne";
             }
             {
-              entity = "sensor.biotonne_0";
+              entity = "sensor.biotonne";
               name = "Biotonne";
             }
             {
-              entity = "sensor.restmull_0";
+              entity = "sensor.restmull";
               name = "Restmüll";
             }
             {
-              entity = "sensor.papiertonne_0";
-              name = "Papiertonne";
-            }
-          ];
-        }
-        {
-          type = "entities";
-          title = secrets.pi.home-assistant.street-other;
-          entities = [
-            {
-              entity = "sensor.gelbe_tonne_1";
-              name = "Gelbe Tonne";
-            }
-            {
-              entity = "sensor.biotonne_1";
-              name = "Biotonne";
-            }
-            {
-              entity = "sensor.restmull_1";
-              name = "Restmüll";
-            }
-            {
-              entity = "sensor.papiertonne_1";
+              entity = "sensor.papiertonne";
               name = "Papiertonne";
             }
           ];
@@ -77,6 +54,57 @@
     ];
 
     config = {
+      template = [
+        {
+          sensor = [
+            {
+              name = "Gelbe Tonne";
+              unique_id = "gelbe_tonne";
+              state = ''
+                {% set s0 = states("sensor.gelbe_tonne_0") | int %}
+                {% set s1 = states("sensor.gelbe_tonne_1") | int %}
+                {% set daysTo = min(s0, s1) %}
+                {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
+              '';
+              icon = "mdi:recycle";
+            }
+            {
+              name = "Biotonne";
+              unique_id = "biotonne";
+              state = ''
+                {% set s0 = states("sensor.biotonne_0") | int %}
+                {% set s1 = states("sensor.biotonne_1") | int %}
+                {% set daysTo = min(s0, s1) %}
+                {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
+              '';
+              icon = "mdi:leaf";
+            }
+            {
+              name = "Papiertonne";
+              unique_id = "papiertonne";
+              state = ''
+                {% set s0 = states("sensor.papiertonne_0") | int %}
+                {% set s1 = states("sensor.papiertonne_1") | int %}
+                {% set daysTo = min(s0, s1) %}
+                {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
+              '';
+              icon = "mdi:package-variant";
+            }
+            {
+              name = "Restmüll";
+              unique_id = "restmull";
+              state = ''
+                {% set s0 = states("sensor.restmull_0") | int %}
+                {% set s1 = states("sensor.restmull_1") | int %}
+                {% set daysTo = min(s0, s1) %}
+                {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
+              '';
+              icon = "mdi:trash-can";
+            }
+          ];
+        }
+      ];
+
       waste_collection_schedule = {
         sources = [
           {
@@ -106,8 +134,7 @@
             platform = "waste_collection_schedule";
             source_index = index;
             name = "${type} ${toString index}";
-            value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
-            date_template = "{{ value.date.strftime('%a, %d.%m.%Y') }}";
+            value_template = "{{ value.daysTo }}";
             types = [ type ];
             add_days_to = true;
           };
@@ -148,35 +175,19 @@
               or = [
                 {
                   condition = "template";
-                  value_template = "{{ is_state_attr('sensor.gelbe_tonne_0', 'daysTo', 1) }}";
+                  value_template = "{{ is_state('sensor.gelbe_tonne', 1) }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state_attr('sensor.papiertonne_0', 'daysTo', 1) }}";
+                  value_template = "{{ is_state('sensor.papiertonne', 1) }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state_attr('sensor.restmull_0', 'daysTo', 1) }}";
+                  value_template = "{{ is_state('sensor.restmull', 1) }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state_attr('sensor.biotonne_0', 'daysTo', 1) }}";
-                }
-                {
-                  condition = "template";
-                  value_template = "{{ is_state_attr('sensor.gelbe_tonne_1', 'daysTo', 1) }}";
-                }
-                {
-                  condition = "template";
-                  value_template = "{{ is_state_attr('sensor.papiertonne_1', 'daysTo', 1) }}";
-                }
-                {
-                  condition = "template";
-                  value_template = "{{ is_state_attr('sensor.restmull_1', 'daysTo', 1) }}";
-                }
-                {
-                  condition = "template";
-                  value_template = "{{ is_state_attr('sensor.biotonne_1', 'daysTo', 1) }}";
+                  value_template = "{{ is_state('sensor.biotonne', 1) }}";
                 }
               ];
             }
