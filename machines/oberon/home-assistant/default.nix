@@ -8,6 +8,7 @@
     ./lovelace.nix
     ./waste.nix
     ./hue.nix
+    ./automations.nix
   ];
 
   oberon = {
@@ -77,6 +78,21 @@
           unit_system = "metric";
           country = "DE";
           language = "de";
+        };
+
+        telegram_bot = [
+          {
+            platform = "polling";
+            api_key = secrets.pi.home-assistant.telegram.bot_token;
+            allowed_chat_ids = [ secrets.pi.home-assistant.telegram.chat_id ];
+          }
+        ];
+
+        input_text = {
+          forgotten_things = {
+            name = "Vergessene Sachen";
+            initial = "";
+          };
         };
       };
     };
