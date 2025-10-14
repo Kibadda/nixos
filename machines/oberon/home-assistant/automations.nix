@@ -13,6 +13,11 @@
           entity_id = "sensor.${secrets.pi.home-assistant.devices.michael}_battery_level";
           below = 21;
         }
+        {
+          trigger = "numeric_state";
+          entity_id = "sensor.${secrets.pi.home-assistant.devices.michael}_battery_level";
+          below = 11;
+        }
       ];
       condition = [
         {
@@ -33,8 +38,11 @@
         {
           action = "notify.mobile_app_${secrets.pi.home-assistant.devices.michael}";
           data = {
-            title = "Lade dein Handy";
-            message = "Handy ist fast leer!!!";
+            title = ''
+              {% set level = states('sensor.${secrets.pi.home-assistant.devices.michael}_battery_level') | int %}
+              {% if level <= 10 %}!!! {% endif %}Akku Warnung{% if level <= 10 %} !!!{% endif %}
+            '';
+            message = "Dein Akku ist bei {{ states('sensor.${secrets.pi.home-assistant.devices.michael}_battery_level' }}%.";
           };
         }
       ];
@@ -51,6 +59,12 @@
             secrets.home.wifi."5.0"
             secrets.home.wifi."2.4"
           ];
+        }
+      ];
+      condition = [
+        {
+          condition = "template";
+          value_template = "{% set text = states('input_text.forgotten_things') %}{{ text is not none and text != ''}}";
         }
       ];
       action = [
@@ -93,11 +107,12 @@
           };
           data = {
             value = ''
-              {% set text = states('input_text.forgotten_things') %}
-              {% if text is none %}
-                - {{ trigger.event.data.args | join(' ') }}
+              {% set current = states('input_text.forgotten_things') %}
+              {% set text = trigger.event.data.args | join(' ') %}
+              {% if current is none or current == "" %}
+                - {{ text }}
               {% else %}
-                {{ text + '\n- ' + trigger.event.data.args | join(' ') }}
+                {{ current + '\n- ' + text }}
               {% endif %}
             '';
           };
