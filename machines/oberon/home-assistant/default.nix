@@ -8,7 +8,9 @@
     ./lovelace.nix
     ./waste.nix
     ./hue.nix
-    ./automations.nix
+
+    ./automations/task-reminder.nix
+    ./automations/charge-reminder.nix
   ];
 
   oberon = {
@@ -87,13 +89,6 @@
             allowed_chat_ids = [ secrets.pi.home-assistant.telegram.chat_id ];
           }
         ];
-
-        input_text = {
-          forgotten_things = {
-            name = "Vergessene Sachen";
-            initial = "";
-          };
-        };
       };
     };
 
