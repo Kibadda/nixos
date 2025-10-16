@@ -14,7 +14,6 @@
     ../yubikey/home.nix
     ../zsh/home.nix
 
-    ../chrome.nix
     ../cursor.nix
     ../direnv.nix
     ../dunst.nix

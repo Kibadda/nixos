@@ -60,7 +60,6 @@
     config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
-        "google-chrome"
         "intelephense"
         "spotify"
         "steam"

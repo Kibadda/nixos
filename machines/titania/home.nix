@@ -8,10 +8,7 @@
   ];
 
   kibadda = {
-    firefox = {
-      enable = true;
-      default = true;
-    };
+    firefox.enable = true;
 
     vpn.enable = true;
 

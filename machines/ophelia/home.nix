@@ -17,10 +17,7 @@
   ];
 
   kibadda = {
-    firefox = {
-      enable = true;
-      default = true;
-    };
+    firefox.enable = true;
 
     kitty.size = 18;
 

@@ -15,20 +15,15 @@ in
         type = lib.types.bool;
         default = false;
       };
-
-      default = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
     };
   };
 
   config = lib.mkIf cfg.firefox.enable {
-    home.sessionVariables = lib.mkIf (cfg.firefox.default || !cfg.chrome.enable) {
+    home.sessionVariables = {
       BROWSER = "firefox";
     };
 
-    xdg.mimeApps = lib.mkIf (cfg.firefox.default || !cfg.chrome.enable) {
+    xdg.mimeApps = {
       enable = true;
       defaultApplications = {
         "text/html" = "firefox.desktop";

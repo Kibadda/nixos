@@ -10,10 +10,7 @@
   kibadda = {
     home-office.enable = true;
 
-    firefox = {
-      enable = true;
-      default = true;
-    };
+    firefox.enable = true;
 
     gaming = {
       steam = true;
