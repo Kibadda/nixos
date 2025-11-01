@@ -132,6 +132,7 @@ in
                 "unified-extensions-button"
                 "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
                 "addon_darkreader_org-browser-action"
+                "myallychou_gmail_com-browser-action"
               ];
               TabsToolbar = [
                 "firefox-view-button"
@@ -146,7 +147,6 @@ in
                 "_74145f27-f039-47ce-a470-a662b129930a_-browser-action"
                 "firefox_ghostery_com-browser-action"
                 "sponsorblocker_ajay_app-browser-action"
-                "myallychou_gmail_com-browser-action"
               ];
             };
             currentVersion = 20;
@@ -168,7 +168,9 @@ in
             addonId = "myallychou@gmail.com";
             url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-recommended-videos/latest.xpi";
             sha256 = "sha256-u21ouN9IyOzkTkFSeDz+QBp9psJ1F2Nmsvqp6nh0DRU=";
-            meta = { platforms = lib.platforms.all; };
+            meta = {
+              platforms = lib.platforms.all;
+            };
           })
           ublock-origin
           vimium
