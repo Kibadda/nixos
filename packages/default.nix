@@ -21,6 +21,7 @@ in
         "work"
         "setup-git-repos"
         "ophelia-landscape-toggle"
+        "nvimupdate"
       ];
   };
 }

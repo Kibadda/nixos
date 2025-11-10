@@ -45,5 +45,6 @@
     spotify
     telegram-desktop
     claude-code
+    kibadda.nvimupdate
   ];
 }
