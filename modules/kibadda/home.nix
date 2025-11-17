@@ -13,6 +13,7 @@
     ../vpn/home.nix
     ../yubikey/home.nix
     ../zsh/home.nix
+    ../gnome/home.nix
 
     ../cursor.nix
     ../direnv.nix

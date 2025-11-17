@@ -8,5 +8,6 @@
     ../vpn/configuration.nix
     ../yubikey/configuration.nix
     ../zsh/configuration.nix
+    ../gnome/configuration.nix
   ];
 }
