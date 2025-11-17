@@ -54,6 +54,8 @@
 
     nvidia.enable = true;
 
+    gnome.enable = true;
+
     hypr =
       let
         coding = "name:Coding";
@@ -64,7 +66,7 @@
         monitorRight = "DP-1";
       in
       {
-        enable = true;
+        enable = false;
 
         hypridle.enable = false;
 
