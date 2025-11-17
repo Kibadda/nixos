@@ -50,13 +50,14 @@ in
       };
 
       settings = {
+        hide_window_decorations = "yes";
         sync_to_monitor = "no";
         disable_ligatures = "never";
         enable_audio_bell = "no";
         dynamic_background_opacity = true;
         cursor_shape = "block";
         cursor_blink_interval = 0;
-        background_opacity = "0.9";
+        background_opacity = "0.95";
         window_padding_width = 5;
         enabled_layouts = "splits,stack";
 

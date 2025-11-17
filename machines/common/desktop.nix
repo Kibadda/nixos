@@ -27,16 +27,6 @@
 
   users.users.${secrets.base.username}.extraGroups = [ "networkmanager" ];
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "Hyprland";
-        user = secrets.base.username;
-      };
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     playerctl
     brightnessctl

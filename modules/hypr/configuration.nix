@@ -14,5 +14,15 @@ in
     security.pam.services.hyprlock = lib.mkIf cfg.yubikey.enable {
       u2fAuth = true;
     };
+
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "Hyprland";
+          user = secrets.base.username;
+        };
+      };
+    };
   };
 }
