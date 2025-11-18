@@ -63,7 +63,7 @@ in
         enableSshSupport = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentry.package = if cfg.hypr.enable then pkgs.kibadda.pinentry else pkgs.pinentry-qt;
+        pinentry.package = if cfg.hypr.enable || cfg.gnome.enable then pkgs.kibadda.pinentry else pkgs.pinentry-qt;
       };
     };
 
