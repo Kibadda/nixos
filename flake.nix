@@ -18,6 +18,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    mobile-nixpkgs.url = "github:nixos/nixpkgs?rev=f02fddb8acef29a8b32f10a335d44828d7825b78";
     mobile-nixos = {
       url = "github:mobile-nixos/mobile-nixos";
       flake = false;
@@ -43,6 +44,7 @@
     {
       self,
       nixpkgs,
+      mobile-nixpkgs,
       ...
     }@inputs:
     let
@@ -54,8 +56,12 @@
       };
 
       nixosSystem =
-        hostname: system:
-        nixpkgs.lib.nixosSystem {
+        {
+          hostname,
+          system ? "x86_64-linux",
+          _nixpkgs ? nixpkgs,
+        }:
+        _nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs secrets hostname;
@@ -66,17 +72,33 @@
     {
       nixosConfigurations = {
         # Home PC
-        uranus = nixosSystem "uranus" "x86_64-linux";
+        uranus = nixosSystem {
+          hostname = "uranus";
+        };
         # Laptop
-        titania = nixosSystem "titania" "x86_64-linux";
+        titania = nixosSystem {
+          hostname = "titania";
+        };
         # Work
-        setebos = nixosSystem "setebos" "x86_64-linux";
+        setebos = nixosSystem {
+          hostname = "setebos";
+        };
         # Raspberry Pi 1
-        oberon = nixosSystem "oberon" "aarch64-linux";
+        oberon = nixosSystem {
+          hostname = "oberon";
+          system = "aarch64-linux";
+        };
         # Raspberry Pi 2
-        umbriel = nixosSystem "umbriel" "aarch64-linux";
+        umbriel = nixosSystem {
+          hostname = "umbriel";
+          system = "aarch64-linux";
+        };
         # OnePlus 6
-        ophelia = nixosSystem "ophelia" "aarch64-linux";
+        ophelia = nixosSystem {
+          hostname = "ophelia";
+          system = "aarch64-linux";
+          _nixpkgs = mobile-nixpkgs;
+        };
       };
 
       devShells =

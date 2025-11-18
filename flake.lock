@@ -695,6 +695,22 @@
         "type": "github"
       }
     },
+    "mobile-nixpkgs": {
+      "locked": {
+        "lastModified": 1746141548,
+        "narHash": "sha256-IgBWhX7A2oJmZFIrpRuMnw5RAufVnfvOgHWgIdds+hc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f02fddb8acef29a8b32f10a335d44828d7825b78",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f02fddb8acef29a8b32f10a335d44828d7825b78",
+        "type": "github"
+      }
+    },
     "neovim-nightly": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1253,6 +1269,7 @@
         "dmenu": "dmenu",
         "home-manager": "home-manager",
         "mobile-nixos": "mobile-nixos",
+        "mobile-nixpkgs": "mobile-nixpkgs",
         "nix-monitored": "nix-monitored",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
