@@ -78,10 +78,10 @@ pkgs.writeShellApplication {
       run make distclean
 
       info "Building"
-      run make CMAKE_BUILD_TYPE=RelWithDebInfo
+      run make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=~/.local/share/
 
       info "Installing"
-      run sudo make CMAKE_BUILD_TYPE=RelWithDebInfo install
+      run make install
 
       info "Done!"
     }
