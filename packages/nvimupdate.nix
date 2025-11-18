@@ -7,6 +7,7 @@ pkgs.writeShellApplication {
     pkgs.gnumake
     pkgs.cmake
     pkgs.gettext
+    pkgs.ninja
   ];
   text = ''
     set -e
@@ -19,7 +20,7 @@ pkgs.writeShellApplication {
 
     function run() {
       echo "-> $*"
-      "$@" >> "$NEOVIM_DIR.log" || cat "$NEOVIM_DIR.log"
+      "$@" >> "$NEOVIM_DIR/build.log" || cat "$NEOVIM_DIR/build.log"
     }
 
     function changes() {
@@ -52,16 +53,16 @@ pkgs.writeShellApplication {
         shift
       done
 
-      run rm -f "$NEOVIM_DIR.log"
+      run rm -f "$NEOVIM_DIR/build.log"
 
-      if [[ ! -d "$NEOVIM_DIR/.git" ]]; then
-        run rm -rf "$NEOVIM_DIR"
+      if [[ ! -d "$NEOVIM_DIR/repo/.git" ]]; then
+        run rm -rf "$NEOVIM_DIR/repo"
         info "Cloning neovim"
-        run git clone https://github.com/neovim/neovim --depth 1 --quiet "$NEOVIM_DIR"
+        run git clone https://github.com/neovim/neovim --depth 1 --quiet "$NEOVIM_DIR/repo"
         FORCE=1
       fi
 
-      run cd "$NEOVIM_DIR"
+      run cd "$NEOVIM_DIR/repo"
 
       info "Fetching updates"
       run git fetch
@@ -78,7 +79,7 @@ pkgs.writeShellApplication {
       run make distclean
 
       info "Building"
-      run make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=~/.local/share/
+      run make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="$NEOVIM_DIR"
 
       info "Installing"
       run make install

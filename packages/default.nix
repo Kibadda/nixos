@@ -19,7 +19,6 @@ in
         "screenshot"
         "home"
         "work"
-        "setup-git-repos"
         "ophelia-landscape-toggle"
         "nvimupdate"
       ];

@@ -35,8 +35,6 @@
 
       homeDirectory = "/home/${secrets.base.username}";
 
-      packages = [ pkgs.kibadda.setup-git-repos ];
-
       file."intelephense/licence.txt".text = secrets.base.intelephenseLicense;
     };
 
