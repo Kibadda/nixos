@@ -111,9 +111,9 @@ in
 
             "org/gnome/shell/extensions/focus-changer" = {
               focus-up = [ "<Super>k" ];
-              focus-left = [ "<Super>l" ];
+              focus-left = [ "<Super>h" ];
               focus-down = [ "<Super>j" ];
-              focus-right = [ "<Super>h" ];
+              focus-right = [ "<Super>l" ];
             };
 
             "org/gnome/shell/extensions/system-monitor" = {
