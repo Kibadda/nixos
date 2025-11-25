@@ -19,7 +19,17 @@ in
 
   config = lib.mkIf cfg.neovim.enable {
     home = {
-      packages = [ pkgs.kibadda.nvimupdate ];
+      packages = with pkgs; [
+        kibadda.nvimupdate
+        lua-language-server
+        nodePackages.intelephense
+        typescript-language-server
+        nil
+        stylua
+        gcc
+        tree-sitter
+        nixfmt-rfc-style
+      ];
 
       sessionVariables = {
         EDITOR = "nvim";
