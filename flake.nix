@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    linphone-nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,6 +47,7 @@
       self,
       nixpkgs,
       mobile-nixpkgs,
+      linphone-nixpkgs,
       ...
     }@inputs:
     let

@@ -581,6 +581,22 @@
         "type": "github"
       }
     },
+    "linphone-nixpkgs": {
+      "locked": {
+        "lastModified": 1735563628,
+        "narHash": "sha256-OnSAY7XDSx7CtDoqNh8jwVwh4xNL/2HaJxGjryLWzX8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "b134951a4c9f3c995fd7be05f3243f8ecd65d798",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "luvit-meta": {
       "flake": false,
       "locked": {
@@ -1249,6 +1265,7 @@
         "disko": "disko",
         "dmenu": "dmenu",
         "home-manager": "home-manager",
+        "linphone-nixpkgs": "linphone-nixpkgs",
         "mobile-nixos": "mobile-nixos",
         "mobile-nixpkgs": "mobile-nixpkgs",
         "nix-monitored": "nix-monitored",
