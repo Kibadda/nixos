@@ -82,6 +82,19 @@ in
           forward = false;
         }
       ];
+
+      gnome.keybindings = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+          name = "firefox work";
+          command = "firefox -P work";
+          binding = "<Control><Super>B";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+          ];
+        };
+      };
     };
   };
 }
