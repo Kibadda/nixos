@@ -32,7 +32,7 @@ in
 
   config = lib.mkIf cfg.yubikey.enable {
     home = {
-      packages = [ pkgs.kibadda.pinentry ];
+      packages = [ pkgs.kibadda.pinentry-adw-wrapped ];
       sessionVariables = {
         KEYID = secrets.base.keyid;
       };
@@ -63,7 +63,11 @@ in
         enableSshSupport = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentry.package = if cfg.hypr.enable || cfg.gnome.enable then pkgs.kibadda.pinentry else pkgs.pinentry-qt;
+        pinentry = {
+          package =
+            if cfg.hypr.enable || cfg.gnome.enable then pkgs.kibadda.pinentry-adw-wrapped else pkgs.pinentry-qt;
+          program = "pinentry-adw-wrapped";
+        };
       };
     };
 
