@@ -175,19 +175,19 @@
               or = [
                 {
                   condition = "template";
-                  value_template = "{{ is_state('sensor.gelbe_tonne', 1) }}";
+                  value_template = "{{ is_state('sensor.gelbe_tonne', 'morgen') }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state('sensor.papiertonne', 1) }}";
+                  value_template = "{{ is_state('sensor.papiertonne', 'morgen') }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state('sensor.restmull', 1) }}";
+                  value_template = "{{ is_state('sensor.restmull', 'morgen') }}";
                 }
                 {
                   condition = "template";
-                  value_template = "{{ is_state('sensor.biotonne', 1) }}";
+                  value_template = "{{ is_state('sensor.biotonne', 'morgen') }}";
                 }
               ];
             }
