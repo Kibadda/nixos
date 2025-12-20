@@ -2,17 +2,17 @@
   description = "Top level NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    linphone-nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    linphone-nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -97,11 +97,11 @@
           system = "aarch64-linux";
         };
         # OnePlus 6
-        ophelia = nixosSystem {
-          hostname = "ophelia";
-          system = "aarch64-linux";
-          _nixpkgs = mobile-nixpkgs;
-        };
+        # ophelia = nixosSystem {
+        #   hostname = "ophelia";
+        #   system = "aarch64-linux";
+        #   _nixpkgs = mobile-nixpkgs;
+        # };
       };
 
       devShells =

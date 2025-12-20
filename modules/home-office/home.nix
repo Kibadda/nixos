@@ -23,7 +23,6 @@ in
     home.packages = [
       pkgs.kibadda.work
       pkgs.thunderbird
-      # pkgs.linphone
       inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone
     ];
 

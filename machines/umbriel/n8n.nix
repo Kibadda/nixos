@@ -5,8 +5,8 @@
 {
   services.n8n = {
     enable = true;
-    webhookUrl = "https://${secrets.pi.n8n.domain}";
-    settings = {
+    environment = {
+      WEBHOOK_URL = "https://${secrets.pi.n8n.domain}";
       # N8N_HIRING_BANNER_ENABLED = false;
       # N8N_HIDE_USAGE_PAGE = true;
     };

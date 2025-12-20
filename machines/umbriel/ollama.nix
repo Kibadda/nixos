@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -6,7 +7,7 @@
     enable = true;
     loadModels = [ "llama3.2:1b" ];
     user = "ollama";
-    acceleration = false;
+    package = pkgs.ollama-cpu;
     openFirewall = true;
     host = "0.0.0.0";
     environmentVariables = {

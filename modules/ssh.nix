@@ -52,27 +52,45 @@ in
   config = lib.mkIf cfg.ssh.enable {
     programs.ssh = {
       enable = true;
-      enableDefaultConfig = true;
-      matchBlocks = builtins.listToAttrs (
-        map (config: {
-          name = config.name;
-          value = {
-            hostname = config.host;
-            port = config.port;
-            user = config.user;
-            remoteForwards = lib.mkIf config.forward [
-              {
-                bind.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
-                host.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
-              }
-              {
-                bind.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-                host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-              }
-            ];
+      enableDefaultConfig = false;
+      matchBlocks =
+        let
+          blocks = builtins.listToAttrs (
+            map (config: {
+              name = config.name;
+              value = {
+                hostname = config.host;
+                port = config.port;
+                user = config.user;
+                remoteForwards = lib.mkIf config.forward [
+                  {
+                    bind.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+                    host.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+                  }
+                  {
+                    bind.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                  }
+                ];
+              };
+            }) cfg.ssh.hosts
+          );
+        in
+        blocks
+        // {
+          "*" = {
+            forwardAgent = false;
+            addKeysToAgent = "no";
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlMaster = "no";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+            controlPersist = "no";
           };
-        }) cfg.ssh.hosts
-      );
+        };
     };
   };
 }

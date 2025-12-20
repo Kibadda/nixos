@@ -28,7 +28,7 @@ in
         stylua
         gcc
         tree-sitter
-        nixfmt-rfc-style
+        nixfmt
       ];
 
       sessionVariables = {
@@ -41,5 +41,10 @@ in
         "${config.home.sessionVariables.NEOVIM_DIR}/bin"
       ];
     };
+
+    programs.zsh.initContent = # bash
+      ''
+        PATH="$PATH:${config.home.sessionVariables.NEOVIM_DIR}/bin"
+      '';
   };
 }
