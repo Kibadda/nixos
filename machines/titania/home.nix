@@ -51,6 +51,8 @@
       ];
     };
 
+    gnome.enable = true;
+
     hypr =
       let
         coding = "name:Coding";
@@ -58,7 +60,7 @@
         tools = "name:Tools";
       in
       {
-        enable = true;
+        enable = false;
 
         hypridle.enable = false;
 
