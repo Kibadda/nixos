@@ -37,6 +37,15 @@
           ];
           grid_options.columns = "full";
         }
+        {
+          type = "tile";
+          entity = "light.kuche";
+          name = "Küche";
+          features = [
+            { type = "light-brightness"; }
+          ];
+          grid_options.columns = "full";
+        }
       ];
     }
   ];
