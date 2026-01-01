@@ -13,8 +13,6 @@
       update = "sudo nixos-rebuild switch --flake .#$(hostname)";
       check = "nix flake check";
       cat = "bat";
-      switch = "NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#$1 --target-host $1 --sudo --ask-sudo-password";
-      build = "nix build .#nixosConfigurations.$1.config.system.build.sdImage";
     };
 
     initContent = # bash
@@ -28,6 +26,14 @@
           hostname="%{$fg_bold[red]%}%m"
           PROMPT="$hostname $PROMPT"
         fi
+
+        function switch() {
+          NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#$1 --target-host $1 --sudo --ask-sudo-password
+        }
+
+        function build() {
+          nix build .#nixosConfigurations.$1.config.system.build.sdImage
+        }
       '';
 
     sessionVariables = {
