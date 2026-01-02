@@ -1,9 +1,10 @@
 {
+  lib,
   secrets,
   ...
 }:
 {
-  oberon = {
+  oberon = lib.mkIf false {
     nginx.${secrets.pi.open-webui.domain} = {
       restrict-access = true;
       host = "10.0.0.4";

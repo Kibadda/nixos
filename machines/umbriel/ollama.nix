@@ -4,7 +4,7 @@
 }:
 {
   services.ollama = {
-    enable = true;
+    enable = false;
     loadModels = [ "llama3.2:1b" ];
     user = "ollama";
     package = pkgs.ollama-cpu;

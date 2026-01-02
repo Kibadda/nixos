@@ -4,7 +4,7 @@
 }:
 {
   services.open-webui = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     port = 11435;
     openFirewall = true;
