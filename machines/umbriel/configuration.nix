@@ -16,6 +16,7 @@
     ./ollama.nix
     ./n8n.nix
     ./open-webui.nix
+    ./beszel.nix
   ];
 
   services.glances = {

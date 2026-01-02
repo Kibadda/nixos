@@ -28,6 +28,7 @@
     ./vikunja.nix
     ./paperless.nix
     ./magic-tournament.nix
+    ./beszel.nix
 
     ./umbriel/n8n.nix
     ./umbriel/open-webui.nix
