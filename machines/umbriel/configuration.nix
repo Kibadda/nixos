@@ -19,11 +19,6 @@
     ./beszel.nix
   ];
 
-  services.glances = {
-    enable = true;
-    openFirewall = true;
-  };
-
   networking = {
     wireless = {
       enable = true;

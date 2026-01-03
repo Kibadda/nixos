@@ -34,8 +34,6 @@
     ./umbriel/open-webui.nix
   ];
 
-  services.glances.enable = true;
-
   networking = {
     wireless = {
       enable = true;

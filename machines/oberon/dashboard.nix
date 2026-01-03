@@ -89,18 +89,6 @@ in
               style = "column";
             };
           }
-          {
-            Oberon = {
-              header = true;
-              style = "column";
-            };
-          }
-          {
-            Umbriel = {
-              header = true;
-              style = "column";
-            };
-          }
         ];
         headerStyle = "clean";
         statusStyle = "dot";
@@ -108,53 +96,6 @@ in
       };
       services =
         let
-          piInfo = url: [
-            {
-              Info = {
-                widget = {
-                  type = "glances";
-                  url = url;
-                  metric = "info";
-                  chart = false;
-                  version = 4;
-                };
-              };
-            }
-            {
-              "CPU Temp" = {
-                widget = {
-                  type = "glances";
-                  url = url;
-                  metric = "sensor:cpu_thermal 0";
-                  chart = false;
-                  version = 4;
-                };
-              };
-            }
-            {
-              Processes = {
-                widget = {
-                  type = "glances";
-                  url = url;
-                  metric = "process";
-                  chart = false;
-                  version = 4;
-                };
-              };
-            }
-            {
-              Network = {
-                widget = {
-                  type = "glances";
-                  url = url;
-                  metric = "network:wlan0";
-                  chart = false;
-                  version = 4;
-                };
-              };
-            }
-          ];
-
           convertServices =
             services:
             builtins.map (conf: {
@@ -172,12 +113,6 @@ in
           }
           {
             Coding = convertServices config.oberon.dashboard.Coding;
-          }
-          {
-            Oberon = piInfo "http://localhost:61208";
-          }
-          {
-            Umbriel = piInfo "http://10.0.0.4:61208";
           }
         ];
     };
