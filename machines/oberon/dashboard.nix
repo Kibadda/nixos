@@ -89,6 +89,12 @@ in
               style = "column";
             };
           }
+          {
+            Links = {
+              header = true;
+              style = "column";
+            };
+          }
         ];
         headerStyle = "clean";
         statusStyle = "dot";
@@ -113,6 +119,40 @@ in
           }
           {
             Coding = convertServices config.oberon.dashboard.Coding;
+          }
+          {
+            Links = [
+              {
+                Youtube = {
+                  icon = "youtube.svg";
+                  href = "https://youtube.de";
+                };
+              }
+              {
+                Kalender = {
+                  icon = "google-calendar.svg";
+                  href = "https://calendar.google.com";
+                };
+              }
+              {
+                Email = {
+                  icon = "gmail.svg";
+                  href = "https://mail.google.com";
+                };
+              }
+              {
+                Discord = {
+                  icon = "discord.svg";
+                  href = "https://discord.com/app";
+                };
+              }
+              {
+                AWS = {
+                  icon = "aws.svg";
+                  href = "https://eu-central-1.console.aws.amazon.com/s3/home?region=eu-central-1";
+                };
+              }
+            ];
           }
         ];
     };
