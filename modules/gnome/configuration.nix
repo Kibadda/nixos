@@ -66,6 +66,7 @@ in
                   experimental-features = [
                     "scale-monitor-framebuffer"
                   ];
+                  dynamic-workspaces = false;
                 };
 
                 "org/gnome/mutter/keybindings" = {
@@ -84,6 +85,7 @@ in
 
                 "org/gnome/desktop/wm/preferences" = {
                   audible-bell = false;
+                  num-workspaces = 4;
                 };
 
                 "org/gnome/desktop/interface" = {
