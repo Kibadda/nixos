@@ -1,12 +1,11 @@
 {
   secrets,
-  pkgs,
   ...
 }:
 {
   imports = [
     ../gaming/home.nix
-    ../home-office/home.nix
+    ../office/home.nix
     ../hypr/home.nix
     ../i3/home.nix
     ../nvidia/home.nix

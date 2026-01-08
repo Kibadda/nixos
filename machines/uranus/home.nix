@@ -8,9 +8,12 @@
   ];
 
   kibadda = {
-    home-office.enable = true;
-
     firefox.enable = true;
+
+    office = {
+      enable = true;
+      atHome = true;
+    };
 
     gaming = {
       steam = true;

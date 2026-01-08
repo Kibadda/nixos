@@ -1,7 +1,7 @@
 {
   imports = [
     ../gaming/configuration.nix
-    ../home-office/configuration.nix
+    ../office/configuration.nix
     ../hypr/configuration.nix
     ../i3/configuration.nix
     ../nvidia/configuration.nix

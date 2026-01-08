@@ -41,6 +41,11 @@ in
                 type = lib.types.nullOr lib.types.str;
                 default = null;
               };
+
+              identity = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+              };
             };
           }
         );
@@ -62,6 +67,7 @@ in
                 hostname = config.host;
                 port = config.port;
                 user = config.user;
+                identityFile = lib.mkIf (config.identity != null) "~/.ssh/${config.identity}";
                 remoteForwards = lib.mkIf config.forward [
                   {
                     bind.address = "/run/user/1000/gnupg/S.gpg-agent.ssh";
