@@ -15,6 +15,14 @@ in
         type = lib.types.bool;
         default = false;
       };
+
+      defaultProfile = lib.mkOption {
+        type = lib.types.enum [
+          secrets.base.username
+          "work"
+        ];
+        default = secrets.base.username;
+      };
     };
   };
 
@@ -160,7 +168,7 @@ in
       ];
       profiles.${secrets.base.username} = {
         id = 0;
-        isDefault = true;
+        isDefault = cfg.firefox.defaultProfile == secrets.base.username;
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           (buildFirefoxXpiAddon {
             pname = "unhook";

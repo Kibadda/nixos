@@ -1,5 +1,4 @@
 {
-  pkgs,
   secrets,
   ...
 }:
@@ -8,16 +7,34 @@
     ../../modules/kibadda/home.nix
   ];
 
-  home.packages = with pkgs; [
-    linphone
-    thunderbird
-    rocketchat-desktop
-  ];
-
   kibadda = {
-    i3.enable = true;
+    firefox = {
+      enable = true;
+      defaultProfile = "work";
+    };
 
-    firefox.enable = true;
+    office.enable = true;
+
+    vpn.enable = true;
+
+    ssh = {
+      enable = true;
+      hosts = [
+        {
+          name = "uranus";
+          host = "10.0.0.10";
+          port = secrets.home.sshPort;
+          forward = true;
+        }
+        {
+          name = "oberon";
+          host = "10.0.0.3";
+          port = secrets.home.sshPort;
+        }
+      ];
+    };
+
+    gnome.enable = true;
 
     git = {
       email = secrets.work.email;
