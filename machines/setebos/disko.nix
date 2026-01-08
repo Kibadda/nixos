@@ -1,4 +1,3 @@
-# TODO: THIS IS JUST A COPY OF TITANIA
 {
   disko.devices = {
     disk = {
