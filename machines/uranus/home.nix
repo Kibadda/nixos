@@ -25,29 +25,17 @@
           name = "titania";
           host = "10.0.0.11";
           port = secrets.home.sshPort;
-        }
-        {
-          name = "pi";
-          host = "10.0.0.2";
-          port = secrets.home.sshPort;
-          forward = false;
+          forward = true;
         }
         {
           name = "oberon";
           host = "10.0.0.3";
           port = secrets.home.sshPort;
-          forward = false;
         }
         {
           name = "umbriel";
           host = "10.0.0.4";
           port = secrets.home.sshPort;
-          forward = false;
-        }
-        {
-          name = secrets.pi.forgejo.domain;
-          port = secrets.home.sshPort;
-          forward = false;
         }
       ];
     };

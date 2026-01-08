@@ -34,7 +34,7 @@ in
 
               forward = lib.mkOption {
                 type = lib.types.bool;
-                default = true;
+                default = false;
               };
 
               user = lib.mkOption {
