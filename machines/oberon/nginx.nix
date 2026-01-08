@@ -55,7 +55,15 @@
         enableACME = conf.ssl;
         forceSSL = conf.ssl;
         extraConfig = builtins.concatStringsSep "\n" [
-          (if conf.restrict-access then secrets.pi.ip-whitelist else "")
+          (
+            if conf.restrict-access then
+              ''
+                allow ${secrets.pi.ip};
+                deny all;
+              ''
+            else
+              ""
+          )
           conf.extraConfig
         ];
         locations."/".proxyPass = "http://${conf.host}:${toString conf.port}";

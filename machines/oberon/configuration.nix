@@ -46,6 +46,12 @@
     ];
   };
 
+  services.fail2ban = {
+    enable = true;
+    ignoreIP = [ secrets.pi.ip ];
+    bantime = "1h";
+  };
+
   fileSystems = {
     "/mnt" = {
       device = "/dev/disk/by-uuid/bc76ab1a-8f4a-4d9b-9846-436419d779be";
