@@ -28,6 +28,7 @@ in
     home = {
       packages = (lib.optional cfg.office.atHome pkgs.kibadda.work) ++ [
         pkgs.thunderbird
+        pkgs.sshfs
         inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone
       ];
 
