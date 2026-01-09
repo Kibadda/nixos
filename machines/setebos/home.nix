@@ -36,7 +36,17 @@
       ];
     };
 
-    gnome.enable = true;
+    gnome = {
+      enable = true;
+
+      settings = {
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          next = [ "<Control><Super>j" ];
+          play = [ "<Control><Super>space" ];
+          previous = [ "<Control><Super>k" ];
+        };
+      };
+    };
 
     git = {
       settings = {
