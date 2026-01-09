@@ -121,18 +121,13 @@ in
         }
       ];
 
-      gnome.keybindings = lib.mkIf cfg.office.atHome {
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      gnome.custom-keybindings = lib.mkIf cfg.office.atHome [
+        {
           name = "firefox work";
           command = "firefox -P work";
           binding = "<Control><Super>B";
-        };
-        "org/gnome/settings-daemon/plugins/media-keys" = {
-          custom-keybindings = [
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
-          ];
-        };
-      };
+        }
+      ];
     };
   };
 }
