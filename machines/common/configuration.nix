@@ -48,12 +48,6 @@
         inputs.passmenu.overlays.default
         inputs.pinentry.overlays.default
 
-        (final: prev: {
-          kibadda = (prev.kibadda or { }) // {
-            nvim = inputs.nvim.packages.${prev.system}.nvim;
-          };
-        })
-
         packages.overlays.default
       ];
     config.allowUnsupportedSystem = true;

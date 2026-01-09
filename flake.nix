@@ -35,7 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim.url = "github:Kibadda/nixvim";
     powermenu.url = "github:Kibadda/powermenu";
     dmenu.url = "github:Kibadda/dmenu";
     passmenu.url = "github:Kibadda/passmenu";
