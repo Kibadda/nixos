@@ -85,7 +85,7 @@ in
 
                 "org/gnome/desktop/wm/preferences" = {
                   audible-bell = false;
-                  num-workspaces = 4;
+                  num-workspaces = lib.gvariant.mkInt32 4;
                 };
 
                 "org/gnome/desktop/interface" = {
