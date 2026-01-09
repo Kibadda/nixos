@@ -66,6 +66,7 @@ in
                   experimental-features = [
                     "scale-monitor-framebuffer"
                   ];
+                  workspaces-only-on-primary = true;
                   dynamic-workspaces = false;
                 };
 
@@ -93,6 +94,8 @@ in
                   color-scheme = "prefer-dark";
                   clock-show-seconds = true;
                   clock-show-weekday = true;
+                  cursor-theme = cfg.cursor.name;
+                  cursor-size = lib.gvariant.mkInt32 cfg.cursor.size;
                 };
 
                 "org/gnome/desktop/input-sources" = {
@@ -150,6 +153,14 @@ in
                   hidden-when-paused = false;
                   metadata-when-paused = true;
                   hidden-when-stopped = true;
+                };
+
+                "org/gnome/desktop/session" = {
+                  idle-delay = lib.gvariant.mkInt32 600;
+                };
+
+                "org/gnome/settings-daemon/plugins/power" = {
+                  sleep-inactive-ac-type = "nothing";
                 };
 
                 "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
