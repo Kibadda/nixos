@@ -107,7 +107,17 @@ in
       git.includes = lib.mkIf cfg.office.atHome [
         {
           condition = "gitdir:/mnt/studiesbeta/";
-          contents.user.email = secrets.work.email;
+          contents = {
+            user.email = secrets.work.email;
+            pull.rebase = false;
+          };
+        }
+        {
+          condition = "gitdir:/mnt/beta/";
+          contents = {
+            user.email = secrets.work.email;
+            pull.rebase = false;
+          };
         }
       ];
 

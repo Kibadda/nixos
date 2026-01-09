@@ -37,11 +37,25 @@
     gnome.enable = true;
 
     git = {
-      email = secrets.work.email;
+      settings = {
+        user.email = secrets.work.email;
+        pull.rebase = false;
+      };
+
       includes = [
         {
           condition = "gitdir:~/Projects/Personal/";
-          contents.user.email = secrets.base.email;
+          contents = {
+            user.email = secrets.base.email;
+            pull.rebase = true;
+          };
+        }
+        {
+          condition = "gitdir:~/Projects/neovim/";
+          contents = {
+            user.email = secrets.base.email;
+            pull.rebase = true;
+          };
         }
       ];
     };

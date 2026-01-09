@@ -11,9 +11,9 @@ in
 {
   options = {
     kibadda.git = {
-      email = lib.mkOption {
-        type = lib.types.str;
-        default = secrets.base.email;
+      settings = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
       };
 
       includes = lib.mkOption {
@@ -26,10 +26,10 @@ in
   config = {
     programs.git = {
       enable = true;
-      settings = {
+      settings = lib.recursiveUpdate {
         user = {
           name = secrets.base.name;
-          email = cfg.git.email;
+          email = secrets.base.email;
         };
 
         alias = {
@@ -47,7 +47,7 @@ in
 
         pull.rebase = true;
         init.defaultBranch = "main";
-      };
+      } cfg.git.settings;
 
       includes = cfg.git.includes;
 
