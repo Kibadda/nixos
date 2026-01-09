@@ -22,7 +22,6 @@
     ../git.nix
     ../kitty.nix
     ../neovim.nix
-    ../pass.nix
     ../ssh.nix
     ../zoxide.nix
   ];
