@@ -31,21 +31,27 @@ in
         inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone
       ];
 
-      file = {
-        ".smbcredentials".text = lib.mkIf cfg.office.atHome secrets.work.smb.credentials;
-      }
-      // builtins.listToAttrs (
-        builtins.concatMap (key: [
-          {
-            name = ".ssh/${key}";
-            value.text = secrets.work.additionalSshKeys.${key}.private;
-          }
-          {
-            name = ".ssh/${key}.pub";
-            value.text = secrets.work.additionalSshKeys.${key}.public;
-          }
-        ]) (builtins.attrNames secrets.work.additionalSshKeys)
-      );
+      file =
+        (
+          if cfg.office.atHome then
+            {
+              ".smbcredentials".text = secrets.work.smb.credentials;
+            }
+          else
+            { }
+        )
+        // builtins.listToAttrs (
+          builtins.concatMap (key: [
+            {
+              name = ".ssh/${key}";
+              value.text = secrets.work.additionalSshKeys.${key}.private;
+            }
+            {
+              name = ".ssh/${key}.pub";
+              value.text = secrets.work.additionalSshKeys.${key}.public;
+            }
+          ]) (builtins.attrNames secrets.work.additionalSshKeys)
+        );
     };
 
     programs = {
