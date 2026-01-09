@@ -39,7 +39,7 @@
     powermenu.url = "github:Kibadda/powermenu";
     dmenu.url = "github:Kibadda/dmenu";
     passmenu.url = "github:Kibadda/passmenu";
-    pinentry.url = "git+ssh://git@github.com/Kibadda/adw-pinentry";
+    pinentry.url = "github:Kibadda/adw-pinentry";
   };
 
   outputs =

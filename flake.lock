@@ -1087,15 +1087,15 @@
       "locked": {
         "lastModified": 1766130528,
         "narHash": "sha256-Yq/A3LK8F96rQj0zjwmdRsoR3Y/TvN4lxbNs/UwR5n4=",
-        "ref": "refs/heads/main",
+        "owner": "Kibadda",
+        "repo": "adw-pinentry",
         "rev": "2fe7861aa4db243b946f68e927bb3920e041a838",
-        "revCount": 6,
-        "type": "git",
-        "url": "ssh://git@github.com/Kibadda/adw-pinentry"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/Kibadda/adw-pinentry"
+        "owner": "Kibadda",
+        "repo": "adw-pinentry",
+        "type": "github"
       }
     },
     "plenary-nvim": {
