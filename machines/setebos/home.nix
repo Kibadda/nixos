@@ -17,6 +17,8 @@
 
     vpn.enable = true;
 
+    nvidia.enable = true;
+
     ssh = {
       enable = true;
       hosts = [
