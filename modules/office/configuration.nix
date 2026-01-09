@@ -11,6 +11,6 @@ in
   config = lib.mkIf cfg.office.enable {
     networking.wg-quick.interfaces.work = lib.mkIf cfg.office.atHome secrets.work.vpn;
 
-    security.pki.certificates = [ secrets.work.certificates ];
+    security.pki.certificates = [ secrets.work.certificate ];
   };
 }
