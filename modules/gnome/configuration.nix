@@ -57,7 +57,20 @@ in
         {
           settings =
             let
-              user-keybindings = lib.recursiveUpdate cfg.gnome.keybindings {
+              custom-keybindings =
+                (builtins.listToAttrs (
+                  map (i: {
+                    name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}";
+                    value = lib.elemAt cfg.gnome.custom-keybindings i;
+                  }) (lib.range 0 (lib.length cfg.gnome.custom-keybindings - 1))
+                ))
+                // {
+                  "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = map (
+                    i: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}/"
+                  ) (lib.range 0 (lib.length cfg.gnome.custom-keybindings - 1));
+                };
+
+              default-settings = {
                 "system/locale" = {
                   region = "de_DE.UTF-8";
                 };
@@ -163,28 +176,7 @@ in
                   sleep-inactive-ac-type = "nothing";
                 };
 
-                "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-                  name = "kitty";
-                  command = "kitty";
-                  binding = "<Super>Return";
-                };
-                "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-                  name = "firefox";
-                  command = "firefox";
-                  binding = "<Super>B";
-                };
-                "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-                  name = "secret firefox";
-                  command = "firefox --private-window";
-                  binding = "<Shift><Super>B";
-                };
-
                 "org/gnome/settings-daemon/plugins/media-keys" = {
-                  custom-keybindings = [
-                    "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-                    "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-                    "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
-                  ];
                   www = [ "<Super>b" ];
                   next = [ "AudioNext" ];
                   play = [ "AudioPlay" ];
@@ -219,7 +211,12 @@ in
                 };
               };
             in
-            lib.recursiveUpdate reset-keybindings user-keybindings;
+            lib.lists.foldr (a: b: lib.recursiveUpdate a b) { } [
+              reset-keybindings
+              default-settings
+              cfg.gnome.settings
+              custom-keybindings
+            ];
         }
       ];
     };
