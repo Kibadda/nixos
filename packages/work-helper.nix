@@ -2,7 +2,7 @@
   pkgs,
 }:
 pkgs.writeShellApplication {
-  name = "work";
+  name = "w";
   runtimeInputs = [
     pkgs.sshfs
     pkgs.sftpman

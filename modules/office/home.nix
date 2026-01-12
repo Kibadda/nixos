@@ -26,7 +26,7 @@ in
 
   config = lib.mkIf cfg.office.enable {
     home = {
-      packages = (lib.optional cfg.office.atHome pkgs.kibadda.work) ++ [
+      packages = (lib.optional cfg.office.atHome pkgs.kibadda.work-helper) ++ [
         pkgs.thunderbird
         pkgs.sshfs
         inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone

@@ -18,7 +18,7 @@ in
         "yubikey-indicator"
         "screenshot"
         "home"
-        "work"
+        "work-helper"
         "ophelia-landscape-toggle"
         "nvimupdate"
       ];
