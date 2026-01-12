@@ -184,6 +184,10 @@ in
                   volume-down = [ "AudioLowerVolume" ];
                   volume-up = [ "AudioRaiseVolume" ];
                   volume-mute = [ "AudioMute" ];
+                  shutdown = [ "<Shift><Super>x" ];
+                  reboot = [ "<Shift><Super>r" ];
+                  logout = [ "<Shift><Super>e" ];
+                  screensaver = [ "<Shift><Super>s" ];
                 };
 
                 "org/gnome/desktop/wm/keybindings" = {
