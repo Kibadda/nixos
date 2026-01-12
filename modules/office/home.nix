@@ -30,6 +30,7 @@ in
         pkgs.thunderbird
         pkgs.sshfs
         pkgs.kibadda.work
+        pkgs.bruno
         inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone
       ];
 
