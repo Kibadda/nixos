@@ -334,6 +334,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1768028080,
+        "narHash": "sha256-50aDK+8eLvsLK39TzQhKNq50/HcXyP4hyxOYoPoVxjo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d03088749a110d52a4739348f39a63f84bb0be14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -426,7 +442,8 @@
         "nur": "nur",
         "passmenu": "passmenu",
         "pinentry": "pinentry",
-        "powermenu": "powermenu"
+        "powermenu": "powermenu",
+        "work": "work"
       }
     },
     "systems": {
@@ -471,6 +488,24 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "work": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6"
+      },
+      "locked": {
+        "lastModified": 1768201471,
+        "narHash": "sha256-0gJuRs6wYby0UTTl4l7u5Y152M+Z4Re/I9DZDH30bnI=",
+        "owner": "Kibadda",
+        "repo": "work",
+        "rev": "39c9a0b9d1ea3208349cb6255ab8648c848e759a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kibadda",
+        "repo": "work",
         "type": "github"
       }
     }

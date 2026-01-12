@@ -39,6 +39,7 @@
     dmenu.url = "github:Kibadda/dmenu";
     passmenu.url = "github:Kibadda/passmenu";
     pinentry.url = "github:Kibadda/adw-pinentry";
+    work.url = "github:Kibadda/work";
   };
 
   outputs =

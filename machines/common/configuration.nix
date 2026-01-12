@@ -47,6 +47,7 @@
         inputs.powermenu.overlays.default
         inputs.passmenu.overlays.default
         inputs.pinentry.overlays.default
+        inputs.work.overlays.default
 
         packages.overlays.default
       ];

@@ -29,8 +29,15 @@ in
       packages = (lib.optional cfg.office.atHome pkgs.kibadda.work-helper) ++ [
         pkgs.thunderbird
         pkgs.sshfs
+        pkgs.kibadda.work
         inputs.linphone-nixpkgs.legacyPackages."x86_64-linux".linphone
       ];
+
+      sessionVariables = {
+        WORK_DIR = "$HOME/.local/state/work/";
+        WORK_URL = secrets.work.timekeeping.url;
+        WORK_TOKEN = secrets.work.timekeeping.token;
+      };
 
       file =
         (
