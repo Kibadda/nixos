@@ -24,6 +24,8 @@ in
         gnomeExtensions.focus-changer
         gnomeExtensions.system-monitor
         gnomeExtensions.auto-move-windows
+        gnomeExtensions.clipboard-history
+        gnomeExtensions.panel-date-format
 
         (gnomeExtensions.spotify-tray.overrideAttrs (old: {
           postInstall = (old.postInstall or "") + ''
@@ -134,6 +136,8 @@ in
                     gnomeExtensions.system-monitor.extensionUuid
                     gnomeExtensions.auto-move-windows.extensionUuid
                     gnomeExtensions.spotify-tray.extensionUuid
+                    gnomeExtensions.clipboard-history.extensionUuid
+                    gnomeExtensions.panel-date-format.extensionUuid
                   ];
                 };
 
@@ -174,6 +178,15 @@ in
                   hidden-when-paused = false;
                   metadata-when-paused = true;
                   hidden-when-stopped = true;
+                };
+
+                "org/gnome/shell/extensions/panel-date-format" = {
+                  format = "%A %d.%m.%Y %H:%M:%S";
+                };
+
+                "org/gnome/shell/extensions/clipboard-history" = {
+                  paste-on-selection = false;
+                  window-width-percentage = lib.gvariant.mkInt32 20;
                 };
 
                 "org/gnome/desktop/session" = {
