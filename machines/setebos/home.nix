@@ -46,6 +46,14 @@
           previous = [ "<Control><Super>k" ];
         };
       };
+
+      custom-keybindings = [
+        {
+          name = "firefox personal";
+          command = "firefox -P ${secrets.base.username}";
+          binding = "<Control><Super>B";
+        }
+      ];
     };
 
     git = {
