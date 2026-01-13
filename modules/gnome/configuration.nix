@@ -24,7 +24,14 @@ in
         gnomeExtensions.focus-changer
         gnomeExtensions.system-monitor
         gnomeExtensions.auto-move-windows
-        gnomeExtensions.spotify-tray
+
+        (gnomeExtensions.spotify-tray.overrideAttrs (old: {
+          postInstall = (old.postInstall or "") + ''
+            substituteInPlace \
+              $out/share/gnome-shell/extensions/*/metadata.json \
+              --replace '"shell-version": [' '"shell-version": ["49", '
+          '';
+        }))
       ];
 
       gnome.excludePackages = with pkgs; [
@@ -126,6 +133,7 @@ in
                     gnomeExtensions.focus-changer.extensionUuid
                     gnomeExtensions.system-monitor.extensionUuid
                     gnomeExtensions.auto-move-windows.extensionUuid
+                    gnomeExtensions.spotify-tray.extensionUuid
                   ];
                 };
 
