@@ -161,6 +161,7 @@ in
                   public = false;
                   authorization_policy = "one_factor";
                   token_endpoint_auth_method = "client_secret_${conf.auth_method}";
+                  consent_mode = "implicit";
                 }) config.oberon.authelia
               );
             };
