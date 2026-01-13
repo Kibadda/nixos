@@ -443,7 +443,8 @@
         "passmenu": "passmenu",
         "pinentry": "pinentry",
         "powermenu": "powermenu",
-        "work": "work"
+        "work": "work",
+        "unstable-nixpkgs": "unstable-nixpkgs"
       }
     },
     "systems": {
@@ -506,6 +507,22 @@
       "original": {
         "owner": "Kibadda",
         "repo": "work",
+        "type": "github"
+      }
+    },
+    "unstable-nixpkgs": {
+      "locked": {
+        "lastModified": 1767892417,
+        "narHash": "sha256-dhhvQY67aboBk8b0/u0XB6vwHdgbROZT3fJAjyNh5Ww=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }

@@ -49,6 +49,12 @@
         inputs.pinentry.overlays.default
         inputs.work.overlays.default
 
+        (final: prev: {
+          unstable = import inputs.unstable-nixpkgs {
+            system = final.stdenv.hostPlatform.system;
+          };
+        })
+
         packages.overlays.default
       ];
     config.allowUnsupportedSystem = true;
