@@ -65,8 +65,11 @@ in
         maxCacheTtl = 120;
         pinentry = {
           package =
-            if cfg.hypr.enable || cfg.gnome.enable then pkgs.kibadda.pinentry-adw-wrapped else pkgs.pinentry-qt;
-          program = "pinentry-adw-wrapped";
+            if cfg.gnome.enable then
+              pkgs.pinentry-gnome3
+            else
+              (if cfg.hypr.enable then pkgs.kibadda.pinentry-adw-wrapped else pkgs.pinentry-qt);
+          program = lib.mkIf cfg.hypr.enable "pinentry-adw-wrapped";
         };
       };
     };
