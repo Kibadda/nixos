@@ -10,6 +10,8 @@
   kibadda = {
     firefox.enable = true;
 
+    vpn.magic = secrets.home.magic-vpn;
+
     office = {
       enable = true;
       atHome = true;

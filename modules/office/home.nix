@@ -212,6 +212,8 @@ in
         hosts = secrets.work.sshHosts;
       };
 
+      vpn.work = lib.mkIf cfg.office.atHome secrets.work.vpn;
+
       git.includes = lib.mkIf cfg.office.atHome [
         {
           condition = "gitdir:/mnt/studiesbeta/";

@@ -10,7 +10,7 @@
   kibadda = {
     firefox.enable = true;
 
-    vpn.enable = true;
+    vpn.home = secrets.home.vpn;
 
     gaming = {
       bottles = true;

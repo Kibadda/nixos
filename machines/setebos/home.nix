@@ -15,7 +15,7 @@
 
     office.enable = true;
 
-    vpn.enable = true;
+    vpn.home = secrets.home.vpn;
 
     nvidia.enable = true;
 
