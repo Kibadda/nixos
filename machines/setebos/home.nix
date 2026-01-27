@@ -1,11 +1,14 @@
 {
   secrets,
+  pkgs,
   ...
 }:
 {
   imports = [
     ../../modules/kibadda/home.nix
   ];
+
+  home.packages = [ pkgs.android-studio ];
 
   kibadda = {
     firefox = {

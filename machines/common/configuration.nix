@@ -77,6 +77,7 @@
         "unrar"
         "n8n"
         "open-webui"
+        "android-studio-stable"
       ];
   };
 
