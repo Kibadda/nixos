@@ -43,9 +43,16 @@ in
       ];
     };
 
-    programs.zsh.initContent = # bash
-      ''
-        PATH="$PATH:${config.home.sessionVariables.NEOVIM_DIR}/bin"
-      '';
+    programs = {
+      git.settings = {
+        "difftool \"nvim_difftool\"".cmd =
+          "nvim --cmd \"lua vim.g.loaded_starter = 1\" -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"";
+        diff.tool = "nvim_difftool";
+      };
+      zsh.initContent = # bash
+        ''
+          PATH="$PATH:${config.home.sessionVariables.NEOVIM_DIR}/bin"
+        '';
+    };
   };
 }
