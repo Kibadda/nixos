@@ -78,6 +78,7 @@
         "n8n"
         "open-webui"
         "android-studio-stable"
+        "copilot-language-server"
       ];
   };
 

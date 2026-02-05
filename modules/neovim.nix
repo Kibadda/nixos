@@ -29,6 +29,7 @@ in
         gcc
         tree-sitter
         nixfmt
+        copilot-language-server
       ];
 
       sessionVariables = {
