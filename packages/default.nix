@@ -21,6 +21,7 @@ in
         "work-helper"
         "ophelia-landscape-toggle"
         "nvimupdate"
+        "gitdirty"
       ];
   };
 }

@@ -43,6 +43,7 @@ in
           fixup-to = "!git commit --fixup=$(git filter-commits)";
           unlock = "!git-crypt unlock";
           lock = "!git-crypt lock";
+          dirty = "!gitdirty";
         };
 
         pull.rebase = true;
@@ -59,6 +60,7 @@ in
 
     home.packages = [
       pkgs.git-crypt
+      pkgs.kibadda.gitdirty
     ];
   };
 }
