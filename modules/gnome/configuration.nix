@@ -57,7 +57,10 @@ in
         gnome-tour
       ];
 
-      etc."wallpaper/forest.png".source = ../../wallpapers/forest.png;
+      etc = {
+        "wallpaper/forest.png".source = ../../wallpapers/forest.png;
+        "wallpaper/windmill.jpg".source = ../../wallpapers/windmill.jpg;
+      };
     };
 
     programs.dconf = {
@@ -98,8 +101,8 @@ in
                 };
 
                 "org/gnome/desktop/background" = {
-                  picture-uri = "file:///etc/wallpaper/forest.png";
-                  picture-uri-dark = "file:///etc/wallpaper/forest.png";
+                  picture-uri = "file:///etc/wallpaper/windmill.jpg";
+                  picture-uri-dark = "file:///etc/wallpaper/windmill.jpg";
                 };
 
                 "org/gnome/desktop/calendar" = {
