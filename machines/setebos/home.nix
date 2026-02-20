@@ -80,20 +80,6 @@
             pull.rebase = true;
           };
         }
-        {
-          condition = "gitdir:~/nixos/";
-          contents = {
-            user.email = secrets.base.email;
-            pull.rebase = true;
-          };
-        }
-        {
-          condition = "gitdir:~/.config/nvim/";
-          contents = {
-            user.email = secrets.base.email;
-            pull.rebase = true;
-          };
-        }
       ];
     };
   };
