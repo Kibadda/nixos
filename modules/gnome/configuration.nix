@@ -26,6 +26,7 @@ in
         gnomeExtensions.auto-move-windows
         gnomeExtensions.clipboard-history
         gnomeExtensions.panel-date-format
+        gnomeExtensions.paperwm
 
         (gnomeExtensions.spotify-tray.overrideAttrs (old: {
           postInstall = (old.postInstall or "") + ''
@@ -141,6 +142,7 @@ in
                     gnomeExtensions.spotify-tray.extensionUuid
                     gnomeExtensions.clipboard-history.extensionUuid
                     gnomeExtensions.panel-date-format.extensionUuid
+                    # gnomeExtensions.paperwm.extensionUuid
                   ];
                 };
 
