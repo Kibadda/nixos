@@ -10,9 +10,9 @@ pkgs.writeShellApplication {
   text = ''
     work_vpn() {
       if [ "$1" == "up" ]; then
-        sudo systemctl start wg-quick-work.service
+        wgctl work up
       elif [ "$1" == "down" ]; then
-        sudo systemctl stop wg-quick-work.service
+        wgctl work down
       fi
     }
 
