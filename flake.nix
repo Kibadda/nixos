@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    server-nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
@@ -47,6 +48,7 @@
     {
       self,
       nixpkgs,
+      server-nixpkgs,
       mobile-nixpkgs,
       linphone-nixpkgs,
       ...
@@ -91,11 +93,13 @@
         oberon = nixosSystem {
           hostname = "oberon";
           system = "aarch64-linux";
+          _nixpkgs = server-nixpkgs;
         };
         # Raspberry Pi 2
         umbriel = nixosSystem {
           hostname = "umbriel";
           system = "aarch64-linux";
+          _nixpkgs = server-nixpkgs;
         };
         # OnePlus 6
         # ophelia = nixosSystem {
