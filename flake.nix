@@ -45,14 +45,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      server-nixpkgs,
-      mobile-nixpkgs,
-      linphone-nixpkgs,
-      ...
-    }@inputs:
+    { self, ... }@inputs:
     let
       secrets = {
         base = import ./secrets/base.nix;
@@ -65,9 +58,9 @@
         {
           hostname,
           system ? "x86_64-linux",
-          _nixpkgs ? nixpkgs,
+          nixpkgs ? inputs.nixpkgs,
         }:
-        _nixpkgs.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs secrets hostname;
@@ -93,19 +86,19 @@
         oberon = nixosSystem {
           hostname = "oberon";
           system = "aarch64-linux";
-          _nixpkgs = server-nixpkgs;
+          nixpkgs = inputs.server-nixpkgs;
         };
         # Raspberry Pi 2
         umbriel = nixosSystem {
           hostname = "umbriel";
           system = "aarch64-linux";
-          _nixpkgs = server-nixpkgs;
+          nixpkgs = inputs.server-nixpkgs;
         };
         # OnePlus 6
         # ophelia = nixosSystem {
         #   hostname = "ophelia";
         #   system = "aarch64-linux";
-        #   _nixpkgs = mobile-nixpkgs;
+        #   nixpkgs = inputs.mobile-nixpkgs;
         # };
       };
 
@@ -114,7 +107,7 @@
           system = "x86_64-linux";
         in
         {
-          ${system}.default = nixpkgs.legacyPackages.${system}.mkShell {
+          ${system}.default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
             name = "nixos";
           };
         };
