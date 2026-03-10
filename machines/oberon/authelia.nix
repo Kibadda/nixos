@@ -36,6 +36,10 @@ in
               type = lib.types.str;
               default = "basic";
             };
+            policy = lib.mkOption {
+              type = lib.types.nullOr lib.types.str;
+              default = null;
+            };
           };
         }
       );
@@ -162,8 +166,17 @@ in
                   authorization_policy = "one_factor";
                   token_endpoint_auth_method = "client_secret_${conf.auth_method}";
                   consent_mode = "implicit";
+                  claims_policy = conf.policy;
                 }) config.oberon.authelia
               );
+              claims_policies = {
+                trilium = {
+                  id_token = [
+                    "email"
+                    "name"
+                  ];
+                };
+              };
             };
           };
         };

@@ -21,6 +21,7 @@
       redirect_uris = [
         "https://${secrets.pi.trilium.domain}/callback"
       ];
+      policy = "trilium";
     };
 
     dashboard.Home = [
@@ -38,11 +39,12 @@
     port = 8084;
     noBackup = true;
     environmentFile = pkgs.writeText "trilium.env" ''
-      TRILIUM_MULTIFACTORAUTHENTICATION_OAUTHBASEURL=https://${secrets.pi.trilium.domain}
-      TRILIUM_MULTIFACTORAUTHENTICATION_OAUTHCLIENTID=trilium
-      TRILIUM_MULTIFACTORAUTHENTICATION_OAUTHCLIENTSECRET=${secrets.pi.authelia.oidc.trilium}
-      TRILIUM_MULTIFACTORAUTHENTICATION_OAUTHISSUERBASEURL=https://${secrets.pi.authelia.domain}
-      TRILIUM_MULTIFACTORAUTHENTICATION_OAUTHISSUERNAME=Authelia
+      TRILIUM_OAUTH_BASE_URL=https://${secrets.pi.trilium.domain}
+      TRILIUM_OAUTH_CLIENT_ID=trilium
+      TRILIUM_OAUTH_CLIENT_SECRET=${secrets.pi.authelia.oidc.trilium}
+      TRILIUM_OAUTH_ISSUER_BASE_URL=https://${secrets.pi.authelia.domain}
+      TRILIUM_OAUTH_ISSUER_NAME=Authelia
+      TRILIUM_OAUTH_ISSUER_ICON=https://www.authelia.com/images/branding/logo-cropped.png
     '';
     dataDir = secrets.pi.trilium.dir;
   };

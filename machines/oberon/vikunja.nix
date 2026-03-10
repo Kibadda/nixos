@@ -49,15 +49,15 @@
         openid = {
           enabled = true;
           redirecturl = "https://${secrets.pi.vikunja.domain}/auth/openid/";
-          providers = [
-            {
+          providers = {
+            authelia = {
               name = "Authelia";
               authurl = "https://${secrets.pi.authelia.domain}";
               clientid = "vikunja";
               clientsecret = secrets.pi.authelia.oidc.vikunja;
               scope = "openid profile email";
-            }
-          ];
+            };
+          };
         };
       };
     };
