@@ -6,7 +6,7 @@
 {
   oberon = {
     nginx.${secrets.pi.trilium.domain} = {
-      restrict-access = true;
+      restrict-access = false;
       websockets = true;
       port = 8084;
     };
