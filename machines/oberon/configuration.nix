@@ -29,6 +29,7 @@
     ./paperless.nix
     ./magic-tournament.nix
     ./beszel.nix
+    ./trilium.nix
 
     ./umbriel/n8n.nix
     ./umbriel/open-webui.nix
