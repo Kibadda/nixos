@@ -1,39 +1,60 @@
 {
-  pkgs,
-  hostname,
   secrets,
-  inputs,
+  self,
   ...
 }:
 {
-  imports = [
-    inputs.disko.nixosModules.default
-    ../${hostname}/disko.nix
-    ../${hostname}/hardware-configuration.nix
-  ];
-
-  boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-      };
-      efi.canTouchEfiVariables = true;
+  flake.homeModules.desktop =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      imports = [
+        self.homeModules.base
+      ];
     };
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-  };
 
-  networking.networkmanager.enable = true;
+  flake.nixosModules.desktop =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      imports = [
+        self.nixosModules.base
+      ];
 
-  users.users.${secrets.base.username}.extraGroups = [ "networkmanager" ];
+      boot = {
+        loader = {
+          systemd-boot = {
+            enable = true;
+            configurationLimit = 10;
+          };
+          efi.canTouchEfiVariables = true;
+        };
+        binfmt.emulatedSystems = [ "aarch64-linux" ];
+      };
 
-  environment.systemPackages = with pkgs; [
-    playerctl
-    brightnessctl
-    pamixer
-    xdg-utils
-    spotify
-    telegram-desktop
-    claude-code
-  ];
+      networking.networkmanager.enable = true;
+
+      services.pipewire = {
+        enable = true;
+        audio.enable = true;
+        pulse.enable = true;
+      };
+
+      fonts.fontDir.enable = true;
+
+      hardware.bluetooth.enable = true;
+
+      users.users.${secrets.base.username}.extraGroups = [ "networkmanager" ];
+
+      environment.systemPackages = with pkgs; [
+        xdg-utils
+        spotify
+        telegram-desktop
+        claude-code
+      ];
+    };
 }
