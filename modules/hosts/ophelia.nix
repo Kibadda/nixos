@@ -6,6 +6,7 @@
 {
   nixosConfigurations.ophelia = {
     system = "aarch64-linux";
+    nixpkgs = inputs.mobile-nixpkgs;
 
     configuration = {
       kibadda.vpn.home = true;
