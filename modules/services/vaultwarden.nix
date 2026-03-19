@@ -3,40 +3,32 @@
   ...
 }:
 {
-  oberon = {
-    nginx.${secrets.pi.vaultwarden.domain} = {
-      restrict-access = true;
+  flake.nixosModules.vaultwarden = {
+    kibadda.services.vaultwarden = {
+      description = "Tresor";
+      subdomain = "pass";
       port = 8222;
+      auth = "none";
+      backup = {
+        paths = [ "/var/lib/bitwarden_rs" ];
+        time = "03:00";
+      };
     };
 
-    backup.vaultwarden = {
-      path = secrets.pi.vaultwarden.dir;
-      time = "02:00";
+    services.vaultwarden = {
+      enable = true;
+      environmentFile = "/etc/vaultwarden/env";
+      config = {
+        DOMAIN = "https://pass.${secrets.pi.domain}";
+        SIGNUPS_ALLOWED = false;
+        SIGNUPS_VERIFY = false;
+        INVITATIONS_ALLOWED = false;
+        ROCKET_PORT = 8222;
+      };
     };
 
-    dashboard.Coding = [
-      {
-        name = "Vaultwarden";
-        icon = "vaultwarden.svg";
-        description = "Passwörter";
-        url = "https://${secrets.pi.vaultwarden.domain}";
-      }
-    ];
-  };
-
-  services.vaultwarden = {
-    enable = true;
-    environmentFile = "/etc/vaultwarden/env";
-    config = {
-      DOMAIN = "https://${secrets.pi.vaultwarden.domain}";
-      SIGNUPS_ALLOWED = false;
-      SIGNUPS_VERIFY = false;
-      INVITATIONS_ALLOWED = false;
-      ROCKET_PORT = 8222;
+    environment.etc = {
+      "vaultwarden/env".text = secrets.pi.vaultwarden.environment;
     };
-  };
-
-  environment.etc = {
-    "vaultwarden/env".text = secrets.pi.vaultwarden.environment;
   };
 }
