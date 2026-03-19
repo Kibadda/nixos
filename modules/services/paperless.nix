@@ -1,47 +1,63 @@
 {
   secrets,
-  pkgs,
   ...
 }:
 {
-  oberon = {
-    nginx.${secrets.pi.paperless.domain} = {
-      restrict-access = true;
-      port = 28981;
-    };
-
-    backup.paperless = {
-      path = secrets.pi.paperless.dir;
-      time = "04:00";
-    };
-
-    authelia.paperless = {
-      secret = secrets.pi.authelia.oidc.paperless;
-      redirect_uris = [
-        "https://${secrets.pi.paperless.domain}/accounts/oidc/authelia/login/callback/"
-      ];
-    };
-
-    dashboard.Home = [
-      {
-        name = "Paperless";
-        icon = "paperless.svg";
+  flake.nixosModules.paperless =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      kibadda.services.paperless = {
         description = "Dokumente";
-        url = "https://${secrets.pi.paperless.domain}";
-      }
-    ];
-  };
+        subdomain = "docs";
+        port = 28981;
+        auth = "oidc";
+        oidc = {
+          redirect_uris = [
+            "https://docs.${secrets.pi.domain}/accounts/oidc/authelia/login/callback/"
+          ];
+          method = "basic";
+        };
+        backup = {
+          paths = [ "/mnt/paperless" ];
+          time = "04:00";
+        };
+      };
 
-  services.paperless = {
-    enable = true;
-    dataDir = secrets.pi.paperless.dir;
-    database.createLocally = true;
-    settings = {
-      PAPERLESS_URL = "https://${secrets.pi.paperless.domain}";
-      PAPERLESS_OCR_LANGUAGE = "deu+eng";
-      PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
-      PAPERLESS_SOCIALACCOUNT_PROVIDERS = "{\"openid_connect\":{\"SCOPE\":[\"openid\",\"profile\",\"email\"],\"OAUTH_PKCE_ENABLED\":true,\"APPS\":[{\"provider_id\":\"authelia\",\"name\":\"Authelia\",\"client_id\":\"paperless\",\"secret\":\"${secrets.pi.authelia.oidc.paperless}\",\"settings\":{\"server_url\":\"https://${secrets.pi.authelia.domain}\",\"token_auth_method\":\"client_secret_basic\"}}]}}";
+      services.paperless = {
+        enable = true;
+        dataDir = "/mnt/paperless";
+        database.createLocally = true;
+        settings = {
+          PAPERLESS_URL = "https://docs.${secrets.pi.domain}";
+          PAPERLESS_OCR_LANGUAGE = "deu+eng";
+          PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
+          PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
+            openid_connect = {
+              SCOPE = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              OAUTH_PKCE_ENABLED = true;
+              APPS = [
+                {
+                  provider_id = "authelia";
+                  name = "Authelia";
+                  client_id = "paperless";
+                  secret = secrets.pi.authelia.oidc.paperless;
+                  settings = {
+                    server_url = "https://sso.${secrets.pi.domain}";
+                    token_auth_method = "client_secret_basic";
+                  };
+                }
+              ];
+            };
+          };
+        };
+        passwordFile = pkgs.writeText "dbPassword" secrets.pi.paperless.password;
+      };
     };
-    passwordFile = pkgs.writeText "dbPassword" secrets.pi.paperless.password;
-  };
 }
