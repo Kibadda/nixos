@@ -1,52 +1,33 @@
 {
-  secrets,
-  config,
   lib,
+  secrets,
   ...
 }:
 {
-  options = {
-    oberon.backup = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            path = lib.mkOption {
-              type = lib.types.str;
-            };
-            time = lib.mkOption {
-              type = lib.types.str;
-            };
-            exclude = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-            };
-          };
-        }
-      );
-      default = { };
-    };
-  };
+  flake.nixosModules.restic =
+    {
+      config,
+      ...
+    }:
+    {
+      services.restic.backups = builtins.mapAttrs (name: service: {
+        initialize = true;
+        environmentFile = "/etc/restic/env";
+        passwordFile = "/etc/restic/pass";
+        repository = "${secrets.pi.restic.repository}-dendritic-${name}";
+        extraBackupArgs = [ "--skip-if-unchanged" ];
+        paths = service.backup.paths;
+        timerConfig.OnCalendar = service.backup.time;
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 3"
+          "--keep-monthly 3"
+        ];
+      }) (lib.filterAttrs (_: service: service.backup != null) config.kibadda.services);
 
-  config = {
-    services.restic.backups = builtins.mapAttrs (name: conf: {
-      initialize = true;
-      environmentFile = "/etc/restic/env";
-      passwordFile = "/etc/restic/pass";
-      repository = "${secrets.pi.backup.repository}-${name}";
-      extraBackupArgs = [ "--skip-if-unchanged" ];
-      paths = [ conf.path ];
-      exclude = conf.exclude;
-      timerConfig.OnCalendar = conf.time;
-      pruneOpts = [
-        "--keep-daily 7"
-        "--keep-weekly 3"
-        "--keep-monthly 3"
-      ];
-    }) config.oberon.backup;
-
-    environment.etc = {
-      "restic/env".text = secrets.pi.backup.environment;
-      "restic/pass".text = secrets.pi.backup.password;
+      environment.etc = {
+        "restic/env".text = secrets.pi.restic.environment;
+        "restic/pass".text = secrets.pi.restic.password;
+      };
     };
-  };
 }
