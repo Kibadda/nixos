@@ -13,6 +13,21 @@
       imports = [
         self.homeModules.base
       ];
+
+      home = {
+        packages = with pkgs; [
+          nerd-fonts.jetbrains-mono
+          font-awesome
+        ];
+        pointerCursor = {
+          name = "Bibata-Modern-Classic";
+          package = pkgs.bibata-cursors;
+          size = 18;
+          gtk.enable = true;
+        };
+      };
+
+      fonts.fontconfig.enable = true;
     };
 
   flake.nixosModules.desktop =
