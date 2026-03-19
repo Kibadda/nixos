@@ -3,33 +3,21 @@
   ...
 }:
 {
-  oberon = {
-    nginx.${secrets.pi.beszel.domain} = {
-      restrict-access = true;
-      websockets = true;
+  flake.nixosModules.beszel-server = {
+    kibadda.services.beszel = {
+      description = "Monitoring";
+      subdomain = "monitoring";
       port = 8090;
+      auth = "oidc";
+      oidc = {
+        redirect_uris = [
+          "https://monitoring.${secrets.pi.domain}/api/oauth2-redirect"
+        ];
+        method = "basic";
+      };
     };
 
-    authelia.beszel = {
-      secret = secrets.pi.authelia.oidc.beszel;
-      redirect_uris = [
-        "https://${secrets.pi.beszel.domain}/api/oauth2-redirect"
-      ];
-      auth_method = "basic";
-    };
-
-    dashboard.Home = [
-      {
-        name = "Beszel";
-        icon = "beszel.svg";
-        description = "Monitoring";
-        url = "https://${secrets.pi.beszel.domain}";
-      }
-    ];
-  };
-
-  services.beszel = {
-    hub = {
+    services.beszel.hub = {
       enable = true;
       port = 8090;
       environment = {
@@ -39,15 +27,21 @@
         USER_PASSWORD = secrets.pi.beszel.admin.password;
       };
     };
+  };
 
-    agent = {
-      enable = true;
-      environment = {
-        KEY = secrets.pi.beszel.oberon.key;
-        TOKEN = secrets.pi.beszel.oberon.token;
-        HUB_URL = "https://${secrets.pi.beszel.domain}";
-        EXTRA_FILESYSTEMS = "sda1";
+  flake.nixosModules.beszel-client =
+    {
+      config,
+      ...
+    }:
+    {
+      services.beszel.agent = {
+        enable = true;
+        environment = {
+          KEY = secrets.pi.beszel.${config.networking.hostName}.key;
+          TOKEN = secrets.pi.beszel.${config.networking.hostName}.token;
+          HUB_URL = "https://monitoring.${secrets.pi.domain}";
+        };
       };
     };
-  };
 }
