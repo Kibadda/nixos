@@ -1,92 +1,98 @@
 {
-  pkgs,
-}:
-pkgs.writeShellApplication {
-  name = "nvimupdate";
-  runtimeInputs = [
-    pkgs.gnumake
-    pkgs.cmake
-    pkgs.gettext
-    pkgs.ninja
-  ];
-  text = ''
-    set -e
+  perSystem =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      packages.nvimupdate = pkgs.writeShellApplication {
+        name = "nvimupdate";
+        runtimeInputs = [
+          pkgs.gnumake
+          pkgs.cmake
+          pkgs.gettext
+          pkgs.ninja
+        ];
+        text = ''
+          set -e
 
-    function info() {
-      local blue="\033[0;34m"
-      local nc="\033[0m"
-      echo -e "$blue$1$nc"
-    }
+          function info() {
+            local blue="\033[0;34m"
+            local nc="\033[0m"
+            echo -e "$blue$1$nc"
+          }
 
-    function run() {
-      echo "-> $*"
-      "$@" >> "$NEOVIM_DIR/build.log" || cat "$NEOVIM_DIR/build.log"
-    }
+          function run() {
+            echo "-> $*"
+            "$@" >> "$NEOVIM_DIR/build.log" || cat "$NEOVIM_DIR/build.log"
+          }
 
-    function changes() {
-      local upstream
-      upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "@{u}")
+          function changes() {
+            local upstream
+            upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "@{u}")
 
-      local ahead_behind
-      read -ra ahead_behind <<< "$(git rev-list --left-right --count "$upstream...HEAD")"
+            local ahead_behind
+            read -ra ahead_behind <<< "$(git rev-list --left-right --count "$upstream...HEAD")"
 
-      local -i behind=''${ahead_behind[0]}
+            local -i behind=''${ahead_behind[0]}
 
-      if [[ $behind == 0 ]]; then
-        info "No changes"
-        return 1
-      fi
+            if [[ $behind == 0 ]]; then
+              info "No changes"
+              return 1
+            fi
 
-      info "$behind new changes"
-      git log --oneline "$upstream...HEAD"
+            info "$behind new changes"
+            git log --oneline "$upstream...HEAD"
 
-      return 0
-    }
+            return 0
+          }
 
-    function main() {
-      FORCE=0
+          function main() {
+            FORCE=0
 
-      while [[ $# -gt 0 ]]; do
-        case $1 in
-          -f) FORCE=1 ;;
-        esac
-        shift
-      done
+            while [[ $# -gt 0 ]]; do
+              case $1 in
+                -f) FORCE=1 ;;
+              esac
+              shift
+            done
 
-      run rm -f "$NEOVIM_DIR/build.log"
+            run rm -f "$NEOVIM_DIR/build.log"
 
-      if [[ ! -d "$NEOVIM_DIR/repo/.git" ]]; then
-        run rm -rf "$NEOVIM_DIR/repo"
-        info "Cloning neovim"
-        run git clone https://github.com/neovim/neovim --depth 1 --quiet "$NEOVIM_DIR/repo"
-        FORCE=1
-      fi
+            if [[ ! -d "$NEOVIM_DIR/repo/.git" ]]; then
+              run rm -rf "$NEOVIM_DIR/repo"
+              info "Cloning neovim"
+              run git clone https://github.com/neovim/neovim --depth 1 --quiet "$NEOVIM_DIR/repo"
+              FORCE=1
+            fi
 
-      run cd "$NEOVIM_DIR/repo"
+            run cd "$NEOVIM_DIR/repo"
 
-      info "Fetching updates"
-      run git fetch
+            info "Fetching updates"
+            run git fetch
 
-      if ((!FORCE)) && ! changes; then
-        info "Done!"
-        exit
-      fi
+            if ((!FORCE)) && ! changes; then
+              info "Done!"
+              exit
+            fi
 
-      info "Rebasing"
-      run git rebase
+            info "Rebasing"
+            run git rebase
 
-      info "Cleaning workspace"
-      run make distclean
+            info "Cleaning workspace"
+            run make distclean
 
-      info "Building"
-      run make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="$NEOVIM_DIR"
+            info "Building"
+            run make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="$NEOVIM_DIR"
 
-      info "Installing"
-      run make install
+            info "Installing"
+            run make install
 
-      info "Done!"
-    }
+            info "Done!"
+          }
 
-    main "$@"
-  '';
+          main "$@"
+        '';
+      };
+    };
 }
