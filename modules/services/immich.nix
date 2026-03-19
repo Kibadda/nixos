@@ -3,67 +3,56 @@
   ...
 }:
 {
-  oberon = {
-    nginx.${secrets.pi.immich.domain} = {
-      restrict-access = false;
+  flake.nixosModules.immich = {
+    kibadda.services.immich = {
+      description = "Fotos";
+      subdomain = "pics";
       port = 2283;
-      websockets = true;
-      extraConfig = ''
-        client_max_body_size 100000M;
-        proxy_read_timeout 600s;
-        proxy_send_timeout 600s;
-        send_timeout 600s;
+      open = true;
+      extra = ''
+        request_body {
+          max_size 10GB
+        }
       '';
+      auth = "oidc";
+      oidc = {
+        redirect_uris = [
+          "https://pics.${secrets.pi.domain}/auth/login"
+          "https://pics.${secrets.pi.domain}/user-settings"
+          "app.immich:///oauth-callback"
+        ];
+        method = "post";
+      };
+      backup = {
+        paths = [ "/mnt/immich" ];
+        time = "03:15";
+      };
     };
 
-    backup.immich = {
-      path = secrets.pi.immich.dir;
-      time = "03:15";
+    services.immich = {
+      enable = true;
+      openFirewall = true;
+      machine-learning.enable = true;
+      settings = {
+        server.externalDomain = "https://pics.${secrets.pi.domain}";
+        storageTemplate = {
+          enabled = true;
+          template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
+        };
+        oauth = {
+          enabled = true;
+          autoLaunch = true;
+          issuerUrl = "https://sso.${secrets.pi.domain}/.well-known/openid-configuration";
+          clientId = "immich";
+          clientSecret = secrets.pi.authelia.oidc.immich;
+        };
+      };
+      mediaLocation = "/mnt/immich";
     };
 
-    authelia.immich = {
-      secret = secrets.pi.authelia.oidc.immich;
-      redirect_uris = [
-        "https://${secrets.pi.immich.domain}/auth/login"
-        "https://${secrets.pi.immich.domain}/user-settings"
-        "app.immich:///oauth-callback"
-      ];
-      auth_method = "post";
-    };
-
-    dashboard.Home = [
-      {
-        name = "Immich";
-        icon = "immich.svg";
-        description = "Bilder und Videos";
-        url = "https://${secrets.pi.immich.domain}";
-      }
+    systemd.tmpfiles.rules = [
+      "d /mnt/immich 0750 immich immich - -"
+      "x /mnt/immich"
     ];
   };
-
-  services.immich = {
-    enable = true;
-    openFirewall = true;
-    machine-learning.enable = true;
-    settings = {
-      server.externalDomain = "https://${secrets.pi.immich.domain}";
-      storageTemplate = {
-        enabled = true;
-        template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
-      };
-      oauth = {
-        enabled = true;
-        autoLaunch = true;
-        issuerUrl = "https://${secrets.pi.authelia.domain}/.well-known/openid-configuration";
-        clientId = "immich";
-        clientSecret = secrets.pi.authelia.oidc.immich;
-      };
-    };
-    mediaLocation = secrets.pi.immich.dir;
-  };
-
-  systemd.tmpfiles.rules = [
-    "d ${secrets.pi.immich.dir} 0750 immich immich - -"
-    "x ${secrets.pi.immich.dir}"
-  ];
 }
