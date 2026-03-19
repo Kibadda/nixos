@@ -1,166 +1,153 @@
 {
-  config,
   lib,
   ...
 }:
-let
-  cfg = config.kibadda;
-in
 {
-  options = {
-    kibadda.kitty = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-
-      size = lib.mkOption {
+  config.flake.homeModules.kitty =
+    {
+      config,
+      ...
+    }:
+    {
+      options.kibadda.kitty.size = lib.mkOption {
         type = lib.types.int;
         default = 10;
       };
+
+      config = {
+        programs.kitty = {
+          enable = true;
+
+          font = {
+            name = "JetBrainsMono Nerd Font";
+            size = config.kibadda.kitty.size;
+          };
+
+          extraConfig = ''
+            modify_font cell_height 105%
+          '';
+
+          keybindings = {
+            "kitty_mod+q" = "noop";
+            "kitty_mod+w" = "noop";
+            "kitty_mod+l" = "noop";
+            "kitty_mod+h" = "launch --type=window --cwd=current --location=hsplit";
+            "kitty_mod+b" = "launch --type=window --cwd=current --location=vsplit";
+            "kitty_mod+n" = "launch --type=window --cwd=current --location=split";
+            "kitty_mod+e" = "layout_action rotate";
+            "kitty_mod+z" = "toggle_layout stack";
+            "ctrl+h" = "kitten pass_keys.py left ctrl+h";
+            "ctrl+j" = "kitten pass_keys.py bottom ctrl+j";
+            "ctrl+k" = "kitten pass_keys.py top ctrl+k";
+            "ctrl+l" = "kitten pass_keys.py right ctrl+l";
+          };
+
+          settings = {
+            hide_window_decorations = "yes";
+            sync_to_monitor = "no";
+            disable_ligatures = "never";
+            enable_audio_bell = "no";
+            dynamic_background_opacity = true;
+            cursor_shape = "block";
+            cursor_blink_interval = 0;
+            background_opacity = "0.95";
+            window_padding_width = 5;
+            enabled_layouts = "splits,stack";
+
+            allow_remote_control = "socket-only";
+            listen_on = "unix:/tmp/kitty";
+
+            tab_bar_min_tabs = 1;
+            tab_bar_edge = "bottom";
+            tab_bar_style = "powerline";
+            tab_powerline_style = "slanted";
+
+            foreground = "#C6D0F5";
+            background = "#303446";
+            selection_foreground = "#303446";
+            selection_background = "#F2D5CF";
+            cursor = "#F2D5CF";
+            cursor_text_color = "#303446";
+            url_color = "#F2D5CF";
+            active_border_color = "#BABBF1";
+            inactive_border_color = "#737994";
+            bell_border_color = "#E5C890";
+            wayland_titlebar_color = "system";
+            macos_titlebar_color = "system";
+            active_tab_foreground = "#232634";
+            active_tab_background = "#CA9EE6";
+            inactive_tab_foreground = "#C6D0F5";
+            inactive_tab_background = "#292C3C";
+            tab_bar_background = "#232634";
+            mark1_foreground = "#303446";
+            mark1_background = "#BABBF1";
+            mark2_foreground = "#303446";
+            mark2_background = "#CA9EE6";
+            mark3_foreground = "#303446";
+            mark3_background = "#85C1DC";
+            color0 = "#51576D";
+            color8 = "#626880";
+            color1 = "#E78284";
+            color9 = "#E78284";
+            color2 = "#A6D189";
+            color10 = "#A6D189";
+            color3 = "#E5C890";
+            color11 = "#E5C890";
+            color4 = "#8CAAEE";
+            color12 = "#8CAAEE";
+            color5 = "#F4B8E4";
+            color13 = "#F4B8E4";
+            color6 = "#81C8BE";
+            color14 = "#81C8BE";
+            color7 = "#B5BFE2";
+            color15 = "#A5ADCE";
+          };
+
+          shellIntegration = {
+            mode = "no-cursor";
+          };
+        };
+
+        home.file.".config/kitty/pass_keys.py".text = ''
+          import re
+
+          from kittens.tui.handler import result_handler
+          from kitty.key_encoding import KeyEvent, parse_shortcut
+
+          def encode_key_mapping(window, key_mapping):
+            mods, key = parse_shortcut(key_mapping)
+            event = KeyEvent(
+              mods=mods,
+              key=key,
+              shift=bool(mods & 1),
+              alt=bool(mods & 2),
+              ctrl=bool(mods & 4),
+              super=bool(mods & 8),
+              hyper=bool(mods & 16),
+              meta=bool(mods & 32),
+            ).as_window_system_event()
+
+            return window.encoded_key(event)
+
+          def main():
+            pass
+
+          @result_handler(no_ui=True)
+          def handle_result(args, result, target_window_id, boss):
+            direction = args[1]
+            key_mapping = args[2]
+
+            window = boss.window_id_map.get(target_window_id)
+
+            if window is None:
+              return
+
+            if any(re.search("nvim", p['cmdline'][0] if len(p['cmdline']) else ''', re.I) for p in window.child.foreground_processes):
+              for keymap in key_mapping.split(">"):
+                window.write_to_child(encode_key_mapping(window, keymap))
+            else:
+              boss.active_tab.neighboring_window(direction)
+        '';
+      };
     };
-  };
-
-  config = lib.mkIf cfg.kitty.enable {
-    programs.kitty = {
-      enable = true;
-
-      font = {
-        name = "${cfg.font.main.name} Nerd Font";
-        size = cfg.kitty.size;
-      };
-
-      extraConfig = ''
-        modify_font cell_height 105%
-      '';
-
-      keybindings = {
-        "kitty_mod+q" = "noop";
-        "kitty_mod+w" = "noop";
-        "kitty_mod+l" = "noop";
-        "kitty_mod+h" = "launch --type=window --cwd=current --location=hsplit";
-        "kitty_mod+b" = "launch --type=window --cwd=current --location=vsplit";
-        "kitty_mod+n" = "launch --type=window --cwd=current --location=split";
-        "kitty_mod+e" = "layout_action rotate";
-        "kitty_mod+z" = "toggle_layout stack";
-        "ctrl+h" = "kitten pass_keys.py left ctrl+h";
-        "ctrl+j" = "kitten pass_keys.py bottom ctrl+j";
-        "ctrl+k" = "kitten pass_keys.py top ctrl+k";
-        "ctrl+l" = "kitten pass_keys.py right ctrl+l";
-      };
-
-      settings = {
-        hide_window_decorations = "yes";
-        sync_to_monitor = "no";
-        disable_ligatures = "never";
-        enable_audio_bell = "no";
-        dynamic_background_opacity = true;
-        cursor_shape = "block";
-        cursor_blink_interval = 0;
-        background_opacity = "0.95";
-        window_padding_width = 5;
-        enabled_layouts = "splits,stack";
-
-        allow_remote_control = "socket-only";
-        listen_on = "unix:/tmp/kitty";
-
-        tab_bar_min_tabs = 1;
-        tab_bar_edge = "bottom";
-        tab_bar_style = "powerline";
-        tab_powerline_style = "slanted";
-
-        foreground = "#C6D0F5";
-        background = "#303446";
-        selection_foreground = "#303446";
-        selection_background = "#F2D5CF";
-        cursor = "#F2D5CF";
-        cursor_text_color = "#303446";
-        url_color = "#F2D5CF";
-        active_border_color = "#BABBF1";
-        inactive_border_color = "#737994";
-        bell_border_color = "#E5C890";
-        wayland_titlebar_color = "system";
-        macos_titlebar_color = "system";
-        active_tab_foreground = "#232634";
-        active_tab_background = "#CA9EE6";
-        inactive_tab_foreground = "#C6D0F5";
-        inactive_tab_background = "#292C3C";
-        tab_bar_background = "#232634";
-        mark1_foreground = "#303446";
-        mark1_background = "#BABBF1";
-        mark2_foreground = "#303446";
-        mark2_background = "#CA9EE6";
-        mark3_foreground = "#303446";
-        mark3_background = "#85C1DC";
-        color0 = "#51576D";
-        color8 = "#626880";
-        color1 = "#E78284";
-        color9 = "#E78284";
-        color2 = "#A6D189";
-        color10 = "#A6D189";
-        color3 = "#E5C890";
-        color11 = "#E5C890";
-        color4 = "#8CAAEE";
-        color12 = "#8CAAEE";
-        color5 = "#F4B8E4";
-        color13 = "#F4B8E4";
-        color6 = "#81C8BE";
-        color14 = "#81C8BE";
-        color7 = "#B5BFE2";
-        color15 = "#A5ADCE";
-      };
-
-      shellIntegration = {
-        mode = "no-cursor";
-      };
-    };
-
-    home.file = {
-      ".config/kitty/tool.conf".text = ''
-        include ./kitty.conf
-        clear_all_shortcuts yes
-      '';
-
-      ".config/kitty/pass_keys.py".text = ''
-        import re
-
-        from kittens.tui.handler import result_handler
-        from kitty.key_encoding import KeyEvent, parse_shortcut
-
-        def encode_key_mapping(window, key_mapping):
-          mods, key = parse_shortcut(key_mapping)
-          event = KeyEvent(
-            mods=mods,
-            key=key,
-            shift=bool(mods & 1),
-            alt=bool(mods & 2),
-            ctrl=bool(mods & 4),
-            super=bool(mods & 8),
-            hyper=bool(mods & 16),
-            meta=bool(mods & 32),
-          ).as_window_system_event()
-
-          return window.encoded_key(event)
-
-        def main():
-          pass
-
-        @result_handler(no_ui=True)
-        def handle_result(args, result, target_window_id, boss):
-          direction = args[1]
-          key_mapping = args[2]
-
-          window = boss.window_id_map.get(target_window_id)
-
-          if window is None:
-            return
-
-          if any(re.search("nvim", p['cmdline'][0] if len(p['cmdline']) else ''', re.I) for p in window.child.foreground_processes):
-            for keymap in key_mapping.split(">"):
-              window.write_to_child(encode_key_mapping(window, keymap))
-          else:
-            boss.active_tab.neighboring_window(direction)
-      '';
-    };
-  };
 }
