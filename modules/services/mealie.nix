@@ -3,44 +3,41 @@
   ...
 }:
 {
-  oberon = {
-    nginx.${secrets.pi.mealie.domain} = {
-      restrict-access = true;
+  flake.nixosModules.mealie = {
+    kibadda.services.mealie = {
+      description = "Essen";
+      subdomain = "food";
       port = 9000;
+      auth = "oidc";
+      oidc = {
+        redirect_uris = [
+          "https://food.${secrets.pi.domain}/login"
+        ];
+        method = "basic";
+      };
+      backup = {
+        paths = [ "/var/lib/mealie" ];
+        time = "03:45";
+      };
     };
 
-    backup.mealie = {
-      path = secrets.pi.mealie.dir;
-      time = "03:30";
-    };
+    services.mealie = {
+      enable = true;
+      port = 9000;
+      settings = {
+        API_DOCS = "false";
+        ALLOW_SIGNUP = "false";
+        ALLOW_PASSWORD_LOGIN = "false";
 
-    authelia.mealie = {
-      secret = secrets.pi.authelia.oidc.mealie;
-      redirect_uris = [
-        "https://${secrets.pi.mealie.domain}/login"
-      ];
-    };
-
-    dashboard.Home = [
-      {
-        name = "Mealie";
-        icon = "mealie.svg";
-        description = "Essen";
-        url = "https://${secrets.pi.mealie.domain}";
-      }
-    ];
-  };
-
-  services.mealie = {
-    enable = true;
-    settings = {
-      ALLOW_PASSWORD_LOGIN = "false";
-      OIDC_AUTH_ENABLED = "true";
-      OIDC_CONFIGURATION_URL = "https://${secrets.pi.authelia.domain}/.well-known/openid-configuration";
-      OIDC_CLIENT_ID = "mealie";
-      OIDC_CLIENT_SECRET = secrets.pi.authelia.oidc.mealie;
-      OIDC_AUTO_REDIRECT = "true";
-      OIDC_PROVIDER_NAME = "Authelia";
+        OIDC_AUTH_ENABLED = "true";
+        OIDC_CONFIGURATION_URL = "https://sso.${secrets.pi.domain}/.well-known/openid-configuration";
+        OIDC_CLIENT_ID = "mealie";
+        OIDC_CLIENT_SECRET = secrets.pi.authelia.oidc.mealie;
+        OIDC_USER_GROUP = "family";
+        OIDC_ADMIN_GROUP = "admin";
+        OIDC_AUTO_REDIRECT = "true";
+        OIDC_PROVIDER_NAME = "Authelia";
+      };
     };
   };
 }
