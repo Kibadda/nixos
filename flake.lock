@@ -95,6 +95,38 @@
         "type": "github"
       }
     },
+    "mobile-nixos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772289954,
+        "narHash": "sha256-iDdtwk/dFb6AsXMtcOpZixxXl6C1HNUPe6cglxxHO7M=",
+        "owner": "mobile-nixos",
+        "repo": "mobile-nixos",
+        "rev": "1a9e0af79dc7b5e29ed772f1a8a76fcbd9d45fdf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mobile-nixos",
+        "repo": "mobile-nixos",
+        "type": "github"
+      }
+    },
+    "mobile-nixpkgs": {
+      "locked": {
+        "lastModified": 1773068389,
+        "narHash": "sha256-vMrm7Pk2hjBRPnCSjhq1pH0bg350Z+pXhqZ9ICiqqCs=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "44bae273f9f82d480273bab26f5c50de3724f52f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nix-monitored": {
       "inputs": {
         "nixpkgs": [
@@ -240,6 +272,8 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "mobile-nixos": "mobile-nixos",
+        "mobile-nixpkgs": "mobile-nixpkgs",
         "nix-monitored": "nix-monitored",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
