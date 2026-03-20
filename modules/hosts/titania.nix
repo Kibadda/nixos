@@ -25,11 +25,6 @@
             host = "10.0.0.3";
             port = secrets.home.sshPort;
           }
-          {
-            name = "umbriel";
-            host = "10.0.0.4";
-            port = secrets.home.sshPort;
-          }
         ];
       };
     };
@@ -60,36 +55,34 @@
       self.homeModules.zoxide
     ];
 
-    hardware =
-      { modulesPath, ... }:
-      {
-        imports = [
-          (modulesPath + "/installer/scan/not-detected.nix")
-        ];
-
-        networking.interfaces = {
-          enp4s0.useDHCP = true;
-          wlp5s0.useDHCP = true;
-        };
-
-        boot = {
-          initrd = {
-            availableKernelModules = [
-              "xhci_pci"
-              "nvme"
-              "usb_storage"
-              "sd_mod"
-              "sdhci_pci"
-            ];
-            kernelModules = [ ];
-          };
-          kernelModules = [ ];
-          extraModulePackages = [ ];
-        };
-
-        powerManagement.cpuFreqGovernor = "powersave";
-        hardware.cpu.intel.updateMicrocode = true;
+    hardware = {
+      networking.interfaces = {
+        enp4s0.useDHCP = true;
+        wlp5s0.useDHCP = true;
       };
+
+      boot = {
+        initrd = {
+          availableKernelModules = [
+            "xhci_pci"
+            "nvme"
+            "usb_storage"
+            "sd_mod"
+            "sdhci_pci"
+          ];
+          kernelModules = [ ];
+        };
+        kernelModules = [ ];
+        extraModulePackages = [ ];
+      };
+
+      powerManagement.cpuFreqGovernor = "powersave";
+
+      hardware = {
+        enableRedistributableFirmware = true;
+        cpu.intel.updateMicrocode = true;
+      };
+    };
 
     disko = {
       devices.disk.main = {

@@ -32,14 +32,23 @@
               host = "10.0.0.3";
               port = secrets.home.sshPort;
             }
-            {
-              name = "umbriel";
-              host = "10.0.0.4";
-              port = secrets.home.sshPort;
-            }
           ];
         };
       };
+
+    nixosModules = [
+      self.nixosModules.desktop
+
+      self.nixosModules.yubikey
+      self.nixosModules.zsh
+      self.nixosModules.homeoffice
+
+      self.nixosModules.ausweisapp
+      self.nixosModules.gnome
+      self.nixosModules.nvidia
+      self.nixosModules.vpn
+      self.nixosModules.steam
+    ];
 
     homeModules = [
       self.homeModules.desktop
@@ -58,47 +67,30 @@
       self.homeModules.zoxide
     ];
 
-    nixosModules = [
-      self.nixosModules.desktop
+    hardware = {
+      networking.interfaces.enp4s0.useDHCP = true;
 
-      self.nixosModules.yubikey
-      self.nixosModules.zsh
-      self.nixosModules.homeoffice
-
-      self.nixosModules.ausweisapp
-      self.nixosModules.gnome
-      self.nixosModules.nvidia
-      self.nixosModules.vpn
-      self.nixosModules.steam
-    ];
-
-    hardware =
-      { modulesPath, ... }:
-      {
-        imports = [
-          (modulesPath + "/installer/scan/not-detected.nix")
-        ];
-
-        networking.interfaces.enp4s0.useDHCP = true;
-
-        boot = {
-          initrd = {
-            availableKernelModules = [
-              "xhci_pci"
-              "nvme"
-              "ahci"
-              "usb_storage"
-              "usbhid"
-              "sd_mod"
-            ];
-            kernelModules = [ ];
-          };
-          kernelModules = [ "kvm-amd" ];
-          extraModulePackages = [ ];
+      boot = {
+        initrd = {
+          availableKernelModules = [
+            "xhci_pci"
+            "nvme"
+            "usb_storage"
+            "sd_mod"
+            "ahci"
+            "usbhid"
+          ];
+          kernelModules = [ ];
         };
-
-        hardware.cpu.amd.updateMicrocode = true;
+        kernelModules = [ "kvm-amd" ];
+        extraModulePackages = [ ];
       };
+
+      hardware = {
+        enableRedistributableFirmware = true;
+        cpu.amd.updateMicrocode = true;
+      };
+    };
 
     disko = {
       devices.disk.main = {

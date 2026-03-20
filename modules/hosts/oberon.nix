@@ -19,16 +19,6 @@
 
     home = { };
 
-    homeModules = [
-      self.homeModules.server
-
-      self.homeModules.zsh
-
-      self.homeModules.kitty
-      self.homeModules.eza
-      self.homeModules.zoxide
-    ];
-
     nixosModules = [
       self.nixosModules.server
 
@@ -51,6 +41,16 @@
       self.nixosModules.paperless
       self.nixosModules.home-assistant
       self.nixosModules.psitransfer
+    ];
+
+    homeModules = [
+      self.homeModules.server
+
+      self.homeModules.zsh
+
+      self.homeModules.kitty
+      self.homeModules.eza
+      self.homeModules.zoxide
     ];
 
     hardware = {

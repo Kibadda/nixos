@@ -70,48 +70,43 @@
         };
       };
 
-    home =
-      {
-        pkgs,
-        ...
-      }:
-      {
-        kibadda = {
-          ssh.hosts = [
+    home = {
+      kibadda = {
+        ssh.hosts = [
+          {
+            name = "oberon";
+            host = "10.0.0.3";
+            port = secrets.home.sshPort;
+          }
+        ];
+
+        git = {
+          settings = {
+            user.email = secrets.work.email;
+            pull.rebase = false;
+          };
+
+          includes = [
             {
-              name = "oberon";
-              host = "10.0.0.3";
-              port = secrets.home.sshPort;
+              condition = "gitdir:~/Projects/Personal/";
+              contents = {
+                user.email = secrets.base.email;
+                pull.rebase = true;
+              };
+            }
+            {
+              condition = "gitdir:~/Projects/neovim/";
+              contents = {
+                user.email = secrets.base.email;
+                pull.rebase = true;
+              };
             }
           ];
-
-          git = {
-            settings = {
-              user.email = secrets.work.email;
-              pull.rebase = false;
-            };
-
-            includes = [
-              {
-                condition = "gitdir:~/Projects/Personal/";
-                contents = {
-                  user.email = secrets.base.email;
-                  pull.rebase = true;
-                };
-              }
-              {
-                condition = "gitdir:~/Projects/neovim/";
-                contents = {
-                  user.email = secrets.base.email;
-                  pull.rebase = true;
-                };
-              }
-            ];
-          };
         };
-
-        programs.firefox.profiles.work.isDefault = true;
       };
+
+      programs.firefox.profiles.work.isDefault = true;
+    };
 
     nixosModules = [
       self.nixosModules.desktop
@@ -142,33 +137,30 @@
       self.homeModules.zoxide
     ];
 
-    hardware =
-      { modulesPath, ... }:
-      {
-        imports = [
-          (modulesPath + "/installer/scan/not-detected.nix")
-        ];
+    hardware = {
+      networking.interfaces.enp4s0.useDHCP = true;
 
-        networking.interfaces.enp4s0.useDHCP = true;
-
-        boot = {
-          initrd = {
-            availableKernelModules = [
-              "nvme"
-              "xhci_pci"
-              "ahci"
-              "usbhid"
-              "usb_storage"
-              "sd_mod"
-            ];
-            kernelModules = [ ];
-          };
+      boot = {
+        initrd = {
+          availableKernelModules = [
+            "xhci_pci"
+            "nvme"
+            "usb_storage"
+            "sd_mod"
+            "ahci"
+            "usbhid"
+          ];
           kernelModules = [ ];
-          extraModulePackages = [ ];
         };
-
-        hardware.cpu.amd.updateMicrocode = true;
+        kernelModules = [ "kvm-amd" ];
+        extraModulePackages = [ ];
       };
+
+      hardware = {
+        enableRedistributableFirmware = true;
+        cpu.amd.updateMicrocode = true;
+      };
+    };
 
     disko = {
       devices.disk.main = {
