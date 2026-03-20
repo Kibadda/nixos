@@ -61,7 +61,7 @@
             Services = lib.concatMap (service: [
               {
                 ${service.description} = {
-                  icon = "${service.name}.svg";
+                  icon = service.icon;
                   href = service.url;
                   siteMonitor = service.url;
                 };

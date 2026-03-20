@@ -5,6 +5,7 @@
       subdomain = "ad";
       port = 3000;
       auth = "none";
+      icon = "adguard-home.svg";
     };
 
     networking.firewall = {

@@ -87,6 +87,10 @@
               description = lib.mkOption {
                 type = lib.types.str;
               };
+              icon = lib.mkOption {
+                type = lib.types.str;
+                default = "${config._module.args.name}.svg";
+              };
             };
           }
         )

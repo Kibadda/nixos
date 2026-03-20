@@ -15,6 +15,7 @@
         subdomain = "share";
         port = 8432;
         auth = "none";
+        icon = "psitransfer.webp";
       };
 
       users = {
