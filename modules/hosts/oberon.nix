@@ -41,6 +41,7 @@
       self.nixosModules.paperless
       self.nixosModules.home-assistant
       self.nixosModules.psitransfer
+      self.nixosModules.pgadmin
     ];
 
     homeModules = [
