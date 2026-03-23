@@ -344,7 +344,13 @@
                       at = "08:30:00";
                       weekday = "sat";
                     };
-                    message = "\"Dein Bart ist schon wieder viel zu lang.\" - Annabell";
+                    condition = [
+                      {
+                        condition = "template";
+                        value_template = "{{ (now().isocalendar()[1] % 2) == 1 }}";
+                      }
+                    ];
+                    message = "{{ [ '\"Dein Bart ist schon wieder viel zu lang.\" - Annabell', '\"Du pikst!\" - Annabell' ] | random }}";
                   }
                   {
                     name = "ING";
