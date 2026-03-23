@@ -47,6 +47,8 @@
           mounts = secrets.work.sshMounts;
         };
 
+        zsh.shellAliases.sfs = "sftpman mount_all";
+
         firefox.profiles.work = {
           id = 1;
           extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
