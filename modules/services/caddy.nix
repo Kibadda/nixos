@@ -45,6 +45,9 @@
             api_password ${secrets.pi.netcup.api_password}
           }
         '';
+        virtualHosts."fotos.strobel-süß.de".extraConfig = ''
+          redir https://pics.${secrets.pi.domain}{uri} permanent
+        '';
         virtualHosts."*.${domain}, ${domain}".extraConfig = ''
           tls {
             dns netcup {
