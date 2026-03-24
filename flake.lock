@@ -304,11 +304,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1770622951,
-        "narHash": "sha256-SIVdIJNaFg/bR8nF20hWKRpV4M/f4ULRKpb7yn607hI=",
+        "lastModified": 1774358285,
+        "narHash": "sha256-wVXWyjgrHFdLPcaduxEnz/HV8l1Uxeju2RefNfG0MZ8=",
         "owner": "Kibadda",
         "repo": "work",
-        "rev": "e70b5359cfbe9feeca01163964b7219da677867c",
+        "rev": "e319262a1ba5c58e850084ac837df46e7dac881b",
         "type": "github"
       },
       "original": {
