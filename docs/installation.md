@@ -1,34 +1,51 @@
 # Desktop
 
-```console
-nix-env -iA nixos.git
+This pretends that git, git-crypt and disko are installed on the live usb.
 
+1. export key
+```bash
+git-crypt export-key EXPORTED_KEY.gpg
+```
+
+2. use psitransfer to transfer exported key to new host
+
+3. clone github repository
+```bash
 git clone https://github.com/Kibadda/nixos /tmp/nixos
 ```
 
-```console
-export HOSTNAME=uranus
+4. unlock git-crypt
+```bash
+git unlock EXPORTED_KEY.gpg
 ```
 
-```console
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/nixos/machines/$HOSTNAME/disko-config.nix
+5. export hostname
+```bash
+export HOST=hostname
 ```
 
-optionally generate hardware-configuration.nix
+6. disko
+```bash
+disko --mode destroy,format,mount --flake /tmp/nixos#$HOST
+```
 
-```console
+7. generate hardware-config and update in host
+```bash
 sudo nixos-generate-config --no-filesystems --root /mnt
-
-cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nixos/machines/$HOSTNAME/hardware-configuration.nix
 ```
 
-```console
-sudo nixos-install --flake /tmp/nixos#$HOSTNAME
-
-sudo reboot now
+8. nixos install
+```bash
+sudo nixos-install --flake /tmp/nixos#$HOST
 ```
 
-```console
+9. reboot
+```bash
+reboot now
+```
+
+10. generate u2f keys
+```bash
 nix-shell -p pam_u2f --run 'mkdir -p $HOME/.config/Yubico && pamu2fcfg > $HOME/.config/Yubico/u2f_keys'
 ```
 
