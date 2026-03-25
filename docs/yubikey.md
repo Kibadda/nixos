@@ -4,7 +4,7 @@
 
 mount usb
 
-```console
+```bash
 lsblk
 
 sudo cryptsetup luksOpen /dev/sda1 gnupg-secrets
@@ -20,7 +20,7 @@ sudo mount /dev/sda2 /mnt/public
 
 create directory
 
-```console
+```bash
 export GNUPGHOME=$(mktemp -d -t gnupg-$(date +%Y-%m-%d)-XXXXXXXXXX)
 
 cd $GNUPGHOME
@@ -28,7 +28,7 @@ cd $GNUPGHOME
 cp -avi /mnt/encrypted-storage/gnupg-*/* $GNUPGHOME
 ```
 
-```console
+```bash
 gpg -K
 
 export KEYID=$(gpg -k --with-colons "$IDENTITY" | awk -F: '/^pub:/ { print $5; exit }')
@@ -40,13 +40,11 @@ echo $KEYID $KEYFP
 
 retrieve password
 
-```console
-pass show gpg/pass
-
+```bash
 export CERTIFY_PASS=ABCD-0123-IJKL-4567-QRST-UVWX
 ```
 
-```console
+```bash
 export EXPIRATION=2y
 
 gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS" --quick-set-expire "$KEYFP" "$EXPIRATION" \
@@ -67,7 +65,7 @@ gpg --recv $KEYID
 
 unmount usb
 
-```console
+```bash
 sudp cp -av $GNUPGHOME /mnt/encrypted-storage
 
 sudo umount /mnt/public
