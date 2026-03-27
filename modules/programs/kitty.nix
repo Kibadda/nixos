@@ -3,7 +3,7 @@
   ...
 }:
 {
-  config.flake.homeModules.kitty =
+  flake.homeModules.kitty =
     {
       config,
       ...

@@ -4,7 +4,7 @@
   ...
 }:
 {
-  config.flake.nixosModules.vpn =
+  flake.nixosModules.vpn =
     {
       config,
       pkgs,
