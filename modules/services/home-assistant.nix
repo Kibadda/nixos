@@ -344,12 +344,10 @@
                       at = "08:30:00";
                       weekday = "sat";
                     };
-                    condition = [
-                      {
-                        condition = "template";
-                        value_template = "{{ (now().isocalendar()[1] % 2) == 1 }}";
-                      }
-                    ];
+                    condition = {
+                      condition = "template";
+                      value_template = "{{ (now().isocalendar()[1] % 2) == 1 }}";
+                    };
                     message = "{{ [ '\"Dein Bart ist schon wieder viel zu lang.\" - Annabell', '\"Du pikst!\" - Annabell' ] | random }}";
                   }
                   {
@@ -360,6 +358,19 @@
                       weekday = "sat";
                     };
                     message = "Check mal ab wie viel Geld auf der hohen Kante liegt.";
+                  }
+                  {
+                    name = "Sukkulente";
+                    trigger = {
+                      trigger = "time";
+                      at = "09:00:00";
+                      weekday = "sat";
+                    };
+                    condition = {
+                      condition = "template";
+                      value_template = "{{ (now().isocalendar()[1] % 4) == 2 }}";
+                    };
+                    message = "\"Hydrier mich mal.\" - Sukkulente";
                   }
                   {
                     name = "Wäsche";
