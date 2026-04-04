@@ -386,6 +386,14 @@
                     message = "Vielleicht ist der Wäschekorb voll.";
                   }
                   {
+                    name = "Hydration";
+                    trigger = {
+                      trigger = "time_pattern";
+                      minutes = "/30";
+                    };
+                    message = "Immer hydriert bleiben!";
+                  }
+                  {
                     name = "Handy laden";
                     trigger = [
                       {
