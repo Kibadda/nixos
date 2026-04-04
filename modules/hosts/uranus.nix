@@ -65,6 +65,7 @@
       self.homeModules.neovim
       self.homeModules.ssh
       self.homeModules.zoxide
+      self.homeModules.config-checker
     ];
 
     hardware = {
