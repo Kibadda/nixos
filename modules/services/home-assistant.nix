@@ -391,6 +391,10 @@
                       trigger = "time_pattern";
                       minutes = "/30";
                     };
+                    condition = {
+                      condition = "time";
+                      after = "06:00:00";
+                    };
                     message = "Immer hydriert bleiben!";
                   }
                   {
