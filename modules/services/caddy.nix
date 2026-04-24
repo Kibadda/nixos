@@ -80,7 +80,9 @@
                 ${lib.optionalString (!service.open) deny}
                 ${lib.optionalString (service.auth == "forward") auth}
                 ${service.extra}
-                reverse_proxy ${service.host}:${toString service.port}
+                ${lib.optionalString (
+                  service.port != null
+                ) "reverse_proxy ${service.host}:${toString service.port}"}
               }
             '') (builtins.attrValues config.kibadda.services)
           )}

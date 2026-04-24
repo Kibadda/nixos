@@ -24,7 +24,8 @@
                 default = "localhost";
               };
               port = lib.mkOption {
-                type = lib.types.int;
+                type = lib.types.nullOr lib.types.int;
+                default = null;
               };
               open = lib.mkOption {
                 type = lib.types.bool;
