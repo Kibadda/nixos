@@ -58,15 +58,18 @@
         };
         services = [
           {
-            Services = lib.concatMap (service: [
-              {
-                ${service.description} = {
-                  icon = service.icon;
-                  href = service.url;
-                  siteMonitor = service.url;
-                };
-              }
-            ]) (builtins.attrValues config.kibadda.services);
+            Services =
+              lib.concatMap
+                (service: [
+                  {
+                    ${service.description} = {
+                      icon = service.icon;
+                      href = service.url;
+                      siteMonitor = service.url;
+                    };
+                  }
+                ])
+                (builtins.sort (a: b: a.description < b.description) (builtins.attrValues config.kibadda.services));
           }
           {
             Links = [
