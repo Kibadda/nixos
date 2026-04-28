@@ -13,6 +13,7 @@
       kibadda.services.freshrss = {
         description = "RSS";
         subdomain = "rss";
+        open = true;
         auth = "forward";
         extra = ''
           root * ${config.services.freshrss.package}/p
