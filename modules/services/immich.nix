@@ -31,8 +31,8 @@
 
     services.immich = {
       enable = true;
-      openFirewall = true;
       machine-learning.enable = true;
+      port = 2283;
       settings = {
         server.externalDomain = "https://pics.${secrets.pi.domain}";
         storageTemplate = {
