@@ -43,6 +43,7 @@
       self.nixosModules.psitransfer
       self.nixosModules.freshrss
       self.nixosModules.it-tools
+      self.nixosModules.n8n
     ];
 
     homeModules = [
