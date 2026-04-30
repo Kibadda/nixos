@@ -42,6 +42,7 @@
       self.nixosModules.home-assistant
       self.nixosModules.psitransfer
       self.nixosModules.freshrss
+      self.nixosModules.it-tools
     ];
 
     homeModules = [
