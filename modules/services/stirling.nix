@@ -5,6 +5,7 @@
       subdomain = "pdf";
       port = 8079;
       auth = "none";
+      icon = "stirling-pdf.svg";
     };
 
     services.stirling-pdf = {
