@@ -25,14 +25,14 @@
       kibadda = {
         git.includes = [
           {
-            condition = "gitdir:/mnt/studiesbeta/";
+            condition = "gitdir:/mnt/sshfs/studiesbeta/";
             contents = {
               user.email = secrets.work.email;
               pull.rebase = false;
             };
           }
           {
-            condition = "gitdir:/mnt/beta/";
+            condition = "gitdir:/mnt/sshfs/beta/";
             contents = {
               user.email = secrets.work.email;
               pull.rebase = false;
