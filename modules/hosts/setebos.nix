@@ -35,6 +35,8 @@
           };
         };
 
+        networking.hosts = secrets.work.hosts;
+
         programs.nix-ld = {
           enable = true;
           libraries = with pkgs; [
