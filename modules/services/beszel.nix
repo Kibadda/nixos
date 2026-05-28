@@ -8,20 +8,15 @@
       description = "Monitoring";
       subdomain = "monitoring";
       port = 8090;
-      auth = "oidc";
-      oidc = {
-        redirect_uris = [
-          "https://monitoring.${secrets.pi.domain}/api/oauth2-redirect"
-        ];
-        method = "basic";
-      };
+      auth = "none";
     };
 
     services.beszel.hub = {
       enable = true;
       port = 8090;
       environment = {
-        DISABLE_PASSWORD_AUTH = "true";
+        SHARE_ALL_SYSTEMS = "true";
+        AUTO_LOGIN = secrets.pi.beszel.admin.email;
         USER_CREATION = "true";
         USER_EMAIL = secrets.pi.beszel.admin.email;
         USER_PASSWORD = secrets.pi.beszel.admin.password;
