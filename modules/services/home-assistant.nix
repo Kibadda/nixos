@@ -180,8 +180,8 @@
             # telegram_bot = [
             #   {
             #     platform = "polling";
-            #     api_key = secrets.pi.home-assistant.telegram.bot_token;
-            #     allowed_chat_ids = [ secrets.pi.home-assistant.telegram.chat_id ];
+            #     api_key = secrets.pi.telegram.bot_token;
+            #     allowed_chat_ids = [ secrets.pi.telegram.chat_id ];
             #   }
             # ];
 
