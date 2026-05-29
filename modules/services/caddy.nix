@@ -59,7 +59,17 @@
             resolvers 1.1.1.1 8.8.8.8
           }
 
-          header -Server
+          header {
+            -Server
+            -X-Powered-By
+            -Via
+
+            X-Content-Type-Options nosniff
+            X-Frame-Options SAMEORIGIN
+            Referrer-Polixy strict-origin-when-cross-origin
+            Strict-Transport-Security "max-age=604800; includeSubdomains; reload"
+            Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+          }
 
           @sso host sso.${domain}
           handle @sso {
