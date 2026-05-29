@@ -13,6 +13,7 @@
         paths = [ "/var/lib/bitwarden_rs" ];
         time = "03:00";
       };
+      section = "Apps";
     };
 
     services.vaultwarden = {

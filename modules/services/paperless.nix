@@ -24,6 +24,7 @@
           paths = [ "/mnt/paperless" ];
           time = "04:00";
         };
+        section = "Tools";
       };
 
       services.paperless = {

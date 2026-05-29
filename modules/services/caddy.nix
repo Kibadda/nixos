@@ -14,7 +14,6 @@
     let
       domain = secrets.pi.domain;
       authelia-port = 9091;
-      dashboard-port = 8082;
       auth = ''
         forward_auth 127.0.0.1:${toString authelia-port} {
           uri /api/authz/forward-auth
@@ -65,12 +64,6 @@
           @sso host sso.${domain}
           handle @sso {
             reverse_proxy 127.0.0.1:${toString authelia-port}
-          }
-
-          @dashboard host dashboard.${domain}
-          handle @dashboard {
-            ${auth}
-            reverse_proxy 127.0.0.1:${toString dashboard-port}
           }
 
           ${lib.concatStringsSep "\n" (

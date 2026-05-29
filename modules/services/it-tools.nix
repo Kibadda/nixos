@@ -13,6 +13,7 @@
           root * ${pkgs.it-tools}/lib
           file_server
         '';
+        section = "Tools";
       };
     };
 }

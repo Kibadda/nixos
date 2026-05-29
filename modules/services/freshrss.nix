@@ -22,6 +22,7 @@
           }
           file_server
         '';
+        section = "Tools";
       };
 
       services = {

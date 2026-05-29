@@ -14,6 +14,7 @@
         subdomain = "automation";
         port = 5678;
         auth = "forward";
+        section = "Tools";
       };
 
       services = {

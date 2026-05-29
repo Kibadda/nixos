@@ -31,6 +31,7 @@
           paths = [ "/mnt/trilium" ];
           time = "03:30";
         };
+        section = "Apps";
       };
 
       services.trilium-server = {

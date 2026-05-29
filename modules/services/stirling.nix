@@ -6,6 +6,7 @@
       port = 8079;
       auth = "none";
       icon = "stirling-pdf.svg";
+      section = "Tools";
     };
 
     services.stirling-pdf = {

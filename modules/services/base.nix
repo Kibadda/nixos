@@ -92,6 +92,20 @@
                 type = lib.types.str;
                 default = "${config._module.args.name}.svg";
               };
+              section = lib.mkOption {
+                type = lib.types.nullOr (
+                  lib.types.enum [
+                    "Monitoring"
+                    "Tools"
+                    "Apps"
+                  ]
+                );
+                default = null;
+              };
+              widget = lib.mkOption {
+                type = lib.types.nullOr lib.types.attrs;
+                default = null;
+              };
             };
           }
         )

@@ -27,6 +27,13 @@
         paths = [ "/mnt/immich" ];
         time = "03:15";
       };
+      widget = {
+        type = "immich";
+        url = "https://pics.${secrets.pi.domain}";
+        key = secrets.pi.immich.apikey;
+        version = 2;
+      };
+      section = "Apps";
     };
 
     services.immich = {

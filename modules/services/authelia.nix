@@ -36,13 +36,7 @@
 
           access_control = {
             default_policy = "deny";
-            rules = [
-              {
-                domain = "dashboard.${domain}";
-                policy = "one_factor";
-              }
-            ]
-            ++ lib.concatMap (
+            rules = lib.concatMap (
               service:
               lib.optional (service.auth != "none") {
                 domain = [ "${service.subdomain}.${domain}" ];

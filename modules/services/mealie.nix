@@ -19,6 +19,7 @@
         paths = [ "/var/lib/mealie" ];
         time = "03:45";
       };
+      section = "Apps";
     };
 
     services.mealie = {

@@ -20,6 +20,7 @@
           paths = [ "/mnt/home-assistant" ];
           time = "04:15";
         };
+        section = "Apps";
       };
 
       services = {
