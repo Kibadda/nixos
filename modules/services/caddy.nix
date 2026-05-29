@@ -13,9 +13,8 @@
     }:
     let
       domain = secrets.pi.domain;
-      authelia-port = 9091;
       auth = ''
-        forward_auth 127.0.0.1:${toString authelia-port} {
+        forward_auth 127.0.0.1:${toString config.kibadda.services.authelia.port} {
           uri /api/authz/forward-auth
           copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
         }
@@ -69,11 +68,6 @@
             Referrer-Polixy strict-origin-when-cross-origin
             Strict-Transport-Security "max-age=604800; includeSubdomains; reload"
             Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-          }
-
-          @sso host sso.${domain}
-          handle @sso {
-            reverse_proxy 127.0.0.1:${toString authelia-port}
           }
 
           ${lib.concatStringsSep "\n" (

@@ -14,6 +14,15 @@
       domain = secrets.pi.domain;
     in
     {
+      kibadda.services.authelia = {
+        description = "SSO";
+        subdomain = "sso";
+        port = 9091;
+        open = true;
+        auth = "none";
+        section = "Apps";
+      };
+
       # https://github.com/bjackman/boxen/blob/master/nixos_modules/iap.nix
       services.authelia.instances.main = {
         enable = true;
