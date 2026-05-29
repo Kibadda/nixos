@@ -5,6 +5,8 @@
 mount usb
 
 ```bash
+nix shell nixpkgs#gnupg nixpkgs#cryptsetup
+
 lsblk
 
 sudo cryptsetup luksOpen /dev/sda1 gnupg-secrets

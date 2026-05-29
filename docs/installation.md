@@ -56,3 +56,15 @@ nix build .#nixosConfigurations.pi.config.system.build.sdImage
 
 sudo dd if=TODO of=/dev/sdX bs=4096 conv=fsync status=progress
 ```
+
+# Server
+
+```bash
+# on uranus
+build oberon
+scp result/sd-image/nixos-image.img.zst titania:
+
+# on titania
+unzstd nixos-image.img.zst
+sudo dd bs=4096 conv=fsync status=progress of=/dev/mmcblk0 if=nixos-image.img
+```
