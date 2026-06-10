@@ -31,6 +31,7 @@
       url = "github:mobile-nixos/mobile-nixos";
       flake = false;
     };
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =

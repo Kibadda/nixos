@@ -56,6 +56,7 @@
         overlays = [
           inputs.nur.overlays.default
           inputs.work.overlays.default
+          inputs.llm-agents.overlays.default
         ];
         config = {
           allowUnsupportedSystem = true;

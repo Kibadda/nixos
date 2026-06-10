@@ -69,7 +69,7 @@
         xdg-utils
         spotify
         telegram-desktop
-        claude-code
+        llm-agents.claude-code
       ];
     };
 }
