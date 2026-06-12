@@ -7,7 +7,7 @@ This pretends that git, git-crypt and disko are installed on the live usb.
 git-crypt export-key EXPORTED_KEY.gpg
 ```
 
-2. use psitransfer to transfer exported key to new host
+2. use cloud to transfer exported key to new host
 
 3. clone github repository
 ```bash
