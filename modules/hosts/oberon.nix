@@ -45,6 +45,7 @@
       self.nixosModules.it-tools
       self.nixosModules.n8n
       self.nixosModules.stirling
+      self.nixosModules.nextcloud
     ];
 
     homeModules = [
