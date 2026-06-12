@@ -49,7 +49,7 @@
               service:
               lib.optional (service.auth != "none") {
                 domain = [ "${service.subdomain}.${domain}" ];
-                policy = if service.auth == "oidc" then "bypass" else "one_factor";
+                policy = if service.auth == "oidc" then "bypass" else service.policy;
               }
             ) (builtins.attrValues config.kibadda.services);
           };
@@ -82,7 +82,7 @@
                 response_types = [ "code" ];
                 grant_types = [ "authorization_code" ];
                 public = false;
-                authorization_policy = "one_factor";
+                authorization_policy = service.policy;
                 token_endpoint_auth_method = "client_secret_${service.oidc.method}";
                 consent_mode = "implicit";
                 claims_policy = lib.mkIf (service.oidc.claim != null) service.name;

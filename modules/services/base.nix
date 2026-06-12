@@ -42,6 +42,13 @@
                   "forward"
                 ];
               };
+              policy = lib.mkOption {
+                type = lib.types.enum [
+                  "one_factor"
+                  "two_factor"
+                ];
+                default = "one_factor";
+              };
               oidc = lib.mkOption {
                 type = lib.types.nullOr (
                   lib.types.submodule {
