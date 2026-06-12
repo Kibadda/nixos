@@ -40,7 +40,7 @@
       self.nixosModules.trilium
       self.nixosModules.paperless
       self.nixosModules.home-assistant
-      self.nixosModules.freshrss
+      # self.nixosModules.freshrss
       self.nixosModules.it-tools
       self.nixosModules.n8n
       self.nixosModules.stirling
