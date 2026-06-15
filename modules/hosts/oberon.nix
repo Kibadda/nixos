@@ -28,6 +28,7 @@
       self.nixosModules.caddy
       self.nixosModules.authelia
       self.nixosModules.restic
+      self.nixosModules.backup
       self.nixosModules.adguardhome
 
       self.nixosModules.fail2ban

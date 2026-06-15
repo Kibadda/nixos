@@ -13,12 +13,16 @@
         paths = [ "/var/lib/bitwarden_rs" ];
         time = "03:00";
       };
+      backup2.archive = [
+        "/var/backup/vaultwarden"
+      ];
       section = "Apps";
     };
 
     services.vaultwarden = {
       enable = true;
       environmentFile = "/etc/vaultwarden/env";
+      backupDir = "/var/backup/vaultwarden";
       config = {
         DOMAIN = "https://pass.${secrets.pi.domain}";
         SIGNUPS_ALLOWED = false;

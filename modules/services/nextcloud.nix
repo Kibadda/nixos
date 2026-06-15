@@ -30,6 +30,10 @@
           paths = [ "/mnt/nextcloud" ];
           time = "03:00";
         };
+        backup2 = {
+          archive = [ "/mnt/nextcloud/data/nextcloud.db" ];
+          sync = [ "/mnt/nextcloud/data/michael" ];
+        };
         section = "Apps";
       };
 

@@ -87,6 +87,16 @@
                 );
                 default = null;
               };
+              backup2 = {
+                sync = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                  default = [ ];
+                };
+                archive = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                  default = [ ];
+                };
+              };
               url = lib.mkOption {
                 type = lib.types.str;
                 readOnly = true;

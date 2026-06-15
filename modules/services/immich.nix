@@ -27,6 +27,14 @@
         paths = [ "/mnt/immich" ];
         time = "03:15";
       };
+      backup2 = {
+        archive = [ "/mnt/immich/backups" ];
+        sync = [
+          "/mnt/immich/library"
+          "/mnt/immich/upload"
+          "/mnt/immich/profile"
+        ];
+      };
       widget = {
         type = "immich";
         url = "https://pics.${secrets.pi.domain}";
