@@ -39,7 +39,7 @@
       self.nixosModules.vaultwarden
       self.nixosModules.mealie
       self.nixosModules.trilium
-      self.nixosModules.paperless
+      # self.nixosModules.paperless
       self.nixosModules.home-assistant
       # self.nixosModules.freshrss
       self.nixosModules.it-tools
