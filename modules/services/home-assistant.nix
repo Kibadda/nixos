@@ -6,6 +6,7 @@
 {
   flake.nixosModules.home-assistant =
     {
+      config,
       pkgs,
       ...
     }:
@@ -160,7 +161,7 @@
 
             http = {
               server_port = 8123;
-              base_url = "https://home.${secrets.pi.domain}";
+              base_url = config.kibadda.services.home-assistant.url;
               use_x_forwarded_for = true;
               cors_allowed_origins = "*";
               trusted_proxies = [

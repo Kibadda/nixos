@@ -10,9 +10,6 @@
       pkgs,
       ...
     }:
-    let
-      domain = secrets.pi.domain;
-    in
     {
       kibadda.services.authelia = {
         description = "SSO";
@@ -48,7 +45,7 @@
             rules = lib.concatMap (
               service:
               lib.optional (service.auth != "none") {
-                domain = [ "${service.subdomain}.${domain}" ];
+                domain = [ service.hostname ];
                 policy = if service.auth == "oidc" then "bypass" else service.policy;
               }
             ) (builtins.attrValues config.kibadda.services);
@@ -58,8 +55,8 @@
             name = "session";
             cookies = [
               {
-                domain = domain;
-                authelia_url = "https://sso.${domain}";
+                domain = secrets.pi.domain;
+                authelia_url = config.kibadda.services.authelia.url;
               }
             ];
           };

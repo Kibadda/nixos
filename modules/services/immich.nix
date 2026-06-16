@@ -3,71 +3,76 @@
   ...
 }:
 {
-  flake.nixosModules.immich = {
-    kibadda.services.immich = {
-      description = "Fotos";
-      subdomain = "pics";
-      port = 2283;
-      open = true;
-      extra = ''
-        request_body {
-          max_size 10GB
-        }
-      '';
-      auth = "oidc";
-      oidc = {
-        redirect_uris = [
-          "https://pics.${secrets.pi.domain}/auth/login"
-          "https://pics.${secrets.pi.domain}/user-settings"
-          "app.immich:///oauth-callback"
-        ];
-        method = "post";
-      };
-      backup = {
-        paths = [ "/mnt/immich" ];
-        time = "03:15";
-      };
-      backup2 = {
-        archive = [ "/mnt/immich/backups" ];
-        sync = [
-          "/mnt/immich/library"
-          "/mnt/immich/upload"
-          "/mnt/immich/profile"
-        ];
-      };
-      widget = {
-        type = "immich";
-        url = "https://pics.${secrets.pi.domain}";
-        key = secrets.pi.immich.apikey;
-        version = 2;
-      };
-      section = "Apps";
-    };
-
-    services.immich = {
-      enable = true;
-      machine-learning.enable = true;
-      port = 2283;
-      settings = {
-        server.externalDomain = "https://pics.${secrets.pi.domain}";
-        storageTemplate = {
-          enabled = true;
-          template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
+  flake.nixosModules.immich =
+    {
+      config,
+      ...
+    }:
+    {
+      kibadda.services.immich = {
+        description = "Fotos";
+        subdomain = "pics";
+        port = 2283;
+        open = true;
+        extra = ''
+          request_body {
+            max_size 10GB
+          }
+        '';
+        auth = "oidc";
+        oidc = {
+          redirect_uris = [
+            "${config.kibadda.services.immich.url}/auth/login"
+            "${config.kibadda.services.immich.url}/user-settings"
+            "app.immich:///oauth-callback"
+          ];
+          method = "post";
         };
-        oauth = {
-          enabled = true;
-          autoLaunch = true;
-          issuerUrl = "https://sso.${secrets.pi.domain}/.well-known/openid-configuration";
-          clientId = "immich";
-          clientSecret = secrets.pi.authelia.oidc.immich;
+        backup = {
+          paths = [ "/mnt/immich" ];
+          time = "03:15";
         };
+        backup2 = {
+          archive = [ "/mnt/immich/backups" ];
+          sync = [
+            "/mnt/immich/library"
+            "/mnt/immich/upload"
+            "/mnt/immich/profile"
+          ];
+        };
+        widget = {
+          type = "immich";
+          url = config.kibadda.services.immich.url;
+          key = secrets.pi.immich.apikey;
+          version = 2;
+        };
+        section = "Apps";
       };
-      mediaLocation = "/mnt/immich";
-    };
 
-    systemd.tmpfiles.rules = [
-      "d /mnt/immich 0750 immich immich - -"
-      "x /mnt/immich"
-    ];
-  };
+      services.immich = {
+        enable = true;
+        machine-learning.enable = true;
+        port = 2283;
+        settings = {
+          server.externalDomain = config.kibadda.services.immich.url;
+          storageTemplate = {
+            enabled = true;
+            template = "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}";
+          };
+          oauth = {
+            enabled = true;
+            autoLaunch = true;
+            issuerUrl = "${config.kibadda.services.authelia.url}/.well-known/openid-configuration";
+            clientId = "immich";
+            clientSecret = secrets.pi.authelia.oidc.immich;
+          };
+        };
+        mediaLocation = "/mnt/immich";
+      };
+
+      systemd.tmpfiles.rules = [
+        "d /mnt/immich 0750 immich immich - -"
+        "x /mnt/immich"
+      ];
+    };
 }

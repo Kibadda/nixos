@@ -12,7 +12,6 @@
       ...
     }:
     let
-      domain = secrets.pi.domain;
       auth = ''
         forward_auth 127.0.0.1:${toString config.kibadda.services.authelia.port} {
           uri /api/authz/forward-auth
@@ -44,9 +43,9 @@
           }
         '';
         virtualHosts."fotos.strobel-süß.de".extraConfig = ''
-          redir https://pics.${secrets.pi.domain}{uri} permanent
+          redir ${config.kibadda.services.immich.url}{uri} permanent
         '';
-        virtualHosts."*.${domain}, ${domain}".extraConfig = ''
+        virtualHosts."*.${secrets.pi.domain}, ${secrets.pi.domain}".extraConfig = ''
           tls {
             dns netcup {
               customer_number ${secrets.pi.netcup.customer_number}
@@ -72,7 +71,7 @@
 
           ${lib.concatStringsSep "\n" (
             map (service: ''
-              @${service.subdomain} host ${service.subdomain}.${domain}
+              @${service.subdomain} host ${service.hostname}
               handle @${service.subdomain} {
                 ${lib.optionalString (!service.open) deny}
                 ${lib.optionalString (service.auth == "forward") auth}

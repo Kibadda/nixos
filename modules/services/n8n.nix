@@ -5,6 +5,7 @@
 {
   flake.nixosModules.n8n =
     {
+      config,
       pkgs,
       ...
     }:
@@ -26,8 +27,8 @@
             DB_POSTGRESDB_DATABASE = "n8n";
             DB_POSTGRESDB_USER = "n8n";
             N8N_PORT = 5678;
-            N8N_SSO_HOSTNAME = "automation.${secrets.pi.domain}";
-            WEBHOOK_URL = "https://automation.${secrets.pi.domain}";
+            N8N_SSO_HOSTNAME = config.kibadda.services.n8n.hostname;
+            WEBHOOK_URL = config.kibadda.services.n8n.url;
             N8N_FORWARD_AUTH_HEADER = "Remote-Email";
             N8N_HIRING_BANNER_ENABLED = "false";
             N8N_LICENSE_ACTIVATION_KEY = secrets.pi.n8n.license;
@@ -68,7 +69,7 @@
                                 // if N8N_FORWARD_AUTH_HEADER is not set, skip
                                 if (!process.env.N8N_FORWARD_AUTH_HEADER) return next()
 
-                                const allowedHost = process.env.N8N_SSO_HOSTNAME || 'automation.${secrets.pi.domain}';
+                                const allowedHost = process.env.N8N_SSO_HOSTNAME || '${config.kibadda.services.n8n.hostname}';
                                 if (req.headers.host !== allowedHost) return next()
 
                                 // if N8N_FORWARD_AUTH_HEADER header is not found, skip

@@ -178,7 +178,7 @@
             bitwarden
           ];
           settings = {
-            "browser.startup.homepage" = "https://dashboard.${secrets.pi.domain}";
+            "browser.startup.homepage" = config.kibadda.services.dashboard.url;
           };
           search = {
             default = "ddg";

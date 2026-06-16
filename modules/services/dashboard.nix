@@ -1,6 +1,5 @@
 {
   lib,
-  secrets,
   ...
 }:
 {
@@ -20,7 +19,7 @@
 
       services.homepage-dashboard = {
         enable = true;
-        allowedHosts = "dashboard.${secrets.pi.domain}";
+        allowedHosts = "${config.kibadda.services.dashboard.hostname}";
         customCSS = ''
           body, html {
             font-family: JetBrainsMono Nerd Font, Helvetica, Arial, sans-serif !important;

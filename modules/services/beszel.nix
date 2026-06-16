@@ -49,7 +49,7 @@
         environment = {
           KEY = secrets.pi.beszel.${config.networking.hostName}.key;
           TOKEN = secrets.pi.beszel.${config.networking.hostName}.token;
-          HUB_URL = "https://monitoring.${secrets.pi.domain}";
+          HUB_URL = config.kibadda.services.beszel.url;
         };
       };
     };

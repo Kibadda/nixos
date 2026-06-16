@@ -31,7 +31,7 @@
           authType = "none";
           webserver = "caddy";
           virtualHost = "dummy.${secrets.pi.domain}";
-          baseUrl = "https://rss.${secrets.pi.domain}";
+          baseUrl = config.kibadda.services.freshrss.url;
           defaultUser = "admin";
           language = "de";
           dataDir = "/mnt/freshrss";

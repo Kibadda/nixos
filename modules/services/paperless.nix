@@ -5,6 +5,7 @@
 {
   flake.nixosModules.paperless =
     {
+      config,
       pkgs,
       ...
     }:
@@ -16,7 +17,7 @@
         auth = "oidc";
         oidc = {
           redirect_uris = [
-            "https://docs.${secrets.pi.domain}/accounts/oidc/authelia/login/callback/"
+            "${config.kibadda.services.paperless.url}/accounts/oidc/authelia/login/callback/"
           ];
           method = "basic";
         };
@@ -31,7 +32,7 @@
         enable = true;
         dataDir = "/mnt/paperless";
         settings = {
-          PAPERLESS_URL = "https://docs.${secrets.pi.domain}";
+          PAPERLESS_URL = config.kibadda.services.paperless.url;
           PAPERLESS_OCR_LANGUAGE = "deu+eng";
           PAPERLESS_DISABLE_REGULAR_LOGIN = true;
           PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
@@ -51,7 +52,7 @@
                   client_id = "paperless";
                   secret = secrets.pi.authelia.oidc.paperless;
                   settings = {
-                    server_url = "https://sso.${secrets.pi.domain}";
+                    server_url = config.kibadda.services.authelia.domain;
                     token_auth_method = "client_secret_basic";
                   };
                 }

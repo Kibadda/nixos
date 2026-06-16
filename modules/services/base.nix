@@ -97,10 +97,15 @@
                   default = [ ];
                 };
               };
+              hostname = lib.mkOption {
+                type = lib.types.str;
+                readOnly = true;
+                default = "${config.subdomain}.${secrets.pi.domain}";
+              };
               url = lib.mkOption {
                 type = lib.types.str;
                 readOnly = true;
-                default = "https://${config.subdomain}.${secrets.pi.domain}";
+                default = "https://${config.hostname}";
               };
               description = lib.mkOption {
                 type = lib.types.str;

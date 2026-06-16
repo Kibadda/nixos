@@ -41,7 +41,7 @@
         nextcloud = {
           enable = true;
           package = pkgs.nextcloud33;
-          hostName = "cloud.${secrets.pi.domain}";
+          hostName = "${config.kibadda.services.nextcloud.hostname}";
           database.createLocally = true;
           home = "/mnt/nextcloud";
           config = {
