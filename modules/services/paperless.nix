@@ -30,10 +30,11 @@
       services.paperless = {
         enable = true;
         dataDir = "/mnt/paperless";
-        database.createLocally = true;
         settings = {
           PAPERLESS_URL = "https://docs.${secrets.pi.domain}";
           PAPERLESS_OCR_LANGUAGE = "deu+eng";
+          PAPERLESS_DISABLE_REGULAR_LOGIN = true;
+          PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
           PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
           PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
             openid_connect = {
