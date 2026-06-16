@@ -25,6 +25,11 @@
         }
         respond @denied "Forbidden" 403
       '';
+      netcup = ''
+        customer_number ${secrets.pi.netcup.customer_number}
+        api_key ${secrets.pi.netcup.api_key}
+        api_password ${secrets.pi.netcup.api_password}
+      '';
     in
     {
       services.caddy = {
@@ -37,9 +42,7 @@
         globalConfig = ''
           debug
           acme_dns netcup {
-            customer_number ${secrets.pi.netcup.customer_number}
-            api_key ${secrets.pi.netcup.api_key}
-            api_password ${secrets.pi.netcup.api_password}
+            ${netcup}
           }
         '';
         virtualHosts."fotos.strobel-süß.de".extraConfig = ''
@@ -48,9 +51,7 @@
         virtualHosts."*.${secrets.pi.domain}, ${secrets.pi.domain}".extraConfig = ''
           tls {
             dns netcup {
-              customer_number ${secrets.pi.netcup.customer_number}
-              api_key ${secrets.pi.netcup.api_key}
-              api_password ${secrets.pi.netcup.api_password}
+              ${netcup}
             }
             propagation_timeout 900s
             propagation_delay 600s
