@@ -198,8 +198,8 @@
         text = ''
           gpg --batch --pinentry-mode loopback \
             --passphrase-file /etc/backup/passphrase \
-            --output \""''${1%.gpg}"\" \
-            --decrypt \""$1"\"
+            --output "''${1%.gpg}" \
+            --decrypt "$1"
         '';
       };
     in
