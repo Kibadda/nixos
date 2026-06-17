@@ -103,6 +103,7 @@
               base="$(basename "$p")"
               echo "Syncing $name/$base..."
               aws s3 sync "$p" "s3://${secrets.pi.backup.bucket}/$name/sync/$base/" \
+                --delete \
                 --storage-class DEEP_ARCHIVE
             done
           }
