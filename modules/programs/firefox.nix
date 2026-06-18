@@ -29,6 +29,7 @@
 
       programs.firefox = {
         enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
         policies = {
           DontCheckDefaultBrowser = true;
           DisableTelemetry = true;

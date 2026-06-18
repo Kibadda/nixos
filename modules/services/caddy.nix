@@ -36,7 +36,7 @@
         enable = true;
         package = pkgs.caddy.withPlugins {
           plugins = [ "github.com/caddy-dns/netcup@v1.0.0" ];
-          hash = "sha256-rIImoqXFgbEfgygoGguwATCZV3B6IImRjU+g92IlCtE=";
+          hash = "sha256-WRX4/RzshpC6CdtEImw+pRs14qQFh9zuWSSGdU4ZDgU=";
         };
         email = secrets.base.email;
         globalConfig = ''

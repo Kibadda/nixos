@@ -44,17 +44,7 @@
             "local_calendar"
           ];
           customComponents = [
-            (pkgs.home-assistant-custom-components.waste_collection_schedule.overrideAttrs (
-              final: _: {
-                version = "2.6.0";
-                src = pkgs.fetchFromGitHub {
-                  owner = "mampfes";
-                  repo = "hacs_waste_collection_schedule";
-                  tag = final.version;
-                  hash = "sha256-gfL5Nxe8io7DTya5x8aQ5PhxiH8rb8L3/CA+UqKEDAk=";
-                };
-              }
-            ))
+            pkgs.home-assistant-custom-components.waste_collection_schedule
           ];
           configDir = "/mnt/home-assistant";
           lovelaceConfig = {

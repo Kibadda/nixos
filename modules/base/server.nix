@@ -13,16 +13,22 @@
 
   flake.nixosModules.server =
     {
-      pkgs,
+      modulesPath,
       ...
     }:
     {
       imports = [
         self.nixosModules.base
-        # FIX: how do i set fileSystems root now?
-        inputs.nixos-generators.nixosModules.sd-aarch64
+        "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
       ];
+
+      boot = {
+        zfs.forceImportRoot = false;
+        supportedFilesystems.zfs = false;
+      };
+
+      sdImage.compressImage = false;
 
       networking.wireless = {
         enable = true;

@@ -10,6 +10,8 @@
 
     configuration = {
       kibadda.vpn.home = true;
+
+      boot.zfs.forceImportRoot = false;
     };
 
     home = { };

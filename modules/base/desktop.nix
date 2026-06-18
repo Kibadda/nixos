@@ -49,6 +49,7 @@
           efi.canTouchEfiVariables = true;
         };
         binfmt.emulatedSystems = [ "aarch64-linux" ];
+        zfs.forceImportRoot = false;
       };
 
       networking.networkmanager.enable = true;

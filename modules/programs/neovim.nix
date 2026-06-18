@@ -16,7 +16,7 @@
         packages = with pkgs; [
           selfpkgs.nvimupdate
           lua-language-server
-          nodePackages.intelephense
+          intelephense
           typescript-language-server
           nil
           stylua

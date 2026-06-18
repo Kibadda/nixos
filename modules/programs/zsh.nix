@@ -5,13 +5,15 @@
 {
   flake.homeModules.zsh =
     {
+      config,
       pkgs,
       ...
     }:
     {
       programs.zsh = {
         enable = true;
-        history.path = "/home/${secrets.base.username}/.config/zsh/history";
+        history.path = "${config.xdg.configHome}/zsh/history";
+        dotDir = "${config.xdg.configHome}/zsh";
         autosuggestion.enable = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
@@ -39,8 +41,7 @@
             }
 
             function build() {
-              # nix build .#nixosConfigurations.$1.config.system.build.sdImage
-              nixos-rebuild build-image --image-variant iso --flake .#$1
+              nixos-rebuild build-image --image-variant sd-card --flake .#$1
             }
           '';
 
