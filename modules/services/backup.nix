@@ -12,18 +12,18 @@
     }:
     let
       services = lib.filterAttrs (
-        _: service: service.backup2.sync != [ ] || service.backup2.archive != [ ]
+        _: service: service.backup.sync != [ ] || service.backup.archive != [ ]
       ) config.kibadda.services;
 
       calls = lib.concatStringsSep "\n" (
         lib.flatten (
           lib.mapAttrsToList (
             name: service:
-            lib.optional (service.backup2.archive != [ ])
-              ''backup_archive ${name} ${lib.escapeShellArgs service.backup2.archive} || { echo "archive backup of ${name} failed" >&2; failed=1; }''
+            lib.optional (service.backup.archive != [ ])
+              ''backup_archive ${name} ${lib.escapeShellArgs service.backup.archive} || { echo "archive backup of ${name} failed" >&2; failed=1; }''
             ++
-              lib.optional (service.backup2.sync != [ ])
-                ''backup_sync ${name} ${lib.escapeShellArgs service.backup2.sync} || { echo "sync backup of ${name} failed" >&2; failed=1; }''
+              lib.optional (service.backup.sync != [ ])
+                ''backup_sync ${name} ${lib.escapeShellArgs service.backup.sync} || { echo "sync backup of ${name} failed" >&2; failed=1; }''
           ) services
         )
       );
@@ -227,8 +227,10 @@
       };
 
       environment = {
-        etc."backup/env".text = secrets.pi.backup.environment;
-        etc."backup/passphrase".text = secrets.pi.backup.passphrase;
+        etc = {
+          "backup/env".text = secrets.pi.backup.environment;
+          "backup/passphrase".text = secrets.pi.backup.passphrase;
+        };
 
         systemPackages = [
           decrypt

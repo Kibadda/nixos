@@ -28,11 +28,7 @@
             ];
           };
         };
-        backup = {
-          paths = [ "/mnt/trilium" ];
-          time = "03:30";
-        };
-        backup2.archive = [ "/mnt/trilium/document.db" ];
+        backup.archive = [ "/mnt/trilium/document.db" ];
         section = "Apps";
       };
 

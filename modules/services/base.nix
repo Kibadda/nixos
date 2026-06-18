@@ -71,23 +71,7 @@
                 );
                 default = null;
               };
-              backup = lib.mkOption {
-                type = lib.types.nullOr (
-                  lib.types.submodule {
-                    options = {
-                      paths = lib.mkOption {
-                        type = lib.types.listOf lib.types.str;
-                      };
-                      time = lib.mkOption {
-                        type = lib.types.str;
-                        default = "01:00";
-                      };
-                    };
-                  }
-                );
-                default = null;
-              };
-              backup2 = {
+              backup = {
                 sync = lib.mkOption {
                   type = lib.types.listOf lib.types.str;
                   default = [ ];

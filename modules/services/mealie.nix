@@ -20,11 +20,7 @@
           ];
           method = "basic";
         };
-        backup = {
-          paths = [ "/var/lib/mealie" ];
-          time = "03:45";
-        };
-        backup2.archive = [ "/var/lib/private/mealie" ];
+        backup.archive = [ "/var/lib/private/mealie" ];
         section = "Apps";
       };
 

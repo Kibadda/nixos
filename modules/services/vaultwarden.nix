@@ -14,11 +14,7 @@
         subdomain = "pass";
         port = 8222;
         auth = "none";
-        backup = {
-          paths = [ "/var/lib/bitwarden_rs" ];
-          time = "03:00";
-        };
-        backup2.archive = [
+        backup.archive = [
           "/var/backup/vaultwarden"
         ];
         section = "Apps";

@@ -29,10 +29,6 @@
           method = "post";
         };
         backup = {
-          paths = [ "/mnt/immich" ];
-          time = "03:15";
-        };
-        backup2 = {
           archive = [ "/mnt/immich/backups" ];
           sync = [
             "/mnt/immich/library"

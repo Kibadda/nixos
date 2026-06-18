@@ -17,10 +17,6 @@
         port = 8123;
         open = true;
         auth = "none";
-        backup = {
-          paths = [ "/mnt/home-assistant" ];
-          time = "04:15";
-        };
         section = "Apps";
       };
 
