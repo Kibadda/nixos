@@ -161,7 +161,7 @@
               version = "1.6.7";
               addonId = "myallychou@gmail.com";
               url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-recommended-videos/latest.xpi";
-              sha256 = "sha256-u21ouN9IyOzkTkFSeDz+QBp9psJ1F2Nmsvqp6nh0DRU=";
+              sha256 = "sha256-Rrv0C3gazjI3cf8ZPF3ieFtBDV2INkH48Hw5Oo+W1pw=";
               meta = {
                 platforms = lib.platforms.all;
               };
