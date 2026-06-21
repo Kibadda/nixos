@@ -147,7 +147,6 @@
 
             http = {
               server_port = 8123;
-              base_url = config.kibadda.services.home-assistant.url;
               use_x_forwarded_for = true;
               cors_allowed_origins = "*";
               trusted_proxies = [
@@ -226,39 +225,36 @@
                   };
                 }
               ];
-            };
+              sensors =
+                let
+                  sensor = type: index: {
+                    source_index = index;
+                    name = "${type} ${toString index}";
+                    value_template = "{{ value.daysTo }}";
+                    types = [ type ];
+                    add_days_to = true;
+                  };
 
-            sensor =
-              let
-                sensor = type: index: {
-                  platform = "waste_collection_schedule";
-                  source_index = index;
-                  name = "${type} ${toString index}";
-                  value_template = "{{ value.daysTo }}";
-                  types = [ type ];
-                  add_days_to = true;
-                };
-
-                createSensor = type: [
-                  (sensor type 0)
-                  (sensor type 1)
-                ];
-              in
-              (createSensor "Biotonne")
-              ++ (createSensor "Gelbe Tonne")
-              ++ (createSensor "Restmüll")
-              ++ (createSensor "Papiertonne")
-              ++ [
-                {
-                  platform = "waste_collection_schedule";
-                  source_index = [
-                    0
-                    1
+                  createSensor = type: [
+                    (sensor type 0)
+                    (sensor type 1)
                   ];
-                  name = "Müll";
-                  value_template = "{{ value.types|join(', ') }}";
-                }
-              ];
+                in
+                (createSensor "Biotonne")
+                ++ (createSensor "Gelbe Tonne")
+                ++ (createSensor "Restmüll")
+                ++ (createSensor "Papiertonne")
+                ++ [
+                  {
+                    source_index = [
+                      0
+                      1
+                    ];
+                    name = "Müll";
+                    value_template = "{{ value.types|join(', ') }}";
+                  }
+                ];
+            };
 
             automation =
               map

@@ -31,6 +31,7 @@
           API_DOCS = "false";
           ALLOW_SIGNUP = "false";
           ALLOW_PASSWORD_LOGIN = "false";
+          BASE_URL = config.kibadda.services.mealie.url;
 
           OIDC_AUTH_ENABLED = "true";
           OIDC_CONFIGURATION_URL = "${config.kibadda.services.authelia.url}/.well-known/openid-configuration";
