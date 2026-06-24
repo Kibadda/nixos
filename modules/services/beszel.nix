@@ -29,6 +29,7 @@
         enable = true;
         port = 8090;
         environment = {
+          APP_URL = config.kibadda.services.beszel.url;
           SHARE_ALL_SYSTEMS = "true";
           AUTO_LOGIN = secrets.pi.beszel.admin.email;
           USER_CREATION = "true";
