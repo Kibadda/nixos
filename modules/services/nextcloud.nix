@@ -50,6 +50,12 @@
           };
           settings = {
             overwriteprotocol = "https";
+            overwritehost = config.kibadda.services.nextcloud.hostname;
+            overwrite = {
+              cli = {
+                url = config.kibadda.services.nextcloud.url;
+              };
+            };
             default_language = "de";
             default_locale = "de_DE";
             default_phone_region = "DE";
