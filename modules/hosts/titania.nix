@@ -35,7 +35,7 @@
       self.nixosModules.yubikey
       self.nixosModules.zsh
 
-      self.nixosModules.gnome
+      self.nixosModules.niri
       self.nixosModules.vpn
     ];
 
