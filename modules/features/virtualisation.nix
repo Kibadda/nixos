@@ -12,9 +12,7 @@
         # defaultNetwork.settings.dns_enabled = true;
       };
 
-      oci-containers = {
-        backend = "podman";
-      };
+      oci-containers.backend = "podman";
     };
 
     users.users.${secrets.base.username}.extraGroups = [ "podman" ];
