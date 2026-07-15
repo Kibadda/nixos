@@ -26,7 +26,7 @@
           method = "post";
         };
         backup.archive = [ "/mnt/trek/data/travel.db" ];
-        icon = "mdi-plane";
+        icon = "mdi-airplane";
         section = "Apps";
       };
 
