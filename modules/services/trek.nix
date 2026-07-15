@@ -26,7 +26,7 @@
           method = "post";
         };
         backup.archive = [ "/mnt/trek/data/travel.db" ];
-        icon = "mdi-airplane";
+        icon = "https://raw.githubusercontent.com/mauriceboe/TREK/f9c992ec9363301762ac00e97747c1dd0fe37d6b/client/public/icons/icon-dark.svg";
         section = "Apps";
       };
 
