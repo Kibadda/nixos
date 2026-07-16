@@ -19,6 +19,7 @@
           bruno
           kibadda.work
           linphone
+          libreoffice
         ];
 
         sessionVariables = {
