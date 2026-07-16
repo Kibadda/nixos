@@ -29,23 +29,24 @@
       self.nixosModules.authelia
       self.nixosModules.backup
       self.nixosModules.adguardhome
-
       self.nixosModules.fail2ban
       self.nixosModules.beszel-server
       self.nixosModules.beszel-client
+
       self.nixosModules.dashboard
       self.nixosModules.immich
       self.nixosModules.vaultwarden
       self.nixosModules.mealie
       self.nixosModules.trilium
-      # self.nixosModules.paperless
       self.nixosModules.home-assistant
-      # self.nixosModules.freshrss
       self.nixosModules.it-tools
-      # self.nixosModules.n8n
       self.nixosModules.stirling
       self.nixosModules.nextcloud
       self.nixosModules.trek
+
+      # self.nixosModules.n8n
+      # self.nixosModules.freshrss
+      # self.nixosModules.paperless
     ];
 
     homeModules = [
