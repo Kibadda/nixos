@@ -44,11 +44,6 @@ sudo nixos-install --flake /tmp/nixos#$HOST
 reboot now
 ```
 
-10. generate u2f keys
-```bash
-nix-shell -p pam_u2f --run 'mkdir -p $HOME/.config/Yubico && pamu2fcfg > $HOME/.config/Yubico/u2f_keys'
-```
-
 # Pi
 
 ```console

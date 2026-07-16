@@ -5,6 +5,7 @@
 {
   flake.homeModules.yubikey =
     {
+      lib,
       pkgs,
       ...
     }:
@@ -40,16 +41,33 @@
       ...
     }:
     {
-      environment.systemPackages = with pkgs; [
-        gnupg
-        yubikey-personalization
-        yubikey-manager
-      ];
+      environment = {
+        systemPackages = with pkgs; [
+          gnupg
+          yubikey-personalization
+          yubikey-manager
+          pam_u2f
+        ];
+
+        etc."u2f_keys" = {
+          text = secrets.base.u2f_keys;
+          mode = "0444";
+        };
+      };
 
       programs.yubikey-touch-detector.enable = true;
 
-      security.pam.services = {
-        sudo.u2fAuth = true;
+      security.pam = {
+        u2f.settings = {
+          cue = true;
+          cue_prompt = "🔑 DRÜCKEN 🔑";
+          origin = "pam://kibadda";
+          appid = "pam://kibadda";
+          authfile = "/etc/u2f_keys";
+        };
+        services = {
+          sudo.u2fAuth = true;
+        };
       };
 
       services = {
