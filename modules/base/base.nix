@@ -56,7 +56,7 @@
         overlays = [
           inputs.nur.overlays.default
           inputs.work.overlays.default
-          inputs.llm-agents.overlays.default
+          inputs.llm-agents.overlays.shared-nixpkgs
         ];
         config = {
           allowUnsupportedSystem = true;
