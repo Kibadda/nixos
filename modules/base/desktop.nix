@@ -71,6 +71,7 @@
         spotify
         telegram-desktop
         llm-agents.claude-code
+        llm-agents.opencode
       ];
     };
 }
