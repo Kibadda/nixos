@@ -52,6 +52,7 @@
       self.nixosModules.stirling
       self.nixosModules.nextcloud
       self.nixosModules.trek
+      self.nixosModules.marathon-tracker
 
       # self.nixosModules.n8n
       # self.nixosModules.freshrss
