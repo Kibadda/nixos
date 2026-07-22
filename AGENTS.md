@@ -208,7 +208,18 @@ When adding a new module:
 - Skipping the service registry for new services
 - Using top-level options without `kibadda.*` prefix
 
-## 12. Validation
+## 12. Pre-commit Hook
+
+The repo ships a pre-commit hook (`.githooks/pre-commit`) that auto-generates `docs/services.md` when service modules change.
+
+Enable it on fresh clones:
+```sh
+git config core.hooksPath .githooks
+```
+
+The file is generated via `nix eval` + `jq` — no special runtime needed.
+
+## 13. Validation
 
 After changing settings or adding new modules, run:
 
