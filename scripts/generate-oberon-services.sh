@@ -42,7 +42,8 @@ def section_or_empty(s): if s.section then s.section else "" end;
   "| Auth | \(.value.auth) |",
   "| Port | \(port_text(.value)) |",
   "| Section | \(section_or_empty(.value)) |",
-  "| Backup | \(bk_text(.value)) |"
+  "| Backup | \(bk_text(.value)) |",
+  ""
 )
 ' > "$OUT"
 

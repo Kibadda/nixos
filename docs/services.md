@@ -32,6 +32,7 @@
 | Port | :3000 |
 | Section | Monitoring |
 | Backup | — |
+
 ## authelia
 
 | Key | Value |
@@ -45,6 +46,7 @@
 | Port | :9091 |
 | Section | Apps |
 | Backup | — |
+
 ## beszel
 
 | Key | Value |
@@ -58,6 +60,7 @@
 | Port | :8090 |
 | Section | Monitoring |
 | Backup | — |
+
 ## dashboard
 
 | Key | Value |
@@ -71,6 +74,7 @@
 | Port | :8082 |
 | Section |  |
 | Backup | — |
+
 ## home-assistant
 
 | Key | Value |
@@ -84,6 +88,7 @@
 | Port | :8123 |
 | Section | Apps |
 | Backup | — |
+
 ## immich
 
 | Key | Value |
@@ -97,6 +102,7 @@
 | Port | :2283 |
 | Section | Apps |
 | Backup | archive:<br>/mnt/immich/backups<br>sync:<br>/mnt/immich/library<br>/mnt/immich/upload<br>/mnt/immich/profile |
+
 ## it-tools
 
 | Key | Value |
@@ -110,6 +116,7 @@
 | Port | socket |
 | Section | Tools |
 | Backup | — |
+
 ## marathon-tracker
 
 | Key | Value |
@@ -123,6 +130,7 @@
 | Port | socket |
 | Section | Apps |
 | Backup | archive:<br>/mnt/marathon-tracker/database/database.sqlite |
+
 ## mealie
 
 | Key | Value |
@@ -136,6 +144,7 @@
 | Port | :9000 |
 | Section | Apps |
 | Backup | archive:<br>/var/lib/private/mealie |
+
 ## mindwtr-app
 
 | Key | Value |
@@ -149,6 +158,7 @@
 | Port | :5173 |
 | Section | Apps |
 | Backup | — |
+
 ## mindwtr-cloud
 
 | Key | Value |
@@ -162,6 +172,7 @@
 | Port | :8787 |
 | Section |  |
 | Backup | — |
+
 ## nextcloud
 
 | Key | Value |
@@ -175,6 +186,7 @@
 | Port | socket |
 | Section | Apps |
 | Backup | archive:<br>/mnt/nextcloud/data/nextcloud.db<br>sync:<br>/mnt/nextcloud/data/michael |
+
 ## stirling
 
 | Key | Value |
@@ -188,6 +200,7 @@
 | Port | :8079 |
 | Section | Tools |
 | Backup | — |
+
 ## trek
 
 | Key | Value |
@@ -201,6 +214,7 @@
 | Port | :5926 |
 | Section | Apps |
 | Backup | archive:<br>/mnt/trek/data/travel.db |
+
 ## trilium
 
 | Key | Value |
@@ -214,6 +228,7 @@
 | Port | :8084 |
 | Section | Apps |
 | Backup | archive:<br>/mnt/trilium/document.db |
+
 ## vaultwarden
 
 | Key | Value |
@@ -227,3 +242,4 @@
 | Port | :8222 |
 | Section | Apps |
 | Backup | archive:<br>/var/backup/vaultwarden |
+
