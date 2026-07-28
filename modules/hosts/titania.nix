@@ -37,6 +37,7 @@
 
       self.nixosModules.gnome
       self.nixosModules.vpn
+      self.nixosModules.steam
     ];
 
     homeModules = [
