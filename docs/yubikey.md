@@ -33,6 +33,8 @@ cp -avi /mnt/encrypted-storage/gnupg-*/* $GNUPGHOME
 ```bash
 gpg -K
 
+export IDENTITY="Name <email>"
+
 export KEYID=$(gpg -k --with-colons "$IDENTITY" | awk -F: '/^pub:/ { print $5; exit }')
 
 export KEYFP=$(gpg -k --with-colons "$IDENTITY" | awk -F: '/^fpr:/ { print $10; exit }')
@@ -50,7 +52,7 @@ export CERTIFY_PASS=ABCD-0123-IJKL-4567-QRST-UVWX
 export EXPIRATION=2y
 
 gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS" --quick-set-expire "$KEYFP" "$EXPIRATION" \
-    $(gpg -K --with-colons | awk -f: '/^fpr:/ { print $10 }' | tail -n "+2" | tr "\n" " ")
+    $(gpg -K --with-colons | awk -F: '/^fpr:/ { print $10 }' | tail -n "+2" | tr "\n" " ")
 
 gpg --armor --export $KEYID | sudo tee /mnt/public/$KEYID-$(date +%F).asc
 
