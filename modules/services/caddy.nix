@@ -65,8 +65,8 @@
 
             X-Content-Type-Options nosniff
             X-Frame-Options SAMEORIGIN
-            Referrer-Polixy strict-origin-when-cross-origin
-            Strict-Transport-Security "max-age=604800; includeSubdomains; reload"
+            Referrer-Policy strict-origin-when-cross-origin
+            Strict-Transport-Security "max-age=604800; includeSubdomains; preload"
             Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
           }
 
