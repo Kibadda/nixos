@@ -203,6 +203,24 @@
         "type": "github"
       }
     },
+    "mtg-collection": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1789040610,
+        "narHash": "sha256-L7ozjFdf7o7/MROfOpD6tbf/9vGIlodU30AJ+K4GXGg=",
+        "owner": "Kibadda",
+        "repo": "mtg-collection",
+        "rev": "868db22ef475946975c55901b39f0b89f391076b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kibadda",
+        "repo": "mtg-collection",
+        "type": "github"
+      }
+    },
     "nix-monitored": {
       "inputs": {
         "nixpkgs": [
@@ -276,6 +294,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1788807765,
+        "narHash": "sha256-J9oC0bKnkXUrMegqRTXVkyDFJ0gn2U/Qpoo9HgGMQmA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "93108a538f079596c9a16c72cf03e9322782b6dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1781216227,
         "narHash": "sha256-9mUW6gNwoN2SWc/l0fW4svPNOulXLl8ijqKyeSOGgJE=",
         "owner": "nixos",
@@ -290,7 +324,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1768028080,
         "narHash": "sha256-50aDK+8eLvsLK39TzQhKNq50/HcXyP4hyxOYoPoVxjo=",
@@ -336,9 +370,10 @@
         "llm-agents": "llm-agents",
         "mobile-nixos": "mobile-nixos",
         "mobile-nixpkgs": "mobile-nixpkgs",
+        "mtg-collection": "mtg-collection",
         "nix-monitored": "nix-monitored",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nur": "nur",
         "server-nixpkgs": "server-nixpkgs",
         "work": "work"
@@ -398,7 +433,7 @@
     },
     "work": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1774358285,

@@ -13,6 +13,7 @@
 - [Essen](#mealie)
 - [GTD](#mindwtr-app)
 - [GTD Cloud](#mindwtr-cloud)
+- [MTG Collection](#mtg)
 - [Cloud](#nextcloud)
 - [PDF](#stirling)
 - [Urlaub](#trek)
@@ -172,6 +173,20 @@
 | Port | :8787 |
 | Section |  |
 | Backup | — |
+
+## mtg
+
+| Key | Value |
+|-----|-------|
+| Name | mtg |
+| Description | MTG Collection |
+| Subdomain | mtg |
+| URL | https://mtg.kibadda.de |
+| Open |  |
+| Auth | none |
+| Port | :8421 |
+| Section | Apps |
+| Backup | archive:<br>/mnt/mtg-collection/mtg-collection.json |
 
 ## nextcloud
 
