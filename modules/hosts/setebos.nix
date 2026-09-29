@@ -35,6 +35,22 @@
           };
         };
 
+        services = {
+          avahi = {
+            enable = true;
+            nssmdns4 = true;
+            openFirewall = true;
+          };
+
+          printing = {
+            enable = true;
+            drivers = with pkgs; [
+              cups-filters
+              cups-browsed
+            ];
+          };
+        };
+
         networking.hosts = secrets.work.hosts;
 
         programs.nix-ld = {
