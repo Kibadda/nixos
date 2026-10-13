@@ -26,15 +26,31 @@
 
         initContent = # bash
           ''
-            if echo "$PATH" | grep -qc "/nix/store"; then
-              nixshell="%{$fg_bold[cyan]%} "
-              PROMPT="$nixshell $PROMPT"
-            fi
+            _kibadda_base_prompt="$PROMPT"
 
-            if [[ -n $SSH_CONNECTION ]]; then
-              hostname="%{$fg_bold[red]%}%m"
-              PROMPT="$hostname $PROMPT"
-            fi
+            function _kibadda_set_prompt() {
+              local prefix=""
+              if [[ -n $SSH_CONNECTION ]]; then
+                prefix+="%{$fg_bold[red]%}%m "
+              fi
+              if [[ -n $IN_NIX_SHELL ]]; then
+                prefix+="%{$fg_bold[cyan]%}  "
+              fi
+              PROMPT="$prefix$_kibadda_base_prompt"
+            }
+
+            autoload -Uz add-zsh-hook
+            add-zsh-hook precmd _kibadda_set_prompt
+
+            # `nix shell` sets no marker of its own, but the shell it spawns
+            # inherits the environment, so export IN_NIX_SHELL for it.
+            function nix() {
+              if [[ $1 == shell ]]; then
+                IN_NIX_SHELL=impure command nix "$@"
+              else
+                command nix "$@"
+              fi
+            }
 
             function switch() {
               NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#$1 --target-host $1 --sudo --ask-sudo-password
