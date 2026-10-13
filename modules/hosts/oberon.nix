@@ -54,7 +54,8 @@
       self.nixosModules.trek
       self.nixosModules.marathon-tracker
       self.nixosModules.mindwtr
-      self.nixosModules.mtg-collection
+      # self.nixosModules.mtg-collection
+      self.nixosModules.bindarr
 
       # self.nixosModules.n8n
       # self.nixosModules.freshrss
