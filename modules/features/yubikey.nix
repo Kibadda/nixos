@@ -1,4 +1,5 @@
 {
+  inputs,
   secrets,
   ...
 }:
@@ -31,7 +32,8 @@
         enableSshSupport = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentry.package = pkgs.pinentry-gnome3;
+        # pinentry.package = pkgs.pinentry-gnome3;
+        pinentry.package = inputs.adw-pinentry.packages.${pkgs.stdenv.hostPlatform.system}.default;
       };
     };
 

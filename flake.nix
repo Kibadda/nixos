@@ -23,6 +23,7 @@
     };
     work.url = "github:Kibadda/work";
     mtg-collection.url = "github:Kibadda/mtg-collection";
+    adw-pinentry.url = "github:Kibadda/adw-pinentry";
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
       inputs.nixpkgs.follows = "server-nixpkgs";
