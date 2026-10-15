@@ -73,7 +73,10 @@
     ];
 
     hardware = {
-      networking.interfaces.wlan0.useDHCP = true;
+      networking.interfaces = {
+        eth0.useDHCP = true;
+        wlan0.useDHCP = true;
+      };
 
       fileSystems = {
         "/mnt" = {
