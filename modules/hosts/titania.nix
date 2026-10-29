@@ -35,7 +35,8 @@
       self.nixosModules.yubikey
       self.nixosModules.zsh
 
-      self.nixosModules.gnome
+      # self.nixosModules.gnome
+      self.nixosModules.hyprland
       self.nixosModules.vpn
       self.nixosModules.steam
     ];
@@ -46,6 +47,7 @@
       self.homeModules.yubikey
       self.homeModules.zsh
 
+      self.homeModules.hyprland
       self.homeModules.direnv
       self.homeModules.eza
       self.homeModules.firefox
