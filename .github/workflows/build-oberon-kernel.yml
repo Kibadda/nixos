@@ -1,0 +1,75 @@
+name: Build Oberon kernel
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - flake.lock
+      - modules/base/base.nix
+      - modules/base/server.nix
+      - modules/hosts/oberon.nix
+      - .github/workflows/build-oberon-kernel.yml
+
+concurrency:
+  group: build-oberon-kernel-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  kernel:
+    name: Build and cache aarch64 kernel
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache
+          sudo apt-get clean
+
+      - name: Unlock git-crypt
+        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Validate Cachix configuration
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          if [ -z "$CACHIX_AUTH_TOKEN" ]; then
+            echo "::error::Set the CACHIX_AUTH_TOKEN repository secret."
+            exit 1
+          fi
+
+      - name: Configure Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: kibadda
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          skipPush: true
+
+      - name: Build kernel and modules
+        run: |
+          nix build --no-link -L \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.modules
+
+      - name: Push kernel and modules to Cachix
+        run: |
+          KERNEL=$(nix eval --raw \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.outPath)
+          MODULES=$(nix eval --raw \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.modules.outPath)
+          cachix push kibadda "$KERNEL" "$MODULES"
