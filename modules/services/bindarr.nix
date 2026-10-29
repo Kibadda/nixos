@@ -33,6 +33,7 @@
         image = "ghcr.io/thenotoriousjeremy/bindarr:1.8.8";
         ports = [ "127.0.0.1:6421:3001" ];
         environment = {
+          DEFAULT_ADMIN_PASSWORD = secrets.pi.bindarr.password;
           TRUST_PROXY = "1";
           PUBLIC_BASE_URL = config.kibadda.services.bindarr.url;
           ALLOW_REGISTRATION = "false";
