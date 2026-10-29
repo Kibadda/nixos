@@ -30,7 +30,7 @@
       };
 
       virtualisation.oci-containers.containers.bindarr = {
-        image = "ghcr.io/thenotoriousjeremy/bindarr:1.8.7";
+        image = "ghcr.io/thenotoriousjeremy/bindarr:1.8.8";
         ports = [ "127.0.0.1:6421:3001" ];
         environment = {
           TRUST_PROXY = "1";
