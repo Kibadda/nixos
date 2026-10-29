@@ -1,4 +1,8 @@
 {
+  lib,
+  ...
+}:
+{
   flake.nixosModules.adguardhome =
     {
       config,
@@ -48,6 +52,19 @@
           filtering = {
             protection_enabled = true;
             filtering_enabled = true;
+            rewrites =
+              (lib.mapAttrsToList (_: service: {
+                domain = service.hostname;
+                answer = "10.0.0.3";
+                enabled = true;
+              }) config.kibadda.services)
+              ++ [
+                {
+                  domain = "fritz.box";
+                  answer = "10.0.0.1";
+                  enabled = true;
+                }
+              ];
           };
           querylog = {
             enabled = true;
