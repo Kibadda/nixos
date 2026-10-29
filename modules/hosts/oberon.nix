@@ -24,6 +24,10 @@
       services.openssh.openFirewall = false;
 
       services.beszel.agent.environment.EXTRA_FILESYSTEMS = "sda1";
+
+      nixpkgs.config.permittedInsecurePackages = [
+        "immich-2.7.5"
+      ];
     };
 
     home = { };
@@ -48,18 +52,18 @@
       self.nixosModules.mealie
       self.nixosModules.trilium
       self.nixosModules.home-assistant
-      self.nixosModules.it-tools
-      self.nixosModules.stirling
       self.nixosModules.nextcloud
       self.nixosModules.trek
-      self.nixosModules.marathon-tracker
       self.nixosModules.mindwtr
-      # self.nixosModules.mtg-collection
       self.nixosModules.bindarr
 
       # self.nixosModules.n8n
       # self.nixosModules.freshrss
       # self.nixosModules.paperless
+      # self.nixosModules.marathon-tracker
+      # self.nixosModules.mtg-collection
+      # self.nixosModules.stirling
+      # self.nixosModules.it-tools
     ];
 
     homeModules = [
