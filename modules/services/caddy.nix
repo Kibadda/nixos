@@ -20,7 +20,7 @@
       '';
       deny = ''
         @denied {
-          not remote_ip ${secrets.pi.ip}
+          not remote_ip ${secrets.pi.ip} 10.0.0.0/24
           not path /.well-known/acme-challenge/*
         }
         respond @denied "Forbidden" 403
