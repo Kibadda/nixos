@@ -158,8 +158,10 @@ under QEMU on `uranus` and is much faster than building on the Pi.
    `modules/base/base.nix`.
 
 The workflow runs manually via **Actions → Build Oberon kernel → Run
-workflow**, or on pushes to `main` that change `flake.lock`, the Raspberry Pi
-kernel wiring, or the workflow itself.
+workflow**, or on pushes to `main` that change `flake.lock`. Changes to the
+kernel wiring (`modules/base/base.nix`, `modules/base/server.nix`,
+`modules/hosts/oberon.nix`) or the workflow itself do not trigger it
+automatically; run it manually when such a change should refresh the cache.
 
 ### Runner and limits
 
