@@ -2,10 +2,6 @@ name: Build Oberon kernel
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - flake.lock
 
 concurrency:
   group: build-oberon-kernel-${{ github.ref }}
