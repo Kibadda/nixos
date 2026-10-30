@@ -237,15 +237,15 @@
               "Homemanager options" = {
                 urls = [
                   {
-                    template = "https://home-manager-options.extranix.com";
+                    template = "https://search.nixos.org/options";
                     params = [
+                      {
+                        name = "source";
+                        value = "home_manager";
+                      }
                       {
                         name = "query";
                         value = "{searchTerms}";
-                      }
-                      {
-                        name = "release";
-                        value = "master";
                       }
                     ];
                   }
