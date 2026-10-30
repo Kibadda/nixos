@@ -274,6 +274,21 @@
                 definedAliases = [ "@ng" ];
               };
 
+              Scryfall = {
+                urls = [
+                  {
+                    template = "https://scryfall.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                definedAliases = [ "@sf" ];
+              };
+
               google.metaData.hidden = true;
               bing.metaData.hidden = true;
               amazon.metaData.hidden = true;
