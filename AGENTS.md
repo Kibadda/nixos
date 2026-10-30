@@ -1,230 +1,164 @@
-# Module Development Rules for NixOS Configuration
+# AGENTS.md — NixOS flake configuration
 
-This document provides rules and patterns for adding new modules to this NixOS configuration project using flakes and home-manager.
+Single flake (flake-parts + import-tree, nixpkgs `nixos-26.05`, home-manager, disko)
+that builds NixOS configurations for 5 hosts: `oberon` (aarch64 RPi server),
+`ophelia` (aarch64 mobile-nixos phone), `titania`/`setebos`/`uranus` (x86_64 desktops).
 
-## 1. Directory Structure
+## Validation
 
-| Module Type | Location | Purpose |
-|-------------|----------|---------|
-| Foundation/framework | `modules/base/` | Core system setup (base, desktop, server) |
-| Feature bundles | `modules/features/` | Composable features (gnome, vpn, yubikey) |
-| Program configs | `modules/programs/` | Individual program setup (git, zsh, neovim) |
-| Server services | `modules/services/` | Service definitions (caddy, immich, authelia) |
-| Custom packages | `modules/packages/` | Package definitions as flake outputs |
-| Host configs | `modules/hosts/` | Per-machine wiring |
-
-## 2. Module Export Naming
-
-```nix
-# Home-manager module
-flake.homeModules.<name> = { ... };
-
-# NixOS module
-flake.nixosModules.<name> = { ... };
-
-# Custom package (use perSystem)
-perSystem = { pkgs, ... }: {
-  packages.<name> = pkgs.writeShellApplication { ... };
-};
+```sh
+git add <new files>          # flakes only see git-tracked files — this step is required
+nix flake check              # what CI runs (.github/workflows/nix-flake-check.yml)
 ```
 
-**File naming:** lowercase with hyphens (e.g., `config-checker.nix`)
+There is no formatter, linter, or test suite — `nix flake check` is the whole
+verification step. It evaluates every host, so it is slow. Faster targeted checks:
 
-## 3. Option Namespacing
+```sh
+# Evaluate a single host without building
+nix eval .#nixosConfigurations.titania.config.system.build.toplevel.drvPath
 
-All custom options **must** use the `kibadda.*` namespace:
-
-```nix
-options.kibadda.<module> = {
-  settings = lib.mkOption { type = lib.types.attrs; default = {}; };
-  # ...
-};
+# Dump the service registry of a host
+nix eval .#nixosConfigurations.oberon.config.kibadda.services --json
 ```
 
-## 4. Module Patterns
+Known non-local failure: evaluating `oberon` can fail with `immich-2.7.5 … marked as
+insecure` (a nixpkgs-side known-vulnerability flag, not something you broke). Do not
+chase it as a regression from your change.
 
-### Pattern A: Simple wrapper (for single-purpose program configs)
+## Secrets are git-crypt encrypted
+
+`secrets/**` is encrypted with git-crypt (`.gitattributes`). Evaluation only works on
+an unlocked checkout — on a fresh clone run `git-crypt unlock` (alias: `git unlock`)
+first; CI unlocks with `GIT_CRYPT_KEY`. If evaluation dies with nonsense syntax
+errors inside `secrets/*.nix`, the checkout is locked, not broken.
+
+Secrets are injected as flake-parts `specialArgs` (`flake.nix`) as
+`secrets.{base,pi,home,work}`. **Only the outer file function can take
+`{ secrets, ... }` as a parameter** — inner NixOS/home-manager modules are
+evaluated with `specialArgs = { selfpkgs }` only, so they reference `secrets`
+through lexical closure from the enclosing outer function (see
+`modules/services/immich.nix`). Never hardcode values that exist in secrets.
+
+**Never write secrets into `secrets/*.nix` yourself.** Reference them as if they
+existed and tell the user to add the value.
+
+`docs/sops-nix-migration.md` is a *planned* migration, not the current state — the
+repo still uses git-crypt.
+
+## Module development
+
+Layout under `modules/`:
+
+| Dir | Holds |
+|-----|-------|
+| `base/` | foundation layers: `base`, `desktop`, `server` (+ flake wiring) |
+| `features/` | composable features (gnome, vpn, yubikey, nvidia, …) |
+| `programs/` | single-program configs (git, zsh, neovim, …) |
+| `services/` | NixOS services + the service registry (`services/base.nix`) |
+| `packages/` | custom packages exposed via `perSystem` |
+| `hosts/` | per-machine wiring — keep thin |
+
+Two-layer structure: the *outer* file is a flake-parts module that exports
 
 ```nix
-{
-  flake.homeModules.eza = {
-    programs.eza = {
-      enable = true;
-      git = true;
-    };
-  };
-}
+flake.homeModules.<name> = { ... }: { ... };   # home-manager module
+flake.nixosModules.<name> = { ... }: { ... };  # NixOS module
+perSystem = { pkgs, ... }: { packages.<name> = ...; };  # custom packages
 ```
 
-### Pattern B: With custom options (for extensible configs)
+and the *inner* function is the actual module. File names: lowercase-with-hyphens.
+
+Gotchas that are easy to miss:
+
+- **import-tree auto-imports every `.nix` under `modules/`** (default: only paths
+  containing `/_` are skipped, so `_helpers.nix` stays private). There is no import
+  list to update — but every imported file must be a valid flake-parts module; a
+  broken or non-module `.nix` file breaks the whole flake.
+- **A module exists only once added to a host's `nixosModules`/`homeModules` list**
+  in `modules/hosts/*.nix` (or via `imports = [ self.nixosModules.x ]` from another
+  module). Exporting it does nothing by itself.
+- All custom options live under the **`kibadda.*` namespace** — no bare top-level
+  options.
+- Custom packages are consumed through the `selfpkgs` specialArg
+  (e.g. `home.packages = [ selfpkgs.gitdirty ]`).
+- Common pattern: defaults + user override via
+  `lib.recursiveUpdate { ...base config... } config.kibadda.<name>.settings`
+  (see `modules/programs/git.nix`).
+
+### Host schema (non-standard — read `modules/base/nixos.nix` first)
+
+Hosts do not call `nixosSystem` directly; they fill an option set:
 
 ```nix
-{
-  lib,
-  ...
-}:
-{
-  flake.homeModules.git = { config, pkgs, ... }: {
-    options.kibadda.git = {
-      settings = lib.mkOption { type = lib.types.attrs; default = {}; };
-    };
-
-    config.programs.git = lib.recursiveUpdate {
-      enable = true;
-      # base config...
-    } config.kibadda.git.settings;
-  };
-}
-```
-
-### Pattern C: Dual module (when both NixOS and home-manager needed)
-
-```nix
-{
-  flake.homeModules.zsh = { ... }: { ... };
-  flake.nixosModules.zsh = { ... }: { ... };
-}
-```
-
-## 5. Service Module Pattern
-
-Services **must** register with the service registry in `services/base.nix`:
-
-```nix
-{ self, secrets, ... }: {
-  flake.nixosModules.myservice = { config, pkgs, ... }: {
-    kibadda.services.myservice = {
-      subdomain = "myservice";
-      host = "127.0.0.1";
-      port = 8080;
-      auth = "oidc";  # or "forward" or "none"
-      backup = {
-        paths = [ "/var/lib/myservice" ];
-        time = "03:00";
-      };
-    };
-
-    services.myservice = {
-      enable = true;
-      # ...
-    };
-  };
-}
-```
-
-## 6. Secrets Access
-
-Secrets are passed via `specialArgs` - access them as function parameters:
-
-```nix
-{
-  secrets,
-  ...
-}:
-{
-  flake.nixosModules.foo = {
-    # Use secrets.base.username, secrets.home.vpn, etc.
-  };
-}
-```
-
-Available secret files:
-- `secrets.base` - username, email, keyid, intelephense license
-- `secrets.pi` - domain, IP, authelia secrets, netcup DNS
-- `secrets.home` - SSH port, WiFi, VPN config
-- `secrets.work` - email, smb config, certificate, ssh hosts
-
-**Never** add secrets to the secret files. Use them as if they were there and instruct the user to add them.
-
-## 7. Custom Packages
-
-Access custom packages via `selfpkgs`:
-
-```nix
-flake.homeModules.neovim = { selfpkgs, ... }: {
-  home.packages = [ selfpkgs.nvimupdate ];
-};
-```
-
-## 8. Module Dependencies
-
-Import base modules when extending them:
-
-```nix
-{
-  self,
-  ...
-}:
-{
-  flake.nixosModules.desktop = {
-    imports = [ self.nixosModules.base ];
-    # ...
-  };
-}
-```
-
-## 9. Host Configuration
-
-Hosts wire modules together - keep them thin:
-
-```nix
-nixosConfigurations.hostname = {
+nixosConfigurations.<host> = {
   system = "x86_64-linux";
-  configuration = { };  # Host-specific NixOS overrides
-  home = { };           # Host-specific home-manager overrides
-  nixosModules = [
-    self.nixosModules.desktop
-    self.nixosModules.gnome
-    # ...
-  ];
-  homeModules = [
-    self.homeModules.desktop
-    self.homeModules.git
-    # ...
-  ];
-  hardware = { /* filesystems, boot, etc. */ };
-  disko = { /* disk layout */ };
+  configuration = { };            # NixOS overrides
+  home = { };                     # home-manager overrides
+  nixosModules = [ self.nixosModules.desktop ... ];
+  homeModules  = [ self.homeModules.desktop ... ];
+  hardware = { }; disko = { };    # optional
+  nixpkgs = inputs.<...>;         # optional, defaults to main nixpkgs
 };
 ```
 
-## 10. Module Checklist
+`nixpkgs.hostPlatform`, hostname, home-manager user wiring, and `stateVersion`
+are applied centrally — don't repeat them per host.
 
-When adding a new module:
+### Service modules must register in the service registry
 
-- [ ] Place in correct directory (`programs/`, `features/`, `services/`, etc.)
-- [ ] Use `kibadda.*` namespace for custom options
-- [ ] Export as `flake.homeModules.<name>` or `flake.nixosModules.<name>`
-- [ ] Access secrets via function parameter, not hardcoded
-- [ ] For services: register with `kibadda.services.<name>`
-- [ ] Import parent modules if extending (e.g., `self.nixosModules.base`)
-- [ ] No manual registration needed - `import-tree` auto-discovers modules
-- [ ] Add to host's `nixosModules`/`homeModules` list to enable
+New services set `kibadda.services.<name>` (defined in `modules/services/base.nix`);
+caddy, authelia, backups, and the dashboard all consume `builtins.attrValues
+config.kibadda.services`, so an unregistered service gets no proxy/auth/backup.
 
-## 11. Anti-Patterns to Avoid
+```nix
+kibadda.services.myservice = {
+  description = "Short human name";   # required, no default
+  subdomain = "myservice";            # → <subdomain>.<secrets.pi.domain>
+  host = "127.0.0.1"; port = 8080;    # both optional (defaults: "localhost"/null).
+                                      # port = null → no reverse_proxy emitted,
+                                      # proxy yourself via `extra` (see freshrss)
+  auth = "oidc";                      # required: "none" | "oidc" | "forward"
+  open = false;                       # false → caddy IP-allowlists the vhost to
+                                      # secrets.pi.ip; true → reachable anywhere
+  policy = "one_factor";              # only for auth = "forward" (default one_factor)
+  backup = {
+    archive = [ "/var/lib/myservice" ];  # tar.gz → S3 (restorable)
+    sync = [ "/mnt/data" ];              # aws s3 sync (live data)
+  };
+  section = "Apps";                   # optional: "Monitoring" | "Tools" | "Apps"
+  oidc = { redirect_uris = [ ... ]; method = "post"; };  # required when auth = "oidc"
+};
+```
 
-- Hardcoding values that exist in secrets
-- Creating circular dependencies between modules
-- Putting host-specific logic in shared modules (use options instead)
-- Skipping the service registry for new services
-- Using top-level options without `kibadda.*` prefix
+- `auth = "forward"` → caddy runs forward_auth against authelia, gated by `policy`.
+- `auth = "oidc"` → the app does OIDC login itself; authelia auto-registers a
+  client using `secrets.pi.authelia.oidc.<name>` — **that secret must already
+  exist**, so a new OIDC service needs the user to add it.
+- `url`/`hostname` are read-only derived values — reference
+  `config.kibadda.services.<name>.url` instead of building URLs by hand.
 
-## 12. Pre-commit Hook
+## Generated docs & git hook
 
-The repo ships a pre-commit hook (`.githooks/pre-commit`) that auto-generates `docs/services.md` when service modules change.
+`docs/services.md` is **generated, never hand-edit it** — from
+`nix eval .#nixosConfigurations.oberon.config.kibadda.services` via
+`scripts/generate-oberon-services.sh` (needs `nix` + `jq`; skips gracefully if absent).
 
-Enable it on fresh clones:
+`.githooks/pre-commit` regenerates and stages it whenever staged changes touch
+`modules/services/**` or `modules/hosts/oberon.nix`. Hooks are **not active by
+default** — enable once per clone:
+
 ```sh
 git config core.hooksPath .githooks
 ```
 
-The file is generated via `nix eval` + `jq` — no special runtime needed.
+If you change service modules without the hook, run the script manually and commit
+`docs/services.md` together with your change.
 
-## 13. Validation
+## Conventions
 
-After changing settings or adding new modules, run:
-
-```sh
-nix flake check
-```
-
-Don't forget to add new files to the git index before running this command via `git add <file>`.
+- Commit messages: conventional commits scoped to the module or host
+  (`feat(oberon): …`, `fix(zsh): …`, `chore: flake update`).
+- `.envrc` runs `use flake . -Lv` (direnv auto-loads the devshell).
+- `opencode.json` wires up the `mcp-nixos` MCP server — use it for nixpkgs/NixOS
+  option lookups instead of guessing option names.
