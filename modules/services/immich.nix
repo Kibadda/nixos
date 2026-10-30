@@ -1,4 +1,5 @@
 {
+  inputs,
   secrets,
   ...
 }:
@@ -6,9 +7,13 @@
   flake.nixosModules.immich =
     {
       config,
+      pkgs,
       ...
     }:
     {
+      disabledModules = [ "services/web-apps/immich.nix" ];
+      imports = [ "${inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/immich.nix" ];
+
       kibadda.services.immich = {
         description = "Fotos";
         subdomain = "pics";
@@ -47,6 +52,7 @@
 
       services.immich = {
         enable = true;
+        package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.immich;
         machine-learning.enable = true;
         port = 2283;
         settings = {
