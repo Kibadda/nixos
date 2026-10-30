@@ -5,17 +5,14 @@
 - [Adblocker](#adguardhome)
 - [SSO](#authelia)
 - [Monitoring](#beszel)
+- [MTG Collection](#bindarr)
 - [Dashboard](#dashboard)
 - [Home](#home-assistant)
 - [Fotos](#immich)
-- [IT Tools](#it-tools)
-- [Joggen](#marathon-tracker)
 - [Essen](#mealie)
 - [GTD](#mindwtr-app)
 - [GTD Cloud](#mindwtr-cloud)
-- [MTG Collection](#mtg)
 - [Cloud](#nextcloud)
-- [PDF](#stirling)
 - [Urlaub](#trek)
 - [Notizen](#trilium)
 - [Tresor](#vaultwarden)
@@ -62,6 +59,20 @@
 | Section | Monitoring |
 | Backup | — |
 
+## bindarr
+
+| Key | Value |
+|-----|-------|
+| Name | bindarr |
+| Description | MTG Collection |
+| Subdomain | mtg |
+| URL | https://mtg.kibadda.de |
+| Open |  |
+| Auth | oidc |
+| Port | :6421 |
+| Section | Apps |
+| Backup | — |
+
 ## dashboard
 
 | Key | Value |
@@ -103,34 +114,6 @@
 | Port | :2283 |
 | Section | Apps |
 | Backup | archive:<br>/mnt/immich/backups<br>sync:<br>/mnt/immich/library<br>/mnt/immich/upload<br>/mnt/immich/profile |
-
-## it-tools
-
-| Key | Value |
-|-----|-------|
-| Name | it-tools |
-| Description | IT Tools |
-| Subdomain | tools |
-| URL | https://tools.kibadda.de |
-| Open | ✓ |
-| Auth | none |
-| Port | socket |
-| Section | Tools |
-| Backup | — |
-
-## marathon-tracker
-
-| Key | Value |
-|-----|-------|
-| Name | marathon-tracker |
-| Description | Joggen |
-| Subdomain | joggen |
-| URL | https://joggen.kibadda.de |
-| Open |  |
-| Auth | oidc |
-| Port | socket |
-| Section | Apps |
-| Backup | archive:<br>/mnt/marathon-tracker/database/database.sqlite |
 
 ## mealie
 
@@ -174,20 +157,6 @@
 | Section |  |
 | Backup | — |
 
-## mtg
-
-| Key | Value |
-|-----|-------|
-| Name | mtg |
-| Description | MTG Collection |
-| Subdomain | mtg |
-| URL | https://mtg.kibadda.de |
-| Open |  |
-| Auth | none |
-| Port | :8421 |
-| Section | Apps |
-| Backup | archive:<br>/mnt/mtg-collection/mtg-collection.json |
-
 ## nextcloud
 
 | Key | Value |
@@ -201,20 +170,6 @@
 | Port | socket |
 | Section | Apps |
 | Backup | archive:<br>/mnt/nextcloud/data/nextcloud.db<br>sync:<br>/mnt/nextcloud/data/michael |
-
-## stirling
-
-| Key | Value |
-|-----|-------|
-| Name | stirling |
-| Description | PDF |
-| Subdomain | pdf |
-| URL | https://pdf.kibadda.de |
-| Open |  |
-| Auth | none |
-| Port | :8079 |
-| Section | Tools |
-| Backup | — |
 
 ## trek
 
