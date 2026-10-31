@@ -1,18 +1,18 @@
-name: Build Oberon kernel
+name: Build Oberon cache
 
 on:
   workflow_dispatch:
 
 concurrency:
-  group: build-oberon-kernel-${{ github.ref }}
+  group: build-oberon-cache-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  kernel:
-    name: Build and cache aarch64 kernel
+  packages:
+    name: Build and cache aarch64 packages
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 180
     steps:
@@ -52,16 +52,22 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           skipPush: true
 
-      - name: Build kernel and modules
+      - name: Build kernel, modules, config, and caddy
         run: |
           nix build --no-link -L \
             .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel \
-            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.modules
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.modules \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.configfile \
+            .#nixosConfigurations.oberon.config.services.caddy.package
 
-      - name: Push kernel and modules to Cachix
+      - name: Push kernel, modules, config, and caddy to Cachix
         run: |
           KERNEL=$(nix eval --raw \
             .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.outPath)
           MODULES=$(nix eval --raw \
             .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.modules.outPath)
-          cachix push kibadda "$KERNEL" "$MODULES"
+          CONFIG=$(nix eval --raw \
+            .#nixosConfigurations.oberon.config.boot.kernelPackages.kernel.configfile.outPath)
+          CADDY=$(nix eval --raw \
+            .#nixosConfigurations.oberon.config.services.caddy.package.outPath)
+          cachix push kibadda "$KERNEL" "$MODULES" "$CONFIG" "$CADDY"

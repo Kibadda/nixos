@@ -143,9 +143,14 @@ produces.
 
 ## GitHub Actions
 
-`.github/workflows/build-oberon-kernel.yml` builds the kernel and modules on
-GitHub's native arm64 runner and pushes them to Cachix. This avoids compiling
-under QEMU on `uranus` and is much faster than building on the Pi.
+`.github/workflows/build-oberon-kernel.yml` builds the kernel, modules, kernel
+config, and caddy on GitHub's native arm64 runner and pushes them to Cachix.
+This avoids compiling under QEMU on `uranus` and is much faster than building
+on the Pi.
+
+Caddy is included because Oberon's instance is built with
+`pkgs.caddy.withPlugins` (the netcup DNS plugin), so it is compiled from source
+and is not available from `cache.nixos.org` either.
 
 ### Setup
 
@@ -157,19 +162,20 @@ under QEMU on `uranus` and is much faster than building on the Pi.
 3. The workflow pushes to the `kibadda` cache, matching
    `modules/base/base.nix`.
 
-The workflow runs manually via **Actions → Build Oberon kernel → Run
+The workflow runs manually via **Actions → Build Oberon cache → Run
 workflow**, or on pushes to `main` that change `flake.lock`. Changes to the
 kernel wiring (`modules/base/base.nix`, `modules/base/server.nix`,
-`modules/hosts/oberon.nix`) or the workflow itself do not trigger it
+`modules/hosts/oberon.nix`), the caddy module
+(`modules/services/caddy.nix`), or the workflow itself do not trigger it
 automatically; run it manually when such a change should refresh the cache.
 
 ### Runner and limits
 
 - `ubuntu-24.04-arm` is a native arm64 runner. Public repositories get 4 vCPU,
   16 GB RAM, and 14 GB disk; private repositories currently get 2 vCPU.
-- The workflow builds only the kernel and modules, not the full system. The
-  14 GB disk is tight for a kernel build, so the workflow removes unused
-  preinstalled toolchains first.
+- The workflow builds only the kernel, modules, kernel config (`linux-config`),
+  and caddy, not the full system. The 14 GB disk is tight for a kernel build,
+  so the workflow removes unused preinstalled toolchains first.
 - The job has a 180-minute timeout. A native arm64 build should finish well
   within that; an x86_64 runner using QEMU would risk the 6-hour limit.
 - The runner builds the committed flake. Commit and push any local changes
@@ -177,8 +183,8 @@ automatically; run it manually when such a change should refresh the cache.
 - The workflow runs only on manual dispatch and pushes to `main`, not on pull
   requests. This avoids trying to use secrets in pull requests from forks.
 - The workflow uses `skipPush: true` and an explicit `cachix push`, so only
-  the kernel `out` and `modules` outputs are uploaded, not the whole build
-  closure.
+  the kernel `out`, `modules`, and `configfile` outputs plus caddy are
+  uploaded, not the whole build closure.
 
 ### If the git-crypt action fails on arm64
 
