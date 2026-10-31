@@ -1,6 +1,5 @@
 {
   inputs,
-  secrets,
   self,
   ...
 }:
@@ -10,16 +9,10 @@
     nixpkgs = inputs.server-nixpkgs;
 
     configuration = {
-      networking.firewall = {
-        allowedTCPPorts = [
-          80
-          443
-        ];
-
-        extraCommands = ''
-          iptables -I nixos-fw -p tcp -s 10.0.0.0/24 --dport ${toString secrets.home.sshPort} -j nixos-fw-accept
-        '';
-      };
+      networking.firewall.allowedTCPPorts = [
+        80
+        443
+      ];
 
       services.openssh.openFirewall = false;
 
