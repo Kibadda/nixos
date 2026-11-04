@@ -94,6 +94,7 @@
           {
             name = "oberon";
             host = "10.0.0.3";
+            user = secrets.base.username;
             port = secrets.home.sshPort;
           }
         ];
@@ -126,6 +127,8 @@
       };
 
       programs.firefox.profiles.work.isDefault = true;
+
+      programs.ssh.settings."*".User = secrets.work.user;
     };
 
     nixosModules = [
