@@ -1,5 +1,4 @@
 {
-  inputs,
   secrets,
   self,
   ...
@@ -73,7 +72,6 @@
         xdg-utils
         spotify
         telegram-desktop
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
         cachix
       ];
     };

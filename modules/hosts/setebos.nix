@@ -1,4 +1,5 @@
 {
+  inputs,
   self,
   secrets,
   ...
@@ -68,6 +69,7 @@
             android-tools
             gradle
             jdk17
+            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
           ];
 
           etc."nixos/smbcredentials".text = secrets.work.smb.credentials;
