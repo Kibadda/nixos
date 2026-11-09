@@ -50,13 +50,9 @@
       self.nixosModules.mindwtr
       self.nixosModules.bindarr
 
-      # self.nixosModules.n8n
-      # self.nixosModules.freshrss
       # self.nixosModules.paperless
       # self.nixosModules.marathon-tracker
       # self.nixosModules.mtg-collection
-      # self.nixosModules.stirling
-      # self.nixosModules.it-tools
     ];
 
     homeModules = [
