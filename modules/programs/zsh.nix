@@ -19,8 +19,6 @@
         syntaxHighlighting.enable = true;
 
         shellAliases = {
-          update = "sudo nixos-rebuild switch --flake .#$(hostname)";
-          check = "nix flake check";
           cat = "bat";
         };
 
@@ -50,14 +48,6 @@
               else
                 command nix "$@"
               fi
-            }
-
-            function switch() {
-              NIX_SSHOPTS='-p ${toString secrets.home.sshPort}' nixos-rebuild switch --flake .#$1 --target-host $1 --sudo --ask-sudo-password
-            }
-
-            function build() {
-              nixos-rebuild build-image --image-variant sd-card --flake .#$1
             }
           '';
 

@@ -4,6 +4,7 @@
     {
       devShells.default = pkgs.mkShell {
         name = "nixos";
+        packages = with pkgs; [ just ];
       };
 
       packages.php = pkgs.buildEnv {
