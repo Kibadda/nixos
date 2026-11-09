@@ -97,10 +97,9 @@
                       {
                         type = "tile";
                         entity = "light.flur";
-                        name = "Arbeitszimmer";
+                        name = "Flur";
                         features = [
                           { type = "light-brightness"; }
-                          { type = "light-color-temp"; }
                         ];
                         grid_options.columns = "full";
                       }
