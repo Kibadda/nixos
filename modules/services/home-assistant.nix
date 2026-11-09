@@ -159,34 +159,10 @@
             #   }
             # ];
 
-            template = [
-              {
-                sensor =
-                  let
-                    createSensor = id: name: icon: {
-                      name = name;
-                      unique_id = id;
-                      state = ''
-                        {% set daysTo = states("sensor.${id}_0") | int %}
-                        {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
-                      '';
-                      icon = "mdi:${icon}";
-                    };
-                  in
-                  [
-                    (createSensor "gelbe_tonne" "Gelbe Tonne" "recycle")
-                    (createSensor "biotonne" "Biotonne" "leaf")
-                    (createSensor "papiertonne" "Papiertonne" "package-variant")
-                    (createSensor "restmull" "Restmüll" "trash-can")
-                  ];
-              }
-            ];
-
             waste_collection_schedule = {
               sources = [
                 {
                   name = "jumomind_de";
-                  calendar_title = "Müll ${secrets.pi.home-assistant.street}";
                   args = {
                     service_id = "mymuell";
                     city = secrets.pi.home-assistant.city;
@@ -197,9 +173,8 @@
               sensors =
                 let
                   createSensor = type: {
-                    source_index = 0;
                     name = type;
-                    value_template = "{{ value.daysTo }}";
+                    value_template = "{% if value.daysTo == 0 %}heute{% elif value.daysTo == 1%}morgen{% else %}in {{ value.daysTo }} Tagen{% endif %}";
                     types = [ type ];
                     add_days_to = true;
                   };
@@ -210,7 +185,6 @@
                   (createSensor "Restmüll")
                   (createSensor "Papiertonne")
                   {
-                    source_index = 0;
                     name = "Müll";
                     value_template = "{{ value.types|join(', ') }}";
                   }
