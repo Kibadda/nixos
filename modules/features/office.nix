@@ -48,6 +48,8 @@
           mounts = secrets.work.sshMounts;
         };
 
+        opencode.settings.providers.work = secrets.work.llm-provider;
+
         zsh.shellAliases.sfs = "sftpman mount_all";
 
         firefox.profiles.work = {
