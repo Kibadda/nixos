@@ -96,18 +96,8 @@
                       }
                       {
                         type = "tile";
-                        entity = "light.arbeitszimmer";
+                        entity = "light.flur";
                         name = "Arbeitszimmer";
-                        features = [
-                          { type = "light-brightness"; }
-                          { type = "light-color-temp"; }
-                        ];
-                        grid_options.columns = "full";
-                      }
-                      {
-                        type = "tile";
-                        entity = "light.wohnzimmer";
-                        name = "Wohnzimmer";
                         features = [
                           { type = "light-brightness"; }
                           { type = "light-color-temp"; }
@@ -118,15 +108,6 @@
                         type = "tile";
                         entity = "light.esszimmer";
                         name = "Esszimmer";
-                        features = [
-                          { type = "light-brightness"; }
-                        ];
-                        grid_options.columns = "full";
-                      }
-                      {
-                        type = "tile";
-                        entity = "light.kuche";
-                        name = "Küche";
                         features = [
                           { type = "light-brightness"; }
                         ];
@@ -187,9 +168,7 @@
                       name = name;
                       unique_id = id;
                       state = ''
-                        {% set s0 = states("sensor.${id}_0") | int %}
-                        {% set s1 = states("sensor.${id}_1") | int %}
-                        {% set daysTo = min(s0, s1) %}
+                        {% set daysTo = states("sensor.${id}_0") | int %}
                         {% if daysTo == 0 %}heute{% elif daysTo == 1%}morgen{% else %}in {{ daysTo }} Tagen{% endif %}
                       '';
                       icon = "mdi:${icon}";
@@ -215,41 +194,24 @@
                     street = secrets.pi.home-assistant.street;
                   };
                 }
-                {
-                  name = "jumomind_de";
-                  calendar_title = "Müll ${secrets.pi.home-assistant.street-other}";
-                  args = {
-                    service_id = "mymuell";
-                    city = secrets.pi.home-assistant.city;
-                    street = secrets.pi.home-assistant.street-other;
-                  };
-                }
               ];
               sensors =
                 let
-                  sensor = type: index: {
-                    source_index = index;
-                    name = "${type} ${toString index}";
+                  createSensor = type: {
+                    source_index = 0;
+                    name = type;
                     value_template = "{{ value.daysTo }}";
                     types = [ type ];
                     add_days_to = true;
                   };
-
-                  createSensor = type: [
-                    (sensor type 0)
-                    (sensor type 1)
-                  ];
                 in
-                (createSensor "Biotonne")
-                ++ (createSensor "Gelbe Tonne")
-                ++ (createSensor "Restmüll")
-                ++ (createSensor "Papiertonne")
-                ++ [
+                [
+                  (createSensor "Biotonne")
+                  (createSensor "Gelbe Tonne")
+                  (createSensor "Restmüll")
+                  (createSensor "Papiertonne")
                   {
-                    source_index = [
-                      0
-                      1
-                    ];
+                    source_index = 0;
                     name = "Müll";
                     value_template = "{{ value.types|join(', ') }}";
                   }
@@ -320,66 +282,6 @@
                       offset = "09:00:00";
                     };
                     message = "{{ trigger.calendar_event.summary }} hat heute Geburtstag!";
-                  }
-                  {
-                    name = "Rasieren";
-                    trigger = {
-                      trigger = "time";
-                      at = "08:30:00";
-                      weekday = "sat";
-                    };
-                    condition = {
-                      condition = "template";
-                      value_template = "{{ (now().isocalendar()[1] % 2) == 1 }}";
-                    };
-                    message = "{{ [ '\"Dein Bart ist schon wieder viel zu lang.\" - Annabell', '\"Du pikst!\" - Annabell' ] | random }}";
-                  }
-                  {
-                    name = "ING";
-                    trigger = {
-                      trigger = "time";
-                      at = "10:30:00";
-                      weekday = "sat";
-                    };
-                    message = "Check mal ab wie viel Geld auf der hohen Kante liegt.";
-                  }
-                  {
-                    name = "Sukkulente";
-                    trigger = {
-                      trigger = "time";
-                      at = "09:00:00";
-                      weekday = "sat";
-                    };
-                    condition = {
-                      condition = "template";
-                      value_template = "{{ (now().isocalendar()[1] % 4) == 2 }}";
-                    };
-                    message = "\"Hydrier mich mal.\" - Sukkulente";
-                  }
-                  {
-                    name = "Wäsche";
-                    trigger = {
-                      trigger = "time";
-                      at = "17:30:00";
-                      weekday = [
-                        "mon"
-                        "wed"
-                        "fri"
-                      ];
-                    };
-                    message = "Vielleicht ist der Wäschekorb voll.";
-                  }
-                  {
-                    name = "Hydration";
-                    trigger = {
-                      trigger = "time_pattern";
-                      minutes = "/30";
-                    };
-                    condition = {
-                      condition = "time";
-                      after = "06:00:00";
-                    };
-                    message = "Immer hydriert bleiben!";
                   }
                   {
                     name = "Handy laden";
