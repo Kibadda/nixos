@@ -20,8 +20,7 @@
       '';
       deny = ''
         @denied {
-          not remote_ip ${secrets.pi.ip} 10.0.0.0/24
-          not path /.well-known/acme-challenge/*
+          not remote_ip 10.0.0.0/24 127.0.0.1/32 ::1
         }
         respond @denied "Forbidden" 403
       '';
@@ -44,9 +43,6 @@
           acme_dns netcup {
             ${netcup}
           }
-        '';
-        virtualHosts."fotos.strobel-süß.de".extraConfig = ''
-          redir ${config.kibadda.services.immich.url}{uri} permanent
         '';
         virtualHosts."*.${secrets.pi.domain}, ${secrets.pi.domain}".extraConfig = ''
           tls {
@@ -74,12 +70,14 @@
             map (service: ''
               @${service.subdomain} host ${service.hostname}
               handle @${service.subdomain} {
-                ${lib.optionalString (!service.open) deny}
-                ${lib.optionalString (service.auth == "forward") auth}
-                ${service.extra}
-                ${lib.optionalString (
-                  service.port != null
-                ) "reverse_proxy ${service.host}:${toString service.port}"}
+                route {
+                  ${lib.optionalString (!service.open) deny}
+                  ${lib.optionalString (service.auth == "forward") auth}
+                  ${service.extra}
+                  ${lib.optionalString (
+                    service.port != null
+                  ) "reverse_proxy ${service.host}:${toString service.port}"}
+                }
               }
             '') (builtins.attrValues config.kibadda.services)
           )}
