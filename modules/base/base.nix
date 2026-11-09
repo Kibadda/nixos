@@ -62,6 +62,7 @@
 
       nixpkgs = {
         overlays = [
+          inputs.llm-agents.overlays.shared-nixpkgs
           inputs.nur.overlays.default
           inputs.work.overlays.default
         ];

@@ -45,6 +45,7 @@
 
       self.homeModules.yubikey
       self.homeModules.zsh
+      self.homeModules.opencode
 
       self.homeModules.direnv
       self.homeModules.eza
