@@ -48,7 +48,7 @@
           mounts = secrets.work.sshMounts;
         };
 
-        opencode.settings.providers.work = secrets.work.llm-provider;
+        opencode.settings = secrets.work.opencode-settings;
 
         zsh.shellAliases.sfs = "sftpman mount_all";
 

@@ -11,7 +11,6 @@
         opencode = {
           enable = true;
           package = pkgs.llm-agents.opencode2;
-          enableMcpIntegration = true;
 
           agents = {
             caveman = ''
@@ -150,14 +149,12 @@
               websearch = "allow";
               bash = "ask";
             };
-          };
-        };
 
-        mcp = {
-          enable = true;
-          servers = {
-            nixos = {
-              command = "mcp-nixos";
+            mcp.servers = {
+              nixos = {
+                type = "local";
+                command = [ "mcp-nixos" ];
+              };
             };
           };
         };
