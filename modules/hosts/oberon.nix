@@ -51,8 +51,6 @@
       self.nixosModules.bindarr
 
       # self.nixosModules.paperless
-      # self.nixosModules.marathon-tracker
-      # self.nixosModules.mtg-collection
     ];
 
     homeModules = [

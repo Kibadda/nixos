@@ -23,7 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     work.url = "github:Kibadda/work";
-    mtg-collection.url = "github:Kibadda/mtg-collection";
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
       inputs.nixpkgs.follows = "server-nixpkgs";

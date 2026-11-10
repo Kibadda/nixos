@@ -53,7 +53,6 @@
       self.homeModules.firefox
       self.homeModules.git
       self.homeModules.kitty
-      self.homeModules.mtg-collection
       self.homeModules.neovim
       self.homeModules.ssh
       self.homeModules.zoxide
