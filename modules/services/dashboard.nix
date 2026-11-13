@@ -84,16 +84,22 @@
             transform =
               services: section:
               lib.concatMap
-                (service: [
-                  {
-                    ${service.description} = {
-                      icon = service.icon;
-                      href = service.url;
-                      siteMonitor = service.url;
-                      widget = service.widget;
-                    };
-                  }
-                ])
+                (
+                  service:
+                  let
+                    name = if service.open then service.description else "${service.description} ";
+                  in
+                  [
+                    {
+                      ${name} = {
+                        icon = service.icon;
+                        href = service.url;
+                        siteMonitor = service.url;
+                        widget = service.widget;
+                      };
+                    }
+                  ]
+                )
                 (
                   builtins.sort (a: b: a.description < b.description) (
                     builtins.attrValues (
