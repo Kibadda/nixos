@@ -49,6 +49,7 @@
       self.nixosModules.trek
       self.nixosModules.mindwtr
       self.nixosModules.bindarr
+      self.nixosModules.ntfy
 
       # self.nixosModules.paperless
     ];
