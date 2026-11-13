@@ -1,6 +1,7 @@
 {
   lib,
   secrets,
+  self,
   ...
 
 }:
@@ -31,6 +32,26 @@
       '';
     in
     {
+      imports = [
+        self.nixosModules.virtualisation
+      ];
+
+      virtualisation.oci-containers.containers.netcup-dyndns = {
+        image = "stecklars/dynamic-dns-netcup-api:latest";
+        environment =
+          let
+            subdomains = lib.mapAttrsToList (_: service: service.subdomain) (
+              lib.filterAttrs (_: service: service.open) config.kibadda.services
+            );
+          in
+          {
+            CUSTOMERNR = secrets.pi.netcup.customer_number;
+            APIKEY = secrets.pi.netcup.api_key;
+            APIPASSWORD = secrets.pi.netcup.api_password;
+            DOMAINLIST = "${secrets.pi.domain}: ${builtins.concatStringsSep ", " subdomains}";
+          };
+      };
+
       services.caddy = {
         enable = true;
         package = pkgs.caddy.withPlugins {
@@ -81,6 +102,10 @@
               }
             '') (builtins.attrValues config.kibadda.services)
           )}
+
+          handle {
+            respond "Not Found" 404
+          }
         '';
       };
     };

@@ -57,7 +57,7 @@
                 domain = service.hostname;
                 answer = "10.0.0.3";
                 enabled = true;
-              }) config.kibadda.services)
+              }) (lib.filterAttrs (_: service: !service.open) config.kibadda.services))
               ++ [
                 {
                   domain = "fritz.box";
