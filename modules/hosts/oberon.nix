@@ -17,10 +17,6 @@
       services.openssh.openFirewall = false;
 
       services.beszel.agent.environment.EXTRA_FILESYSTEMS = "sda1";
-
-      nixpkgs.config.permittedInsecurePackages = [
-        "immich-2.7.5"
-      ];
     };
 
     home = { };
