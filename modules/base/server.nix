@@ -30,11 +30,6 @@
 
       sdImage.compressImage = false;
 
-      networking.wireless = {
-        enable = true;
-        networks.${secrets.home.wifi."5.0"}.psk = secrets.home.wifi.pass;
-      };
-
       nixpkgs.overlays = [
         # FIX: cross compiling https://github.com/NixOS/nixpkgs/issues/126755#issuecomment-869149243
         (final: prev: {
