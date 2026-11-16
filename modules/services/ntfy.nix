@@ -17,6 +17,7 @@
         description = "Push";
         subdomain = "push";
         port = 2586;
+        open = true;
         auth = "none";
         section = "Apps";
       };
