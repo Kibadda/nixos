@@ -40,7 +40,6 @@
             "frontend"
             "mobile_app"
             "hue"
-            "telegram_bot"
             "local_calendar"
           ];
           customComponents = [
@@ -143,14 +142,6 @@
               country = "DE";
               language = "de";
             };
-
-            # telegram_bot = [
-            #   {
-            #     platform = "polling";
-            #     api_key = secrets.pi.telegram.bot_token;
-            #     allowed_chat_ids = [ secrets.pi.telegram.chat_id ];
-            #   }
-            # ];
 
             # hue.bridges = [
             #   {
