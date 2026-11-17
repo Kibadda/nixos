@@ -28,6 +28,7 @@
           php_fastcgi unix/${config.services.phpfpm.pools.homepage.socket}
           file_server
         '';
+        icon = "${config.kibadda.services.homepage.url}/logo.svg";
         section = "Apps";
       };
 
