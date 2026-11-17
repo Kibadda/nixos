@@ -23,6 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     work.url = "github:Kibadda/work";
+    homepage.url = "git+ssh://git@github.com/Kibadda/homepage";
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
       inputs.nixpkgs.follows = "server-nixpkgs";
